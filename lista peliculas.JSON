@@ -718,5 +718,448 @@
     "mes": "06",
     "dia": "26",
     "titulo": "HULK"
+  },
+  {
+    "año": "2003",
+    "mes": "07",
+    "dia": "03",
+    "titulo": "BUSCANDO A NEMO"
+  },
+  {
+    "año": "2003",
+    "mes": "07",
+    "dia": "08",
+    "titulo": "TERMINATOR 3"
+  },
+  {
+    "año": "2003",
+    "mes": "11",
+    "dia": "05",
+    "titulo": "THE MATRIX REVOLUTION"
+  },
+  {
+    "año": "2003",
+    "mes": "11",
+    "dia": "27",
+    "titulo": "KILL BILL"
+  },
+  {
+    "año": "2003",
+    "mes": "12",
+    "dia": "17",
+    "titulo": "EL SEÑOR DE LOS ANILLOS EL RETORNO DEL REY"
+  },
+  {
+    "año": "2004",
+    "mes": "01",
+    "dia": "18",
+    "titulo": "EL MAQUINISTA"
+  },
+  {
+    "año": "2004",
+    "mes": "02",
+    "dia": "05",
+    "titulo": "EL GRAN PEZ"
+  },
+  {
+    "año": "2004",
+    "mes": "03",
+    "dia": "10",
+    "titulo": "DAWN OF THE DEAD"
+  },
+  {
+    "año": "2004",
+    "mes": "04",
+    "dia": "21",
+    "titulo": "HOMBRE EN LLAMAS"
+  },
+  {
+    "año": "2004",
+    "mes": "04",
+    "dia": "29",
+    "titulo": "KILL BILL VOLUMEN 2"
+  },
+  {
+    "año": "2004",
+    "mes": "05",
+    "dia": "13",
+    "titulo": "TROYA"
+  },
+  {
+    "año": "2004",
+    "mes": "05",
+    "dia": "27",
+    "titulo": "THE DAY AFTER TOMORROW"
+  },
+  {
+    "año": "2004",
+    "mes": "05",
+    "dia": "29",
+    "titulo": "MUERTOS DE RISA"
+  },
+  {
+    "año": "2004",
+    "mes": "06",
+    "dia": "03",
+    "titulo": "HARRY POTTER Y EL PRISIONERO DE AZKABAN"
+  },
+  {
+    "año": "2004",
+    "mes": "06",
+    "dia": "11",
+    "titulo": "THE CHRONICLE OF RIDDICK"
+  },
+  {
+    "año": "2004",
+    "mes": "06",
+    "dia": "24",
+    "titulo": "EFECTO MARIPOSA"
+  },
+  {
+    "año": "2004",
+    "mes": "07",
+    "dia": "01",
+    "titulo": "EL HOMBRE ARAÑA 2"
+  },
+  {
+    "año": "2004",
+    "mes": "08",
+    "dia": "13",
+    "titulo": "ALIEN VS DEPREDATOR"
+  },
+  {
+    "año": "2004",
+    "mes": "10",
+    "dia": "28",
+    "titulo": "RESIDENT EVIL: APOCALIPSIS"
+  },
+  {
+    "año": "2004",
+    "mes": "12",
+    "dia": "08",
+    "titulo": "OCEAN'S TWELVE"
+  },
+  {
+    "año": "2005",
+    "mes": "02",
+    "dia": "09",
+    "titulo": "AVIADOR"
+  },
+  {
+    "año": "2005",
+    "mes": "03",
+    "dia": "17",
+    "titulo": "CONSTANTINE"
+  },
+  {
+    "año": "2005",
+    "mes": "04",
+    "dia": "01",
+    "titulo": "SIN CITY"
+  },
+  {
+    "año": "2005",
+    "mes": "04",
+    "dia": "06",
+    "titulo": "V DE VENDETA"
+  },
+  {
+    "año": "2005",
+    "mes": "04",
+    "dia": "27",
+    "titulo": "XXX ESTADO DE EMERGENCIA"
+  },
+  {
+    "año": "2005",
+    "mes": "05",
+    "dia": "05",
+    "titulo": "CRUZADA"
+  },
+  {
+    "año": "2005",
+    "mes": "05",
+    "dia": "17",
+    "titulo": "STAR WARS LA VENGANZA DEL SITH"
+  },
+  {
+    "año": "2005",
+    "mes": "06",
+    "dia": "16",
+    "titulo": "BATMAN INICIA"
+  },
+  {
+    "año": "2005",
+    "mes": "07",
+    "dia": "05",
+    "titulo": "LOS 4 FANTASTICOS"
+  },
+  {
+    "año": "2005",
+    "mes": "07",
+    "dia": "09",
+    "titulo": "SR Y SRA SMITH"
+  },
+  {
+    "año": "2005",
+    "mes": "07",
+    "dia": "14",
+    "titulo": "LOS CUATRO FANTASTICOS"
+  },
+  {
+    "año": "2005",
+    "mes": "07",
+    "dia": "21",
+    "titulo": "LAND OF THE DEAD"
+  },
+  {
+    "año": "2005",
+    "mes": "10",
+    "dia": "20",
+    "titulo": "DOOM"
+  },
+  {
+    "año": "2005",
+    "mes": "11",
+    "dia": "24",
+    "titulo": "HARRY POTTER Y EL CALIZ DE FUEGO"
+  },
+  {
+    "año": "2006",
+    "mes": "01",
+    "dia": "12",
+    "titulo": "INFRAMUNDO LA EVOLUCION"
+  },
+  {
+    "año": "2006",
+    "mes": "05",
+    "dia": "25",
+    "titulo": "X-MEN THE LAST STAND"
+  },{
+    "año": "2006",
+    "mes": "09",
+    "dia": "02",
+    "titulo": "PAPRIKA"
+  },
+  {
+    "año": "2006",
+    "mes": "10",
+    "dia": "27",
+    "titulo": "BABEL"
+  },
+  {
+    "año": "2006",
+    "mes": "11",
+    "dia": "16",
+    "titulo": "007 CASINO ROYALE"
+  },
+  {
+    "año": "2006",
+    "mes": "11",
+    "dia": "30",
+    "titulo": "EL PRESTIGIO"
+  },
+  {
+    "año": "2006",
+    "mes": "12",
+    "dia": "09",
+    "titulo": "SMOKING ACES"
+  },
+  {
+    "año": "2007",
+    "mes": "02",
+    "dia": "08",
+    "titulo": "DIAMANTES DE SANGRE"
+  },
+  {
+    "año": "2007",
+    "mes": "02",
+    "dia": "16",
+    "titulo": "GHOST RIDER"
+  },
+  {
+    "año": "2007",
+    "mes": "03",
+    "dia": "09",
+    "titulo": "300"
+  },
+  {
+    "año": "2007",
+    "mes": "04",
+    "dia": "05",
+    "titulo": "PRUEBA DE FE"
+  },
+  {
+    "año": "2007",
+    "mes": "05",
+    "dia": "03",
+    "titulo": "EL HOMBRE ARAÑA 3"
+  },
+  {
+    "año": "2007",
+    "mes": "05",
+    "dia": "24",
+    "titulo": "OCEAN'S THIRTEEN"
+  },
+  {
+    "año": "2007",
+    "mes": "06",
+    "dia": "12",
+    "titulo": "LOS 4 FANTASTICOS Y SILVER SURFER"
+  },
+  {
+    "año": "2007",
+    "mes": "07",
+    "dia": "07",
+    "titulo": "28 SEMANAS DESPUES"
+  },
+  {
+    "año": "2007",
+    "mes": "07",
+    "dia": "19",
+    "titulo": "TRANSFORMERS"
+  },
+  {
+    "año": "2007",
+    "mes": "07",
+    "dia": "28",
+    "titulo": "HARRY POTTER Y LA ORDEN DEL FENIX"
+  },
+  {
+    "año": "2007",
+    "mes": "09",
+    "dia": "21",
+    "titulo": "INTO THE WILD"
+  },
+  {
+    "año": "2007",
+    "mes": "10",
+    "dia": "11",
+    "titulo": "RESIDENT EVIL: LA EXTINCION"
+  },
+  {
+    "año": "2007",
+    "mes": "10",
+    "dia": "26",
+    "titulo": "DAN EN LA VIDA REAL"
+  },
+  {
+    "año": "2007",
+    "mes": "12",
+    "dia": "25",
+    "titulo": "ALIEN VS DEPREDATOR 2"
+  },
+  {
+    "año": "2007",
+    "mes": "12",
+    "dia": "25",
+    "titulo": "ANTES DE PARTIR"
+  },
+  {
+    "año": "2008",
+    "mes": "01",
+    "dia": "01",
+    "titulo": "SOY LEYENDA"
+  },
+  {
+    "año": "2008",
+    "mes": "01",
+    "dia": "03",
+    "titulo": "AMERICAN GANGSTER"
+  },
+  {
+    "año": "2008",
+    "mes": "01",
+    "dia": "10",
+    "titulo": "JUEGOS SINIESTROS"
+  },
+  {
+    "año": "2008",
+    "mes": "01",
+    "dia": "10",
+    "titulo": "PUENTE HACIA TERABITHIA"
+  },
+  {
+    "año": "2008",
+    "mes": "01",
+    "dia": "17",
+    "titulo": "RESIDENT EVIL DEGENERATION"
+  },
+  {
+    "año": "2008",
+    "mes": "02",
+    "dia": "14",
+    "titulo": "JUMPER"
+  },
+  {
+    "año": "2008",
+    "mes": "02",
+    "dia": "14",
+    "titulo": "JUNO"
+  },
+  {
+    "año": "2008",
+    "mes": "02",
+    "dia": "28",
+    "titulo": "POSDATA TE AMO"
+  },
+  {
+    "año": "2008",
+    "mes": "04",
+    "dia": "30",
+    "titulo": "IRON MAN"
+  },
+  {
+    "año": "2008",
+    "mes": "06",
+    "dia": "05",
+    "titulo": "LA NIEBLA"
+  },
+  {
+    "año": "2008",
+    "mes": "06",
+    "dia": "17",
+    "titulo": "BATMAN EL CABALLERO DE LA NOCHE"
+  },
+  {
+    "año": "2008",
+    "mes": "06",
+    "dia": "19",
+    "titulo": "EL INCREIBLE HULK"
+  },
+  {
+    "año": "2008",
+    "mes": "06",
+    "dia": "20",
+    "titulo": "GET SMART"
+  },
+  {
+    "año": "2008",
+    "mes": "07",
+    "dia": "03",
+    "titulo": "HANCOCK"
+  },
+  {
+    "año": "2008",
+    "mes": "08",
+    "dia": "21",
+    "titulo": "MAMMA MIA"
+  },
+  {
+    "año": "2008",
+    "mes": "10",
+    "dia": "31",
+    "titulo": "007 QUANTUM OF SOLACE"
+  },
+  {
+    "año": "2009",
+    "mes": "01",
+    "dia": "22",
+    "titulo": "INFRAMUNDO LA REBELION DE LOS LYCANS"
+  },
+  {
+    "año": "2009",
+    "mes": "02",
+    "dia": "12",
+    "titulo": "QUIEN QUIERE SER MILLONARIO"
   }
 ]
