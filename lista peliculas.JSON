@@ -771,21 +771,13 @@
     "año": "2004",
     "mes": "04",
     "dia": "21",
-<<<<<<< HEAD
     "titulo": "Man on Fire "
-=======
-    "titulo": "Man on Fire"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
     "mes": "04",
     "dia": "29",
-<<<<<<< HEAD
     "titulo": "Kill Bill vol 2"
-=======
-    "titulo": "Kill bill VOL 2"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
@@ -797,21 +789,13 @@
     "año": "2004",
     "mes": "05",
     "dia": "27",
-<<<<<<< HEAD
     "titulo": "The day after tomorrow"
-=======
-    "titulo": "The day after tomorrow "
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
     "mes": "05",
     "dia": "29",
-<<<<<<< HEAD
     "titulo": "Shaun of the Dead"
-=======
-    "titulo": "Shaun of the Dead "
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
@@ -823,11 +807,7 @@
     "año": "2004",
     "mes": "06",
     "dia": "11",
-<<<<<<< HEAD
     "titulo": "The chronicle of riddick"
-=======
-    "titulo": "The cronicle of riddick"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
@@ -839,11 +819,7 @@
     "año": "2004",
     "mes": "07",
     "dia": "01",
-<<<<<<< HEAD
     "titulo": "Spider-Man 2"
-=======
-    "titulo": "Spider-man 2"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2004",
@@ -867,11 +843,7 @@
     "año": "2005",
     "mes": "02",
     "dia": "09",
-<<<<<<< HEAD
     "titulo": "The aviator"
-=======
-    "titulo": "The Aviator"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
@@ -889,31 +861,19 @@
     "año": "2005",
     "mes": "04",
     "dia": "06",
-<<<<<<< HEAD
     "titulo": " V for Vendetta"
-=======
-    "titulo": "V for Vendetta"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
     "mes": "04",
     "dia": "27",
-<<<<<<< HEAD
     "titulo": " xXx: State of the Union"
-=======
-    "titulo": "xXx: State of the Union"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
     "mes": "05",
     "dia": "05",
-<<<<<<< HEAD
     "titulo": "Kingdom of Heaven"
-=======
-    "titulo": "Cruzada"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
@@ -926,25 +886,12 @@
     "mes": "06",
     "dia": "16",
     "titulo": "Batman Begins"
-<<<<<<< HEAD
-=======
-  },
-  {
-    "año": "2005",
-    "mes": "07",
-    "dia": "05",
-    "titulo": "Fantastic Four"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
     "mes": "07",
     "dia": "09",
-<<<<<<< HEAD
     "titulo": "Sr and sra Smith"
-=======
-    "titulo": "Sr and Sra Smith"
->>>>>>> 99440007181110ed90ecf4fbe646f06c2d9a7c44
   },
   {
     "año": "2005",
@@ -956,42 +903,42 @@
     "año": "2005",
     "mes": "07",
     "dia": "21",
-    "titulo": "LAND OF THE DEAD"
+    "titulo": "Land of the dead"
   },
   {
     "año": "2005",
     "mes": "10",
     "dia": "20",
-    "titulo": "DOOM"
+    "titulo": "Doom"
   },
   {
     "año": "2005",
     "mes": "11",
     "dia": "24",
-    "titulo": "HARRY POTTER Y EL CALIZ DE FUEGO"
+    "titulo": "Harry Potter and the Goblet of Fire"
   },
   {
     "año": "2006",
     "mes": "01",
     "dia": "12",
-    "titulo": "INFRAMUNDO LA EVOLUCION"
+    "titulo": "Inframundo la evolucion"
   },
   {
     "año": "2006",
     "mes": "05",
     "dia": "25",
-    "titulo": "X-MEN THE LAST STAND"
+    "titulo": "X-men the last stand"
   },{
     "año": "2006",
     "mes": "09",
     "dia": "02",
-    "titulo": "PAPRIKA"
+    "titulo": "Paprika"
   },
   {
     "año": "2006",
     "mes": "10",
     "dia": "27",
-    "titulo": "BABEL"
+    "titulo": "Babel"
   },
   {
     "año": "2006",
@@ -1003,7 +950,7 @@
     "año": "2006",
     "mes": "11",
     "dia": "30",
-    "titulo": "EL PRESTIGIO"
+    "titulo": "The Prestige"
   },
   {
     "año": "2006",
@@ -1015,7 +962,7 @@
     "año": "2007",
     "mes": "02",
     "dia": "08",
-    "titulo": "DIAMANTES DE SANGRE"
+    "titulo": "Blood Diamond"
   },
   {
     "año": "2007",
@@ -1033,13 +980,13 @@
     "año": "2007",
     "mes": "04",
     "dia": "05",
-    "titulo": "PRUEBA DE FE"
+    "titulo": "The Reaping"
   },
   {
     "año": "2007",
     "mes": "05",
     "dia": "03",
-    "titulo": "EL HOMBRE ARAÑA 3"
+    "titulo": "Spider-Man 3"
   },
   {
     "año": "2007",
@@ -1051,13 +998,13 @@
     "año": "2007",
     "mes": "06",
     "dia": "12",
-    "titulo": "LOS 4 FANTASTICOS Y SILVER SURFER"
+    "titulo": " The Fantastic Four and SILVER SURFER"
   },
   {
     "año": "2007",
     "mes": "07",
     "dia": "07",
-    "titulo": "28 SEMANAS DESPUES"
+    "titulo": "28 Weeks Later"
   },
   {
     "año": "2007",
@@ -1069,7 +1016,7 @@
     "año": "2007",
     "mes": "07",
     "dia": "28",
-    "titulo": "HARRY POTTER Y LA ORDEN DEL FENIX"
+    "titulo": "Harry Potter and the Order of the Phoenix"
   },
   {
     "año": "2007",
@@ -1081,13 +1028,13 @@
     "año": "2007",
     "mes": "10",
     "dia": "11",
-    "titulo": "RESIDENT EVIL: LA EXTINCION"
+    "titulo": "Resident Evil: Extinction"
   },
   {
     "año": "2007",
     "mes": "10",
     "dia": "26",
-    "titulo": "DAN EN LA VIDA REAL"
+    "titulo": "Dan in Real Life"
   },
   {
     "año": "2007",
@@ -1099,13 +1046,13 @@
     "año": "2007",
     "mes": "12",
     "dia": "25",
-    "titulo": "ANTES DE PARTIR"
+    "titulo": "The Bucket List"
   },
   {
     "año": "2008",
     "mes": "01",
     "dia": "01",
-    "titulo": "SOY LEYENDA"
+    "titulo": "I Am Legend"
   },
   {
     "año": "2008",
@@ -1117,13 +1064,13 @@
     "año": "2008",
     "mes": "01",
     "dia": "10",
-    "titulo": "JUEGOS SINIESTROS"
+    "titulo": "sleuth"
   },
   {
     "año": "2008",
     "mes": "01",
     "dia": "10",
-    "titulo": "PUENTE HACIA TERABITHIA"
+    "titulo": "Bridge to Terabithia"
   },
   {
     "año": "2008",
@@ -1147,7 +1094,7 @@
     "año": "2008",
     "mes": "02",
     "dia": "28",
-    "titulo": "POSDATA TE AMO"
+    "titulo": "P.S. I Love You"
   },
   {
     "año": "2008",
@@ -1159,19 +1106,19 @@
     "año": "2008",
     "mes": "06",
     "dia": "05",
-    "titulo": "LA NIEBLA"
+    "titulo": "The Mist"
   },
   {
     "año": "2008",
     "mes": "06",
     "dia": "17",
-    "titulo": "BATMAN EL CABALLERO DE LA NOCHE"
+    "titulo": "The Dark Knight"
   },
   {
     "año": "2008",
     "mes": "06",
     "dia": "19",
-    "titulo": "EL INCREIBLE HULK"
+    "titulo": "The Incredible Hulk"
   },
   {
     "año": "2008",
@@ -1201,13 +1148,13 @@
     "año": "2009",
     "mes": "01",
     "dia": "22",
-    "titulo": "INFRAMUNDO LA REBELION DE LOS LYCANS"
+    "titulo": "Underworld: Rise of the Lycans"
   },
   {
     "año": "2009",
     "mes": "02",
     "dia": "12",
-    "titulo": "QUIEN QUIERE SER MILLONARIO"
+    "titulo": "Who Wants to Be a Millionaire?"
   },{
     "año": "2009",
     "mes": "02",
@@ -1218,43 +1165,43 @@
     "año": "2009",
     "mes": "04",
     "dia": "29",
-    "titulo": "WOLVERINE ORIGENES"
+    "titulo": "wolverine origins"
   },
   {
     "año": "2009",
     "mes": "05",
     "dia": "13",
-    "titulo": "ANGELES Y DEMONIOS"
+    "titulo": "Angels & Demons"
   },
   {
     "año": "2009",
     "mes": "06",
     "dia": "04",
-    "titulo": "RESCATE EN EL METRO 123"
+    "titulo": "The Taking of Pelham 123"
   },
   {
     "año": "2009",
     "mes": "06",
     "dia": "24",
-    "titulo": "TRANSFORMERS LA VENGANZA DE LOS CAIDOS"
+    "titulo": "Transformers: Revenge of the Fallen"
   },
   {
     "año": "2009",
     "mes": "06",
     "dia": "30",
-    "titulo": "ENEMIGOS PUBLICOS"
+    "titulo": "Public Enemies"
   },
   {
     "año": "2009",
     "mes": "07",
     "dia": "06",
-    "titulo": "HARRY POTTER Y EL MISTERIO DEL PRINCIPE"
+    "titulo": "Harry Potter and the Half-Blood Prince"
   },
   {
     "año": "2009",
     "mes": "07",
     "dia": "22",
-    "titulo": "LA HUERFANA"
+    "titulo": "Orphan"
   },
   {
     "año": "2009",
@@ -1266,7 +1213,7 @@
     "año": "2009",
     "mes": "08",
     "dia": "10",
-    "titulo": "¿QUE PASO AYER?"
+    "titulo": "The Hangover"
   },
   {
     "año": "2009",
@@ -1278,13 +1225,13 @@
     "año": "2009",
     "mes": "08",
     "dia": "31",
-    "titulo": "BASTARDOS SIN GLORIA"
+    "titulo": "Inglourious basterds"
   },
   {
     "año": "2009",
     "mes": "09",
     "dia": "08",
-    "titulo": "HOMBRES DE MENTES"
+    "titulo": "The Men Who Stare at Goats"
   },
   {
     "año": "2009",
@@ -1302,7 +1249,7 @@
     "año": "2009",
     "mes": "10",
     "dia": "13",
-    "titulo": "DONDE SE ESCONDEN LOS MONSTRUOS"
+    "titulo": "Where the Wild Things Are"
   },
   {
     "año": "2009",
@@ -1314,7 +1261,7 @@
     "año": "2009",
     "mes": "11",
     "dia": "17",
-    "titulo": "500 DIAS CON ELLA"
+    "titulo": "(500) Days of Summer"
   },
   {
     "año": "2009",
@@ -1368,19 +1315,19 @@
     "año": "2010",
     "mes": "02",
     "dia": "24",
-    "titulo": "127 HORAS"
+    "titulo": "127 Hours"
   },
   {
     "año": "2010",
     "mes": "03",
     "dia": "04",
-    "titulo": "ALICIA EN EL PAIS DE LAS MARAVILLAS"
+    "titulo": "Alice in wonderland"
   },
   {
     "año": "2010",
     "mes": "04",
     "dia": "27",
-    "titulo": "PESADILLA EN LA CALLE ELM"
+    "titulo": "A Nightmare on Elm Street"
   },
   {
     "año": "2010",
@@ -1392,7 +1339,7 @@
     "año": "2010",
     "mes": "05",
     "dia": "07",
-    "titulo": "PIRATAS DEL CARIVE NAVEGANDO POR AGUAS MISTERIOSAS"
+    "titulo": "Pirates of the Caribbean: On Stranger Tides"
   },
   {
     "año": "2010",
@@ -1404,7 +1351,7 @@
     "año": "2010",
     "mes": "06",
     "dia": "07",
-    "titulo": "DEPREDADORES"
+    "titulo": "Predators"
   },
   {
     "año": "2010",
@@ -1422,13 +1369,13 @@
     "año": "2010",
     "mes": "06",
     "dia": "26",
-    "titulo": "EL ORIGEN"
+    "titulo": "ORIGEN"
   },
   {
     "año": "2010",
     "mes": "07",
     "dia": "15",
-    "titulo": "ENCUENTRO EXPLOSIVO"
+    "titulo": "Knight and Day"
   },
   {
     "año": "2010",
@@ -1440,13 +1387,13 @@
     "año": "2010",
     "mes": "08",
     "dia": "12",
-    "titulo": "EL ULTIMO MAESTRO DEL AIRE"
+    "titulo": "The Last Airbender"
   },
   {
     "año": "2010",
     "mes": "08",
     "dia": "13",
-    "titulo": "COMER REZAR AMAR"
+    "titulo": "Eat, Pray, Love"
   },
   {
     "año": "2010",
@@ -1464,13 +1411,13 @@
     "año": "2010",
     "mes": "10",
     "dia": "14",
-    "titulo": "RESIDENT EVIL 4 LA RESURRECION"
+    "titulo": "Resident Evil: Afterlife"
   },
   {
     "año": "2010",
     "mes": "10",
     "dia": "21",
-    "titulo": "RED SOCIAL"
+    "titulo": "The Social Network"
   },
   {
     "año": "2010",
@@ -1488,13 +1435,13 @@
     "año": "2010",
     "mes": "11",
     "dia": "18",
-    "titulo": "HARRY POTTER Y LAS RELIQUIAS DE LA MUERTE PARTE 1"
+    "titulo": "Harry Potter and the Deathly Hallows"
   },
   {
     "año": "2010",
     "mes": "12",
     "dia": "13",
-    "titulo": "¿COMO SABER SI ES AMOR?"
+    "titulo": "How do you know"
   },
   {
     "año": "2010",
@@ -1506,7 +1453,7 @@
     "año": "2011",
     "mes": "02",
     "dia": "17",
-    "titulo": "EL CISNE NEGRO"
+    "titulo": "Black Swan"
   },
   {
     "año": "2011",
@@ -1535,19 +1482,19 @@
     "año": "2011",
     "mes": "05",
     "dia": "05",
-    "titulo": "AGUA PARA ELEFANTES"
+    "titulo": "Water for Elephants"
   },
   {
     "año": "2011",
     "mes": "05",
     "dia": "25",
-    "titulo": "X-MEN PRIMERA GENERACION"
+    "titulo": "X-Men: First Class"
   },
   {
     "año": "2011",
     "mes": "05",
     "dia": "26",
-    "titulo": "¿QUE PASO AYER? 2"
+    "titulo": "The Hangover: Part II"
   },
   {
     "año": "2011",
