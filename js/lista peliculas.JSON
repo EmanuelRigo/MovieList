@@ -342,6 +342,12 @@
     "titulo": "The Sandlot"
   },
   {
+    "año": "1993",
+    "mes": "07",
+    "dia": "15",
+    "titulo": "Jurassic Park"
+  },
+  {
     "año": "1994",
     "mes": "02",
     "dia": "16",
@@ -445,6 +451,12 @@
   },
   {
     "año": "1997",
+    "mes": "06",
+    "dia": "26",
+    "titulo": "Jurassic Park 2"
+  },
+  {
+    "año": "1997",
     "mes": "07",
     "dia": "12",
     "titulo": "Batman and Robin"
@@ -499,6 +511,12 @@
   },
   {
     "año": "1999",
+    "mes": "01",
+    "dia": "10",
+    "titulo": "batman beyond"
+  },
+  {
+    "año": "1999",
     "mes": "03",
     "dia": "11",
     "titulo": "American history X"
@@ -526,6 +544,12 @@
     "mes": "11",
     "dia": "04",
     "titulo": "Fight club"
+  },
+  {
+    "año": "1999",
+    "mes": "12",
+    "dia": "02",
+    "titulo": "Toy story 2"
   },
   {
     "año": "2000",
@@ -580,6 +604,12 @@
     "mes": "06",
     "dia": "08",
     "titulo": "Swordfishse"
+  },
+  {
+    "año": "2001",
+    "mes": "07",
+    "dia": "18",
+    "titulo": "Jurassic Park 3"
   },
   {
     "año": "2001",
@@ -763,6 +793,12 @@
   },
   {
     "año": "2004",
+    "mes": "02",
+    "dia": "13",
+    "titulo": "50 first dates "
+  },
+  {
+    "año": "2004",
     "mes": "03",
     "dia": "10",
     "titulo": "Dawn of the dead"
@@ -862,6 +898,12 @@
     "mes": "04",
     "dia": "06",
     "titulo": " V for Vendetta"
+  },
+  {
+    "año": "2005",
+    "mes": "04",
+    "dia": "07",
+    "titulo": "hitch"
   },
   {
     "año": "2005",
@@ -1678,6 +1720,12 @@
   },
   {
     "año": "2012",
+    "mes": "01",
+    "dia": "27",
+    "titulo": "man on a ledge"
+  },
+  {
+    "año": "2012",
     "mes": "02",
     "dia": "15",
     "titulo": "GHOST RIDER 2"
@@ -1765,6 +1813,12 @@
     "mes": "06",
     "dia": "26",
     "titulo": "The Dark Knight Rises"
+  },
+  {
+    "año": "2012",
+    "mes": "06",
+    "dia": "28",
+    "titulo": "Ice Age 4"
   },
   {
     "año": "2012",
@@ -1871,6 +1925,12 @@
   {
     "año": "2013",
     "mes": "01",
+    "dia": "13",
+    "titulo": "ralph el demoledor"
+  },
+  {
+    "año": "2013",
+    "mes": "01",
     "dia": "17",
     "titulo": "GANGSTER SQUAD"
   },
@@ -1891,6 +1951,12 @@
     "mes": "04",
     "dia": "05",
     "titulo": "6 SOULS"
+  },
+  {
+    "año": "2013",
+    "mes": "04",
+    "dia": "08",
+    "titulo": "the call"
   },
   {
     "año": "2013",
@@ -1968,6 +2034,12 @@
     "año": "2013",
     "mes": "07",
     "dia": "04",
+    "titulo": "Despicable Me 2"
+  },
+  {
+    "año": "2013",
+    "mes": "07",
+    "dia": "04",
     "titulo": "Lone Ranger"
   },
   {
@@ -2005,6 +2077,12 @@
     "mes": "08",
     "dia": "09",
     "titulo": "PRINCE AVALANCHE"
+  },
+  {
+    "año": "2013",
+    "mes": "08",
+    "dia": "22",
+    "titulo": "the dead 2"
   },
   {
     "año": "2013",
@@ -2252,6 +2330,13 @@
     "dia": "11",
     "titulo": "Big Hero 6"
   },
+  
+  {
+    "año": "2015",
+    "mes": "01",
+    "dia": "29",
+    "titulo": "unbroken"
+  },
   {
     "año": "2015",
     "mes": "03",
@@ -2275,6 +2360,12 @@
     "mes": "04",
     "dia": "15",
     "titulo": "Avengers: Age of Ultron"
+  },
+  {
+    "año": "2015",
+    "mes": "05",
+    "dia": "21",
+    "titulo": "Tomorrowland"
   },
   {
     "año": "2015",
@@ -2314,9 +2405,21 @@
   },
   {
     "año": "2016",
+    "mes": "03",
+    "dia": "24",
+    "titulo": "Batman vs Superman: Dawn of Justice "
+  },
+  {
+    "año": "2016",
     "mes": "05",
     "dia": "05",
     "titulo": " Captain America: Civil War"
+  },
+  {
+    "año": "2016",
+    "mes": "07",
+    "dia": "08",
+    "titulo": "The Secret Life of Pets"
   },
   {
     "año": "2016",
