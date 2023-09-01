@@ -1,0 +1,29 @@
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.menu__grid-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 250px);
+  gap: 1em;
+  grid-template-rows: repeat(2, 250px);
+}
+
+.caja {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 180px;
+  color: #eaeaea;
+}

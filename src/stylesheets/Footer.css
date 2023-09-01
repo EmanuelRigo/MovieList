@@ -1,0 +1,18 @@
+.footer {
+  border-radius: 7px;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(5px);
+  height: 100%;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+  font-size: 30px;
+  color: #eaeaea;
+  box-sizing: border-box;
+}
+
+.footer svg {
+  transform: rotate(180deg);
+}
