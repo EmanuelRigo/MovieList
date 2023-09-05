@@ -9,7 +9,7 @@ function Main() {
 
   useEffect(() => {
     const pedido = fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=2f1736eb88ab6c6643da070a6a190ac9&languaje=es-MX&page=1"
+      "https://api.themoviedb.org/3/movie/popular?api_key=2f1736eb88ab6c6643da070a6a190ac9&languaje=es-MX&page=3"
     )
       .then((respuesta) => {
         const peliculas = respuesta.json();
@@ -27,9 +27,7 @@ function Main() {
   return (
     <div className="main">
       {load ? "prooductos cargados" : "cargando"}
-      {movies.map((movie) => {
-        return <h1>{movie.title} </h1>;
-      })}
+      <List movies={movies}></List>
     </div>
   );
 }
