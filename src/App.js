@@ -9,15 +9,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
-
-  useEffect(() => {
-    console.log("object")
-    setTimeout(() => {
-      console.log("holaa")
-
-    }, 3000);
-  }, [])
-
   return (
     <div className="App">
       <BrowserRouter>
