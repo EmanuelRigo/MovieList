@@ -1,11 +1,45 @@
-import React from 'react'
+"use client";
 
-const HomePage = () => {
+import { useEffect, useState } from "react";
+import { FooterMainMenu } from "./components/menu/FooterMainMenu";
+
+export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth > 1023);
+    };
+
+    handleResize(); // Verifica el tamaño inicial
+    window.addEventListener("resize", handleResize); // Escucha cambios de tamaño
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Limpia el listener
+    };
+  }, []);
+
   return (
-    <div>
-      HomePage
+    <div className="h-screen w-screen flex items-center">
+      <div
+        className="container rounded-xl bg-neutral-100 dark:bg-neutral-900 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 h-full lg:h-5/6 overflow-auto"
+      >
+        <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto bg-green-300">
+          <FooterMainMenu />
+        </div>
+        {isMobile && (
+          <div className="block h-full bg-blue-300">
+            {/* <MovieList></MovieList> */}
+            Movielist
+          </div>
+        )}
+        {isMobile && (
+          <div className="h-full bg-red-300">
+            {/* <CardMovieViewer></CardMovieViewer> */}
+            cardmovieviewer
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
-
-export default HomePage

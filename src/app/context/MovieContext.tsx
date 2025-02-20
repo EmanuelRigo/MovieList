@@ -1,8 +1,16 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { Movie } from "./interfaces/movieTypes";
 
-export const movieContext = createContext();
-const Provider = movieContext.Provider;
+interface MovieContextProps {
+  movie: Movie | null;
+  setMovie: React.Dispatch<React.SetStateAction<Movie | null>>;
+  updateCardMovie: (movie: Movie) => void;
+  movieList: Movie[];
+  setMovieList: React.Dispatch<React.SetStateAction<Movie[]>>;
+}
+
+export const movieContext = createContext<MovieContextProps | undefined>(undefined);
 
 export const useMovieContext = () => {
   const contextValue = useContext(movieContext);
@@ -12,11 +20,15 @@ export const useMovieContext = () => {
   return contextValue;
 };
 
-const MovieProvider = ({ children }) => {
-  const [movie, setMovie] = useState(null);
-  const [movieList, setMovieList] = useState([]);
+interface MovieProviderProps {
+  children: ReactNode;
+}
 
-  const updateCardMovie = (movie) => {
+const MovieProvider = ({ children }: MovieProviderProps) => {
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const [movieList, setMovieList] = useState<Movie[]>([]);
+
+  const updateCardMovie = (movie: Movie) => {
     setMovie(movie);
     console.log(movie);
   };
@@ -29,7 +41,7 @@ const MovieProvider = ({ children }) => {
     setMovieList,
   };
 
-  return <Provider value={value}>{children}</Provider>;
+  return <movieContext.Provider value={value}>{children}</movieContext.Provider>;
 };
 
 export default MovieProvider;

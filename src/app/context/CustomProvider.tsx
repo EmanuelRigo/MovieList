@@ -1,14 +1,15 @@
 "use client";
+import { createContext, useContext, useState, ReactNode } from "react";
 
-import { createContext, useContext, useState } from "react";
+interface CustomContextProps {
+  updateCardMovie: (movie: Movie) => void;
+}
 
-// Asegúrate de que el contexto tenga un valor inicial (null en este caso)
-export const contexto = createContext(null);
+export const contexto = createContext<CustomContextProps | undefined>(undefined);
 
 export const useCart = () => {
   const valorDelContexto = useContext(contexto);
 
-  // Si el contexto no está disponible, arrojar un error para advertir
   if (!valorDelContexto) {
     throw new Error("useCart debe ser usado dentro de un CustomProvider");
   }
@@ -16,10 +17,14 @@ export const useCart = () => {
   return valorDelContexto;
 };
 
-const CustomProvider = ({ children }) => {
-  const [movie, setMovie] = useState([]);
+interface CustomProviderProps {
+  children: ReactNode;
+}
 
-  const updateCardMovie = (movie) => {
+const CustomProvider = ({ children }: CustomProviderProps) => {
+  const [movie, setMovie] = useState<Movie[]>([]);
+
+  const updateCardMovie = (movie: Movie) => {
     setMovie(movie);
     console.log(movie);
   };

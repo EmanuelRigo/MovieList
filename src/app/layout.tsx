@@ -2,6 +2,8 @@ import localFont from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
 
+import MovieProvider from "./context/MovieContext";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -29,11 +31,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </Head>
+      <MovieProvider>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className="h-screen w-screen flex items-center">
           <div>{children}</div>
         </div>
       </body>
+      </MovieProvider>
     </html>
   );
 }
