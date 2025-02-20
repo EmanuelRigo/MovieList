@@ -1,7 +1,8 @@
 "use client";
 
+import MovieList from "@/components/list/MovieList";
 import { useEffect, useState } from "react";
-import { FooterMainMenu } from "./components/menu/FooterMainMenu";
+import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -29,7 +30,7 @@ export default function Home() {
         </div>
         {isMobile && (
           <div className="block h-full bg-blue-300">
-            {/* <MovieList></MovieList> */}
+            <MovieList></MovieList>
             Movielist
           </div>
         )}

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { useContext } from "react";
-import { movieContext } from "@/app/context/MovieContext";
+import { movieContext } from "@/context/MovieContext";
 
 const CardMenuMovie = () => {
   const { movie } = useContext(movieContext);

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { movieContext } from "@/app/context/MovieContext";
+import { movieContext } from "@/context/MovieContext";
 
 const OrderListButtons = () => {
   const { setMovieList, movieList, setMovie } = useContext(movieContext);

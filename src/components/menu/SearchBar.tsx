@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useContext } from "react";
-import { movieContext } from "@/app/context/MovieContext";
+import { movieContext } from "@/context/MovieContext";
 
 const SearchBar = ({ movies }) => {
   const { movie, setMovie, movieList } = useContext(movieContext);
