@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useContext } from "react";
 import { movieContext } from "@/context/MovieContext";
+import { Movie } from "@/context/interfaces/movieTypes";
 
-const SearchBar = ({ movies }) => {
+interface SearchBarProps {
+  movies?: Movie[];
+}
+
+const SearchBar: React.FC<SearchBarProps> = () => {
   const { movie, setMovie, movieList } = useContext(movieContext);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
 
     // Buscar el primer objeto que tiene la propiedad `title` coincidente
-    const normalizeString = (str) =>
+    const normalizeString = (str: string) =>
       str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Elimina acentos y caracteres diacríticos
 
     const matchedMovie = movieList.find((movie) =>
@@ -29,7 +33,7 @@ const SearchBar = ({ movies }) => {
     }
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (movie) {
       console.log("Selected movie:", movie);
@@ -38,10 +42,8 @@ const SearchBar = ({ movies }) => {
 
   return (
     <div className="w-full">
-      {" "}
-      {/* Cambiado para ocupar el 100% del ancho */}
       <form
-        // onSubmit={handleSearch}
+        onSubmit={handleSearch}
         className="flex items-center w-full bg-white rounded-xl shadow-md border border-gray-300"
       >
         <input

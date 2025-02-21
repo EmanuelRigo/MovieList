@@ -7,6 +7,8 @@ import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
 
+  console.log("holaaa apps")
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth > 1023);

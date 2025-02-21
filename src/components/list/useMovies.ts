@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Movie } from "@/context/interfaces/movieTypes";
 
 export const useMovies = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -9,9 +10,10 @@ export const useMovies = () => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:9000/api/movies");
-        const movies = await response.json();
+        const result = await response.json();
+        const movies = result.response; // Obtener solo la propiedad response
         setData(movies);
-        console.log("data",movies.response);
+        console.log("data", movies);
       } catch (err: unknown) {
         console.error("Error fetching movies:", err);
         if (err instanceof Error) {
