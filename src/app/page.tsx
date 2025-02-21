@@ -3,6 +3,7 @@
 import MovieList from "@/components/list/MovieList";
 import { useEffect, useState } from "react";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
+import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
@@ -27,19 +28,17 @@ export default function Home() {
       <div
         className="container rounded-xl bg-neutral-100 dark:bg-neutral-900 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 h-full lg:h-5/6 overflow-auto"
       >
-        <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto bg-green-300">
+        <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto ">
           <FooterMainMenu />
         </div>
         {isMobile && (
-          <div className="block h-full bg-blue-300">
+          <div className="block h-full" >
             <MovieList></MovieList>
-            Movielist
           </div>
         )}
         {isMobile && (
-          <div className="h-full bg-red-300">
-            {/* <CardMovieViewer></CardMovieViewer> */}
-            cardmovieviewer
+          <div className="h-full ">
+            <CardMovieViewer></CardMovieViewer>
           </div>
         )}
       </div>

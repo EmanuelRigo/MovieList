@@ -87,9 +87,10 @@ export const AddMovie = () => {
                       src={pelicula.poster_path}
                       alt={pelicula.title}
                       width={500}
-                      height={500}
-                      sizes="width: 100%"
-                      className="w-full object-cover"
+                      height={750}
+                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                      style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                      className="w-full h-full object-cover"
                     />
                   )}
                 </div>

@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* styles.css */
+.aspect-w-9 {
+  aspect-ratio: 9 / 16;
+}
+
+.aspect-h-16 {
+  aspect-ratio: 16 / 9;
+}

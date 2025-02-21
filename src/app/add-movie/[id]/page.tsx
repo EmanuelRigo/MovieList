@@ -113,20 +113,18 @@ const Page: React.FC = () => {
 
   return (
     <div className="h-screen w-screen flex items-center">
-      <div className="container rounded-lg  bg-neutral-800 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
-        <div className="rounded-lg aspect-4/6  relative m-4  outline outline-offset-3 outline-orange-500">
+      <div className="container rounded-lg bg-neutral-800 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
+        <div className="relative m-4 flex w-2/5 rounded-lg aspect-w-9 aspect-h-16">
           <Image
             loader={myLoader}
-            src={
-              pelicula.poster_path ? pelicula.poster_path : "/images/poster.jpg"
-            }
+            src={pelicula.poster_path ? pelicula.poster_path : "/images/poster.jpg"}
             alt={pelicula.title}
-            width={500}
-            height={750}
-            className="object-cover rounded-lg "
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
           />
         </div>
-        <div className="text-white p-4 flex flex-col justify-between">
+        <div className="text-white p-4 flex flex-col justify-between w-2/5">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl">{pelicula.title}</h1>
@@ -150,7 +148,7 @@ const Page: React.FC = () => {
                 onClick={() => handleFormatChange("vhs")}
                 className={`${
                   movieToAdd?.formats.vhs ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 me-4 w-28  rounded-lg  outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
               >
                 VHS
               </button>
@@ -158,7 +156,7 @@ const Page: React.FC = () => {
                 onClick={() => handleFormatChange("dvd")}
                 className={`${
                   movieToAdd?.formats.dvd ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 me-4 w-28  rounded-lg  outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
               >
                 DVD
               </button>
@@ -166,7 +164,7 @@ const Page: React.FC = () => {
                 onClick={() => handleFormatChange("bluray")}
                 className={`${
                   movieToAdd?.formats.bluray ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 w-28  rounded-lg  outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
               >
                 BLU-RAY
               </button>
