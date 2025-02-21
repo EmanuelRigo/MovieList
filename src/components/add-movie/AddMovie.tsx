@@ -47,11 +47,11 @@ export const AddMovie = () => {
 
   return (
     <div className="h-screen w-screen flex items-center">
-      <div className="container rounded-lg bg-gray-900 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
+      <div className="container rounded-lg bg-neutral-900 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
         <div className="flex justify-between align-center w-full pb-6">
           <form
             onSubmit={handleSubmit}
-            className="flex w-4/5 lg:w-2/4 bg-white items-center rounded-lg overflow-hidden shadow-sm"
+            className="flex w-4/5 lg:w-2/4 bg-white items-center rounded-lg overflow-hidden shadow-sm text-black"
           >
             <input
               type="text"
@@ -60,7 +60,7 @@ export const AddMovie = () => {
               value={busqueda}
               onChange={handleInputChange}
             />
-            <button type="submit" className="py-3 px-4">
+            <button type="submit" className="py-3 px-4 text-black">
               <BsSearch />
             </button>
           </form>
