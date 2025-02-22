@@ -30,8 +30,8 @@ export const FooterMainMenu = () => {
       <div className="flex justify-between items-center p-4">
         <button
           onClick={toggleDarkMode}
-          className={`p-2 rounded-full transition-colors duration-300 ${
-            darkMode ? "bg-gray-600 text-white" : "bg-gray-300 text-black"
+          className={`p-2 rounded-lg transition-colors duration-300 ${
+            darkMode ? "bg-neutral-950 text-white" : "bg-gray-300 text-black"
           }`}
           title={darkMode ? "Modo Claro" : "Modo Oscuro"}
         >
@@ -46,7 +46,7 @@ export const FooterMainMenu = () => {
           <Link
             style={{ fontSize: "4rem" }}
             className={`rounded-lg w-full h-18 flex justify-between items-center 
-              dark:bg-slate-600 dark:text-gray-200 dark:hover:text-gray-300 
+              dark:bg-neutral-950 dark:text-gray-200 dark:hover:text-orange-500
               bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-300`}
             href="/add-movie"
           >

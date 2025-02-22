@@ -113,7 +113,7 @@ const Page: React.FC = () => {
 
   return (
     <div className="h-screen w-screen flex items-center">
-      <div className="container rounded-lg bg-neutral-800 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
+      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
         <div className="relative m-4 flex w-2/5 rounded-lg aspect-w-9 aspect-h-16">
           <Image
             loader={myLoader}
@@ -124,13 +124,13 @@ const Page: React.FC = () => {
             className="rounded-lg"
           />
         </div>
-        <div className="text-white p-4 flex flex-col justify-between w-2/5">
+        <div className="text-black dark:text-white p-4 flex flex-col justify-between w-2/5">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl">{pelicula.title}</h1>
               <Link
                 href="/add-movie"
-                className="p-4 bg-orange-500 rounded-lg text-black"
+                className="p-4 bg-blue-500 dark:bg-orange-500 rounded-lg text-white"
               >
                 Volver
               </Link>
@@ -147,31 +147,31 @@ const Page: React.FC = () => {
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`${
-                  movieToAdd?.formats.vhs ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                  movieToAdd?.formats.vhs ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 VHS
               </button>
               <button
                 onClick={() => handleFormatChange("dvd")}
                 className={`${
-                  movieToAdd?.formats.dvd ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                  movieToAdd?.formats.dvd ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 DVD
               </button>
               <button
                 onClick={() => handleFormatChange("bluray")}
                 className={`${
-                  movieToAdd?.formats.bluray ? "bg-orange-500" : "bg-neutral-900"
-                } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                  movieToAdd?.formats.bluray ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 BLU-RAY
               </button>
             </div>
             <button
               onClick={checkFormats}
-              className="p-5 bg-orange-500 rounded-lg w-full text-black"
+              className="p-5 bg-blue-500 dark:bg-orange-500 rounded-lg w-full text-white"
             >
               Agregar pelicula
             </button>

@@ -47,24 +47,24 @@ export const AddMovie = () => {
 
   return (
     <div className="h-screen w-screen flex items-center">
-      <div className="container rounded-lg bg-neutral-900 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
+      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
         <div className="flex justify-between align-center w-full pb-6">
           <form
             onSubmit={handleSubmit}
-            className="flex w-4/5 lg:w-2/4 bg-white items-center rounded-lg overflow-hidden shadow-sm text-black"
+            className="flex w-4/5 lg:w-2/4 bg-white dark:bg-neutral-800 items-center rounded-lg overflow-hidden shadow-sm text-black dark:text-white"
           >
             <input
               type="text"
               placeholder="Busca la pelicula a agregar"
-              className="w-full py-3 px-4 focus:outline-none"
+              className="w-full py-3 px-4 focus:outline-none bg-white dark:bg-neutral-800 text-black dark:text-white"
               value={busqueda}
               onChange={handleInputChange}
             />
-            <button type="submit" className="py-3 px-4 text-black">
+            <button type="submit" className="py-3 px-4 text-black dark:text-white">
               <BsSearch />
             </button>
           </form>
-          <Link className="p-4 bg-orange-500 rounded-lg" href="/">
+          <Link className="p-4 bg-blue-500 dark:bg-orange-500 rounded-lg text-white" href="/">
             volver
           </Link>
         </div>
@@ -74,7 +74,7 @@ export const AddMovie = () => {
               <Link
                 key={pelicula.id}
                 href={`/add-movie/${pelicula.id}`}
-                className="h-80 pt-0 rounded-lg overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer"
+                className="h-80 pt-0 rounded-lg overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer"
               >
                 <div className="h-full w-full flex relative">
                   <div className="absolute bottom-0 bg-black bg-opacity-45 w-full text-white">

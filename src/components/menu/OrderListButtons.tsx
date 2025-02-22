@@ -29,19 +29,19 @@ const OrderListButtons = () => {
   return (
     <div className="flex justify-between">
       <button
-        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-orange-400"
+        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-950 dark:text-neutral-200 dark:hover:text-orange-400"
         onClick={ordenarPorFecha}
       >
         Ordenar por fecha
       </button>
       <button
-        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-orange-400"
+        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-950 dark:text-neutral-200  dark:hover:text-orange-400"
         onClick={ordenarPorTitulo}
       >
         Ordenar por título
       </button>
       <button
-        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:hover:text-orange-400"
+        className="bg-neutral-200 text-black hover:bg-neutral-300 p-2 rounded-lg dark:bg-neutral-950 dark:text-neutral-200  dark:hover:text-orange-400"
         onClick={obtenerObjetoAleatorio}
       >
         Random

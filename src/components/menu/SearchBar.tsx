@@ -15,22 +15,19 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Buscar el primer objeto que tiene la propiedad `title` coincidente
+    // Normaliza la cadena eliminando acentos y caracteres diacríticos
     const normalizeString = (str: string) =>
-      str.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Elimina acentos y caracteres diacríticos
+      str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    const matchedMovie = movieList.find((movie) =>
+    // Busca la primera película cuyo título coincida con el término de búsqueda
+    const matchedMovie = movieList.find((movie: Movie) =>
       normalizeString(movie.title.toLowerCase()).startsWith(
         normalizeString(value.toLowerCase())
       )
     );
 
-    // Si encuentra un objeto, hace setMovie con el objeto encontrado
-    if (matchedMovie) {
-      setMovie(matchedMovie);
-    } else {
-      setMovie(null); // Opcional: limpia si no se encuentra coincidencia
-    }
+    // Establece la película encontrada o limpia si no hay coincidencia
+    setMovie(matchedMovie || null);
   };
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -44,18 +41,18 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="w-full">
       <form
         onSubmit={handleSearch}
-        className="flex items-center w-full bg-white rounded-xl shadow-md border border-gray-300"
+        className="flex items-center w-full bg-neutral-300 dark:bg-neutral-950 rounded-xl"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          placeholder="Buscar"
-          className="flex-grow px-4 py-2 text-sm bg-white text-gray-700 rounded-l-full outline-none"
+          placeholder="Buscar en mi lista"
+          className="flex-grow px-4 py-2 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-300 dark:bg-neutral-950 rounded-l-full outline-none"
         />
         <button
           type="submit"
-          className="flex items-center justify-center w-12 h-12 text-gray-400 hover:text-gray-800 rounded-full focus:ring-2 focus:ring-blue-300"
+          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-orange-500 rounded-full focus:ring-2 focus:ring-orange-700"
         >
           <FaSearch />
         </button>

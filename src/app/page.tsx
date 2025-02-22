@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         )}
         {isMobile && (
-          <div className="h-full ">
+          <div className="h-full p-4">
             <CardMovieViewer></CardMovieViewer>
           </div>
         )}
