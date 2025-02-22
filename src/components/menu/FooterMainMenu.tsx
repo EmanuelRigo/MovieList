@@ -8,8 +8,9 @@ import SearchBar from "./SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { CiCircleList, CiSquarePlus } from "react-icons/ci";
-
+import { BsFillMoonStarsFill, BsSun } from "react-icons/bs";
+import { BiLogOut } from "react-icons/bi";
+import { CiSquarePlus } from "react-icons/ci";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
@@ -21,22 +22,39 @@ export const FooterMainMenu = () => {
     document.body.classList.toggle("dark", !darkMode);
   };
 
+  const handleLogout = () => {
+    // Aquí puedes agregar la lógica de logout
+    console.log("Logout");
+  };
+
   return (
     <div
       className={
-        "w-full flex flex-col gap-4 justify-between h-full bg-neutral-100 dark:bg-neutral-900 text-black dark:text-neutral-200"
+        "w-full flex flex-col gap-4 justify-between h-full dark:bg-neutral-900 text-black dark:text-neutral-200"
       }
     >
-      <div className="flex justify-between items-center p-4">
-        <button
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-lg transition-colors duration-300 ${
-            darkMode ? "bg-neutral-950 text-white" : "bg-gray-300 text-black"
-          }`}
-          title={darkMode ? "Modo Claro" : "Modo Oscuro"}
-        >
-          {darkMode ? "Modo Claro" : "Modo Oscuro"}
-        </button>
+      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-4">
+   
+          <span className="text-lg">John Doe</span>
+
+          <div className="flex gap-4">
+          <button
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-lg transition-colors duration-300 ${
+              darkMode ? " text-white" : " text-black"
+            }`}
+            title={darkMode ? "Modo Claro" : "Modo Oscuro"}
+          >
+            {darkMode ? <BsSun /> : <BsFillMoonStarsFill />}
+          </button>
+          <button
+            onClick={handleLogout}
+            className="p-2 px-4 flex items-center justify-center bg-blue-500 dark:bg-orange-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-orange-700 transition-colors duration-300"
+          >
+            Logout
+            <BiLogOut />
+          </button>
+          </div>
       </div>
       <div className="flex-grow">
         <div className="pb-4">
@@ -46,8 +64,8 @@ export const FooterMainMenu = () => {
           <Link
             style={{ fontSize: "4rem" }}
             className={`rounded-lg w-full h-18 flex justify-between items-center 
-              dark:bg-neutral-950 dark:text-gray-200 dark:hover:text-orange-500
-              bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-300`}
+              dark:bg-neutral-800 dark:text-gray-200 dark:hover:text-orange-500
+              bg-gray-100 text-black hover:bg-gray-300 transition-colors duration-300`}
             href="/add-movie"
           >
             <span className="text-lg ps-4">Movies: 291</span>

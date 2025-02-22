@@ -34,13 +34,13 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
       ref={buttonRef}
       id={movie._id}
       onClick={handleClick}
-      className={`bg-neutral-300 dark:bg-neutral-950 mb-3 p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
-        isButtonActive ? "outline-offset-0 outline-blue-500 dark:outline-orange-500" : ""
-      } hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer flex justify-between w-full`}
+      className={`bg-neutral-100 dark:bg-neutral-800 mb-3 p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
+        isButtonActive ? "outline-offset-0 outline-blue-700 dark:outline-orange-500" : ""
+      } hover:outline-blue-700 dark:hover:outline-orange-500 hover:cursor-pointer flex justify-between w-full`}
     >
       <p className="text-black dark:text-white">{movie.title}</p>
       <Link
-        className="text-blue-500 dark:text-orange-500 hover:text-blue-700 dark:hover:text-orange-700"
+        className="text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
         href={`/edit/${movie._id}`}
       >
         edit

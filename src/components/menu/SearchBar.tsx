@@ -41,18 +41,18 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="w-full">
       <form
         onSubmit={handleSearch}
-        className="flex items-center w-full bg-neutral-300 dark:bg-neutral-950 rounded-xl"
+        className="flex items-center w-full bg-neutral-100 dark:bg-neutral-950 rounded-xl"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Buscar en mi lista"
-          className="flex-grow px-4 py-2 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-300 dark:bg-neutral-950 rounded-l-full outline-none"
+          className="flex-grow px-4 py-2 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 rounded-l-full outline-none"
         />
         <button
           type="submit"
-          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-orange-500 rounded-full focus:ring-2 focus:ring-orange-700"
+          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 rounded-full focus:ring-2 focus:ring-orange-700"
         >
           <FaSearch />
         </button>

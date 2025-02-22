@@ -14,7 +14,7 @@ const CardMenuMovie = () => {
 
   if (movie) {
     return (
-      <div className="card lg:card-side bg-neutral-300 dark:bg-neutral-950 rounded-lg flex w-full">
+      <div className="card lg:card-side bg-neutral-100 dark:bg-neutral-950 rounded-lg flex w-full">
         <div className="card-body w-1/2 py-5 ps-5">
           <h2 className="card-title text-neutral-900 dark:text-neutral-100">{movie.title}</h2>
           <p className="text-neutral-900 dark:text-neutral-100">{movie.release_date}</p>

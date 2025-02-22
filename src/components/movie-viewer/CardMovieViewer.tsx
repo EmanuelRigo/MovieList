@@ -49,7 +49,7 @@ const CardMovieViewer: React.FC = () => {
           <p className="text-xs text-black dark:text-white">{movie.overview}</p>
         </div>
       </div>
-      <div className="flex items-center justify-evenly bg-neutral-400 dark:bg-neutral-800 rounded-lg p-3">
+      <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3">
         <div className={`flex items-center ${movie.formats.vhs ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"}`}>
           <span>VHS</span>
         </div>
