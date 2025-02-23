@@ -8,7 +8,7 @@ import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
 
-  console.log("holaaa apps")
+  console.log("holaaa apps");
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,20 +26,20 @@ export default function Home() {
   return (
     <div className="h-screen w-screen flex items-center">
       <div
-        className="container rounded-xl bg-neutral-300 dark:bg-neutral-900 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 h-full lg:h-5/6 overflow-auto"
+        className="container md:max-h-[956px] rounded-xl bg-neutral-300 dark:bg-neutral-900 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 h-full lg:h-5/6 overflow-auto"
         style={{ gridTemplateColumns: "1fr 1fr 25rem" }}
       >
-        <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto ">
+        <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto">
           <FooterMainMenu />
         </div>
         {isMobile && (
-          <div className="block h-full" >
-            <MovieList></MovieList>
+          <div className="block h-full">
+            <MovieList />
           </div>
         )}
         {isMobile && (
           <div className="h-full p-4">
-            <CardMovieViewer></CardMovieViewer>
+            <CardMovieViewer />
           </div>
         )}
       </div>
