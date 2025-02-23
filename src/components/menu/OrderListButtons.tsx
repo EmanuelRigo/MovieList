@@ -27,7 +27,7 @@ const OrderListButtons = () => {
   }
 
   return (
-    <div className="flex justify-between bg-white dark:bg-neutral-800 rounded-lg p-4">
+    <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
       <button
         className="text-black rounded-lg  dark:text-neutral-200 dark:hover:text-orange-400"
         onClick={ordenarPorFecha}

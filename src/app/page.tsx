@@ -27,6 +27,7 @@ export default function Home() {
     <div className="h-screen w-screen flex items-center">
       <div
         className="container rounded-xl bg-neutral-300 dark:bg-neutral-900 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-3 h-full lg:h-5/6 overflow-auto"
+        style={{ gridTemplateColumns: "1fr 1fr 25rem" }}
       >
         <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto ">
           <FooterMainMenu />

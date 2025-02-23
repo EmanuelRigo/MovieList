@@ -15,14 +15,11 @@ const CardMenuMovie = () => {
   if (movie) {
     return (
       <div className="card lg:card-side bg-neutral-100 dark:bg-neutral-950 rounded-lg flex w-full">
-        <div className="card-body w-1/2 py-5 ps-5">
+        <div className="card-body w-1/4 py-5 ps-5">
           <h2 className="card-title text-neutral-900 dark:text-neutral-100">{movie.title}</h2>
-          <p className="text-neutral-900 dark:text-neutral-100">{movie.release_date}</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Listen</button>
-          </div>
+          <p className="text-neutral-900 dark:text-neutral-100">{movie.release_date.split("T")[0]}</p>
         </div>
-        <figure className="w-1/2 h-40 relative">
+        <figure className="w-3/4 h-40 relative">
           <Image
             loader={myLoader}
             src={movie.backdrop_path}

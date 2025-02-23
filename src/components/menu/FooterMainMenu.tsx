@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-import SearchBar from "./SearchBar";
+import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
 import { BsFillMoonStarsFill, BsSun } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { CiSquarePlus } from "react-icons/ci";
+import YearSearch from "../widgets/YearSearch";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
@@ -27,6 +28,11 @@ export const FooterMainMenu = () => {
     console.log("Logout");
   };
 
+  const handleSearchByYear = (year: string) => {
+    console.log("Searching movies from year:", year);
+    // Aquí puedes agregar la lógica para manejar la búsqueda por año
+  };
+
   return (
     <div
       className={
@@ -34,10 +40,8 @@ export const FooterMainMenu = () => {
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-4">
-   
-          <span className="text-lg">John Doe</span>
-
-          <div className="flex gap-4">
+        <span className="text-lg">John Doe</span>
+        <div className="flex gap-4">
           <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-lg transition-colors duration-300 ${
@@ -54,7 +58,7 @@ export const FooterMainMenu = () => {
             Logout
             <BiLogOut />
           </button>
-          </div>
+        </div>
       </div>
       <div className="flex-grow">
         <div className="pb-4">
@@ -74,6 +78,7 @@ export const FooterMainMenu = () => {
         </div>
         <div className="pb-4">
           <OrderListButtons />
+          <YearSearch onSearch={handleSearchByYear} />
         </div>
       </div>
       <div>

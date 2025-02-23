@@ -1,8 +1,11 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
+import { Movie } from "@/context/interfaces/movieTypes";
 
 interface CustomContextProps {
   updateCardMovie: (movie: Movie) => void;
+  movieList: Movie[];
+  setMovieList: (movies: Movie[]) => void;
 }
 
 export const contexto = createContext<CustomContextProps | undefined>(undefined);
@@ -22,14 +25,14 @@ interface CustomProviderProps {
 }
 
 const CustomProvider = ({ children }: CustomProviderProps) => {
-  const [movie, setMovie] = useState<Movie[]>([]);
+  const [movieList, setMovieList] = useState<Movie[]>([]);
 
   const updateCardMovie = (movie: Movie) => {
-    setMovie(movie);
+    setMovieList((prevMovies) => [...prevMovies, movie]);
     console.log(movie);
   };
 
-  const valorDelContexto = { updateCardMovie };
+  const valorDelContexto = { updateCardMovie, movieList, setMovieList };
 
   return (
     <contexto.Provider value={valorDelContexto}>{children}</contexto.Provider>
