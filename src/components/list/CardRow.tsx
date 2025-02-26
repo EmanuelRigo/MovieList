@@ -41,7 +41,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
       <p className="text-black dark:text-white">{movie.title}</p>
       <Link
         className="text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit/${movie._id}`}
+        href={`/edit-movie/${movie._id}`}
       >
         edit
       </Link>

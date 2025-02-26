@@ -2,9 +2,10 @@
 // EditMovie.tsx
 import Image from "next/image";
 import Link from "next/link";
-import EditButtons from "../edit-movie/EditButtons";
-import { useState } from "react";
+import EditButtons from "@/components/edit-movie/EditButtons";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { getMovieById } from "@/app/add-movie/movies.api";
 
 interface Genre {
   id: number;
@@ -25,32 +26,51 @@ interface Movie {
   };
 }
 
-interface EditMovieProps {
-  movie: Movie;
-}
-
-const EditMovie: React.FC<EditMovieProps> = ({ movie }) => {
-  const [movieToEdit, setMovieToEdit] = useState<Movie>(movie);
+const EditMovie: React.FC = () => {
+  const [movieToEdit, setMovieToEdit] = useState<Movie | null>(null);
   const pathname = usePathname();
   const id = pathname.split("/").pop();
   console.log(id);
 
+  useEffect(() => {
+    const fetchMovie = async () => {
+      if (id) {
+        try {
+          const movie = await getMovieById(id);
+          setMovieToEdit(movie.response);
+          console.log("movie:",movie.response);
+        } catch (error) {
+          console.error("Failed to fetch movie:", error);
+        }
+      }
+    };
+
+    fetchMovie();
+  }, [id]);
+
   const handleFormatChange = (format: keyof Movie["formats"]) => {
-    setMovieToEdit((prev) => {
-      const newValue = !prev.formats[format];
-      return {
-        ...prev,
-        formats: {
-          ...prev.formats,
-          [format]: newValue,
-        },
-      };
-    });
+    if (movieToEdit) {
+      setMovieToEdit((prev) => {
+        if (!prev) return prev;
+        const newValue = !prev.formats[format];
+        return {
+          ...prev,
+          formats: {
+            ...prev.formats,
+            [format]: newValue,
+          },
+        };
+      });
+    }
   };
 
   const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
     return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
   };
+
+  if (!movieToEdit) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="h-screen w-screen flex items-center">
