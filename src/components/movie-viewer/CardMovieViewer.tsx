@@ -41,15 +41,13 @@ const CardMovieViewer: React.FC = () => {
         />
       </div>
       <div className="">
-        <h3 className="text-black dark:text-white pt-4 pb-2 font-bold">{movie.title}</h3>
-        <p className="text-black dark:text-white pb-2">
-          {movie.release_date && movie.release_date.split("T")[0]}
-        </p>
-        <div className="overflow-auto max-h-[80px] scrollbar-hidden">
+        <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">{movie.title}</h3>
+
+        <div className="overflow-auto max-h-[70px] md:max-h-[80px] lg:max-h-[90px] scrollbar-hidden">
           <p className="text-xs text-black dark:text-white">{movie.overview}</p>
         </div>
       </div>
-      <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3">
+      <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2">
         <div className={`flex items-center ${movie.formats.vhs ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"}`}>
           <span>VHS</span>
         </div>
@@ -59,6 +57,9 @@ const CardMovieViewer: React.FC = () => {
         <div className={`flex items-center ${movie.formats.bluray ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"}`}>
           <span>BLU RAY</span>
         </div>
+        <p className="text-black dark:text-white bg-neutral-900 px-4 py-1 rounded-lg">
+          {movie.release_date && movie.release_date.split("T")[0]}
+        </p>
       </div>
     </div>
   );
