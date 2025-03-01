@@ -16,7 +16,7 @@ interface Movie {
   id: number;
   title: string;
   release_date: string;
-  poster_path: string;
+  poster_path: string | null;
   overview: string;
   genres: Genre[];
   formats: {
@@ -38,7 +38,7 @@ const EditMovie: React.FC = () => {
         try {
           const movie = await getMovieById(id);
           setMovieToEdit(movie.response);
-          console.log("movie:",movie.response);
+          console.log("movie:", movie);
         } catch (error) {
           console.error("Failed to fetch movie:", error);
         }
@@ -69,28 +69,28 @@ const EditMovie: React.FC = () => {
   };
 
   if (!movieToEdit) {
-    return <div>Loading...</div>;
+    return <div className="text-white">Loading...</div>;
   }
 
   return (
     <div className="h-screen w-screen flex items-center">
       {console.log(movieToEdit, "movieToEdit")}
-      <div className="container rounded-lg bg-gray-900 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
-        <div className="rounded-lg aspect-4/6 relative m-4 outline outline-offset-3 outline-orange-500">
+      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
+        <div className="relative m-4 flex w-2/5 rounded-lg aspect-w-9 aspect-h-16">
           <Image
             loader={myLoader}
-            src={movieToEdit.poster_path}
+            src={movieToEdit.poster_path ? movieToEdit.poster_path : "/images/poster.jpg"}
             alt={movieToEdit.title || "Movie Poster"} // Asegúrate de que 'movieToEdit.title' esté definido
-            width={500}
-            height={750}
-            className="object-cover rounded-lg"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
           />
         </div>
-        <div className="text-white p-4 flex flex-col justify-between">
+        <div className="text-black dark:text-white p-4 flex flex-col justify-between w-full">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl">{movieToEdit.title}</h1>
-              <Link href="/" className="p-4 bg-orange-500 rounded-lg text-black">
+              <Link href="/" className="p-4 bg-blue-500 dark:bg-orange-500 rounded-lg text-white">
                 Volver
               </Link>
             </div>
@@ -102,40 +102,30 @@ const EditMovie: React.FC = () => {
             <p>{movieToEdit.overview}</p>
           </div>
           <div>
-            <div className="flex justify-between mb-4">
-              <div className="flex justify-start">
-                <button
-                  onClick={() => handleFormatChange("vhs")}
-                  className={`${
-                    movieToEdit.formats?.vhs ? "bg-orange-500" : "bg-gray-800"
-                  } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
-                >
-                  VHS
-                </button>
-                <button
-                  onClick={() => handleFormatChange("dvd")}
-                  className={`${
-                    movieToEdit.formats?.dvd ? "bg-orange-500" : "bg-gray-800"
-                  } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
-                >
-                  DVD
-                </button>
-                <button
-                  onClick={() => handleFormatChange("bluray")}
-                  className={`${
-                    movieToEdit.formats?.bluray ? "bg-orange-500" : "bg-gray-800"
-                  } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
-                >
-                  BLU-RAY
-                </button>
-              </div>
+            <div className="flex justify-start mb-4">
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`${
-                  movieToEdit.formats?.vhs ? "bg-yellow-500" : "bg-red-800"
-                } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-orange-500 hover:cursor-pointer`}
+                  movieToEdit.formats?.vhs ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
-                eliminar
+                VHS
+              </button>
+              <button
+                onClick={() => handleFormatChange("dvd")}
+                className={`${
+                  movieToEdit.formats?.dvd ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 me-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
+              >
+                DVD
+              </button>
+              <button
+                onClick={() => handleFormatChange("bluray")}
+                className={`${
+                  movieToEdit.formats?.bluray ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                } p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
+              >
+                BLU-RAY
               </button>
             </div>
             <EditButtons movie={movieToEdit} id={id}></EditButtons>

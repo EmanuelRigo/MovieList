@@ -113,7 +113,7 @@ const Page: React.FC = () => {
 
   return (
     <div className="h-screen w-screen flex items-center">
-      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
+      <div className="container md:max-h-[956px]  rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex w-full h-full lg:h-5/6 overflow-auto">
         <div className="relative m-4 flex w-2/5 rounded-lg aspect-w-9 aspect-h-16">
           <Image
             loader={myLoader}
@@ -124,7 +124,7 @@ const Page: React.FC = () => {
             className="rounded-lg"
           />
         </div>
-        <div className="text-black dark:text-white p-4 flex flex-col justify-between w-2/5">
+        <div className="text-black dark:text-white p-4 flex flex-col justify-between w-full">
           <div>
             <div className="flex justify-between items-center mb-4">
               <h1 className="text-2xl">{pelicula.title}</h1>

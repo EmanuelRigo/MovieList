@@ -61,13 +61,13 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
     <div className="flex">
       <button
         onClick={checkFormats}
-        className="p-5 bg-orange-500 rounded-lg w-full text-black me-4"
+        className="p-5 bg-blue-500 dark:bg-orange-500 rounded-lg w-full text-black dark:text-white me-4"
       >
         Terminar
       </button>
       <button
         onClick={onSubmitDelete}
-        className="p-5 bg-red-500 rounded-lg w-full text-black"
+        className="p-5 bg-red-500 dark:bg-red-700 rounded-lg w-1/6 text-black dark:text-white"
       >
         Eliminar
       </button>
