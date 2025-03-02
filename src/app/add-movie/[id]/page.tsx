@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CreateMovie } from "../movies.api";
+import { CreateMovie } from "../../../components/widgets/movies.api";
 
 interface Movie {
   id: number;

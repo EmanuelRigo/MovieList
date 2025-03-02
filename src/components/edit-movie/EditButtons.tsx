@@ -1,5 +1,7 @@
 import { useRouter } from "next/navigation";
 import { Movie } from "@/context/interfaces/movieTypes";
+import Swal from "sweetalert2";
+import { deleteMovieById } from "@/components/widgets/movies.api";
 
 const uri = "http://localhost:3000/api/movie";
 
@@ -27,13 +29,31 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
   };
 
   const onSubmitDelete = async () => {
-    const response = await fetch(`${uri}/${id}`, {
-      method: "DELETE",
-    });
-    if (response.ok) {
+    try {
+      await deleteMovieById(id);
       router.refresh();
       router.push("/");
+    } catch (error) {
+      console.error("Failed to delete movie:", error);
     }
+  };
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No podrás revertir esto",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, bórralo",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onSubmitDelete();
+        Swal.fire("¡Borrado!", "La película ha sido borrada.", "success");
+      }
+    });
   };
 
   const onSubmitEdit = async (movie: Movie) => {
@@ -66,7 +86,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
         Terminar
       </button>
       <button
-        onClick={onSubmitDelete}
+        onClick={handleDelete}
         className="p-5 bg-red-500 dark:bg-red-700 rounded-lg w-1/6 text-black dark:text-white"
       >
         Eliminar

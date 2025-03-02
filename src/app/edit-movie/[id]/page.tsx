@@ -5,7 +5,7 @@ import Link from "next/link";
 import EditButtons from "@/components/edit-movie/EditButtons";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { getMovieById } from "@/app/add-movie/movies.api";
+import { getMovieById } from "@/components/widgets/movies.api";
 
 interface Genre {
   id: number;
