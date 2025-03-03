@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useRef, RefObject } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { movieContext } from "@/context/MovieContext";
 import { CardRow } from "./CardRow";
 import OrderListButtons from "../menu/OrderListButtons";
@@ -10,16 +10,17 @@ interface MovieListClientProps {
 }
 
 const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
-  console.log("hola")
-  console.log("liist",list)
-  const { movieList, setMovieList, movie } = useContext(movieContext);
+  const { movieList, setMovieList, movie, setMovie } = useContext(movieContext);
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (list && Array.isArray(list)) {
       setMovieList(list);
+      if (!movie && list.length > 0) {
+        setMovie(list[0]); // Establecer la primera película como la seleccionada
+      }
     }
-  }, [list, setMovieList]);
+  }, [list, setMovieList, movie, setMovie]);
 
   useEffect(() => {
     const elementToScroll = movieRows.current.find((row) =>

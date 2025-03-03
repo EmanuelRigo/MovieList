@@ -36,6 +36,7 @@ export async function getMovieByIdUpdate(id: string, movieData: any): Promise<an
         body: JSON.stringify(movieData),
     });
     if (!res.ok) {
+        console.log(res);
         throw new Error("Failed to update movie.");
     }
     const data = await res.json();

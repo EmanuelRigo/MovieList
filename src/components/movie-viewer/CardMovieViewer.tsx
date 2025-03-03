@@ -57,7 +57,7 @@ const CardMovieViewer: React.FC = () => {
         <div className={`flex items-center ${movie.formats.bluray ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"}`}>
           <span>BLU RAY</span>
         </div>
-        <p className="text-black dark:text-white bg-neutral-900 px-4 py-1 rounded-lg">
+        <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 px-4 py-1 rounded-lg">
           {movie.release_date && movie.release_date.split("T")[0]}
         </p>
       </div>

@@ -1,7 +1,9 @@
 import { useRouter } from "next/navigation";
 import { Movie } from "@/context/interfaces/movieTypes";
 import Swal from "sweetalert2";
-import { deleteMovieById } from "@/components/widgets/movies.api";
+import { deleteMovieById, getMovieByIdUpdate } from "@/components/widgets/movies.api";
+import { movieContext } from "@/context/MovieContext";
+import { useContext } from "react";
 
 const uri = "http://localhost:3000/api/movie";
 
@@ -12,6 +14,8 @@ interface EditButtonsProps {
 
 const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
   const router = useRouter();
+  const { setMovie } = useContext(movieContext);
+
   console.log("+++++++++++", movie);
 
   const checkFormats = async () => {
@@ -23,7 +27,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
         );
         onSubmitEdit(movie);
       } else {
-        alert("todo bien");
+        alert("almenos tiene que tener un formato");
       }
     }
   };
@@ -52,6 +56,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
       if (result.isConfirmed) {
         onSubmitDelete();
         Swal.fire("¡Borrado!", "La película ha sido borrada.", "success");
+        setMovie(null);
       }
     });
   };
@@ -60,14 +65,9 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
     const { formats } = movie;
     try {
       console.log("++++++", id);
-      const response = await fetch(`${uri}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ formats }),
-      });
-      if (!response.ok) {
+      const response = await getMovieByIdUpdate(id, { formats });
+      console.log(id, formats)
+      if (!response) {
         throw new Error("Failed to update.");
       }
       router.refresh();
