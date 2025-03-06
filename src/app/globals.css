@@ -39,3 +39,12 @@ body {
 .aspect-h-16 {
   aspect-ratio: 16 / 9;
 }
+
+
+
+
+@media screen and (min-width: 1024px) {
+  .md-grid-template {
+    grid-template-columns: 1fr 1fr 25rem;
+  }
+}

@@ -36,7 +36,7 @@ export const FooterMainMenu = () => {
   return (
     <div
       className={
-        "w-full flex flex-col gap-4 justify-between h-full dark:bg-neutral-900 text-black dark:text-neutral-200"
+        "w-full flex flex-col gap-4 justify-between h-full dark:bg-neutral-900 text-black dark:text-neutral-200 "
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-4">
