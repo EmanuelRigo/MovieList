@@ -26,7 +26,7 @@ const CardMenuMovie = () => {
             className="rounded-lg"
           />
         </div>
-        <div className="absolute bottom-0 w-full bg-black bg-opacity-50 text-white p-4">
+        <div className="absolute bottom-0 w-full bg-neutral-100 bg-opacity-70 dark:bg-black dark:bg-opacity-50 dark:text-white p-4">
           <h2 className="text-xs xl:text-xl">{movie.title}</h2>
           <p className="text-xs xl:text-lg">{movie.release_date.split("T")[0]}</p>
         </div>

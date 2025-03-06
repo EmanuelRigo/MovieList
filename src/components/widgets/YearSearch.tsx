@@ -40,7 +40,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
         <select
           value={selectedYear}
           onChange={handleYearChange}
-          className="w-28 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 rounded-l-full outline-none"
+          className="w-32 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 rounded-l-full outline-none"
         >
           <option value="">Todos los años</option>
           {years.map((year) => (
