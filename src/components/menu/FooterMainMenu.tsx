@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -18,9 +18,46 @@ export const FooterMainMenu = () => {
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
+  useEffect(() => {
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+    };
+
+    const mode = getCookie("mode");
+    if (mode === "dark") {
+      setDarkMode(true);
+      document.body.classList.add("dark");
+    } else {
+      setDarkMode(false);
+      document.body.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = async () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark", !darkMode);
+
+    try {
+      const response = await fetch("http://localhost:9000/api/cookies/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mode: darkMode ? "light" : "dark" }),
+        credentials: "include", // Asegúrate de incluir las credenciales
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create cookie");
+      }
+
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error("Error creating cookie:", error);
+    }
   };
 
   const handleLogout = () => {
