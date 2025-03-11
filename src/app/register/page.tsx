@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import { createUser } from "@/components/widgets/users.api";
+
 const RegisterPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,12 +16,27 @@ const RegisterPage: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para registrar al usuario
-    // Por ejemplo, hacer una solicitud a tu API de registro
 
-    // Simulación de registro exitoso
-    console.log({ username, password, firstname, lastname, email });
-    router.push("/login"); // Redirige a la página de inicio de sesión después del registro exitoso
+    try {
+      const userData = {
+        username,
+        password,
+        firstname,
+        lastname,
+        email,
+      };
+
+      const response = await createUser(userData);
+
+      if (response.ok) {
+        console.log("Registro exitoso");
+        router.push("/login"); // Redirige a la página de inicio de sesión después del registro exitoso
+      } else {
+        console.error("Error en el registro");
+      }
+    } catch (error) {
+      console.error("Error en el registro:", error);
+    }
   };
 
   return (

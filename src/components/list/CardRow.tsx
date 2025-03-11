@@ -34,8 +34,8 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
       ref={buttonRef}
       id={movie._id}
       onClick={handleClick}
-      className={`bg-neutral-100 dark:bg-neutral-800 mb-3 p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
-        isButtonActive ? "outline-offset-0 outline-blue-700 dark:outline-orange-500" : ""
+      className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-3 p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
+        isButtonActive ? "outline-offset-0 border-blue-400 dark:border-yellow-400" : ""
       } hover:outline-blue-700 dark:hover:outline-orange-500 hover:cursor-pointer flex justify-between w-full`}
     >
       <p className="text-black dark:text-white">{movie.title}</p>

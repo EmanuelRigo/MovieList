@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <meta name="description" content={metadata.description} />
       </Head>
       <MovieProvider>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} bg-black ${geistMono.variable}`}>
         <div className="h-screen w-screen flex items-center">
           {children}
         </div>

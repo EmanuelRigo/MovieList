@@ -2,11 +2,16 @@
 
 import MovieList from "@/components/list/MovieList";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 
+import { checkOnlineStatus } from "@/components/widgets/users.api";
+
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+  const router = useRouter();
 
   console.log("holaaa apps");
 
@@ -23,10 +28,32 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchOnlineStatus = async () => {
+      try {
+        const response = await checkOnlineStatus();
+        if (response.status !== 200) {
+          router.push("/login"); // Redirige a la página de inicio de sesión si el usuario está offline
+        } else {
+          setIsLoading(false); // Establece isLoading en false si el usuario está online
+        }
+      } catch (error) {
+        console.error("Error checking online status:", error);
+        router.push("/login"); // Redirige a la página de inicio de sesión en caso de error
+      }
+    };
+
+    fetchOnlineStatus();
+  }, [router]);
+
+  if (isLoading) {
+    return null; // No renderiza nada mientras isLoading es true
+  }
+
   return (
     <div className="h-screen w-screen flex items-center">
       <div
-        className="container md:max-h-[956px] rounded-xl bg-neutral-300 dark:bg-neutral-900 mx-auto grid grid-cols-1  gap-3 h-full lg:h-5/6 overflow-auto md-grid-template"
+        className="container md:max-h-[956px] rounded-xl bg-neutral-300 dark:bg-neutral-900 mx-auto grid grid-cols-1 h-full lg:h-5/6 overflow-auto md-grid-template"
       >
         <div className="h-full w-full flex flex-col justify-between p-4 mb-8 lg:mb-auto">
           <FooterMainMenu />

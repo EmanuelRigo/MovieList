@@ -52,7 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
         />
         <button
           type="submit"
-          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 rounded-full focus:ring-2 focus:ring-orange-700"
+          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 rounded-full dark:hover:text-orange-500 focus:ring-2 focus:ring-orange-700"
         >
           <FaSearch />
         </button>

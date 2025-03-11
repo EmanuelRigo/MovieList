@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+import { loginUser } from "@/components/widgets/users.api";
+
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,14 +13,23 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para autenticar al usuario
-    // Por ejemplo, hacer una solicitud a tu API de autenticación
 
-    // Simulación de autenticación exitosa
-    if (email === "user@example.com" && password === "password") {
-      router.push("/"); // Redirige a la página principal después del inicio de sesión exitoso
-    } else {
-      alert("Credenciales incorrectas");
+    try {
+      const credentials = {
+        email,
+        password,
+      }
+      const response = await loginUser(credentials)
+
+      if (response.ok) {
+        console.log(response)
+        console.log("Inicio de sesión exitoso");
+        router.push("/"); // Redirige a la página de inicio después del inicio de sesión exitoso
+      } else {
+        console.error("Error en el inicio de sesión");
+      }
+    } catch (error) {
+      console.error("Error en el inicio de sesión:", error);
     }
   };
 
