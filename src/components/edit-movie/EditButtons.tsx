@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { deleteMovieById, getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { movieContext } from "@/context/MovieContext";
 import { useContext } from "react";
+import { FaTrash } from "react-icons/fa"; // Importa el icono de tacho de basura
 
 const uri = "http://localhost:3000/api/movie";
 
@@ -81,15 +82,15 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
     <div className="flex">
       <button
         onClick={checkFormats}
-        className="p-5 bg-blue-500 dark:bg-orange-500 rounded-lg w-full text-black dark:text-white me-4"
+        className="p-5 bg-blue-500 dark:bg-orange-500 rounded-md md:rounded-lg w-full text-black dark:text-white me-2 md:me-4"
       >
         Terminar
       </button>
       <button
         onClick={handleDelete}
-        className="p-5 bg-red-500 dark:bg-red-700 rounded-lg w-1/6 text-black dark:text-white"
+        className="p-5 bg-red-500 dark:bg-red-700 rounded-md md:rounded-lg w-1/6 text-black dark:text-white flex items-center justify-center"
       >
-        Eliminar
+        <FaTrash /> {/* Icono de tacho de basura */}
       </button>
     </div>
   );
