@@ -13,6 +13,8 @@ import { BiLogOut } from "react-icons/bi";
 import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
 
+import { logoutUser } from "../widgets/users.api";
+
 export const FooterMainMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -60,9 +62,20 @@ export const FooterMainMenu = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Aquí puedes agregar la lógica de logout
-    console.log("Logout");
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      // Borra todas las cookies
+      const cookies = document.cookie.split("; ");
+      for (const cookie of cookies) {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
+      }
+      router.push("/login"); // Redirige a la página de inicio de sesión después del logout
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   const handleSearchByYear = (year: string) => {
@@ -92,7 +105,6 @@ export const FooterMainMenu = () => {
             onClick={handleLogout}
             className="p-2 px-4 flex items-center justify-center bg-blue-500 dark:bg-orange-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-orange-700 transition-colors duration-300"
           >
-            Logout
             <BiLogOut />
           </button>
         </div>

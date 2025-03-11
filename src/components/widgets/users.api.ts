@@ -25,9 +25,17 @@ export async function loginUser(credentials: { email: string; password: string }
 export async function checkOnlineStatus(): Promise<Response> {
     const res = await fetch("http://localhost:9000/api/sessions/online", {
         method: "POST",
-        credentials: "include", // Asegúrate de incluir las credenciales
+        credentials: "include", 
     });
 
     console.log(res)
+    return res;
+}
+
+export async function logoutUser(): Promise<Response> {
+    const res = await fetch("http://localhost:9000/api/sessions/signout", {
+        method: "POST",
+        credentials: "include", 
+    });
     return res;
 }
