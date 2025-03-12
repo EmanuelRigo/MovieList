@@ -32,6 +32,9 @@ body {
 
 
 /* styles.css */
+
+
+
 .aspect-w-9 {
   aspect-ratio: 9 / 16;
 }
@@ -46,5 +49,9 @@ body {
 @media screen and (min-width: 1024px) {
   .md-grid-template {
     grid-template-columns: 1fr 1fr 25rem;
+  }
+
+  .aspect-h-6-9 {
+    aspect-ratio: 6 / 9;
   }
 }

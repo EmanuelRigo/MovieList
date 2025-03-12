@@ -125,9 +125,15 @@ export const FooterMainMenu = () => {
             <CiSquarePlus />
           </Link>
         </div>
-        <div className="pb-4">
+        <div className="pb-4 hidden md:block">
           <OrderListButtons />
           <YearSearch onSearch={handleSearchByYear} />
+        </div>
+        <div className="md:hidden">
+          <Link
+            href="/list">
+              list
+            </Link>
         </div>
       </div>
       <div>

@@ -1,4 +1,4 @@
-
+"use client"
 import MovieListClient from "./MovieListClient";
 import { useMovies } from "./useMovies";
 

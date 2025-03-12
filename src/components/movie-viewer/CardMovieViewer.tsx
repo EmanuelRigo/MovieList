@@ -29,7 +29,7 @@ const CardMovieViewer: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full justify-between">
-      <div className="relative h-[500px] bg-black rounded-lg bg-opacity-50">
+      <div className="relative aspect-h-6-9 bg-black rounded-lg bg-opacity-50">
         <Image
           loader={myLoader}
           src={movie.poster_path || ""}

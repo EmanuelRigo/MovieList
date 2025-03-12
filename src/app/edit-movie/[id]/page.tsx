@@ -64,8 +64,18 @@ const EditMovie: React.FC = () => {
     }
   };
 
-  const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+  const myLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string;
+    width: number;
+    quality?: number;
+  }) => {
+    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+      quality || 75
+    }`;
   };
 
   if (!movieToEdit) {
@@ -75,10 +85,14 @@ const EditMovie: React.FC = () => {
   return (
     <div className="h-screen w-screen flex items-center md:max-h-[956px]">
       <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex flex-col md:flex-row w-full h-full lg:h-5/6 overflow-auto gap-4 p-4">
-        <div className="relative flex rounded-lg h-96 md:h-auto aspect-w-9 bg-red-400">
+        <div className="relative flex rounded-lg h-full aspect-h-6-9 ">
           <Image
             loader={myLoader}
-            src={movieToEdit.poster_path ? movieToEdit.poster_path : "/images/poster.jpg"}
+            src={
+              movieToEdit.poster_path
+                ? movieToEdit.poster_path
+                : "/images/poster.jpg"
+            }
             alt={movieToEdit.title || "Movie Poster"}
             layout="fill"
             objectFit="cover"
@@ -89,24 +103,39 @@ const EditMovie: React.FC = () => {
           <div>
             <div className="flex justify-between items-center mb-1 md:mb-4">
               <h1 className="text-xl md:text-2xl">{movieToEdit.title}</h1>
-              <Link href="/" className="p-2 md:p-4 bg-blue-500 dark:bg-orange-500 rounded-lg text-white text-sm md:text-base">
+              <Link
+                href="/"
+                className="p-2 md:p-4 bg-blue-500 dark:bg-orange-500 rounded-lg text-white text-sm md:text-base"
+              >
                 Volver
               </Link>
             </div>
-            <p className="text-sm md:text-base mb-1 md:mb-4">{movieToEdit.release_date}</p>
-            <div className="flex">{movieToEdit.genres &&
-              movieToEdit.genres.map((genre) => (
-                <p key={genre.id} className="text-sm md:text-base pe-1">{genre.name}</p>
-              ))}</div>
-            
-            <p className="text-sm md:text-base">{movieToEdit.overview}</p>
+            <p className="text-sm md:text-base mb-1 md:mb-4">
+              {movieToEdit.release_date}
+            </p>
+            <div className="flex mb-1">
+              {movieToEdit.genres &&
+                movieToEdit.genres.map((genre) => (
+                  <p key={genre.id} className="text-sm md:text-base pe-1">
+                    {genre.name}
+                  </p>
+                ))}
+            </div>
+
+            <div className="h-[80px] md:h-96 overflow-y-auto">
+              <p className="text-xs md:text-base text-neutral-500">
+                {movieToEdit.overview}
+              </p>
+            </div>
           </div>
           <div>
-            <div className="flex justify-start mb-2 md:mb-4 gap-4">
+            <div className="flex justify-start mb-2 md:mb-4 gap-2 md:gap-4">
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`${
-                  movieToEdit.formats?.vhs ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                  movieToEdit.formats?.vhs
+                    ? "bg-blue-500 dark:bg-orange-500"
+                    : "bg-white dark:bg-neutral-900"
                 } p-2 md:p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 VHS
@@ -114,7 +143,9 @@ const EditMovie: React.FC = () => {
               <button
                 onClick={() => handleFormatChange("dvd")}
                 className={`${
-                  movieToEdit.formats?.dvd ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                  movieToEdit.formats?.dvd
+                    ? "bg-blue-500 dark:bg-orange-500"
+                    : "bg-white dark:bg-neutral-900"
                 } p-2 md:p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 DVD
@@ -122,7 +153,9 @@ const EditMovie: React.FC = () => {
               <button
                 onClick={() => handleFormatChange("bluray")}
                 className={`${
-                  movieToEdit.formats?.bluray ? "bg-blue-500 dark:bg-orange-500" : "bg-white dark:bg-neutral-900"
+                  movieToEdit.formats?.bluray
+                    ? "bg-blue-500 dark:bg-orange-500"
+                    : "bg-white dark:bg-neutral-900"
                 } p-2 md:p-4 w-28 rounded-lg outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
               >
                 BLU-RAY

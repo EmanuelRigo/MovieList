@@ -82,13 +82,13 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
     <div className="flex">
       <button
         onClick={checkFormats}
-        className="p-5 bg-blue-500 dark:bg-orange-500 rounded-md md:rounded-lg w-full text-black dark:text-white me-2 md:me-4"
+        className="p-3 md:p-5 bg-blue-500 dark:bg-orange-500 rounded-md md:rounded-lg w-full text-black dark:text-white me-2 md:me-4"
       >
         Terminar
       </button>
       <button
         onClick={handleDelete}
-        className="p-5 bg-red-500 dark:bg-red-700 rounded-md md:rounded-lg w-1/6 text-black dark:text-white flex items-center justify-center"
+        className="p-3 md:p-5 bg-red-500 dark:bg-red-700 rounded-md md:rounded-lg w-1/6 text-black dark:text-white flex items-center justify-center"
       >
         <FaTrash /> {/* Icono de tacho de basura */}
       </button>
