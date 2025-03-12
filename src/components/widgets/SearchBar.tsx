@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import { movieContext } from "@/context/MovieContext";
@@ -41,7 +42,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="w-full">
       <form
         onSubmit={handleSearch}
-        className="flex items-center w-full bg-neutral-100 dark:bg-neutral-950 rounded-xl"
+        className="flex items-center w-full bg-neutral-100 dark:bg-neutral-950 rounded-md"
       >
         <input
           type="text"

@@ -2,23 +2,46 @@
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import { movieContext } from "@/context/MovieContext";
+import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
+import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 
 interface CardRowProps {
   movie: {
     _id: string;
     title: string;
+    checked: boolean;
+    formats: {
+      dvd: boolean;
+    };
   };
   isFocused: boolean;
 }
 
 export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
+  const buttonRef = useRef<HTMLDivElement>(null);
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const { updateCardMovie } = useContext(movieContext);
+  const { setMovie } = useContext(movieContext);
+  const [localMovie, setLocalMovie] = useState(movie);
 
   const handleClick = () => {
-    updateCardMovie(movie);
+    setMovie(movie);
+    console.log(movie);
+  };
+
+  const handleCheckClick = async () => {
+    const updatedMovie = { 
+      ...localMovie, 
+      checked: !localMovie.checked, 
+    };
+    console.log(updatedMovie);
+    try {
+      const movieupdate = await getMovieByIdUpdate(localMovie._id, updatedMovie);
+      console.log("🚀 ~ handleCheckClick ~ movieupdate:", movieupdate);
+      setLocalMovie(updatedMovie);
+      setMovie(updatedMovie);
+    } catch (error) {
+      console.error("Failed to update movie:", error);
+    }
   };
 
   useEffect(() => {
@@ -30,21 +53,35 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
   }, [isFocused]);
 
   return (
-    <button
+    <div
       ref={buttonRef}
-      id={movie._id}
+      id={localMovie._id}
       onClick={handleClick}
-      className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-3 p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
-        isButtonActive ? "outline-offset-0 border-blue-400 dark:border-yellow-400" : ""
+      className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 lg:p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
+        isButtonActive
+          ? "outline-offset-0 border-blue-400 dark:border-yellow-400"
+          : ""
       } hover:outline-blue-700 dark:hover:outline-orange-500 hover:cursor-pointer flex justify-between w-full`}
     >
-      <p className="text-black dark:text-white">{movie.title}</p>
+      <div className="flex items-center gap-2">
+        <button onClick={handleCheckClick} className="focus:outline-none">
+          {localMovie.checked ? (
+            <FaRegCheckCircle className="text-xl" />
+          ) : (
+            <FaRegCircle className="text-xl" />
+          )}
+        </button>
+        <p className="text-sm lg:text-lg text-black dark:text-white">
+          {localMovie.title}
+        </p>
+      </div>
+
       <Link
-        className="text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit-movie/${movie._id}`}
+        className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
+        href={`/edit-movie/${localMovie._id}`}
       >
         edit
       </Link>
-    </button>
+    </div>
   );
 };

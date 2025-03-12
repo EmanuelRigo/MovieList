@@ -14,7 +14,7 @@ export default function MovieList() {
   }
 
   return (
-    <div className="flex flex-col h-screen lg:h-full py-4">
+    <div className="flex flex-grow-1 h-full lg:h-full">
       <MovieListClient list={data} />
     </div>
   );
