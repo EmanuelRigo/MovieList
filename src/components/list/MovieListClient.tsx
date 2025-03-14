@@ -35,7 +35,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   return (
     <>
       <div className="relative rounded-lg flex-grow scrollbar-hidden overflow-auto scroll-smooth scoll-duration-600 ">
-        <div className="w-full absolute p-1">
+        <div className="w-full absolute">
           {movieList && movieList.length > 0 ? (
             movieList.map((element, index) => (
               <div
