@@ -49,7 +49,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
               >
                 <CardRow
                   movie={element}
-                  isFocused={movie?._id === element._id}
+                  isFocused={movie?._id._id === element._id._id}
                 />
               </div>
             ))

@@ -35,7 +35,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
     };
     console.log(updatedMovie);
     try {
-      const movieupdate = await getMovieByIdUpdate(localMovie._id, updatedMovie);
+      const movieupdate = await getMovieByIdUpdate(localMovie._id._id, updatedMovie);
       console.log("🚀 ~ handleCheckClick ~ movieupdate:", movieupdate);
       setLocalMovie(updatedMovie);
       setMovie(updatedMovie);
@@ -59,9 +59,9 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
       onClick={handleClick}
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 lg:p-4 rounded-lg outline outline-none hover:outline-offset-3 ${
         isButtonActive
-          ? "outline-offset-0 border-blue-400 dark:border-yellow-400"
+          ? "outline-offset-0 border-blue-400 dark:border-yellow-500"
           : ""
-      } hover:outline-blue-700 dark:hover:outline-orange-500 hover:cursor-pointer flex justify-between w-full`}
+      } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
     >
       <div className="flex items-center gap-2">
         <button onClick={handleCheckClick} className="focus:outline-none">
@@ -72,13 +72,13 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
           )}
         </button>
         <p className="text-sm lg:text-lg text-black dark:text-white">
-          {localMovie.title}
+          {localMovie._id.title}
         </p>
       </div>
 
       <Link
         className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit-movie/${localMovie._id}`}
+        href={`/edit-movie/${localMovie._id._id}`}
       >
         edit
       </Link>

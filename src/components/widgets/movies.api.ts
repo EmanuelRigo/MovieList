@@ -1,7 +1,8 @@
 export async function CreateMovie(movieData: any): Promise<any> {
     console.log(movieData);
-    const res = await fetch("http://localhost:9000/api/movies", {
-        method: "POST",
+    const res = await fetch("http://localhost:9000/api/userMovies", {
+        method: "PUT",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },

@@ -141,7 +141,7 @@ const EditMovie: React.FC = () => {
   };
 
   if (!movieToEdit) {
-    return <div className="text-white">Loading...</div>;
+    return <div className="text-neutral-900">Loading...</div>;
   }
 
   return (
@@ -161,13 +161,13 @@ const EditMovie: React.FC = () => {
             className="rounded-sm"
           />
         </div>
-        <div className="text-black dark:text-white flex flex-col justify-between w-full gap-2 md:gap-4">
+        <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 md:gap-4">
           <div>
             <div className="flex justify-between items-center mb-1 md:mb-4">
               <h1 className="text-xl md:text-2xl">{movieToEdit.title}</h1>
               <Link
                 href="/"
-                className="p-2 md:p-4 bg-blue-500 dark:bg-orange-500 rounded-sm text-white text-sm md:text-base"
+                className="p-2 md:p-4 bg-blue-500 dark:bg-yellow-500 rounded-sm text-neutral-900 text-sm md:text-base"
               >
                 Volver
               </Link>
@@ -189,14 +189,14 @@ const EditMovie: React.FC = () => {
             </div>
           </div>
           <div>
-            <div className="flex justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch">
+            <div className="flex justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`${
                   movieToEdit.formats?.vhs
-                    ? "bg-blue-500 dark:bg-orange-500"
+                    ? "bg-blue-500 dark:bg-yellow-500"
                     : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm} outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
+                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
                 VHS
               </button>
@@ -204,9 +204,9 @@ const EditMovie: React.FC = () => {
                 onClick={() => handleFormatChange("dvd")}
                 className={`${
                   movieToEdit.formats?.dvd
-                    ? "bg-blue-500 dark:bg-orange-500"
+                    ? "bg-blue-500 dark:bg-yellow-500"
                     : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
+                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
                 DVD
               </button>
@@ -214,15 +214,15 @@ const EditMovie: React.FC = () => {
                 onClick={() => handleFormatChange("bluray")}
                 className={`${
                   movieToEdit.formats?.bluray
-                    ? "bg-blue-500 dark:bg-orange-500"
+                    ? "bg-blue-500 dark:bg-yellow-500"
                     : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer`}
+                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
                 BLU-RAY
               </button>
               <button
                 onClick={handleDelete}
-                className="p-2 md:p-4 w-28 bg-red-500 dark:bg-red-700 rounded-sm text-black dark:text-white flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-orange-500 hover:cursor-pointer h-auto"
+                className="p-2 md:p-4 w-28 bg-red-500 dark:bg-red-700 rounded-sm text-black dark:text-neutral-900 flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer h-auto"
               >
                 <FaTrash />
               </button>
@@ -230,7 +230,7 @@ const EditMovie: React.FC = () => {
             <div className="flex">
               <button
                 onClick={checkFormats}
-                className="p-3 md:p-5 bg-blue-500 dark:bg-orange-500 rounded-sm md:rounded-sm w-full text-black dark:text-white"
+                className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-sm md:rounded-sm w-full text-black dark:text-neutral-900"
               >
                 Terminar
               </button>

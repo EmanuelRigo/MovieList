@@ -18,17 +18,17 @@ const CardMenuMovie = () => {
         <div className="absolute inset-0">
           <Image
             loader={myLoader}
-            src={movie.backdrop_path}
+            src={movie._id.backdrop_path}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
             style={{ objectFit: "cover" }}
-            alt={movie.title || "Movie Poster"}
+            alt={movie._id.title || "Movie Poster"}
             className="rounded-lg"
           />
         </div>
         <div className="absolute bottom-0 w-full bg-neutral-100 bg-opacity-70 dark:bg-black dark:bg-opacity-50 dark:text-white p-4">
-          <h2 className="text-xs xl:text-xl">{movie.title}</h2>
-          <p className="text-xs xl:text-lg">{movie.release_date.split("T")[0]}</p>
+          <h2 className="text-xs xl:text-xl">{movie._id.title}</h2>
+          <p className="text-xs xl:text-lg">{movie._id.release_date.split("T")[0]}</p>
         </div>
       </div>
     );

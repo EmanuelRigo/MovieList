@@ -22,7 +22,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
 
     // Filtrar las películas por el año seleccionado
     const matchedMovie = movieList.find((movie: Movie) =>
-      new Date(movie.release_date).getFullYear().toString() === selectedYear
+      new Date(movie._id.release_date).getFullYear().toString() === selectedYear
     );
 
     // Establecer la primera película que cumpla con el año seleccionado
@@ -32,7 +32,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
   };
 
   // Generar un array de años únicos a partir de las fechas de lanzamiento de las películas
-  const years = Array.from(new Set(movieList.map((movie: Movie) => new Date(movie.release_date).getFullYear()))).sort((a, b) => b - a);
+  const years = Array.from(new Set(movieList.map((movie: Movie) => new Date(movie._id.release_date).getFullYear()))).sort((a, b) => b - a);
 
   return (
     <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 my-4">

@@ -10,11 +10,13 @@ export const useMovies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:9000/api/movies");
+        const response = await fetch("http://localhost:9000/api/userMovies/67d73f5e33527bcf7d53f362");
+        console.log("response", response);
         const result = await response.json();
-        const movies = result.response; // Obtener solo la propiedad response
-        setData(movies);
-        console.log("data", movies);
+        const data = result.response;
+        console.log("moviesss",data) // Obtener solo la propiedad response
+        setData(data.movies);
+        console.log("data", data);
       } catch (err: unknown) {
         console.error("Error fetching movies:", err);
         if (err instanceof Error) {
