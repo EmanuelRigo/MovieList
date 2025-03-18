@@ -39,16 +39,31 @@ body {
   aspect-ratio: 9 / 16;
 }
 
-.aspect-h-16 {
-  aspect-ratio: 16 / 9;
-}
+
+
+/* .md-grid-template {
+  grid-template-columns: 1fr 
+} */
 
 
 
 
 @media screen and (min-width: 1024px) {
   .md-grid-template {
-    grid-template-columns: 1fr 1fr 25rem;
+    grid-template-columns: 1fr 1.5fr 16rem;
+  }
+
+  .aspect-h-6-9 {
+    aspect-ratio: 6 / 9;
+  }
+
+
+}
+
+
+@media screen and (min-width: 1280px) {
+  .md-grid-template {
+    grid-template-columns: 1fr 1.5fr 21rem;
   }
 
   .aspect-h-6-9 {

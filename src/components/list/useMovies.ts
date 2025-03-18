@@ -1,4 +1,5 @@
-"use client"
+"use client";
+import { getMovies } from "../widgets/movies.api";
 import { useState, useEffect } from "react";
 import { Movie } from "@/context/interfaces/movieTypes";
 
@@ -10,13 +11,10 @@ export const useMovies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:9000/api/userMovies/67d73f5e33527bcf7d53f362");
-        console.log("response", response);
-        const result = await response.json();
-        const data = result.response;
-        console.log("moviesss",data) // Obtener solo la propiedad response
-        setData(data.movies);
-        console.log("data", data);
+        const result = await getMovies(); // Usar la función getMovies
+        console.log("moviesss", result); // Obtener la respuesta completa
+        setData(result.response.movies); // Asignar la propiedad movies de la respuesta
+        console.log("data", result.response.movies);
       } catch (err: unknown) {
         console.error("Error fetching movies:", err);
         if (err instanceof Error) {

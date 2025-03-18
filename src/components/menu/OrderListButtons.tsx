@@ -7,7 +7,7 @@ const OrderListButtons = () => {
 
   function ordenarPorTitulo() {
     const sortedList = [...movieList].sort((a, b) => {
-      return a.title.localeCompare(b.title);
+      return a._id.title.localeCompare(b._id.title);
     });
     setMovieList(sortedList);
     console.log(movieList);
@@ -15,7 +15,7 @@ const OrderListButtons = () => {
 
   function ordenarPorFecha() {
     const sortedList = [...movieList].sort(
-      (a, b) => new Date(a.release_date) - new Date(b.release_date)
+      (a, b) => new Date(a._id.release_date) - new Date(b._id.release_date)
     );
     setMovieList(sortedList);
     console.log(movieList);

@@ -1,5 +1,20 @@
+export async function getMovies(): Promise<any> {
+    const res = await fetch("http://localhost:9000/api/userMovies",
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    const data = await res.json();
+    console.log("🚀 ~ getMovies ~ data:", data)
+    return data;}
+
+
+
 export async function CreateMovie(movieData: any): Promise<any> {
-    console.log(movieData);
+    console.log("🚀 ~ CreateMovie ~ movieData:", movieData)
     const res = await fetch("http://localhost:9000/api/userMovies", {
         method: "PUT",
         credentials: "include",
@@ -57,3 +72,4 @@ export async function deleteMovieById(id: string): Promise<any> {
     const data = await res.json();
     return data;
 }
+

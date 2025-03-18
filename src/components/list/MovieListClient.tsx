@@ -39,10 +39,10 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
           {movieList && movieList.length > 0 ? (
             movieList.map((element, index) => (
               <div
-                key={element._id}
+                key={element._id._id}
                 ref={(el) => (movieRows.current[index] = el)}
                 className={
-                  movie?._id === element._id
+                  movie?._id._id === element._id._id
                     ? "outline-offset-0 outline-orange-500 rounded-lg"
                     : ""
                 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -14,11 +14,18 @@ import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
+import { movieContext } from "@/context/MovieContext";
 
 export const FooterMainMenu = () => {
+
+
+  const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
+  console.log("username", username);
+
   const router = useRouter();
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
+  const { movieList } = useContext(movieContext);
 
   useEffect(() => {
     const getCookie = (name: string) => {
@@ -84,13 +91,14 @@ export const FooterMainMenu = () => {
   };
 
   return (
+    console.log("movieslisssst", movieList.length),
     <div
       className={
         "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-4">
-        <span className="text-lg">John Doe</span>
+        <span className="text-lg">{username}</span>
         <div className="flex gap-4">
           <button
             onClick={toggleDarkMode}
@@ -110,27 +118,26 @@ export const FooterMainMenu = () => {
         </div>
       </div>
       <div className="flex-grow">
-        <div className="pb-4">
           <CardMenuMovie />
-        </div>
-        <div className="pb-4">
           <Link
             style={{ fontSize: "4rem" }}
             className={`rounded-lg w-full h-18 flex justify-between items-center 
               dark:bg-neutral-800 dark:text-gray-200 dark:hover:text-orange-500
-              bg-gray-100 text-black hover:bg-gray-300 transition-colors duration-300`}
+              bg-gray-100 text-black hover:bg-gray-300`}
             href="/add-movie"
           >
-            <span className="text-lg ps-4">Movies: 291</span>
+            <span className="text-lg ps-4">Movies: {movieList.length}</span>
             <CiSquarePlus />
           </Link>
-        </div>
-        <div className="pb-4 hidden md:block">
-          <OrderListButtons />
+
+        <div className="hidden lg:block">
           <YearSearch onSearch={handleSearchByYear} />
         </div>
-        <div className="md:hidden">
-          <Link
+        <div className="hidden lg:block">
+          <OrderListButtons />
+        </div>
+        <div className="lg:hidden">
+          <Link className="text-lg bg-neutral-950 p-4 rounded-md "
             href="/list">
               list
             </Link>
