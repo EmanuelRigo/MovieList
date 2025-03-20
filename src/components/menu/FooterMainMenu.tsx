@@ -117,7 +117,7 @@ export const FooterMainMenu = () => {
           </button>
         </div>
       </div>
-      <div className="flex-grow">
+      <div className="flex-grow flex flex-col gap-4">
           <CardMenuMovie />
           <Link
             style={{ fontSize: "4rem" }}
@@ -136,8 +136,8 @@ export const FooterMainMenu = () => {
         <div className="hidden lg:block">
           <OrderListButtons />
         </div>
-        <div className="lg:hidden">
-          <Link className="text-lg bg-neutral-950 p-4 rounded-md "
+        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md">
+          <Link className=""
             href="/list">
               list
             </Link>

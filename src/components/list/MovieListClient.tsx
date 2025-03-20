@@ -20,7 +20,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
         setMovie(list[0]); // Establecer la primera película como la seleccionada
       }
     }
-  }, [list, setMovieList, movie, setMovie]);
+  }, [list, setMovieList,  setMovie]);
 
   useEffect(() => {
     const elementToScroll = movieRows.current.find((row) =>
@@ -38,6 +38,9 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
         <div className="w-full absolute">
           {movieList && movieList.length > 0 ? (
             movieList.map((element, index) => (
+              console.log("🚀 ~ file: MovieListClient.tsx ~ line 100 ~ movieList.map ~ element", element._id.title
+            
+              ),
               <div
                 key={element._id._id}
                 ref={(el) => (movieRows.current[index] = el)}

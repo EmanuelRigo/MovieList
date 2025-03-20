@@ -30,18 +30,20 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
 
   const handleCheckClick = async () => {
     const updatedMovie = {
-      ...localMovie,
-      checked: !localMovie.checked,
+      checked: !localMovie.checked, // Actualizar el estado de checked
+      formats: localMovie.formats, // Mantener los formatos
     };
-    console.log(updatedMovie);
+    console.log("🚀 ~ handleCheckClick ~ updatedMovie:", updatedMovie)
+    console.log("🚀🚀🚀🚀🚀 ~ handleCheckClick ~ localMovie:", localMovie)
     try {
       const movieupdate = await getMovieByIdUpdate(
-        localMovie._id._id,
+
+        localMovie._id,
         updatedMovie
       );
       console.log("🚀 ~ handleCheckClick ~ movieupdate:", movieupdate);
       setLocalMovie(updatedMovie);
-      setMovie(updatedMovie);
+      setMovie(movie);
     } catch (error) {
       console.error("Failed to update movie:", error);
     }
@@ -58,7 +60,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
   return (
     <div
       ref={buttonRef}
-      id={localMovie._id}
+      id={movie._id}
       onClick={handleClick}
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
@@ -72,20 +74,20 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
           onClick={handleCheckClick}
           className="focus:outline-none text-neutral-500 dark:text-neutral-400"
         >
-          {localMovie.checked ? (
+          {movie.checked ? (
             <FaRegCheckCircle className="text-xl" />
           ) : (
             <FaRegCircle className="text-xl" />
           )}
         </button>
         <p className="text-sm lg:text-lg text-black dark:text-white">
-          {localMovie._id.title}
+          {movie._id.title}
         </p>
       </div>
 
       <Link
         className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit-movie/${localMovie._id._id}`}
+        href={`/edit-movie/${movie._id._id}`}
       >
         edit
       </Link>

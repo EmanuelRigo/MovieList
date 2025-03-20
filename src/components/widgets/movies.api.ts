@@ -43,12 +43,13 @@ export async function getMovieById(id: string): Promise<any> {
     return data;
 }
 
-export async function getMovieByIdUpdate(id: string, movieData: any): Promise<any> {
-    const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
+export async function getMovieByIdUpdate(mid: string, movieData: any): Promise<any> {
+    const res = await fetch(`http://localhost:9000/api/userMovies/${mid}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(movieData),
     });
     if (!res.ok) {

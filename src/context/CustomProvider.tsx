@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { Movie } from "@/context/interfaces/movieTypes";
 
+
 interface CustomContextProps {
   updateCardMovie: (movie: Movie) => void;
   movieList: Movie[];
