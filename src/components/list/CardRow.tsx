@@ -18,36 +18,50 @@ interface CardRowProps {
 }
 
 export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
+  
   const buttonRef = useRef<HTMLDivElement>(null);
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const { setMovie } = useContext(movieContext);
+  const { setMovie, setMovieList } = useContext(movieContext);
   const [localMovie, setLocalMovie] = useState(movie);
-
   const handleClick = () => {
-    setMovie(movie);
-    console.log(movie);
+    setMovie(movie);  
   };
 
   const handleCheckClick = async () => {
+
+    //data to update
     const updatedMovie = {
-      checked: !localMovie.checked, // Actualizar el estado de checked
-      formats: localMovie.formats, // Mantener los formatos
-    };
-    console.log("🚀 ~ handleCheckClick ~ updatedMovie:", updatedMovie)
-    console.log("🚀🚀🚀🚀🚀 ~ handleCheckClick ~ localMovie:", localMovie)
+      checked: !localMovie.checked
+    };    
     try {
       const movieupdate = await getMovieByIdUpdate(
-
-        localMovie._id,
+        localMovie._id._id,
         updatedMovie
       );
-      console.log("🚀 ~ handleCheckClick ~ movieupdate:", movieupdate);
-      setLocalMovie(updatedMovie);
-      setMovie(movie);
+      // setLocalMovie(updatedMovie);
+      if (!movieupdate.response.message == "ok") {
+        throw new Error("Failed to update movie.");
+      } else { 
+
+      setLocalMovie((prev) => ({
+        ...prev,
+        checked: updatedMovie.checked,
+      }));
+      console.log("🚀 ~ handleCheckClick ~ localMovie:", localMovie);
+
+      // Actualizar el contexto global si es necesario
+      setMovie((prev) => ({
+        ...prev,
+        checked: updatedMovie.checked,
+      }));
+      }    
+      setMovie(localMovie);
     } catch (error) {
       console.error("Failed to update movie:", error);
     }
   };
+
+
 
   useEffect(() => {
     if (isFocused) {
@@ -58,6 +72,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
   }, [isFocused]);
 
   return (
+    
     <div
       ref={buttonRef}
       id={movie._id}
@@ -74,10 +89,10 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
           onClick={handleCheckClick}
           className="focus:outline-none text-neutral-500 dark:text-neutral-400"
         >
-          {movie.checked ? (
-            <FaRegCheckCircle className="text-xl" />
+          {localMovie.checked ? (
+            <FaRegCheckCircle className="text-xl hover:text-blue-700 dark:hover:text-yellow-500" />
           ) : (
-            <FaRegCircle className="text-xl" />
+            <FaRegCircle className="text-xl hover:text-blue-700 dark:hover:text-yellow-500" />
           )}
         </button>
         <p className="text-sm lg:text-lg text-black dark:text-white">

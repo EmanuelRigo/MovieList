@@ -38,9 +38,6 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
         <div className="w-full absolute">
           {movieList && movieList.length > 0 ? (
             movieList.map((element, index) => (
-              console.log("🚀 ~ file: MovieListClient.tsx ~ line 100 ~ movieList.map ~ element", element._id.title
-            
-              ),
               <div
                 key={element._id._id}
                 ref={(el) => (movieRows.current[index] = el)}

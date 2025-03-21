@@ -44,6 +44,7 @@ export async function getMovieById(id: string): Promise<any> {
 }
 
 export async function getMovieByIdUpdate(mid: string, movieData: any): Promise<any> {
+    console.log("🚀 ~ getMovieByIdUpdate ~ mid:::", mid, "moviedata:::", movieData)
     const res = await fetch(`http://localhost:9000/api/userMovies/${mid}`, {
         method: "PUT",
         headers: {
