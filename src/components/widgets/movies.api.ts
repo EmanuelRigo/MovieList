@@ -62,11 +62,13 @@ export async function getMovieByIdUpdate(mid: string, movieData: any): Promise<a
 }
 
 export async function deleteMovieById(id: string): Promise<any> {
-    const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
+    console.log("🚀 ~ deleteMovieById ~ id:::", id)
+    const res = await fetch(`http://localhost:9000/api/userMovies/movies/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
         },
+        credentials: "include",
     });
     if (!res.ok) {
         throw new Error("Failed to delete movie.");

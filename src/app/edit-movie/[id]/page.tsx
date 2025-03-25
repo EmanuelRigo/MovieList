@@ -35,7 +35,11 @@ const EditMovie: React.FC = () => {
   const [movieToEdit, setMovieToEdit] = useState<Movie | null>(null);
   const pathname = usePathname();
   const router = useRouter();
-  const { setMovie } = useContext(movieContext);
+  const movieContextValue = useContext(movieContext);
+  if (!movieContextValue || !movieContextValue.setMovie) {
+    throw new Error("movieContext is not properly initialized.");
+  }
+  const { setMovie } = movieContextValue;
   const id = pathname.split("/").pop();
 
   useEffect(() => {
