@@ -8,6 +8,9 @@ import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 
 import { checkOnlineStatus } from "@/components/widgets/users.api";
 
+
+console.log("procceess:::", process.argv)
+
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga

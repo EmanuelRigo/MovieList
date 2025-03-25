@@ -2,11 +2,8 @@ import { useRouter } from "next/navigation";
 import { Movie } from "@/context/interfaces/movieTypes";
 import Swal from "sweetalert2";
 import { deleteMovieById, getMovieByIdUpdate } from "@/components/widgets/movies.api";
-import { movieContext } from "@/context/MovieContext";
-import { useContext } from "react";
+import { useMovieContext } from "@/context/MovieContext"; // Usa el hook personalizado
 import { FaTrash } from "react-icons/fa"; // Importa el icono de tacho de basura
-
-const uri = "http://localhost:3000/api/movie";
 
 interface EditButtonsProps {
   id: string;
@@ -15,10 +12,7 @@ interface EditButtonsProps {
 
 const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
   const router = useRouter();
-  const { setMovie } = useContext(movieContext);
-
-  console.log("+++++++++++", movie);
-
+  const { setMovie } = useMovieContext();
   const checkFormats = async () => {
     if (movie) {
       const { vhs, dvd, bluray } = movie.formats;
@@ -28,7 +22,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
         );
         onSubmitEdit(movie);
       } else {
-        alert("almenos tiene que tener un formato");
+        alert("Al menos tiene que tener un formato.");
       }
     }
   };
@@ -57,7 +51,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
       if (result.isConfirmed) {
         onSubmitDelete();
         Swal.fire("¡Borrado!", "La película ha sido borrada.", "success");
-        setMovie(null);
+        setMovie(null); // Limpia la película seleccionada en el contexto
       }
     });
   };
@@ -65,9 +59,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
   const onSubmitEdit = async (movie: Movie) => {
     const { formats } = movie;
     try {
-      console.log("++++++", id);
       const response = await getMovieByIdUpdate(id, { formats });
-      console.log(id, formats)
       if (!response) {
         throw new Error("Failed to update.");
       }

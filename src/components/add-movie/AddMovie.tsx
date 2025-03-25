@@ -12,9 +12,13 @@ interface Movie {
   poster_path: string | null;
 }
 
-export const AddMovie = () => {
+interface AddMovieProps {
+  apiKey: string;
+}
+
+export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   const urlBase = "https://api.themoviedb.org/3/search/movie";
-  const API_KEY = "67c383651f5d04b52d4a09b8a9d41b9a";
+  const API_KEY = apiKey;
 
   const [busqueda, setBusqueda] = useState<string>("");
   const [peliculas, setPeliculas] = useState<Movie[]>([]);
@@ -34,7 +38,6 @@ export const AddMovie = () => {
         `${urlBase}?query=${busqueda}&api_key=${API_KEY}`
       );
       const data = await response.json();
-      console.log(data.results);
       setPeliculas(data.results);
     } catch (error) {
       console.error("Ha ocurrido un error: ", error);

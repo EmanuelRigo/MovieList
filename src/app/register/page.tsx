@@ -30,7 +30,7 @@ const RegisterPage: React.FC = () => {
 
       if (response.ok) {
         console.log("Registro exitoso");
-        router.push("/login"); // Redirige a la página de inicio de sesión después del registro exitoso
+        router.push("/login");
       } else {
         console.error("Error en el registro");
       }

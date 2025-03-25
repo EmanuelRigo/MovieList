@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
 import { loginUser } from "@/components/widgets/users.api";
 
 const LoginPage: React.FC = () => {
@@ -22,9 +21,8 @@ const LoginPage: React.FC = () => {
       const response = await loginUser(credentials)
 
       if (response.ok) {
-        console.log(response)
         console.log("Inicio de sesión exitoso");
-        router.push("/"); // Redirige a la página de inicio después del inicio de sesión exitoso
+        router.push("/");
       } else {
         console.error("Error en el inicio de sesión");
       }

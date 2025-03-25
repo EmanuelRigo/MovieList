@@ -7,7 +7,6 @@
   --foreground: #171717;
 }
 
-
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
@@ -30,23 +29,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 /* styles.css */
-
-
 
 .aspect-w-9 {
   aspect-ratio: 9 / 16;
 }
 
-
-
 /* .md-grid-template {
   grid-template-columns: 1fr 
 } */
-
-
-
 
 @media screen and (min-width: 1024px) {
   .md-grid-template {
@@ -56,8 +47,6 @@ body {
   .aspect-h-6-9 {
     aspect-ratio: 6 / 9;
   }
-
-
 }
 
 

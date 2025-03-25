@@ -1,4 +1,3 @@
-import React from 'react'
 import MovieList from '@/components/list/MovieList'
 import SearchBar from '@/components/widgets/SearchBar'
 import OrderListButtons from '@/components/menu/OrderListButtons'
