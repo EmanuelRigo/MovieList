@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
-import { movieContext } from "@/context/MovieContext";
+import { useEffect, useRef, useState } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
-import { LocalMovie } from "@/context/interfaces/movieTypes";
+import { Movie } from "@/context/interfaces/movieTypes";
 
 interface CardRowProps {
   movie: {
@@ -27,7 +26,13 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
   const { setMovie } = useMovieContext();
   const [localMovie, setLocalMovie] = useState(movie);
   const handleClick = () => {
-    setMovie(movie);
+    setMovie({
+      ...movie,
+      title: movie._id.title,
+      release_date: "",
+      backdrop_path: "",
+      formats: { vhs: false, dvd: movie.formats.dvd, bluray: false },
+    });
   };
 
   const handleCheckClick = async () => {
