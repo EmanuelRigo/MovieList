@@ -1,7 +1,7 @@
 "use client"
-import React, { useContext } from "react";
-import { movieContext } from "@/context/MovieContext";
+import React from "react";
 import { useMovieContext } from "@/context/MovieContext";
+import RandomButton from "./RandomButton";
 
 const OrderListButtons = () => {
   const { setMovieList, movieList, setMovie } = useMovieContext()
@@ -21,12 +21,6 @@ const OrderListButtons = () => {
   }
    
 
-  function obtenerObjetoAleatorio() {
-    const indiceAleatorio = Math.floor(Math.random() * movieList.length);
-    const objetoAleatorio = movieList[indiceAleatorio];
-    setMovie(objetoAleatorio);
-  }
-
   return (
     <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
       <button
@@ -41,12 +35,7 @@ const OrderListButtons = () => {
       >
         Ordenar por título
       </button>
-      <button
-        className="text-black rounded-lg  dark:text-neutral-200  hover:text-blue-500 dark:hover:text-orange-400"
-        onClick={obtenerObjetoAleatorio}
-      >
-        Random
-      </button>
+      <RandomButton></RandomButton>
     </div>
   );
 };

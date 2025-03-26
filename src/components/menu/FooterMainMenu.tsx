@@ -16,6 +16,8 @@ import YearSearch from "../widgets/YearSearch";
 import { logoutUser } from "../widgets/users.api";
 import { movieContext } from "@/context/MovieContext";
 import { useMovieContext } from "@/context/MovieContext";
+import FilterFormatsButtons from "./FilterFormatsButtons";
+import RandomButton from "./RandomButton";
 
 export const FooterMainMenu = () => {
 
@@ -136,6 +138,12 @@ export const FooterMainMenu = () => {
         </div>
         <div className="hidden lg:block">
           <OrderListButtons />
+        </div>
+        <div className="hidden lg:block">
+          <FilterFormatsButtons></FilterFormatsButtons>
+        </div>
+        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md ">
+          <RandomButton></RandomButton>
         </div>
         <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md">
           <Link className=""

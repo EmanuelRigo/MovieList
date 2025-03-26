@@ -4,19 +4,6 @@ import React, { useContext } from "react";
 import { movieContext } from "@/context/MovieContext";
 import { useMovieContext } from "@/context/MovieContext";
 
-interface Movie {
-  id: number;
-  title: string;
-  release_date: string;
-  poster_path: string | null;
-  overview: string;
-  formats: {
-    vhs: boolean;
-    dvd: boolean;
-    bluray: boolean;
-  };
-}
-
 const CardMovieViewer: React.FC = () => {
   const { movie } = useMovieContext()
   const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {

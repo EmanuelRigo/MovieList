@@ -1,3 +1,4 @@
+//USERMOVIES
 export async function getMovies(): Promise<any> {
   const res = await fetch("http://localhost:9000/api/userMovies", {
     method: "GET",
@@ -8,6 +9,21 @@ export async function getMovies(): Promise<any> {
   });
   const data = await res.json();
   return data;
+}
+
+export async function getMovieUser(mid: string): Promise<any> {
+  const res = await fetch(`http://localhost:9000/api/usermovies/movies/${mid}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include"
+  })
+  if (!res.ok) {
+    throw new Error("Fail to get movie")
+  }
+  const data = await res.json()
+  return data
 }
 
 export async function CreateMovie(movieData: any): Promise<any> {
@@ -23,25 +39,11 @@ export async function CreateMovie(movieData: any): Promise<any> {
   return data;
 }
 
-export async function getMovieById(id: string): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch movie.");
-  }
-  const data = await res.json();
-  return data;
-}
-
 export async function getMovieByIdUpdate(
   mid: string,
   movieData: any
 ): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/userMovies/${mid}`, {
+  const res = await fetch(`http://localhost:9000/api/userMovies/movies/${mid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -66,6 +68,20 @@ export async function deleteMovieById(id: string): Promise<any> {
   });
   if (!res.ok) {
     throw new Error("Failed to delete movie.");
+  }
+  const data = await res.json();
+  return data;
+}
+
+export async function getMovieById(id: string): Promise<any> {
+  const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch movie.");
   }
   const data = await res.json();
   return data;

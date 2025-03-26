@@ -1,38 +1,26 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import {
-  getMovieById,
   getMovieByIdUpdate,
   deleteMovieById,
+  getMovieUser
 } from "@/components/widgets/movies.api";
 import { movieContext } from "@/context/MovieContext";
 import { FaTrash } from "react-icons/fa";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
-interface Movie {
-  id: number;
-  title: string;
-  release_date: string;
-  poster_path: string | null;
-  overview: string;
-  genres: Genre[];
-  formats: {
-    vhs: boolean;
-    dvd: boolean;
-    bluray: boolean;
-  };
-}
+// interface Genre {
+//   id: number;
+//   name: string;
+// }
 
 const EditMovie: React.FC = () => {
-  const [movieToEdit, setMovieToEdit] = useState<Movie | null>(null);
+  const [movieToEdit, setMovieToEdit] = useState<MovieDB | null>(null);
   const pathname = usePathname();
   const router = useRouter();
   const movieContextValue = useContext(movieContext);
@@ -46,7 +34,7 @@ const EditMovie: React.FC = () => {
     const fetchMovie = async () => {
       if (id) {
         try {
-          const movie = await getMovieById(id);
+          const movie = await getMovieUser(id);
           setMovieToEdit(movie.response);
         } catch (error) {
           console.error("Failed to fetch movie:", error);
@@ -57,7 +45,7 @@ const EditMovie: React.FC = () => {
     fetchMovie();
   }, [id]);
 
-  const handleFormatChange = (format: keyof Movie["formats"]) => {
+  const handleFormatChange = (format: keyof MovieDB["formats"]) => {
     if (movieToEdit) {
       setMovieToEdit((prev) => {
         if (!prev) return prev;
@@ -87,7 +75,7 @@ const EditMovie: React.FC = () => {
     }
   };
 
-  const onSubmitEdit = async (movie: Movie) => {
+  const onSubmitEdit = async (movie: MovieDB) => {
     const { formats } = movie;
     try {
       const response = await getMovieByIdUpdate(id!, { formats });
@@ -155,11 +143,11 @@ const EditMovie: React.FC = () => {
           <Image
             loader={myLoader}
             src={
-              movieToEdit.poster_path
-                ? movieToEdit.poster_path
+              movieToEdit._id.poster_path
+                ? movieToEdit._id.poster_path
                 : "/images/poster.jpg"
             }
-            alt={movieToEdit.title || "Movie Poster"}
+            alt={movieToEdit._id.title || "Movie Poster"}
             layout="fill"
             objectFit="cover"
             className="rounded-sm"
@@ -168,7 +156,7 @@ const EditMovie: React.FC = () => {
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 md:gap-4">
           <div>
             <div className="flex justify-between items-center mb-1 md:mb-4">
-              <h1 className="text-xl md:text-2xl">{movieToEdit.title}</h1>
+              <h1 className="text-xl md:text-2xl">{movieToEdit._id.title}</h1>
               <Link
                 href="/"
                 className="p-2 md:p-4 bg-blue-500 dark:bg-yellow-500 rounded-sm text-neutral-900 text-sm md:text-base"
@@ -177,10 +165,10 @@ const EditMovie: React.FC = () => {
               </Link>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
-            {movieToEdit.release_date && movieToEdit.release_date.split("T")[0]}            </p>
+            {movieToEdit._id.release_date && movieToEdit._id.release_date.split("T")[0]}            </p>
             <div className="flex mb-1">
-              {movieToEdit.genres &&
-                movieToEdit.genres.map((genre) => (
+              {movieToEdit._id.genres &&
+                movieToEdit._id.genres.map((genre) => (
                   <p key={genre.id} className="text-sm md:text-base pe-1">
                     {genre.name}
                   </p>
@@ -188,7 +176,7 @@ const EditMovie: React.FC = () => {
             </div>
             <div className="h-[80px] md:h-96 overflow-y-auto">
               <p className="text-xs md:text-base text-neutral-500">
-                {movieToEdit.overview}
+                {movieToEdit._id.overview}
               </p>
             </div>
           </div>
