@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useMovieContext } from "@/context/MovieContext";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 
 const FilterFormatsButtons = () => {
   const { movieList, setMovieList } = useMovieContext();
-  const [originalMovieList, setOriginalMovieList] = useState(movieList); 
+  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]); // Inicializa como un array vacío
   const [activeFilters, setActiveFilters] = useState({
     vhs: true,
     dvd: true,
     bluray: true,
   });
 
+  // Sincroniza originalMovieList con movieList cuando este último cambie
+  useEffect(() => {
+    if (movieList.length > 0 && originalMovieList.length === 0) {
+      setOriginalMovieList(movieList); // Solo establece originalMovieList una vez
+    }
+  }, [movieList]);
+
+  // Función para filtrar películas según los filtros activos
   const filtrarPeliculas = () => {
     const listaFiltrada = originalMovieList.filter((movie) => {
       return (
@@ -18,10 +27,10 @@ const FilterFormatsButtons = () => {
         (activeFilters.bluray && movie.formats.bluray)
       );
     });
-    setMovieList(listaFiltrada);
+    setMovieList(listaFiltrada); // Actualiza la lista global con la lista filtrada
   };
 
-
+  // Función para alternar el estado de un filtro
   const toggleFilter = (formato: "vhs" | "dvd" | "bluray") => {
     setActiveFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters, [formato]: !prevFilters[formato] };
@@ -29,11 +38,10 @@ const FilterFormatsButtons = () => {
     });
   };
 
-
- 
+  // Actualizar la lista filtrada cada vez que cambian los filtros
   useEffect(() => {
     filtrarPeliculas();
-  }, [activeFilters]); 
+  }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
     <div className="flex flex-col gap-4">
@@ -62,7 +70,6 @@ const FilterFormatsButtons = () => {
         >
           Blu-ray
         </button>
-
       </div>
     </div>
   );
