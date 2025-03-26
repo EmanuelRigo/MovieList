@@ -1,25 +1,25 @@
 "use client"
 import React, { useContext } from "react";
 import { movieContext } from "@/context/MovieContext";
+import { useMovieContext } from "@/context/MovieContext";
 
 const OrderListButtons = () => {
-  const { setMovieList, movieList, setMovie } = useContext(movieContext);
+  const { setMovieList, movieList, setMovie } = useMovieContext()
 
   function ordenarPorTitulo() {
     const sortedList = [...movieList].sort((a, b) => {
       return a._id.title.localeCompare(b._id.title);
     });
     setMovieList(sortedList);
-    console.log(movieList);
   }
 
   function ordenarPorFecha() {
     const sortedList = [...movieList].sort(
-      (a, b) => new Date(a._id.release_date) - new Date(b._id.release_date)
+      (a, b) => new Date(a._id.release_date).getTime() - new Date(b._id.release_date).getTime()
     );
     setMovieList(sortedList);
-    console.log(movieList);
   }
+   
 
   function obtenerObjetoAleatorio() {
     const indiceAleatorio = Math.floor(Math.random() * movieList.length);

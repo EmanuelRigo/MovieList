@@ -1,23 +1,23 @@
 "use client";
-import { useContext, useEffect, useRef } from "react";
-import { movieContext } from "@/context/MovieContext";
+import { useEffect, useRef } from "react";
 import { CardRow } from "./CardRow";
 import OrderListButtons from "../menu/OrderListButtons";
-import { Movie } from "@/context/interfaces/movieTypes";
+import { MovieDB } from "@/context/interfaces/movieTypes";
+import { useMovieContext } from "@/context/MovieContext";
 
 interface MovieListClientProps {
-  list: Movie[];
+  list: MovieDB[];
 }
 
 const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
-  const { movieList, setMovieList, movie, setMovie } = useContext(movieContext);
+  const { movieList, setMovieList, movie, setMovie } = useMovieContext()
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (list && Array.isArray(list)) {
       setMovieList(list);
       if (!movie && list.length > 0) {
-        setMovie(list[0]); // Establecer la primera película como la seleccionada
+        setMovie(list[0]);
       }
     }
   }, [list, setMovieList,  setMovie]);
@@ -40,7 +40,9 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
             movieList.map((element, index) => (
               <div
                 key={element._id._id}
-                ref={(el) => (movieRows.current[index] = el)}
+                ref={(el) => {
+                  movieRows.current[index] = el;
+                }}
                 className={
                   movie?._id._id === element._id._id
                     ? "outline-offset-0 outline-orange-500 rounded-lg"
@@ -48,7 +50,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
                 }
               >
                 <CardRow
-                  movie={element}
+                  movieProp={element}
                   isFocused={movie?._id._id === element._id._id}
                 />
               </div>

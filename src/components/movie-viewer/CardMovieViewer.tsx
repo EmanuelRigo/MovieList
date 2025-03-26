@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useContext } from "react";
 import { movieContext } from "@/context/MovieContext";
+import { useMovieContext } from "@/context/MovieContext";
 
 interface Movie {
   id: number;
@@ -17,8 +18,7 @@ interface Movie {
 }
 
 const CardMovieViewer: React.FC = () => {
-  const { movie } = useContext(movieContext);
-
+  const { movie } = useMovieContext()
   const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
     return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
   };

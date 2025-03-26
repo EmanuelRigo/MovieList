@@ -1,13 +1,13 @@
 import { useRouter } from "next/navigation";
-import { Movie } from "@/context/interfaces/movieTypes";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 import Swal from "sweetalert2";
 import { deleteMovieById, getMovieByIdUpdate } from "@/components/widgets/movies.api";
-import { useMovieContext } from "@/context/MovieContext"; // Usa el hook personalizado
-import { FaTrash } from "react-icons/fa"; // Importa el icono de tacho de basura
+import { useMovieContext } from "@/context/MovieContext"; 
+import { FaTrash } from "react-icons/fa"; 
 
 interface EditButtonsProps {
   id: string;
-  movie: Movie;
+  movie: MovieDB;
 }
 
 const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
@@ -56,7 +56,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
     });
   };
 
-  const onSubmitEdit = async (movie: Movie) => {
+  const onSubmitEdit = async (movie: MovieDB) => {
     const { formats } = movie;
     try {
       const response = await getMovieByIdUpdate(id, { formats });
@@ -66,7 +66,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
       router.refresh();
       router.push("/");
     } catch (error) {
-      console.log(error, "hola error");
+      console.log(error, "error");
     }
   };
 
@@ -82,7 +82,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
         onClick={handleDelete}
         className="p-3 md:p-5 bg-red-500 dark:bg-red-700 rounded-md md:rounded-lg w-1/6 text-black dark:text-white flex items-center justify-center"
       >
-        <FaTrash /> {/* Icono de tacho de basura */}
+        <FaTrash />
       </button>
     </div>
   );

@@ -15,17 +15,18 @@ import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
 import { movieContext } from "@/context/MovieContext";
+import { useMovieContext } from "@/context/MovieContext";
 
 export const FooterMainMenu = () => {
 
 
   const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
-  console.log("username", username);
+
 
   const router = useRouter();
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
-  const { movieList } = useContext(movieContext);
+  const { movieList } = useMovieContext()
 
   useEffect(() => {
     const getCookie = (name: string) => {

@@ -2,14 +2,15 @@
 import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import { movieContext } from "@/context/MovieContext";
-import { Movie } from "@/context/interfaces/movieTypes";
+import { MovieDB } from "@/context/interfaces/movieTypes";
+import { useMovieContext } from "@/context/MovieContext";
 
 interface SearchBarProps {
-  movies?: Movie[];
+  movies?: MovieDB[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = () => {
-  const { movie, setMovie, movieList } = useContext(movieContext);
+  const { movie, setMovie, movieList } = useMovieContext()
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,8 +22,8 @@ const SearchBar: React.FC<SearchBarProps> = () => {
       str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     // Busca la primera película cuyo título coincida con el término de búsqueda
-    const matchedMovie = movieList.find((movie: Movie) =>
-      normalizeString(movie.title.toLowerCase()).startsWith(
+    const matchedMovie = movieList.find((movie: MovieDB) =>
+      normalizeString(movie._id.title.toLowerCase()).startsWith(
         normalizeString(value.toLowerCase())
       )
     );

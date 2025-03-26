@@ -4,35 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
-import { Movie } from "@/context/interfaces/movieTypes";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 
 interface CardRowProps {
-  movie: {
-    _id: {
-      _id: string;
-      title: string;
-    };
-    checked: boolean;
-    formats: {
-      dvd: boolean;
-    };
-  };
   isFocused: boolean;
+  movieProp: MovieDB;
 }
 
-export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
+export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const [isButtonActive, setIsButtonActive] = useState(false);
   const { setMovie } = useMovieContext();
-  const [localMovie, setLocalMovie] = useState(movie);
+  const [localMovie, setLocalMovie] = useState(movieProp);
   const handleClick = () => {
-    setMovie({
-      ...movie,
-      title: movie._id.title,
-      release_date: "",
-      backdrop_path: "",
-      formats: { vhs: false, dvd: movie.formats.dvd, bluray: false },
-    });
+    setMovie(movieProp);
   };
 
   const handleCheckClick = async () => {
@@ -53,14 +38,14 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
           ...prev,
           checked: updatedMovie.checked,
         }));
-        setMovie((prev) => {
-          if (!prev) return null; 
+        setMovie((prev: MovieDB | null) => {
+          if (!prev) return null;
           return {
             ...prev,
             checked: updatedMovie.checked,
-            title: prev.title || "", 
-            release_date: prev.release_date || "",
-            backdrop_path: prev.backdrop_path || "",
+            title: prev._id.title || "",
+            release_date: prev._id.release_date || "",
+            backdrop_path: prev._id.backdrop_path || "",
             formats: prev.formats || { vhs: false, dvd: false, bluray: false },
           };
         });
@@ -82,7 +67,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
   return (
     <div
       ref={buttonRef}
-      id={movie._id._id}
+      id={movieProp._id._id}
       onClick={handleClick}
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
@@ -103,13 +88,13 @@ export const CardRow: React.FC<CardRowProps> = ({ movie, isFocused }) => {
           )}
         </button>
         <p className="text-sm lg:text-lg text-black dark:text-white">
-          {movie._id.title}
+          {movieProp._id.title}
         </p>
       </div>
 
       <Link
         className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit-movie/${movie._id._id}`}
+        href={`/edit-movie/${movieProp._id._id}`}
       >
         edit
       </Link>
