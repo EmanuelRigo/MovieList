@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -14,27 +14,39 @@ import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
-import { movieContext } from "@/context/MovieContext";
 import { useMovieContext } from "@/context/MovieContext";
 import FilterFormatsButtons from "./FilterFormatsButtons";
 import RandomButton from "./RandomButton";
+import { getMovies } from "../widgets/movies.api";
 
 export const FooterMainMenu = () => {
-
-
   const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
-
 
   const router = useRouter();
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
-  const { movieList } = useMovieContext()
+  const { movieList, setMovieList } = useMovieContext(); // Accede a setMovieList desde el contexto
+
+  // Función para cargar las películas al montar el componente
+  const fetchMovies = async () => {
+    try {
+      const movies = await getMovies(); // Llama a la API para obtener las películas
+      console.log("🚀 ~ fetchMovies ~ movies:", movies)
+      setMovieList(movies.response.movies); // Actualiza la lista global de películas
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies(); // Llama a fetchMovies cuando el componente se monta
+  }, []);
 
   useEffect(() => {
     const getCookie = (name: string) => {
       const value = `; ${document.cookie}`;
       const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      if (parts.length === 2) return parts.pop()?.split(";").shift();
     };
 
     const mode = getCookie("mode");
@@ -94,7 +106,6 @@ export const FooterMainMenu = () => {
   };
 
   return (
-    console.log("movieslisssst", movieList.length),
     <div
       className={
         "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
@@ -121,17 +132,17 @@ export const FooterMainMenu = () => {
         </div>
       </div>
       <div className="flex-grow flex flex-col gap-4">
-          <CardMenuMovie />
-          <Link
-            style={{ fontSize: "4rem" }}
-            className={`rounded-lg w-full h-18 flex justify-between items-center 
+        <CardMenuMovie />
+        <Link
+          style={{ fontSize: "4rem" }}
+          className={`rounded-lg w-full h-18 flex justify-between items-center 
               dark:bg-neutral-800 dark:text-gray-200 dark:hover:text-orange-500
               bg-gray-100 text-black hover:bg-gray-300`}
-            href="/add-movie"
-          >
-            <span className="text-lg ps-4">Movies: {movieList.length}</span>
-            <CiSquarePlus />
-          </Link>
+          href="/add-movie"
+        >
+          <span className="text-lg ps-4">Movies: {movieList.length}</span>
+          <CiSquarePlus />
+        </Link>
 
         <div className="hidden lg:block">
           <YearSearch onSearch={handleSearchByYear} />
@@ -146,10 +157,9 @@ export const FooterMainMenu = () => {
           <RandomButton></RandomButton>
         </div>
         <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md">
-          <Link className=""
-            href="/list">
-              list
-            </Link>
+          <Link className="" href="/list">
+            list
+          </Link>
         </div>
       </div>
       <div>

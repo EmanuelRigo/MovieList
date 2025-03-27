@@ -11,10 +11,10 @@ const FilterFormatsButtons = () => {
     bluray: true,
   });
 
-  // Sincroniza originalMovieList con movieList cuando este último cambie
+
   useEffect(() => {
     if (movieList.length > 0 && originalMovieList.length === 0) {
-      setOriginalMovieList(movieList); // Solo establece originalMovieList una vez
+      setOriginalMovieList(movieList);
     }
   }, [movieList]);
 
