@@ -8,7 +8,7 @@ import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { BsFillMoonStarsFill, BsSun } from "react-icons/bs";
+import { BsFillMoonStarsFill, BsSun,BsPlusCircle } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
@@ -135,13 +135,12 @@ export const FooterMainMenu = () => {
         <CardMenuMovie />
         <Link
           style={{ fontSize: "4rem" }}
-          className={`rounded-lg w-full h-18 flex justify-between items-center 
-              dark:bg-neutral-800 dark:text-gray-200 dark:hover:text-orange-500
-              bg-gray-100 text-black hover:bg-gray-300`}
+          className={`rounded-lg w-full h-18 flex justify-between items-center dark:bg-neutral-950
+              dark:lg:bg-neutral-800 dark:text-gray-200 p-3 bg-gray-100 text-black`}
           href="/add-movie"
         >
-          <span className="text-lg ps-4">Movies: {movieList.length}</span>
-          <CiSquarePlus />
+          <span className="text-lg">Movies: {movieList.length}</span>
+          <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-orange-500" />
         </Link>
 
         <div className="hidden lg:block">

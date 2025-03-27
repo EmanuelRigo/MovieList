@@ -16,12 +16,12 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
   const [isButtonActive, setIsButtonActive] = useState(false);
   const { setMovie } = useMovieContext();
   const [localMovie, setLocalMovie] = useState(movieProp);
+
   const handleClick = () => {
     setMovie(movieProp);
   };
 
   const handleCheckClick = async () => {
-    //data to update
     const updatedMovie = {
       checked: !localMovie.checked,
     };
@@ -30,7 +30,6 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
         localMovie._id._id,
         updatedMovie
       );
-      // setLocalMovie(updatedMovie);
       if (movieupdate.message !== "ok") {
         throw new Error("Failed to update movie.");
       } else {
@@ -50,7 +49,6 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
           };
         });
       }
-      //setMovie(localMovie);
     } catch (error) {
       console.error("Failed to update movie:", error);
     }
@@ -76,7 +74,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
             : ""
         } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ">
         <button
           onClick={handleCheckClick}
           className="focus:outline-none text-neutral-500 dark:text-neutral-400"
@@ -87,17 +85,22 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
             <FaRegCircle className="text-xl hover:text-blue-700 dark:hover:text-yellow-500" />
           )}
         </button>
-        <p className="text-sm lg:text-lg text-black dark:text-white">
+        <p className="text-sm lg:text-md text-black dark:text-white">
           {movieProp._id.title}
         </p>
       </div>
 
-      <Link
-        className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
-        href={`/edit-movie/${movieProp._id._id}`}
-      >
-        edit
-      </Link>
+      <div className="flex items-center gap-2">
+        <p className="text-xs text-neutral-500">
+          {new Date(movieProp._id.release_date).getFullYear()}
+        </p>
+        <Link
+          className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
+          href={`/edit-movie/${movieProp._id._id}`}
+        >
+          edit
+        </Link>
+      </div>
     </div>
   );
 };

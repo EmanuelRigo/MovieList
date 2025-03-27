@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+"use client"
+import { useState, useEffect } from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 
@@ -45,7 +46,7 @@ const FilterFormatsButtons = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
+      <div className="flex justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
         <button
           className={`text-black rounded-lg dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
             activeFilters.vhs ? "font-bold" : "opacity-50"
