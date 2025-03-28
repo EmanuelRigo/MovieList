@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { CreateMovie } from "@/components/widgets/movies.api";
+import SvgDvd from "@/utils/svgs/DvdSvg";
+import BluRaySvg from "@/utils/svgs/BluRaySvg";
+import VhsSvg from "@/utils/svgs/VhsSvg";
 
 interface Movie {
   id: number;
@@ -48,7 +51,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       }
       alert("Película agregada correctamente.");
     } else {
-      alert("¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) debe estar disponible.");
+      alert(
+        "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) debe estar disponible."
+      );
     }
   };
 
@@ -62,8 +67,18 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     }));
   };
 
-  const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+  const myLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string;
+    width: number;
+    quality?: number;
+  }) => {
+    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+      quality || 75
+    }`;
   };
 
   return (
@@ -116,7 +131,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
                     : "bg-white dark:bg-neutral-900"
                 } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
-                VHS
+                <VhsSvg></VhsSvg>
               </button>
               <button
                 onClick={() => handleFormatChange("dvd")}
@@ -124,19 +139,19 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
                   movieToAdd.formats.dvd
                     ? "bg-blue-500 dark:bg-yellow-500"
                     : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
+                } p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
-                DVD
+                <SvgDvd className="w-20 h-5 mx-auto bg-red-400"/>
               </button>
               <button
-                onClick={() => handleFormatChange("bluray")}
+                onClick={() => handleFormatChange("dvd")}
                 className={`${
-                  movieToAdd.formats.bluray
+                  movieToAdd.formats.dvd
                     ? "bg-blue-500 dark:bg-yellow-500"
                     : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
+                } p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
               >
-                BLU-RAY
+                <BluRaySvg className="w-16 h-5 mx-auto bg-red-400"/>
               </button>
             </div>
             <div className="flex">

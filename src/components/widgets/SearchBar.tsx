@@ -8,6 +8,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsArrowReturnLeft, BsArrowBarLeft  } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
+import { LuSearch } from "react-icons/lu";
+
+
 interface SearchBarProps {
   movies?: MovieDB[];
 }
@@ -62,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           type="submit"
           className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 rounded-full dark:hover:text-orange-500 focus:ring-2 focus:ring-orange-700"
         >
-          <FaSearch />
+          <LuSearch />
         </button>
       </form>
       <Link

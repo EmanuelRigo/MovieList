@@ -18,6 +18,8 @@ import { useMovieContext } from "@/context/MovieContext";
 import FilterFormatsButtons from "./FilterFormatsButtons";
 import RandomButton from "./RandomButton";
 import { getMovies } from "../widgets/movies.api";
+import { BsListUl } from "react-icons/bs";
+import { IoIosLogOut } from "react-icons/io";
 
 export const FooterMainMenu = () => {
   const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
@@ -102,7 +104,6 @@ export const FooterMainMenu = () => {
 
   const handleSearchByYear = (year: string) => {
     console.log("Searching movies from year:", year);
-    // Aquí puedes agregar la lógica para manejar la búsqueda por año
   };
 
   return (
@@ -125,9 +126,9 @@ export const FooterMainMenu = () => {
           </button>
           <button
             onClick={handleLogout}
-            className="p-2 px-4 flex items-center justify-center bg-blue-500 dark:bg-orange-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-orange-700 transition-colors duration-300"
+            className="flex items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180"
           >
-            <BiLogOut />
+      <IoIosLogOut />
           </button>
         </div>
       </div>
@@ -152,12 +153,12 @@ export const FooterMainMenu = () => {
         <div className="hidden lg:block">
           <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md ">
-          <RandomButton></RandomButton>
+        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md flex items-center gap-2 ">
+          <RandomButton></RandomButton> <span>Random</span>
         </div>
         <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md">
-          <Link className="" href="/list">
-            list
+          <Link className="flex items-center gap-2" href="/list">
+          <BsListUl className="text-3xl"/> <span>List</span>
           </Link>
         </div>
       </div>

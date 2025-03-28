@@ -15,7 +15,7 @@ const page = () => {
           </div>
           <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="w-3/12 bg-blue-600 overflow-hidden">
+        <div className="w-3/12 overflow-hidden">
           <MiniCardViewer></MiniCardViewer>
         </div>
       </div>
