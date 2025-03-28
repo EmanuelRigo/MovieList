@@ -107,7 +107,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
             </div>
           </div>
           <div>
-            <div className="flex justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
+            <div className="flex justify-between mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`${

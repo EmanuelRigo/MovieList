@@ -1,6 +1,7 @@
 import { useMovieContext } from "@/context/MovieContext";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { GiCardRandom } from "react-icons/gi";
 
 const RandomButton = () => {
   const pathname = usePathname();
@@ -28,10 +29,10 @@ const RandomButton = () => {
 
   return (
     <button
-      className="text-black rounded-lg dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400"
+      className="text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400"
       onClick={obtenerObjetoAleatorio}
     >
-      Random
+  <GiCardRandom />
     </button>
   );
 };

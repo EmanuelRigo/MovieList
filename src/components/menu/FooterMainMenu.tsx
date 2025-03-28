@@ -8,7 +8,7 @@ import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { BsFillMoonStarsFill, BsSun,BsPlusCircle } from "react-icons/bs";
+import { BsMoonStars, BsSun,BsPlusCircle } from "react-icons/bs";
 import { BiLogOut } from "react-icons/bi";
 import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
@@ -121,7 +121,7 @@ export const FooterMainMenu = () => {
             }`}
             title={darkMode ? "Modo Claro" : "Modo Oscuro"}
           >
-            {darkMode ? <BsSun /> : <BsFillMoonStarsFill />}
+            {darkMode ? <BsSun /> : <BsMoonStars />}
           </button>
           <button
             onClick={handleLogout}

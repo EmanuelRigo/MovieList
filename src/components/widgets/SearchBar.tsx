@@ -1,17 +1,22 @@
-"use client"
+"use client";
 import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import { movieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
+import { BsArrowReturnLeft, BsArrowBarLeft  } from "react-icons/bs";
+import { IoIosArrowBack } from "react-icons/io";
 interface SearchBarProps {
   movies?: MovieDB[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = () => {
-  const { movie, setMovie, movieList } = useMovieContext()
+  const pathname = usePathname();
+  console.log("🚀 ~ pathname:", pathname);
+
+  const { movie, setMovie, movieList } = useMovieContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="w-full flex">
       <form
         onSubmit={handleSearch}
-        className="flex items-center bg-neutral-100 dark:bg-neutral-950 rounded-md w-10/12  lg:w-full  "
+        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border border-2 border-neutral-800 "
       >
         <input
           type="text"
@@ -60,7 +65,15 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           <FaSearch />
         </button>
       </form>
-        <Link className="lg:hidden w-2/12 text-yellow-500 flex items-center justify-center" href="/">volver</Link>
+      <Link
+        className={`${
+          pathname === "/list"
+            ? " w-2/12 text-yellow-500 flex justify-center ps-2 items-center text-3xl"
+            : "hidden"
+        }`}
+        href="/"
+      >
+<IoIosArrowBack />      </Link>
     </div>
   );
 };

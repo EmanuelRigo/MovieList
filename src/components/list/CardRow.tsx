@@ -5,6 +5,8 @@ import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
+import { CiEdit } from "react-icons/ci";
+import { AiOutlineEdit } from "react-icons/ai";
 
 interface CardRowProps {
   isFocused: boolean;
@@ -95,11 +97,10 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
           {new Date(movieProp._id.release_date).getFullYear()}
         </p>
         <Link
-          className="text-sm lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
+          className="text-lg lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
           href={`/edit-movie/${movieProp._id._id}`}
         >
-          edit
-        </Link>
+<AiOutlineEdit />        </Link>
       </div>
     </div>
   );
