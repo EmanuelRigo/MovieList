@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-const BluRaySvg = (props: SVGProps<SVGSVGElement>) => (
+const SvgBluRay = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -17,4 +17,4 @@ const BluRaySvg = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export default BluRaySvg;
+export default SvgBluRay;

@@ -112,7 +112,7 @@ export const FooterMainMenu = () => {
         "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
       }
     >
-      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-4">
+      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-4">
         <span className="text-lg">{username}</span>
         <div className="flex gap-4">
           <button

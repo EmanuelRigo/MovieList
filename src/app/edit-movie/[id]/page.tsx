@@ -8,16 +8,14 @@ import Swal from "sweetalert2";
 import {
   getMovieByIdUpdate,
   deleteMovieById,
-  getMovieUser
+  getMovieUser,
 } from "@/components/widgets/movies.api";
 import { movieContext } from "@/context/MovieContext";
 import { FaTrash } from "react-icons/fa";
 import { MovieDB } from "@/context/interfaces/movieTypes";
-
-// interface Genre {
-//   id: number;
-//   name: string;
-// }
+import SvgBluRay from "@/utils/svgs/SvgBluRay";
+import SvgDvd from "@/utils/svgs/SvgDvd";
+import SvgVhs from "@/utils/svgs/SvgVhs";
 
 const EditMovie: React.FC = () => {
   const [movieToEdit, setMovieToEdit] = useState<MovieDB | null>(null);
@@ -165,7 +163,9 @@ const EditMovie: React.FC = () => {
               </Link>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
-            {movieToEdit._id.release_date && movieToEdit._id.release_date.split("T")[0]}            </p>
+              {movieToEdit._id.release_date &&
+                movieToEdit._id.release_date.split("T")[0]}
+            </p>
             <div className="flex mb-1">
               {movieToEdit._id.genres &&
                 movieToEdit._id.genres.map((genre) => (
@@ -181,36 +181,36 @@ const EditMovie: React.FC = () => {
             </div>
           </div>
           <div>
-            <div className="flex justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
+            <div className="flex justify-between mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
-                className={`${
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.vhs
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
+                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                    : "text-white dark:text-neutral-700 bg-neutral-900"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
               >
-                VHS
+                <SvgVhs className="w-16 h-5 mx-auto" />
               </button>
               <button
                 onClick={() => handleFormatChange("dvd")}
-                className={`${
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.dvd
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
+                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                    : "text-white dark:text-neutral-700 bg-neutral-900"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
               >
-                DVD
+                <SvgDvd className="w-16 h-5 mx-auto" />
               </button>
               <button
                 onClick={() => handleFormatChange("bluray")}
-                className={`${
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.bluray
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
+                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                    : "text-white dark:text-neutral-700 bg-neutral-900"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
               >
-                BLU-RAY
+                <SvgBluRay className="w-16 h-5 mx-auto" />
               </button>
               <button
                 onClick={handleDelete}

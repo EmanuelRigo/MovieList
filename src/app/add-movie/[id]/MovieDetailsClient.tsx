@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { CreateMovie } from "@/components/widgets/movies.api";
-import SvgDvd from "@/utils/svgs/DvdSvg";
-import BluRaySvg from "@/utils/svgs/BluRaySvg";
-import VhsSvg from "@/utils/svgs/VhsSvg";
+import SvgDvd from "@/utils/svgs/SvgDvd";
+import BluRaySvg from "@/utils/svgs/SvgBluRay";
+import VhsSvg from "@/utils/svgs/SvgVhs";
 
 interface Movie {
   id: number;
@@ -123,36 +123,36 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           </div>
           <div>
             <div className="flex justify-between mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
-              <button
-                onClick={() => handleFormatChange("vhs")}
-                className={`${
-                  movieToAdd.formats.vhs
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-4 w-28 h-full rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
-              >
-                <VhsSvg></VhsSvg>
-              </button>
-              <button
-                onClick={() => handleFormatChange("dvd")}
-                className={`${
-                  movieToAdd.formats.dvd
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
-              >
-                <SvgDvd className="w-20 h-5 mx-auto bg-red-400"/>
-              </button>
-              <button
-                onClick={() => handleFormatChange("dvd")}
-                className={`${
-                  movieToAdd.formats.dvd
-                    ? "bg-blue-500 dark:bg-yellow-500"
-                    : "bg-white dark:bg-neutral-900"
-                } p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer`}
-              >
-                <BluRaySvg className="w-16 h-5 mx-auto bg-red-400"/>
-              </button>
+            <button
+              onClick={() => handleFormatChange("vhs")}
+              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                movieToAdd.formats.vhs
+                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                  : "text-white dark:text-neutral-700 bg-neutral-900"
+              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+            >
+              <VhsSvg className="w-16 h-5 mx-auto" />
+            </button>
+            <button
+              onClick={() => handleFormatChange("dvd")}
+              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                movieToAdd.formats.dvd
+                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                  : "text-white dark:text-neutral-700 bg-neutral-900"
+              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+            >
+              <SvgDvd className="w-16 h-5 mx-auto" />
+            </button>
+            <button
+              onClick={() => handleFormatChange("bluray")}
+              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                movieToAdd.formats.bluray
+                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
+                  : "text-white dark:text-neutral-700 bg-neutral-900"
+              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+            >
+              <BluRaySvg className="w-16 h-5 mx-auto" />
+            </button>
             </div>
             <div className="flex">
               <button
