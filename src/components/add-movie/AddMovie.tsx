@@ -70,7 +70,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
           {/* Barra de búsqueda */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-800"
+            className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-400"
           >
             <input
               type="text"
@@ -89,7 +89,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
 
           {/* Botón de volver */}
           <Link
-            className="flex items-center justify-center w-2/12 h-12 text-neutral-900 dark:text-yellow-500 hover:text-blue-600 dark:hover:text-orange-500 text-3xl ps-2"
+            className="flex items-center justify-center w-2/12 h-12 text-blue-500 dark:text-yellow-500 hover:text-blue-600 dark:hover:text-orange-500 text-3xl ps-2"
             href="/"
           >
             <IoIosArrowBack />
@@ -101,7 +101,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
           {!hasSearched ? (
             <div className="h-full flex flex-col items-center justify-center ">
               <BiCameraMovie className="text-8xl mb-4 text-blue-500 dark:text-yellow-500" />
-              <p className="text-center text-lg text-neutral-900 dark:text-neutral-100">
+              <p className="text-center text-lg text-neutral-700 dark:text-neutral-100">
                 Busca tu película para agregarla.
               </p>
             </div>

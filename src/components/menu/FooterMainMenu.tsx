@@ -153,10 +153,10 @@ export const FooterMainMenu = () => {
         <div className="hidden lg:block">
           <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md flex items-center gap-2 ">
+        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-950 p-4 rounded-md flex items-center gap-2 ">
           <RandomButton></RandomButton> <span>Random</span>
         </div>
-        <div className="lg:hidden text-lg bg-neutral-950 p-4 rounded-md">
+        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-950 p-4 rounded-md">
           <Link className="flex items-center gap-2" href="/list">
           <BsListUl className="text-3xl"/> <span>List</span>
           </Link>

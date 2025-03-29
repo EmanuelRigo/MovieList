@@ -16,6 +16,7 @@ import { MovieDB } from "@/context/interfaces/movieTypes";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgVhs from "@/utils/svgs/SvgVhs";
+import { IoIosArrowBack } from "react-icons/io";
 
 const EditMovie: React.FC = () => {
   const [movieToEdit, setMovieToEdit] = useState<MovieDB | null>(null);
@@ -157,9 +158,9 @@ const EditMovie: React.FC = () => {
               <h1 className="text-xl md:text-2xl">{movieToEdit._id.title}</h1>
               <Link
                 href="/"
-                className="p-2 md:p-4 bg-blue-500 dark:bg-yellow-500 rounded-sm text-neutral-900 text-sm md:text-base"
+                className=" text-blue-500 dark:text-yellow-500 text-3xl"
               >
-                Volver
+               <IoIosArrowBack />
               </Link>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
@@ -181,14 +182,14 @@ const EditMovie: React.FC = () => {
             </div>
           </div>
           <div>
-            <div className="flex justify-between mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
+            <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.vhs
-                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                    : "text-white dark:text-neutral-700 bg-neutral-900"
-                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
               >
                 <SvgVhs className="w-16 h-5 mx-auto" />
               </button>
@@ -196,9 +197,9 @@ const EditMovie: React.FC = () => {
                 onClick={() => handleFormatChange("dvd")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.dvd
-                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                    : "text-white dark:text-neutral-700 bg-neutral-900"
-                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
               >
                 <SvgDvd className="w-16 h-5 mx-auto" />
               </button>
@@ -206,15 +207,15 @@ const EditMovie: React.FC = () => {
                 onClick={() => handleFormatChange("bluray")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.bluray
-                    ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                    : "text-white dark:text-neutral-700 bg-neutral-900"
-                } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
               >
                 <SvgBluRay className="w-16 h-5 mx-auto" />
               </button>
               <button
                 onClick={handleDelete}
-                className="p-2 md:p-4 w-28 bg-red-500 dark:bg-red-700 rounded-sm text-black dark:text-neutral-900 flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer h-auto"
+                className="p-2 w-28 bg-neutral-100 dark:bg-neutral-900 text-red-500 dark:text-red-600 rounded-sm  flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer h-auto"
               >
                 <FaTrash />
               </button>

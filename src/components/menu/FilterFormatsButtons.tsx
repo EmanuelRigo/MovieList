@@ -50,8 +50,8 @@ const FilterFormatsButtons = () => {
   }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 lg:rounded-lg px-4">
+    <div className="flex flex-col gap-4 ">
+      <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 lg:rounded-lg px-4 lg:py-4">
         <button
           className={`text-black rounded-lg dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
             activeFilters.vhs ? "font-bold" : "opacity-20"

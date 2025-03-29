@@ -5,7 +5,6 @@ import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
-import { CiEdit } from "react-icons/ci";
 import { AiOutlineEdit } from "react-icons/ai";
 
 interface CardRowProps {
@@ -72,7 +71,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
           isButtonActive
-            ? "outline-offset-0 border-blue-400 dark:border-yellow-500"
+            ? "outline-offset-0 border-blue-500 dark:border-yellow-500"
             : ""
         } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
     >
@@ -100,7 +99,8 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
           className="text-lg lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
           href={`/edit-movie/${movieProp._id._id}`}
         >
-<AiOutlineEdit />        </Link>
+          <AiOutlineEdit />{" "}
+        </Link>
       </div>
     </div>
   );

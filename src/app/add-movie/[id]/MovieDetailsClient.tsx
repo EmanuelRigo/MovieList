@@ -8,6 +8,7 @@ import { CreateMovie } from "@/components/widgets/movies.api";
 import SvgDvd from "@/utils/svgs/SvgDvd";
 import BluRaySvg from "@/utils/svgs/SvgBluRay";
 import VhsSvg from "@/utils/svgs/SvgVhs";
+import { IoIosArrowBack } from "react-icons/io";
 
 interface Movie {
   id: number;
@@ -100,9 +101,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               <h1 className="text-xl md:text-2xl">{movie.title}</h1>
               <Link
                 href="/"
-                className="p-2 md:p-4 bg-blue-500 dark:bg-yellow-500 rounded-sm text-neutral-900 text-sm md:text-base"
+                 className=" text-blue-500 dark:text-yellow-500 text-3xl"
               >
-                Volver
+                <IoIosArrowBack></IoIosArrowBack>
               </Link>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
@@ -122,14 +123,14 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
             </div>
           </div>
           <div>
-            <div className="flex justify-between mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
+            <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
             <button
               onClick={() => handleFormatChange("vhs")}
               className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                 movieToAdd.formats.vhs
-                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                  : "text-white dark:text-neutral-700 bg-neutral-900"
-              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                  ? "text-blue-500 dark:text-yellow-500"
+                  : "text-neutral-400 dark:text-neutral-700"
+              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
             >
               <VhsSvg className="w-16 h-5 mx-auto" />
             </button>
@@ -137,9 +138,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               onClick={() => handleFormatChange("dvd")}
               className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                 movieToAdd.formats.dvd
-                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                  : "text-white dark:text-neutral-700 bg-neutral-900"
-              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                  ? "text-blue-500 dark:text-yellow-500 "
+                  : "text-neutral-400 dark:text-neutral-700 "
+              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
             >
               <SvgDvd className="w-16 h-5 mx-auto" />
             </button>
@@ -147,9 +148,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               onClick={() => handleFormatChange("bluray")}
               className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                 movieToAdd.formats.bluray
-                  ? "text-blue-500 dark:text-yellow-500 bg-neutral-900"
-                  : "text-white dark:text-neutral-700 bg-neutral-900"
-              } hover:outline-blue-500 dark:hover:outline-yellow-500`}
+                  ? "text-blue-500 dark:text-yellow-500"
+                  : "text-neutral-400 dark:text-neutral-700"
+              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
             >
               <BluRaySvg className="w-16 h-5 mx-auto" />
             </button>
