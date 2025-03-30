@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import Swal from "sweetalert2";
 import {
   getMovieByIdUpdate,
   deleteMovieById,
@@ -17,9 +16,13 @@ import SvgBluRay from "@/utils/svgs/SvgBluRay";
 import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgVhs from "@/utils/svgs/SvgVhs";
 import { IoIosArrowBack } from "react-icons/io";
+import Modal from "@/components/widgets/Modal";
 
 const EditMovie: React.FC = () => {
   const [movieToEdit, setMovieToEdit] = useState<MovieDB | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalActions, setModalActions] = useState<{ label: string; onClick: () => void; className?: string }[]>([]);
   const pathname = usePathname();
   const router = useRouter();
   const movieContextValue = useContext(movieContext);
@@ -64,12 +67,28 @@ const EditMovie: React.FC = () => {
     if (movieToEdit) {
       const { vhs, dvd, bluray } = movieToEdit.formats;
       if (vhs || dvd || bluray) {
-        alert(
+        setModalMessage(
           "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) está disponible."
         );
-        await onSubmitEdit(movieToEdit);
+        setModalActions([
+          {
+            label: "Aceptar",
+            onClick: async () => {
+              await onSubmitEdit(movieToEdit);
+              setIsModalOpen(false);
+            },
+          },
+        ]);
+        setIsModalOpen(true);
       } else {
-        alert("Al menos tiene que tener un formato.");
+        setModalMessage("Al menos tiene que tener un formato.");
+        setModalActions([
+          {
+            label: "Cerrar",
+            onClick: () => setIsModalOpen(false),
+          },
+        ]);
+        setIsModalOpen(true);
       }
     }
   };
@@ -99,22 +118,24 @@ const EditMovie: React.FC = () => {
   };
 
   const handleDelete = () => {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "No podrás revertir esto",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, bórralo",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        onSubmitDelete();
-        Swal.fire("¡Borrado!", "La película ha sido borrada.", "success");
-        setMovie(null);
-      }
-    });
+    setModalMessage("¿Estás seguro? No podrás revertir esto.");
+    setModalActions([
+      {
+        label: "Cancelar",
+        onClick: () => setIsModalOpen(false),
+        className: "bg-gray-500 text-white hover:bg-gray-600",
+      },
+      {
+        label: "Sí, bórralo",
+        onClick: async () => {
+          await onSubmitDelete();
+          setIsModalOpen(false);
+          setMovie(null);
+        },
+        className: "bg-red-500 text-white hover:bg-red-600",
+      },
+    ]);
+    setIsModalOpen(true);
   };
 
   const myLoader = ({
@@ -160,7 +181,7 @@ const EditMovie: React.FC = () => {
                 href="/"
                 className=" text-blue-500 dark:text-yellow-500 text-3xl"
               >
-               <IoIosArrowBack />
+                <IoIosArrowBack />
               </Link>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
@@ -231,6 +252,14 @@ const EditMovie: React.FC = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Mensaje"
+        actions={modalActions}
+      >
+        {modalMessage}
+      </Modal>
     </div>
   );
 };

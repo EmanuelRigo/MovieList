@@ -3,13 +3,16 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
+import { IoIosArrowBack } from "react-icons/io";
 
 const MiniCardViewer = () => {
   const { movie } = useMovieContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+    const url = `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+    console.log("Image URL:", url); // Verifica la URL generada
+    return url;
   };
 
   const handleImageClick = () => {
@@ -21,13 +24,20 @@ const MiniCardViewer = () => {
   };
 
   if (movie && movie._id) {
+    const imagePath = movie._id.poster_path?.startsWith("/")
+      ? movie._id.poster_path
+      : `/${movie._id.poster_path}`;
+
     return (
       <>
         {/* Imagen que abre el modal */}
-        <div className="relative w-full h-full overflow-hidden" onClick={handleImageClick}>
+        <div
+          className="relative h-full aspect-3-4 overflow-hidden"
+          onClick={handleImageClick}
+        >
           <Image
             loader={myLoader}
-            src={movie._id.poster_path || "/images/default-backdrop.jpg"}
+            src={imagePath || "/images/default-backdrop.jpg"}
             fill
             style={{ objectFit: "cover" }}
             alt={movie._id.title || "Movie Poster"}
@@ -75,15 +85,15 @@ const MiniCardViewer = () => {
                       : "text-neutral-400 dark:text-neutral-600"
                   }`}
                 >
-                  Blu-ray
+                  BLU-RAY
                 </span>
               </p>
               <div className="flex justify-end mt-4">
                 <button
                   onClick={handleCloseModal}
-                  className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  className="p-2 text-blue-500 dark:text-yellow-500 text-4xl"
                 >
-                  Cerrar
+                  <IoIosArrowBack></IoIosArrowBack>
                 </button>
               </div>
             </div>

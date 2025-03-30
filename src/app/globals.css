@@ -35,6 +35,10 @@ body {
   aspect-ratio: 9 / 16;
 }
 
+.aspect-3-4 {
+  aspect-ratio: 3 / 4;
+}
+
 /* .md-grid-template {
   grid-template-columns: 1fr 
 } */

@@ -9,6 +9,7 @@ import SvgDvd from "@/utils/svgs/SvgDvd";
 import BluRaySvg from "@/utils/svgs/SvgBluRay";
 import VhsSvg from "@/utils/svgs/SvgVhs";
 import { IoIosArrowBack } from "react-icons/io";
+import Modal from "@/components/widgets/Modal";
 
 interface Movie {
   id: number;
@@ -34,6 +35,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     year: new Date(movie.release_date).getFullYear(),
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const router = useRouter();
 
   const checkFormats = async () => {
@@ -42,19 +45,21 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       try {
         const data = await CreateMovie(movieToAdd);
         if (data) {
-          router.refresh();
-          router.push("/");
+          setModalMessage("Película agregada correctamente.");
+          setIsModalOpen(true);
         } else {
           throw new Error("Failed to create");
         }
       } catch (error) {
         console.log(error);
+        setModalMessage("Ocurrió un error al agregar la película.");
+        setIsModalOpen(true);
       }
-      alert("Película agregada correctamente.");
     } else {
-      alert(
+      setModalMessage(
         "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) debe estar disponible."
       );
+      setIsModalOpen(true);
     }
   };
 
@@ -66,6 +71,11 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
         [format]: !prev.formats[format],
       },
     }));
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    router.push("/"); // Redirige al usuario después de cerrar el modal
   };
 
   const myLoader = ({
@@ -101,7 +111,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               <h1 className="text-xl md:text-2xl">{movie.title}</h1>
               <Link
                 href="/"
-                 className=" text-blue-500 dark:text-yellow-500 text-3xl"
+                className="text-blue-500 dark:text-yellow-500 text-3xl"
               >
                 <IoIosArrowBack></IoIosArrowBack>
               </Link>
@@ -124,36 +134,36 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           </div>
           <div>
             <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
-            <button
-              onClick={() => handleFormatChange("vhs")}
-              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                movieToAdd.formats.vhs
-                  ? "text-blue-500 dark:text-yellow-500"
-                  : "text-neutral-400 dark:text-neutral-700"
-              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
-            >
-              <VhsSvg className="w-16 h-5 mx-auto" />
-            </button>
-            <button
-              onClick={() => handleFormatChange("dvd")}
-              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                movieToAdd.formats.dvd
-                  ? "text-blue-500 dark:text-yellow-500 "
-                  : "text-neutral-400 dark:text-neutral-700 "
-              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
-            >
-              <SvgDvd className="w-16 h-5 mx-auto" />
-            </button>
-            <button
-              onClick={() => handleFormatChange("bluray")}
-              className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                movieToAdd.formats.bluray
-                  ? "text-blue-500 dark:text-yellow-500"
-                  : "text-neutral-400 dark:text-neutral-700"
-              } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
-            >
-              <BluRaySvg className="w-16 h-5 mx-auto" />
-            </button>
+              <button
+                onClick={() => handleFormatChange("vhs")}
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                  movieToAdd.formats.vhs
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
+              >
+                <VhsSvg className="w-16 h-5 mx-auto" />
+              </button>
+              <button
+                onClick={() => handleFormatChange("dvd")}
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                  movieToAdd.formats.dvd
+                    ? "text-blue-500 dark:text-yellow-500 "
+                    : "text-neutral-400 dark:text-neutral-700 "
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
+              >
+                <SvgDvd className="w-16 h-5 mx-auto" />
+              </button>
+              <button
+                onClick={() => handleFormatChange("bluray")}
+                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                  movieToAdd.formats.bluray
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
+                } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
+              >
+                <BluRaySvg className="w-16 h-5 mx-auto" />
+              </button>
             </div>
             <div className="flex">
               <button
@@ -166,6 +176,23 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           </div>
         </div>
       </div>
+
+      <Modal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  title="Mensaje"
+  actions={[
+    {
+      label: "Ok",
+      onClick: () => {
+        setIsModalOpen(false);
+        router.push("/"); // Redirige al usuario
+      },
+    },
+  ]}
+>
+  Película agregada correctamente.
+</Modal>
     </div>
   );
 }

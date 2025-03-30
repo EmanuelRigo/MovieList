@@ -9,13 +9,13 @@ const page = () => {
     <div className=" bg-neutral-300 dark:bg-neutral-950 flex flex-col  w-full h-full p-4 gap-4">
       <SearchBar></SearchBar>
       <div className="flex rounded-lg h-44 bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
-        <div className="flex flex-col justify-evenly w-9/12 overflow-hidden">
+        <div className="flex flex-col flex-grow justify-evenly overflow-hidden">
           <div>
             <OrderListButtons></OrderListButtons>
           </div>
           <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="w-3/12 overflow-hidden">
+        <div className="overflow-hidden">
           <MiniCardViewer></MiniCardViewer>
         </div>
       </div>
