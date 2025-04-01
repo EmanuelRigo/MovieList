@@ -23,7 +23,7 @@ const RegisterPage: React.FC = () => {
         password,
         firstname,
         lastname,
-        email,
+        email
       };
 
       const response = await createUser(userData);

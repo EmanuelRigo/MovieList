@@ -153,19 +153,11 @@ export interface UserMovie {
 }
 
 export interface User {
-  _id: {
-    $oid: string;
-  };
   username: string;
   password: string;
   firstname: string;
   lastname: string;
   email: string;
-  role: string;
-  verifyUser: boolean;
-  verifyCode: string;
-  isOnline: boolean;
-  __v: number;
 }
 
 export interface UserMoviesResponse {
