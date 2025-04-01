@@ -37,7 +37,8 @@ const EditMovie: React.FC = () => {
       if (id) {
         try {
           const movie = await getMovieUser(id);
-          setMovieToEdit(movie.response);
+          const movieData = await movie.json();
+          setMovieToEdit(movieData);
         } catch (error) {
           console.error("Failed to fetch movie:", error);
         }
