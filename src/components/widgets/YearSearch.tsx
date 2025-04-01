@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
-import { movieContext } from "@/context/MovieContext";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 

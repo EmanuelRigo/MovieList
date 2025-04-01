@@ -118,10 +118,10 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     });
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    router.push("/");
-  };
+  // const handleModalClose = () => {
+  //   setIsModalOpen(false);
+  //   router.push("/");
+  // };
 
   const myLoader = ({
     src,

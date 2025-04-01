@@ -6,7 +6,7 @@ import { RiSortAlphabetAsc } from "react-icons/ri";
 import { PiCalendarLight } from "react-icons/pi";
 
 const OrderListButtons = () => {
-  const { setMovieList, movieList, setMovie } = useMovieContext();
+  const { setMovieList, movieList} = useMovieContext();
 
   function ordenarPorTitulo() {
     const sortedList = [...movieList].sort((a, b) => {
