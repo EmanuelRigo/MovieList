@@ -1,12 +1,10 @@
 "use client";
-import React, { useState, useContext, ChangeEvent, FormEvent } from "react";
-import { FaSearch } from "react-icons/fa";
-import { movieContext } from "@/context/MovieContext";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BsArrowReturnLeft, BsArrowBarLeft } from "react-icons/bs";
+
 import { IoIosArrowBack } from "react-icons/io";
 import { LuSearch } from "react-icons/lu";
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { MovieDB, Movie } from "./interfaces/movieTypes";
+import { MovieDB } from "./interfaces/movieTypes";
 
 interface MovieContextProps {
   movie: MovieDB | null;

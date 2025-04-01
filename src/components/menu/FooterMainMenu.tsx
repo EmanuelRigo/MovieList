@@ -9,8 +9,6 @@ import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
 import { BsMoonStars, BsSun,BsPlusCircle } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
-import { CiSquarePlus } from "react-icons/ci";
 import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
@@ -25,7 +23,6 @@ export const FooterMainMenu = () => {
   const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
 
   const router = useRouter();
-  const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
   const { movieList, setMovieList } = useMovieContext(); // Accede a setMovieList desde el contexto
 

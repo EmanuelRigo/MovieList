@@ -1,4 +1,4 @@
-import { Movie, MovieDB, UserMovie, UserMoviesResponse, CreateMovieInterface} from "@/context/interfaces/movieTypes";
+import { Movie, MovieDB, UserMovie, UserMoviesResponse} from "@/context/interfaces/movieTypes";
 
 //USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {

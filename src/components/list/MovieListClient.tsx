@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { CardRow } from "./CardRow";
-import OrderListButtons from "../menu/OrderListButtons";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 import { FaFilm } from "react-icons/fa"; // Importa el ícono de react-icons

@@ -12,11 +12,10 @@ import { IoIosArrowBack } from "react-icons/io";
 import Modal from "@/components/widgets/Modal";
 import { Movie, MovieDB } from "@/context/interfaces/movieTypes";
 
-
 export default function MovieDetailsClient({ movie }: { movie: Movie }) {
   const [movieToAdd, setMovieToAdd] = useState<MovieDB>({
     _id: {
-      id: movie.id, 
+      id: movie.id,
       title: movie.title,
       release_date: movie.release_date,
       backdrop_path: movie.backdrop_path || "",
@@ -25,7 +24,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       genres: movie.genres.map((genre) => ({
         id: genre.id,
         name: genre.name,
-        _id: { $oid: "" }, 
+        _id: { $oid: "" },
       })),
       belongs_to_collection: movie.belongs_to_collection || undefined,
       budget: movie.budget || 0,
@@ -35,26 +34,29 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       original_language: movie.original_language || "",
       original_title: movie.original_title || "",
       popularity: movie.popularity || 0,
-      production_companies: movie.production_companies?.map((company) => ({
-        id: company.id,
-        logo_path: company.logo_path || null,
-        name: company.name,
-        origin_country: company.origin_country,
-        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
-      })) || [],
-      production_countries: movie.production_countries?.map((country) => ({
-        iso_3166_1: country.iso_3166_1,
-        name: country.name,
-        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
-      })) || [],
+      production_companies:
+        movie.production_companies?.map((company) => ({
+          id: company.id,
+          logo_path: company.logo_path || null,
+          name: company.name,
+          origin_country: company.origin_country,
+          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+        })) || [],
+      production_countries:
+        movie.production_countries?.map((country) => ({
+          iso_3166_1: country.iso_3166_1,
+          name: country.name,
+          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+        })) || [],
       revenue: movie.revenue || 0,
       runtime: movie.runtime || 0,
-      spoken_languages: movie.spoken_languages?.map((language) => ({
-        english_name: language.english_name,
-        iso_639_1: language.iso_639_1,
-        name: language.name,
-        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
-      })) || [],
+      spoken_languages:
+        movie.spoken_languages?.map((language) => ({
+          english_name: language.english_name,
+          iso_639_1: language.iso_639_1,
+          name: language.name,
+          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+        })) || [],
       status: movie.status || "",
       tagline: movie.tagline || "",
       video: movie.video || false,
@@ -62,7 +64,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       vote_count: movie.vote_count || 0,
       createdAt: { $date: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
       updatedAt: { $date: "" },
-       // Puedes dejarlo vacío si no tienes un valor inicial
+      // Puedes dejarlo vacío si no tienes un valor inicial
     },
     formats: { vhs: false, dvd: false, bluray: false },
     checked: false, // Inicializa como `false` si no tienes un valor inicial
@@ -71,11 +73,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
   const [modalMessage, setModalMessage] = useState("");
   const router = useRouter();
 
-  
-
   const checkFormats = async () => {
-    const { vhs, dvd, bluray } = movieToAdd.formats 
-    
+    const { vhs, dvd, bluray } = movieToAdd.formats;
+
     if (vhs || dvd || bluray) {
       try {
         if (!movieToAdd || !movieToAdd._id) {
@@ -83,8 +83,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
         }
 
         const data = await CreateMovie(movieToAdd);
-        console.log("🚀 ~ checkFormats ~ data:", data)
-  
+        console.log("🚀 ~ checkFormats ~ data:", data);
+
         if (data) {
           setModalMessage("Película agregada correctamente!.");
           setIsModalOpen(true);
@@ -104,10 +104,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     }
   };
 
-
   const handleFormatChange = (format: keyof MovieDB["formats"]) => {
     setMovieToAdd((prev) => {
-      if (!prev) return undefined;
       return {
         ...prev,
         formats: {
@@ -122,7 +120,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    router.push("/"); 
+    router.push("/");
   };
 
   const myLoader = ({
@@ -181,7 +179,6 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           </div>
           <div>
             <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
-       {     console.log("consoeee", movieToAdd)}
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
@@ -226,23 +223,23 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       </div>
 
       <Modal
-  isOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  title="Mensaje"
-  actions={[
-    {
-      label: "Ok",
-      onClick: () => {
-        setIsModalOpen(false);
-        if (modalMessage === "Película agregada correctamente.") {
-          router.push("/"); 
-        }
-      },
-    },
-  ]}
->
-  {modalMessage}
-</Modal>
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Mensaje"
+        actions={[
+          {
+            label: "Ok",
+            onClick: () => {
+              setIsModalOpen(false);
+              if (modalMessage === "Película agregada correctamente.") {
+                router.push("/");
+              }
+            },
+          },
+        ]}
+      >
+        {modalMessage}
+      </Modal>
     </div>
   );
 }
