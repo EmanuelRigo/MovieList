@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
+import { useMovieContext } from "@/context/MovieContext";
 
 import { checkOnlineStatus } from "@/components/widgets/users.api";
 
@@ -16,7 +17,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const router = useRouter();
 
+  const {setMovie} = useMovieContext()
   console.log("holaaa apps");
+
+  useEffect(()=>{
+    setMovie(null)
+  },[])
 
   useEffect(() => {
     const handleResize = () => {

@@ -1,5 +1,5 @@
 "use client";
-import { getMovies } from "../widgets/movies.api";
+import { getUserMovies } from "../widgets/movies.api";
 import { useState, useEffect } from "react";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 
@@ -11,7 +11,7 @@ export const useMovies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getMovies();  
+        const result = await getUserMovies();  
         setData(result.response.movies);
       } catch (err: unknown) {
         console.error("Error fetching movies:", err);

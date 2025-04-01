@@ -16,7 +16,6 @@ const LoginPage: React.FC = () => {
     const fetchOnlineStatus = async () => {
       try {
         const response = await checkOnlineStatus();
-        console.log("🚀 ~ fetchOnlineStatus ~ response:", response);
 
         if (response.status === 200) {
           router.push("/"); // Redirige a la página de inicio si el usuario está online

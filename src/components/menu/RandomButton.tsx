@@ -5,8 +5,6 @@ import { GiCardRandom } from "react-icons/gi";
 
 const RandomButton = () => {
   const pathname = usePathname();
-  console.log("🚀 ~ RandomButton ~ pathname:", pathname);
-
   const { movieList, setMovie } = useMovieContext();
   const [hasExecuted, setHasExecuted] = useState(false); // Estado para rastrear si el efecto ya se ejecutó
 
@@ -14,14 +12,13 @@ const RandomButton = () => {
     if (movieList.length > 0) {
       const indiceAleatorio = Math.floor(Math.random() * movieList.length);
       const objetoAleatorio = movieList[indiceAleatorio];
-      console.log("🚀 ~ obtenerObjetoAleatorio ~ objetoAleatorio:", objetoAleatorio);
+
       setMovie(objetoAleatorio);
     }
   }
 
   useEffect(() => {
     if (!hasExecuted && pathname === "/" && movieList.length > 0) {
-      console.log("🚀 ~ Ejecutando obtenerObjetoAleatorio en / por primera vez");
       obtenerObjetoAleatorio();
       setHasExecuted(true); // Marca que el efecto ya se ejecutó
     }

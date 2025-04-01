@@ -1,24 +1,31 @@
+import { Movie, MovieDB, UserMovie, UserMoviesResponse, CreateMovieInterface} from "@/context/interfaces/movieTypes";
+
 //USERMOVIES
-export async function getMovies(): Promise<any> {
-  const res = await fetch("http://localhost:9000/api/userMovies", {
+export async function getUserMovies(): Promise<UserMoviesResponse> {
+  const res = await fetch("https://movielist-backend.vercel.app/api/userMovies", {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
   });
+  console.log("🚀 ~ getUserMovies ~ res:", res)
+  
   const data = await res.json();
+  console.log("🚀 ~ getUserMovies ~ data:", data)
+  
   return data;
 }
 
-export async function getMovieUser(mid: string): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/usermovies/movies/${mid}`, {
+export async function getMovieUser(mid: string): Promise<Response> {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     },
     credentials: "include"
   })
+  console.log("ressss:", res)
   if (!res.ok) {
     throw new Error("Fail to get movie")
   }
@@ -26,8 +33,8 @@ export async function getMovieUser(mid: string): Promise<any> {
   return data
 }
 
-export async function CreateMovie(movieData: any): Promise<any> {
-  const res = await fetch("http://localhost:9000/api/userMovies", {
+export async function CreateMovie(movieData: MovieDB): Promise<Response> {
+  const res = await fetch("https://movielist-backend.vercel.app/api/userMovies", {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -41,9 +48,9 @@ export async function CreateMovie(movieData: any): Promise<any> {
 
 export async function getMovieByIdUpdate(
   mid: string,
-  movieData: any
-): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/userMovies/movies/${mid}`, {
+  movieData: UserMovie
+): Promise<Response> {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/userMovies/movies/${mid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -55,11 +62,13 @@ export async function getMovieByIdUpdate(
     throw new Error("Failed to update movie.");
   }
   const data = await res.json();
+  console.log("🚀 ~ data:", data)
+  
   return data;
 }
 
-export async function deleteMovieById(id: string): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/userMovies/movies/${id}`, {
+export async function deleteMovieById(id: string): Promise<Response> {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/userMovies/movies/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -73,8 +82,8 @@ export async function deleteMovieById(id: string): Promise<any> {
   return data;
 }
 
-export async function getMovieById(id: string): Promise<any> {
-  const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
+export async function getMovieById(id: string): Promise<Movie> {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/movies/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

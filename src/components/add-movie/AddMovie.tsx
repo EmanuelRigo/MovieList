@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { FaSearch } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";

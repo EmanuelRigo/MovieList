@@ -17,7 +17,7 @@ import { logoutUser } from "../widgets/users.api";
 import { useMovieContext } from "@/context/MovieContext";
 import FilterFormatsButtons from "./FilterFormatsButtons";
 import RandomButton from "./RandomButton";
-import { getMovies } from "../widgets/movies.api";
+import { getUserMovies } from "../widgets/movies.api";
 import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 
@@ -32,7 +32,7 @@ export const FooterMainMenu = () => {
   // Función para cargar las películas al montar el componente
   const fetchMovies = async () => {
     try {
-      const movies = await getMovies(); // Llama a la API para obtener las películas
+      const movies = await getUserMovies(); // Llama a la API para obtener las películas
       console.log("🚀 ~ fetchMovies ~ movies:", movies)
       setMovieList(movies.response.movies); // Actualiza la lista global de películas
     } catch (error) {
@@ -66,7 +66,7 @@ export const FooterMainMenu = () => {
     document.body.classList.toggle("dark", !darkMode);
 
     try {
-      const response = await fetch("http://localhost:9000/api/cookies/create", {
+      const response = await fetch("https://movielist-backend.vercel.app/api/cookies/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

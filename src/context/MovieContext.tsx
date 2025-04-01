@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { MovieDB, Movie } from "./interfaces/movieTypes";
 
 interface MovieContextProps {
@@ -31,6 +31,10 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const updateCardMovie = (movie: MovieDB) => {
     setMovie(movie);
   };
+
+  useEffect(()=>{
+    setMovie(null)
+  },[movieList])
 
   const value = {
     movie,

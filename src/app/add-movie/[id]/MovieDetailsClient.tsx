@@ -10,48 +10,89 @@ import BluRaySvg from "@/utils/svgs/SvgBluRay";
 import VhsSvg from "@/utils/svgs/SvgVhs";
 import { IoIosArrowBack } from "react-icons/io";
 import Modal from "@/components/widgets/Modal";
+import { Movie, MovieDB } from "@/context/interfaces/movieTypes";
 
-interface Movie {
-  id: number;
-  title: string;
-  release_date: string;
-  poster_path: string | null;
-  overview: string;
-  genres: { id: number; name: string }[];
-  formats: {
-    vhs: boolean;
-    dvd: boolean;
-    bluray: boolean;
-  };
-  director: string;
-  year: number;
-}
 
 export default function MovieDetailsClient({ movie }: { movie: Movie }) {
-  const [movieToAdd, setMovieToAdd] = useState<Movie>({
-    ...movie,
+  const [movieToAdd, setMovieToAdd] = useState<MovieDB>({
+    _id: {
+      id: movie.id, 
+      title: movie.title,
+      release_date: movie.release_date,
+      backdrop_path: movie.backdrop_path || "",
+      poster_path: movie.poster_path || "",
+      overview: movie.overview,
+      genres: movie.genres.map((genre) => ({
+        id: genre.id,
+        name: genre.name,
+        _id: { $oid: "" }, 
+      })),
+      belongs_to_collection: movie.belongs_to_collection || undefined,
+      budget: movie.budget || 0,
+      homepage: movie.homepage || "",
+      imdb_id: movie.imdb_id || "",
+      origin_country: movie.origin_country || [],
+      original_language: movie.original_language || "",
+      original_title: movie.original_title || "",
+      popularity: movie.popularity || 0,
+      production_companies: movie.production_companies?.map((company) => ({
+        id: company.id,
+        logo_path: company.logo_path || null,
+        name: company.name,
+        origin_country: company.origin_country,
+        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+      })) || [],
+      production_countries: movie.production_countries?.map((country) => ({
+        iso_3166_1: country.iso_3166_1,
+        name: country.name,
+        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+      })) || [],
+      revenue: movie.revenue || 0,
+      runtime: movie.runtime || 0,
+      spoken_languages: movie.spoken_languages?.map((language) => ({
+        english_name: language.english_name,
+        iso_639_1: language.iso_639_1,
+        name: language.name,
+        _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+      })) || [],
+      status: movie.status || "",
+      tagline: movie.tagline || "",
+      video: movie.video || false,
+      vote_average: movie.vote_average || 0,
+      vote_count: movie.vote_count || 0,
+      createdAt: { $date: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+      updatedAt: { $date: "" },
+       // Puedes dejarlo vacío si no tienes un valor inicial
+    },
     formats: { vhs: false, dvd: false, bluray: false },
-    director: movie.director || "Unknown",
-    year: new Date(movie.release_date).getFullYear(),
+    checked: false, // Inicializa como `false` si no tienes un valor inicial
   });
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const router = useRouter();
 
+  
+
   const checkFormats = async () => {
-    const { vhs, dvd, bluray } = movieToAdd.formats;
+    const { vhs, dvd, bluray } = movieToAdd.formats 
+    
     if (vhs || dvd || bluray) {
       try {
+        if (!movieToAdd || !movieToAdd._id) {
+          throw new Error("Los datos de la película están incompletos.");
+        }
+
         const data = await CreateMovie(movieToAdd);
+        console.log("🚀 ~ checkFormats ~ data:", data)
+  
         if (data) {
-          setModalMessage("Película agregada correctamente.");
+          setModalMessage("Película agregada correctamente!.");
           setIsModalOpen(true);
         } else {
-          throw new Error("Failed to create");
+          throw new Error("No se pudo agregar la película.");
         }
       } catch (error) {
-        console.log(error);
+        console.error("Error al agregar la película:", error);
         setModalMessage("Ocurrió un error al agregar la película.");
         setIsModalOpen(true);
       }
@@ -63,19 +104,25 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     }
   };
 
-  const handleFormatChange = (format: keyof Movie["formats"]) => {
-    setMovieToAdd((prev) => ({
-      ...prev,
-      formats: {
-        ...prev.formats,
-        [format]: !prev.formats[format],
-      },
-    }));
+
+  const handleFormatChange = (format: keyof MovieDB["formats"]) => {
+    setMovieToAdd((prev) => {
+      if (!prev) return undefined;
+      return {
+        ...prev,
+        formats: {
+          vhs: prev.formats?.vhs ?? false,
+          dvd: prev.formats?.dvd ?? false,
+          bluray: prev.formats?.bluray ?? false,
+          [format]: !prev.formats?.[format],
+        },
+      };
+    });
   };
 
   const handleModalClose = () => {
     setIsModalOpen(false);
-    router.push("/"); // Redirige al usuario después de cerrar el modal
+    router.push("/"); 
   };
 
   const myLoader = ({
@@ -134,10 +181,11 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           </div>
           <div>
             <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
+       {     console.log("consoeee", movieToAdd)}
               <button
                 onClick={() => handleFormatChange("vhs")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                  movieToAdd.formats.vhs
+                  movieToAdd.formats?.vhs ?? false
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
                 } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
@@ -147,7 +195,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               <button
                 onClick={() => handleFormatChange("dvd")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                  movieToAdd.formats.dvd
+                  movieToAdd.formats?.dvd ?? false
                     ? "text-blue-500 dark:text-yellow-500 "
                     : "text-neutral-400 dark:text-neutral-700 "
                 } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
@@ -157,7 +205,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               <button
                 onClick={() => handleFormatChange("bluray")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
-                  movieToAdd.formats.bluray
+                  movieToAdd.formats?.bluray ?? false
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
                 } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
@@ -186,12 +234,14 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       label: "Ok",
       onClick: () => {
         setIsModalOpen(false);
-        router.push("/"); // Redirige al usuario
+        if (modalMessage === "Película agregada correctamente.") {
+          router.push("/"); 
+        }
       },
     },
   ]}
 >
-  Película agregada correctamente.
+  {modalMessage}
 </Modal>
     </div>
   );

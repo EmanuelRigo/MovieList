@@ -16,8 +16,6 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = () => {
   const pathname = usePathname();
-  console.log("🚀 ~ pathname:", pathname);
-
   const { movie, setMovie, movieList } = useMovieContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
 
