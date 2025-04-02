@@ -174,12 +174,5 @@ export interface UserMoviesResponse {
 
 export interface UserMovieResponse {
   message: string;
-  response: {
-    _id: string;
-    user_id: string;
-    movies: MovieDB;
-    createdAt: string;
-    updatedAt: string;
-    __v: number;
-  };
+  response: MovieDB
 }

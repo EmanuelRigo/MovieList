@@ -28,10 +28,10 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
     };
     try {
       const movieupdate = await getMovieByIdUpdate(
-        localMovie._id._id,
+        localMovie._id._id ?? "",
         updatedMovie
       );
-      if (movieupdate.message !== "ok") {
+      if (movieupdate.message !== "Updated with success") {
         throw new Error("Failed to update movie.");
       } else {
         setLocalMovie((prev) => ({
