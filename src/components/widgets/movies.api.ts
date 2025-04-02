@@ -2,7 +2,7 @@ import { Movie, MovieDB, UserMovie, UserMoviesResponse, UserMovieResponse} from 
 
 //USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {
-  const res = await fetch("http://localhost:9000/api/userMovies", {
+  const res = await fetch("https://movielist-backend.vercel.app/api/userMovies", {
     method: "GET",
     credentials: "include",
     headers: {
@@ -18,7 +18,7 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
 }
 
 export async function getMovieUser(mid: string): Promise<Response> {
-  const res = await fetch(`http://localhost:9000/api/usermovies/movies/${mid}`, {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -34,7 +34,7 @@ export async function getMovieUser(mid: string): Promise<Response> {
 }
 
 export async function CreateMovie(movieData: MovieDB): Promise<Response> {
-  const res = await fetch("http://localhost:9000/api/userMovies", {
+  const res = await fetch("https://movielist-backend.vercel.app/api/userMovies", {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -50,7 +50,7 @@ export async function getMovieByIdUpdate(
   mid: string,
   movieData: UserMovie
 ): Promise<UserMovieResponse> {
-  const res = await fetch(`http://localhost:9000/api/userMovies/movies/${mid}`, {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/userMovies/movies/${mid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function getMovieByIdUpdate(
 }
 
 export async function deleteMovieById(id: string): Promise<Response> {
-  const res = await fetch(`http://localhost:9000/api/userMovies/movies/${id}`, {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/userMovies/movies/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -83,7 +83,7 @@ export async function deleteMovieById(id: string): Promise<Response> {
 }
 
 export async function getMovieById(id: string): Promise<Movie> {
-  const res = await fetch(`http://localhost:9000/api/movies/${id}`, {
+  const res = await fetch(`https://movielist-backend.vercel.app/api/movies/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

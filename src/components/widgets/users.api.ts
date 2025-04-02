@@ -1,7 +1,7 @@
 import { User } from "@/context/interfaces/movieTypes";
 
 export async function createUser(userData: User): Promise<Response> {
-    const res = await fetch("http://localhost:9000/api/sessions/register", {
+    const res = await fetch("https://movielist-backend.vercel.app/api/sessions/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -12,7 +12,7 @@ export async function createUser(userData: User): Promise<Response> {
 }
 
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
-    const res = await fetch("http://localhost:9000/api/sessions/login", {
+    const res = await fetch("https://movielist-backend.vercel.app/api/sessions/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export async function loginUser(credentials: { email: string; password: string }
 
 
 export async function checkOnlineStatus(): Promise<Response> {
-    const res = await fetch("http://localhost:9000/api/sessions/online", {
+    const res = await fetch("https://movielist-backend.vercel.app/api/sessions/online", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -41,7 +41,7 @@ export async function checkOnlineStatus(): Promise<Response> {
   }
 
 export async function logoutUser(): Promise<Response> {
-    const res = await fetch("http://localhost:9000/api/sessions/signout", {
+    const res = await fetch("https://movielist-backend.vercel.app/api/sessions/signout", {
         method: "POST",
         credentials: "include", 
     });
