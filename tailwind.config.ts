@@ -14,7 +14,7 @@ export default {
         foreground: "var(--foreground)",
       },
       aspectRatio: {
-        '9/16': [9, 16],
+        '9/16': '9 / 16',
       },
     },
   },
