@@ -138,7 +138,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center md:max-h-[956px]">
+    <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen w-screen flex items-center md:max-h-[956px]">
       <div className="container rounded-sm bg-neutral-300 dark:bg-neutral-950 mx-auto flex flex-col md:flex-row w-full h-full lg:h-5/6 overflow-auto gap-4 p-4">
         <div className="relative flex rounded-sm h-full aspect-h-6-9">
           <Image

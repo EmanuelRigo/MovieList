@@ -40,7 +40,7 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
+    <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
       <div className="bg-white dark:bg-neutral-800 p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">Registrarse</h1>
         <form onSubmit={handleRegister}>

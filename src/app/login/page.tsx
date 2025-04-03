@@ -55,14 +55,14 @@ const LoginPage: React.FC = () => {
   // Mostrar un indicador de carga mientras se verifica el estado online
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
+      <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
         <p className="text-black dark:text-white">Cargando...</p>
       </div>
     );
   }
 
   return (
-    <div className="h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
+    <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
       <div className="bg-white dark:bg-neutral-800 p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">Iniciar Sesión</h1>
         <form onSubmit={handleLogin}>

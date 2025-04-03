@@ -63,7 +63,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center">
+    <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen w-screen flex items-center">
       <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
         <div className="flex justify-between items-center w-full pb-6">
           {/* Barra de búsqueda */}
