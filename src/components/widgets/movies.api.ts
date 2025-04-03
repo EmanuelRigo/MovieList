@@ -17,7 +17,7 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
   return data;
 }
 
-export async function getMovieUser(mid: string): Promise<Response> {
+export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
   const res = await fetch(`https://movielist-backend.vercel.app/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {

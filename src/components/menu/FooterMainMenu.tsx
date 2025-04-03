@@ -1,17 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { BsMoonStars, BsSun,BsPlusCircle } from "react-icons/bs";
+import { BsMoonStars, BsSun, BsPlusCircle } from "react-icons/bs";
 import YearSearch from "../widgets/YearSearch";
 
-import { logoutUser } from "../widgets/users.api";
+import { logoutUser, getCookie, createCookie } from "../widgets/users.api";
 import { useMovieContext } from "@/context/MovieContext";
 import FilterFormatsButtons from "./FilterFormatsButtons";
 import RandomButton from "./RandomButton";
@@ -20,17 +20,16 @@ import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 
 export const FooterMainMenu = () => {
-  const username = document.cookie.split(";").find((cookie) => cookie.includes("name"))?.split("=")[1];
-
   const router = useRouter();
   const [darkMode, setDarkMode] = useState(false);
   const { movieList, setMovieList } = useMovieContext(); // Accede a setMovieList desde el contexto
+  const [username, setUsername] = useState<string | null>(null);
 
   // Función para cargar las películas al montar el componente
   const fetchMovies = async () => {
     try {
       const movies = await getUserMovies(); // Llama a la API para obtener las películas
-      console.log("🚀 ~ fetchMovies ~ movies:", movies)
+      console.log("🚀 ~ fetchMovies ~ movies:", movies);
       setMovieList(movies.response.movies); // Actualiza la lista global de películas
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -42,20 +41,36 @@ export const FooterMainMenu = () => {
   }, []);
 
   useEffect(() => {
-    const getCookie = (name: string) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(";").shift();
+    const initializeCookies = async () => {
+      try {
+        // Crea la cookie si no existe
+        await createCookie("light");
+        console.log("🚀 ~ initializeCookies ~ Cookie creada o actualizada");
+
+        // Obtén las cookies para configurar el estado inicial
+        const response = await getCookie("mode");
+        const data = await response.json();
+        console.log("🚀 ~ initializeCookies ~ data:", data);
+
+        // Configura el modo oscuro según la cookie
+        if (data.mode === "dark") {
+          setDarkMode(true);
+          document.body.classList.add("dark");
+        } else {
+          setDarkMode(false);
+          document.body.classList.remove("dark");
+        }
+
+        // Configura el nombre de usuario si está disponible
+        if (data.rolDeUsuario) {
+          setUsername(data.rolDeUsuario);
+        }
+      } catch (error) {
+        console.error("Error inicializando cookies:", error);
+      }
     };
 
-    const mode = getCookie("mode");
-    if (mode === "dark") {
-      setDarkMode(true);
-      document.body.classList.add("dark");
-    } else {
-      setDarkMode(false);
-      document.body.classList.remove("dark");
-    }
+    initializeCookies();
   }, []);
 
   const toggleDarkMode = async () => {
@@ -63,14 +78,17 @@ export const FooterMainMenu = () => {
     document.body.classList.toggle("dark", !darkMode);
 
     try {
-      const response = await fetch("https://movielist-backend.vercel.app/api/cookies/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ mode: darkMode ? "light" : "dark" }),
-        credentials: "include", // Asegúrate de incluir las credenciales
-      });
+      const response = await fetch(
+        "https://movielist-backend.vercel.app/api/cookies/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ mode: darkMode ? "light" : "dark" }),
+          credentials: "include", // Asegúrate de incluir las credenciales
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to create cookie");
@@ -110,7 +128,7 @@ export const FooterMainMenu = () => {
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-4">
-        <span className="text-lg">{username}</span>
+        <span className="text-lg">{username || "Guest"}</span>
         <div className="flex gap-4">
           <button
             onClick={toggleDarkMode}
@@ -125,7 +143,7 @@ export const FooterMainMenu = () => {
             onClick={handleLogout}
             className="flex items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180"
           >
-      <IoIosLogOut />
+            <IoIosLogOut />
           </button>
         </div>
       </div>
@@ -155,7 +173,7 @@ export const FooterMainMenu = () => {
         </div>
         <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-950 p-4 rounded-md">
           <Link className="flex items-center gap-2" href="/list">
-          <BsListUl className="text-3xl"/> <span>List</span>
+            <BsListUl className="text-3xl" /> <span>List</span>
           </Link>
         </div>
       </div>
