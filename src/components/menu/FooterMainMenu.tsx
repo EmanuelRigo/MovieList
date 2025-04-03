@@ -44,11 +44,11 @@ export const FooterMainMenu = () => {
     const initializeCookies = async () => {
       try {
         // Crea la cookie si no existe
-        await createCookie("light");
+        await createCookie();
         console.log("🚀 ~ initializeCookies ~ Cookie creada o actualizada");
 
         // Obtén las cookies para configurar el estado inicial
-        const response = await getCookie("mode");
+        const response = await getCookie();
         const data = await response.json();
         console.log("🚀 ~ initializeCookies ~ data:", data);
 
