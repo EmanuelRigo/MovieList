@@ -49,7 +49,7 @@ export async function logoutUser(): Promise<Response> {
 }
 
 
-export async function createCookie(mode: string): Promise<Response> {
+export async function createCookie(): Promise<Response> {
     const res = await fetch(`https://movielist-backend.vercel.app/api/cookies/create`, {
         method: "POST",
         credentials: "include", // Asegura que las cookies se envíen con la solicitud
@@ -65,7 +65,7 @@ export async function createCookie(mode: string): Promise<Response> {
     return res;
 }
 
-export async function getCookie(mode: string): Promise<Response> {
+export async function getCookie(): Promise<Response> {
     const res = await fetch(`https://movielist-backend.vercel.app/api/cookies/read`, {
         method: "GET",
         credentials: "include", // Asegura que las cookies se envíen con la solicitud
