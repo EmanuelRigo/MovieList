@@ -33,9 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </Head>
       <MovieProvider>
       <body className={`${geistSans.variable} bg-black ${geistMono.variable}`}>
-        <div className="h-screen w-screen flex items-center">
+
           {children}
-        </div>
+
       </body>
       </MovieProvider>
     </html>
