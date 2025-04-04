@@ -3,7 +3,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GiCardRandom } from "react-icons/gi";
 
-const RandomButton = () => {
+type RandomButtonProps = {
+  className?: string; // Prop opcional para estilos personalizados
+};
+
+const RandomButton = ({ className }: RandomButtonProps) => {
   const pathname = usePathname();
   const { movieList, setMovie } = useMovieContext();
   const [hasExecuted, setHasExecuted] = useState(false); // Estado para rastrear si el efecto ya se ejecutó
@@ -26,10 +30,11 @@ const RandomButton = () => {
 
   return (
     <button
-      className="text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400"
       onClick={obtenerObjetoAleatorio}
+      className={className} // Aplica la clase pasada como prop
     >
-  <GiCardRandom />
+      <GiCardRandom />
+      <span className="text-xl lg:hidden">Random</span>
     </button>
   );
 };

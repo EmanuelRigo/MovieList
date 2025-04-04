@@ -60,9 +60,9 @@ export default function Home() {
   }
 
   return (
-    <div className="h-[calc(100vh-56px)] overflow-auto md:h-screen w-screen flex items-center">
+    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
       <div
-        className="container md:max-h-[956px] rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent  mx-auto grid grid-cols-1 h-full 2xl:h-5/6 overflow-auto md-grid-template gap-4 p-4"
+        className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4"
       >
         <div className="h-full w-full flex flex-col justify-between mb-8 lg:mb-auto">
           <FooterMainMenu />

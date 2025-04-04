@@ -6,7 +6,7 @@ import MiniCardViewer from "@/components/list/MiniCardViewer";
 
 const page = () => {
   return (
-    <div className=" bg-neutral-300 dark:bg-neutral-950 flex flex-col  w-full h-full p-4 gap-4">
+    <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
       <SearchBar></SearchBar>
       <div className="flex rounded-lg h-44 bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
         <div className="flex flex-col flex-grow justify-evenly overflow-hidden">

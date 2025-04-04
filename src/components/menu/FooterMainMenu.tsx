@@ -151,7 +151,7 @@ export const FooterMainMenu = () => {
         <CardMenuMovie />
         <Link
           style={{ fontSize: "4rem" }}
-          className={`rounded-lg w-full h-18 flex justify-between items-center dark:bg-neutral-950
+          className={`rounded-lg w-full h-18 flex justify-between items-center dark:bg-neutral-900
               dark:lg:bg-neutral-800 dark:text-gray-200 p-3 bg-gray-100 text-black`}
           href="/add-movie"
         >
@@ -168,10 +168,11 @@ export const FooterMainMenu = () => {
         <div className="hidden lg:block">
           <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-950 p-4 rounded-md flex items-center gap-2 ">
-          <RandomButton></RandomButton> <span>Random</span>
+        <div className="">
+          <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
+        
         </div>
-        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-950 p-4 rounded-md">
+        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-orange-500 p-4 rounded-md">
           <Link className="flex items-center gap-2" href="/list">
             <BsListUl className="text-3xl" /> <span>List</span>
           </Link>
