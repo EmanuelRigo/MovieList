@@ -62,6 +62,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
       setIsButtonActive(false);
     }
   }, [isFocused]);
+  
 
   return (
     <div
@@ -71,7 +72,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
           isButtonActive
-            ? "outline-offset-0 border-blue-500 dark:border-yellow-500"
+            ? "outline-offset-0 border-blue-600 dark:border-yellow-500"
             : ""
         } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
     >

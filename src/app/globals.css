@@ -59,7 +59,7 @@ body {
     grid-template-columns: 1fr 1.5fr 21rem;
   }
 
-  .aspect-h-6-9 {
+  /* .aspect-h-6-9 {
     aspect-ratio: 6 / 9;
-  }
+  } */
 }

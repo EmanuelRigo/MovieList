@@ -69,7 +69,7 @@ const FilterFormatsButtons = () => {
           <SvgDvd className="w-14 h-5 text-current" />
         </button>
         <button
-          className={`text-black rounded-lg dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400${
+          className={`text-black rounded-lg dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
             activeFilters.bluray ? "font-bold" : "opacity-20"
           }`}
           onClick={() => toggleFilter("bluray")}

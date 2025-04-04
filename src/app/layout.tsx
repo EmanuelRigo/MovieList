@@ -33,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </Head>
       <MovieProvider>
       <body className={`${geistSans.variable} bg-black ${geistMono.variable}`}>
-        <div className="h-[calc(100vh-56px)] overflow-auto w-screen flex items-center">
+        <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
           {children}
         </div>
       </body>
