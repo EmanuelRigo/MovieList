@@ -162,7 +162,7 @@ const EditMovie: React.FC = () => {
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto md:h-screen w-screen flex items-center md:max-h-[956px]">
       <div className="container h-full md:max-h-[956px] 2xl:h-5/6  bg-neutral-300 dark:bg-neutral-950 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
-        <div className="relative flex rounded-sm h-full p-4 aspect-h-6-9">
+        <div className="relative flex rounded-lg h-full p-4 aspect-h-6-9">
           <Image
             loader={myLoader}
             src={
@@ -173,7 +173,7 @@ const EditMovie: React.FC = () => {
             alt={movieToEdit._id.title || "Movie Poster"}
             layout="fill"
             objectFit="cover"
-            className="rounded-sm"
+            className="rounded-lg"
           />
         </div>
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 lg:gap-4 ">
@@ -209,7 +209,7 @@ const EditMovie: React.FC = () => {
             <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
-                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.vhs
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
@@ -219,7 +219,7 @@ const EditMovie: React.FC = () => {
               </button>
               <button
                 onClick={() => handleFormatChange("dvd")}
-                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.dvd
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
@@ -229,7 +229,7 @@ const EditMovie: React.FC = () => {
               </button>
               <button
                 onClick={() => handleFormatChange("bluray")}
-                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 md:w-24 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToEdit.formats?.bluray
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
@@ -239,7 +239,7 @@ const EditMovie: React.FC = () => {
               </button>
               <button
                 onClick={handleDelete}
-                className="p-2 w-28 md:w-24 bg-neutral-100 dark:bg-neutral-900 text-red-500 dark:text-red-600 rounded-sm  flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer h-auto"
+                className="p-2 w-28 md:w-24 bg-neutral-100 dark:bg-neutral-900 text-red-500 dark:text-red-600 rounded-lg  flex items-center justify-center outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer h-auto"
               >
                 <FaTrash />
               </button>
@@ -247,7 +247,7 @@ const EditMovie: React.FC = () => {
             <div className="flex">
               <button
                 onClick={checkFormats}
-                className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-sm md:rounded-sm w-full text-black dark:text-neutral-900"
+                className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-lg md:rounded-lg w-full text-black dark:text-neutral-900"
               >
                 Terminar
               </button>

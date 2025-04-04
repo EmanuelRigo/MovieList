@@ -33,7 +33,7 @@ export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
   return data
 }
 
-export async function CreateMovie(movieData: MovieDB): Promise<Response> {
+export async function CreateMovie(movieData: MovieDB): Promise<UserMovieResponse> {
   const res = await fetch("https://movielist-backend.vercel.app/api/userMovies", {
     method: "PUT",
     credentials: "include",

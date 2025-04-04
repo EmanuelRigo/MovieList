@@ -86,7 +86,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
         console.log("🚀 ~ checkFormats ~ data:", data);
 
         if (data) {
-          setModalMessage("Película agregada correctamente!.");
+          setModalMessage(data.message);
           setIsModalOpen(true);
         } else {
           throw new Error("No se pudo agregar la película.");
@@ -118,10 +118,10 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     });
   };
 
-  // const handleModalClose = () => {
-  //   setIsModalOpen(false);
-  //   router.push("/");
-  // };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    router.push("/");
+  };
 
   const myLoader = ({
     src,
@@ -139,15 +139,15 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
 
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen w-screen flex items-center md:max-h-[956px]">
-      <div className="container rounded-sm bg-neutral-300 dark:bg-neutral-950 mx-auto flex flex-col md:flex-row w-full h-full lg:h-5/6 overflow-auto gap-4 p-4">
-        <div className="relative flex rounded-sm h-full aspect-h-6-9">
+      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 mx-auto flex flex-col md:flex-row w-full h-full lg:h-5/6 overflow-auto gap-4 p-4">
+        <div className="relative flex rounded-lg h-full aspect-h-6-9">
           <Image
             loader={myLoader}
             src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
             alt={movie.title}
             layout="fill"
             objectFit="cover"
-            className="rounded-sm"
+            className="rounded-lg"
           />
         </div>
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 md:gap-4">
@@ -181,7 +181,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
             <div className="flex justify-between lg:justify-start mb-2 md:mb-4 gap-2 md:gap-4 items-stretch dark:text-neutral-800">
               <button
                 onClick={() => handleFormatChange("vhs")}
-                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToAdd.formats?.vhs ?? false
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
@@ -191,7 +191,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               </button>
               <button
                 onClick={() => handleFormatChange("dvd")}
-                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToAdd.formats?.dvd ?? false
                     ? "text-blue-500 dark:text-yellow-500 "
                     : "text-neutral-400 dark:text-neutral-700 "
@@ -201,7 +201,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               </button>
               <button
                 onClick={() => handleFormatChange("bluray")}
-                className={`p-2 md:p-2 w-28 h-10 rounded-sm outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
+                className={`p-2 md:p-2 w-28 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToAdd.formats?.bluray ?? false
                     ? "text-blue-500 dark:text-yellow-500"
                     : "text-neutral-400 dark:text-neutral-700"
@@ -213,7 +213,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
             <div className="flex">
               <button
                 onClick={checkFormats}
-                className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-sm md:rounded-sm w-full text-black dark:text-neutral-900"
+                className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-lg md:rounded-lg w-full text-black dark:text-neutral-900"
               >
                 Agregar película
               </button>
@@ -231,7 +231,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
             label: "Ok",
             onClick: () => {
               setIsModalOpen(false);
-              if (modalMessage === "Película agregada correctamente.") {
+              if (modalMessage === "Added to userMovies" || modalMessage === "Movie already exists") {
+                console.log("🚀 ~ MovieDetailsClient ~ modalMessage:", modalMessage)
                 router.push("/");
               }
             },
