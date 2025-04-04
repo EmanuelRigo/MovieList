@@ -14,7 +14,7 @@ const CardMenuMovie = () => {
 
   if (movie && movie._id) {
     return (
-      <div className="relative w-full rounded-lg overflow-hidden" style={{ aspectRatio: "16/9" }}>
+      <div className="relative w-full rounded-lg overflow-hidden h-36 md:h-1/3 2xl:h-48">
         <div className="absolute inset-0">
           <Image
             loader={myLoader}
@@ -37,8 +37,7 @@ const CardMenuMovie = () => {
   } else {
     return (
       <div
-        className="relative w-full rounded-lg overflow-hidden flex items-center justify-center bg-neutral-200 dark:bg-neutral-800"
-        style={{ aspectRatio: "16/9" }}
+        className="relative w-full rounded-lg overflow-hidden flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 h-36 md:h-1/3 2xl:h-48"
       >
         <FaFilm className="text-neutral-500 dark:text-neutral-400 text-4xl" />
       </div>

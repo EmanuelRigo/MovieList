@@ -47,18 +47,18 @@ const SearchBar: React.FC<SearchBarProps> = () => {
     <div className="w-full flex">
       <form
         onSubmit={handleSearch}
-        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-400  dark:border-neutral-800 "
+        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-400  dark:border-neutral-800 p-2"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Buscar en mi lista"
-          className="flex-grow px-4 py-2 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 rounded-l-full outline-none"
+          className="flex-grow px-4 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
         />
         <button
           type="submit"
-          className="flex items-center justify-center w-12 h-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 rounded-full dark:hover:text-orange-500 focus:ring-2 focus:ring-orange-700"
+          className="flex items-center justify-center text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500"
         >
           <LuSearch />
         </button>

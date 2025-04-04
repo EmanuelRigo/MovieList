@@ -35,7 +35,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
   const years = Array.from(new Set(movieList.map((movie: MovieDB) => new Date(movie._id.release_date).getFullYear()))).sort((a, b) => b - a);
 
   return (
-    <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4">
+    <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg  p-2 2xl:p-4">
       <form onSubmit={handleSubmit} className="flex items-center justify-between w-full">
         <select
           value={selectedYear}
@@ -51,7 +51,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
         </select>
         <button
           type="submit"
-          className="flex items-center justify-center w-12  text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500 rounded-full focus:ring-2 focus:ring-orange-700"
+          className="flex items-center justify-center w-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500 me-2"
         >
           Buscar
         </button>

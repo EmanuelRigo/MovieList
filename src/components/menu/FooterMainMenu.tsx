@@ -127,8 +127,8 @@ export const FooterMainMenu = () => {
         "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
       }
     >
-      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-4">
-        <span className="text-lg">{username || "Guest"}</span>
+      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4">
+        <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span>
         <div className="flex gap-4">
           <button
             onClick={toggleDarkMode}
@@ -150,12 +150,11 @@ export const FooterMainMenu = () => {
       <div className="flex-grow flex flex-col gap-4">
         <CardMenuMovie />
         <Link
-          style={{ fontSize: "4rem" }}
-          className={`rounded-lg w-full h-18 flex justify-between items-center dark:bg-neutral-900
-              dark:lg:bg-neutral-800 dark:text-gray-200 p-3 bg-gray-100 text-black`}
+          className="rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
+              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-2 2xl:p-4"
           href="/add-movie"
         >
-          <span className="text-lg">Movies: {movieList.length}</span>
+          <span className="ms-2 2xl:ms-0 text-lg">Movies: {movieList.length}</span>
           <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-orange-500" />
         </Link>
 

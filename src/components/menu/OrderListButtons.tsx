@@ -25,20 +25,20 @@ const OrderListButtons = () => {
   }
 
   return (
-    <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 rounded-lg p-4">
+    <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 rounded-lg  text-black  dark:text-neutral-200 text-3xl lg:text-xl 2xl:text-3xl p-3 2xl:p-4">
       <button
-        className="text-black rounded-lg  text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400"
+        className=" hover:text-blue-500 dark:hover:text-orange-400"
         onClick={ordenarPorFecha}
       >
-        <PiCalendarLight />{" "}
+        <PiCalendarLight />
       </button>
       <button
-        className="text-black rounded-lg  dark:text-neutral-200  hover:text-blue-500 dark:hover:text-orange-400 text-3xl"
+        className=" hover:text-blue-500 dark:hover:text-orange-400 "
         onClick={ordenarPorTitulo}
       >
         <RiSortAlphabetAsc />
       </button>
-      <RandomButton className="text-black rounded-lg  dark:text-neutral-200  hover:text-blue-500 dark:hover:text-orange-400 text-3xl"></RandomButton>
+      <RandomButton className=" hover:text-blue-500 dark:hover:text-orange-400"></RandomButton>
     </div>
   );
 };
