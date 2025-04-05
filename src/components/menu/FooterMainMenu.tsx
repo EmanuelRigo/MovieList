@@ -8,20 +8,20 @@ import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { BsMoonStars, BsSun, BsPlusCircle } from "react-icons/bs";
+import { BsPlusCircle } from "react-icons/bs";
 import YearSearch from "../widgets/YearSearch";
 
-import { logoutUser, getCookie, createCookie } from "../widgets/users.api";
+import { logoutUser } from "../widgets/users.api";
 import { useMovieContext } from "@/context/MovieContext";
 import FilterFormatsButtons from "./FilterFormatsButtons";
 import RandomButton from "./RandomButton";
 import { getUserMovies } from "../widgets/movies.api";
 import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
+import ThemeHandler from "../widgets/ThemeHandler";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
-  const [darkMode, setDarkMode] = useState(false);
   const { movieList, setMovieList } = useMovieContext(); // Accede a setMovieList desde el contexto
   const [username, setUsername] = useState<string | null>(null);
 
@@ -39,67 +39,6 @@ export const FooterMainMenu = () => {
   useEffect(() => {
     fetchMovies(); // Llama a fetchMovies cuando el componente se monta
   }, []);
-
-  useEffect(() => {
-    const initializeCookies = async () => {
-      try {
-        // Crea la cookie si no existe
-        await createCookie();
-        console.log("🚀 ~ initializeCookies ~ Cookie creada o actualizada");
-
-        // Obtén las cookies para configurar el estado inicial
-        const response = await getCookie();
-        const data = await response.json();
-        console.log("🚀 ~ initializeCookies ~ data:", data);
-
-        // Configura el modo oscuro según la cookie
-        if (data.mode === "dark") {
-          setDarkMode(true);
-          document.body.classList.add("dark");
-        } else {
-          setDarkMode(false);
-          document.body.classList.remove("dark");
-        }
-
-        // Configura el nombre de usuario si está disponible
-        if (data.rolDeUsuario) {
-          setUsername(data.rolDeUsuario);
-        }
-      } catch (error) {
-        console.error("Error inicializando cookies:", error);
-      }
-    };
-
-    initializeCookies();
-  }, []);
-
-  const toggleDarkMode = async () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("dark", !darkMode);
-
-    try {
-      const response = await fetch(
-        "https://movielist-backend.vercel.app/api/cookies/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ mode: darkMode ? "light" : "dark" }),
-          credentials: "include", // Asegúrate de incluir las credenciales
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to create cookie");
-      }
-
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.error("Error creating cookie:", error);
-    }
-  };
 
   const handleLogout = async () => {
     try {
@@ -122,64 +61,57 @@ export const FooterMainMenu = () => {
   };
 
   return (
-    <div
-      className={
-        "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
-      }
-    >
-      <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4">
-        <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span>
-        <div className="flex gap-4">
-          <button
-            onClick={toggleDarkMode}
-            className={`p-2 rounded-lg transition-colors duration-300 ${
-              darkMode ? " text-white" : " text-black"
-            }`}
-            title={darkMode ? "Modo Claro" : "Modo Oscuro"}
-          >
-            {darkMode ? <BsSun /> : <BsMoonStars />}
-          </button>
-          <button
-            onClick={handleLogout}
-            className="flex items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180"
-          >
-            <IoIosLogOut />
-          </button>
-        </div>
-      </div>
-      <div className="flex-grow flex flex-col gap-4">
-        <CardMenuMovie />
-        <Link
-          className="rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
-              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-2 2xl:p-4"
-          href="/add-movie"
-        >
-          <span className="ms-2 2xl:ms-0 text-lg">Movies: {movieList.length}</span>
-          <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-orange-500" />
-        </Link>
 
-        <div className="hidden lg:block">
-          <YearSearch onSearch={handleSearchByYear} />
+      <div
+        className={
+          "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
+        }
+      >
+        <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4">
+          <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span>
+            <ThemeHandler  /> 
+          <div className="flex gap-4">
+            <button
+              onClick={handleLogout}
+              className="flex items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180"
+            >
+              <IoIosLogOut />
+            </button>
+          </div>
         </div>
-        <div className="hidden lg:block">
-          <OrderListButtons />
-        </div>
-        <div className="hidden lg:block">
-          <FilterFormatsButtons></FilterFormatsButtons>
-        </div>
-        <div className="">
-          <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
-        
-        </div>
-        <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-orange-500 p-4 rounded-md">
-          <Link className="flex items-center gap-2" href="/list">
-            <BsListUl className="text-3xl" /> <span>List</span>
+        <div className="flex-grow flex flex-col gap-4">
+          <CardMenuMovie />
+          <Link
+            className="rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
+              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-2 2xl:p-4"
+            href="/add-movie"
+          >
+            <span className="ms-2 2xl:ms-0 text-lg">Movies: {movieList.length}</span>
+            <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-orange-500" />
           </Link>
+
+          <div className="hidden lg:block">
+            <YearSearch onSearch={handleSearchByYear} />
+          </div>
+          <div className="hidden lg:block">
+            <OrderListButtons />
+          </div>
+          <div className="hidden lg:block">
+            <FilterFormatsButtons></FilterFormatsButtons>
+          </div>
+          <div className="">
+            <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
+          </div>
+          <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-orange-500 p-4 rounded-md">
+            <Link className="flex items-center gap-2" href="/list">
+              <BsListUl className="text-3xl" /> <span>List</span>
+            </Link>
+          </div>
+        </div>
+        <div>
+          <SearchBar />
         </div>
       </div>
-      <div>
-        <SearchBar />
-      </div>
-    </div>
+
   );
 };
