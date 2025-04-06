@@ -17,6 +17,7 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
         acc[key] = value;
         return acc;
       }, {} as Record<string, string>);
+      console.log("🚀 ~ cookies ~ cookies:", cookies)
 
       const mode = cookies["mode"];
       if (mode === "dark") {
