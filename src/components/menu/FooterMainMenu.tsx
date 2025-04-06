@@ -18,12 +18,11 @@ import RandomButton from "./RandomButton";
 import { getUserMovies } from "../widgets/movies.api";
 import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
-import ThemeHandler from "../widgets/ThemeHandler";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
   const { movieList, setMovieList } = useMovieContext(); // Accede a setMovieList desde el contexto
-  const [username, setUsername] = useState<string | null>(null);
+  const [username] = useState<string | null>(null);
 
   // Función para cargar las películas al montar el componente
   const fetchMovies = async () => {
@@ -68,8 +67,7 @@ export const FooterMainMenu = () => {
         }
       >
         <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4">
-          <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span>
-            <ThemeHandler  /> 
+          <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span> 
           <div className="flex gap-4">
             <button
               onClick={handleLogout}

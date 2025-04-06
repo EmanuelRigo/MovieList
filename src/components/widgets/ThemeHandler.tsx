@@ -33,7 +33,7 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
   };
 
   const toggleDarkMode = async () => {
-    const newMode = !darkMode ? "dark" : "light";
+    !darkMode ? "dark" : "light";
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark", !darkMode);
 
