@@ -9,7 +9,7 @@ type ThemeHandlerProps = {
 const ThemeHandler = ({ children }: ThemeHandlerProps) => {
   const [darkMode, setDarkMode] = useState(false);
 
-  const initializeTheme = async () => {
+  const initializeTheme = () => {
     try {
       // Obtén el valor de la cookie "mode"
       const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
@@ -17,7 +17,8 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
         acc[key] = value;
         return acc;
       }, {} as Record<string, string>);
-      console.log("🚀 ~ cookies ~ cookies:", cookies)
+
+      console.log("🚀 ~ cookies:", cookies);
 
       const mode = cookies["mode"];
       if (mode === "dark") {
@@ -32,11 +33,19 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
     }
   };
 
-  const toggleDarkMode = async () => {
-    !darkMode ? "dark" : "light";
+  const toggleDarkMode = () => {
+    const newMode = !darkMode ? "dark" : "light";
     setDarkMode(!darkMode);
-    document.body.classList.toggle("dark", !darkMode);
 
+    // Actualiza la clase del body
+    if (newMode === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+
+    // Actualiza la cookie "mode"
+    document.cookie = `mode=${newMode}; path=/; max-age=31536000; SameSite=Strict`;
   };
 
   useEffect(() => {
@@ -44,15 +53,15 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
   }, []);
 
   return (
-    <div className="bg-red-500">
+    <div>
       <button
         onClick={toggleDarkMode}
         className={`p-2 rounded-lg transition-colors duration-300 ${
-          darkMode ? "text-white" : "text-black"
+          darkMode ? "text-white bg-black" : "text-black bg-white"
         }`}
         title={darkMode ? "Modo Claro" : "Modo Oscuro"}
       >
-        {darkMode ? "☀️" : "🌙"}
+        {darkMode ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
       </button>
       {children}
     </div>
