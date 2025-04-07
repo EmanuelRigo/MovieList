@@ -8,8 +8,8 @@ interface MovieContextProps {
   updateCardMovie: (movie: MovieDB) => void;
   movieList: MovieDB[];
   setMovieList: React.Dispatch<React.SetStateAction<MovieDB[]>>;
-  userData: UserData; // Cambia 'any' por el tipo adecuado
-  setUserData: React.Dispatch<React.SetStateAction<UserData>>; // Cambia 'any' por el tipo adecuado
+  userData: UserData | null; // Cambia 'any' por el tipo adecuado
+  setUserData: React.Dispatch<React.SetStateAction<UserData | null>>; // Cambia 'any' por el tipo adecuado
 }
 
 export const movieContext = createContext<MovieContextProps | undefined>(undefined);

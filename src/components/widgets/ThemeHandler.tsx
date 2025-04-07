@@ -1,4 +1,5 @@
 "use client";
+import { UserData } from "@/context/interfaces/movieTypes";
 
 import { useEffect, useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
@@ -13,19 +14,22 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
   const {userData} = useMovieContext()
   console.log("🚀 ~ ThemeHandler ~ userData:", userData)
 
-  const initializeTheme = () => {
-    console.log("🚀 ~ ThemeHandler ~ userData222:", userData)
+  const initializeTheme = (userData: UserData | null) => {
     try {
       console.log("🚀 ~ userData:", userData);
   
-      const { mode } = userData; // Extrae el valor de "mode" desde userData
+      if (userData && userData.mode) { // Verifica que userData no sea null y que mode exista
+        const { mode } = userData;
   
-      if (mode === "dark") {
-        setDarkMode(true);
-        document.body.classList.add("dark");
+        if (mode === "dark") {
+          setDarkMode(true);
+          document.body.classList.add("dark");
+        } else {
+          setDarkMode(false);
+          document.body.classList.remove("dark");
+        }
       } else {
-        setDarkMode(false);
-        document.body.classList.remove("dark");
+        console.warn("No se pudo inicializar el tema: userData es nulo o no tiene un modo definido.");
       }
     } catch (error) {
       console.error("Error inicializando el tema:", error);
@@ -48,7 +52,7 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
   };
 
   useEffect(() => {
-    initializeTheme();
+    initializeTheme(userData);
   }, [userData]);
 
   return (
