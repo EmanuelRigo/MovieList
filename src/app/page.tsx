@@ -17,7 +17,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const router = useRouter();
 
-  const {setMovie} = useMovieContext()
+  const {setMovie, setUserData} = useMovieContext()
   console.log("holaaa apps");
 
   useEffect(()=>{
@@ -41,9 +41,13 @@ export default function Home() {
     const fetchOnlineStatus = async () => {
       try {
         const response = await checkOnlineStatus();
-        if (response.status !== 200) {
+        if (response.response.isOnline !== true) {
+
           router.push("/login"); // Redirige a la página de inicio de sesión si el usuario está offline
+
         } else {
+          setUserData(response.response); // Establece los datos del usuario en el contexto
+          console.log("🚀 ~ fetchOnlineStatus ~ response:", response);
           setIsLoading(false); // Establece isLoading en false si el usuario está online
         }
       } catch (error) {

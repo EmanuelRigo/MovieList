@@ -1,26 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useMovieContext } from "@/context/MovieContext";
 
 type ThemeHandlerProps = {
   children: React.ReactNode;
 };
 
 const ThemeHandler = ({ children }: ThemeHandlerProps) => {
+
   const [darkMode, setDarkMode] = useState(false);
+  const {userData} = useMovieContext()
+  console.log("🚀 ~ ThemeHandler ~ userData:", userData)
 
   const initializeTheme = () => {
+    console.log("🚀 ~ ThemeHandler ~ userData222:", userData)
     try {
-      // Obtén el valor de la cookie "mode"
-      const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-        const [key, value] = cookie.split("=");
-        acc[key] = value;
-        return acc;
-      }, {} as Record<string, string>);
-
-      console.log("🚀 ~ cookies:", cookies);
-
-      const mode = cookies["mode"];
+      console.log("🚀 ~ userData:", userData);
+  
+      const { mode } = userData; // Extrae el valor de "mode" desde userData
+  
       if (mode === "dark") {
         setDarkMode(true);
         document.body.classList.add("dark");
@@ -50,7 +49,7 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
 
   useEffect(() => {
     initializeTheme();
-  }, []);
+  }, [userData]);
 
   return (
     <div>

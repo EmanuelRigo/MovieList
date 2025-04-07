@@ -152,6 +152,19 @@ export interface UserMovie {
   checked?: boolean
 }
 
+export interface isOnline {
+  message: string;
+  response: {
+    email: string;
+    firstname: string;
+    isOnline: boolean;
+    mode: string;
+    role: string;
+    user_id: string;
+    username: string;
+  };
+}
+
 export interface User {
   username: string;
   password: string;

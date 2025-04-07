@@ -1,6 +1,7 @@
 import MovieDetailsClient from "./MovieDetailsClient";
 import envsUtils from "@/utils/envs.utils";
 
+
 interface Movie {
     id: number;
     title: string;
@@ -22,6 +23,7 @@ interface Params {
 }
 
 export default async function MoviePage({ params }: { params: Promise<Params> }) {
+  
     const resolvedParams = await params; // Esperar a que params se resuelva
     const res = await fetch(`https://api.themoviedb.org/3/movie/${resolvedParams.id}?api_key=${envsUtils.API_KEY}`);
   
