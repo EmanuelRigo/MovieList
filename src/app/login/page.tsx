@@ -16,6 +16,7 @@ const LoginPage: React.FC = () => {
     const fetchOnlineStatus = async () => {
       try {
         const response = await checkOnlineStatus();
+        console.log("🚀 ~ fetchOnlineStatus ~ response!!:", response)
 
         if (response.response.isOnline === true) {
           router.push("/"); // Redirige a la página de inicio si el usuario está online
@@ -40,6 +41,7 @@ const LoginPage: React.FC = () => {
         password,
       };
       const response = await loginUser(credentials);
+      console.log("🚀 ~ handleLogin ~ response:", response)
 
       if (response.ok) {
         console.log("Inicio de sesión exitoso");

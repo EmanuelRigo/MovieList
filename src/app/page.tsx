@@ -42,6 +42,7 @@ export default function Home() {
       try {
         const response = await checkOnlineStatus();
         if (response.response.isOnline !== true) {
+        console.log("🚀 ~ fetchOnlineStatus ~ response.response.isOnline :", response.response.isOnline )
 
           router.push("/login"); // Redirige a la página de inicio de sesión si el usuario está offline
 
