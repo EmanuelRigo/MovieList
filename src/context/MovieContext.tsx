@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { MovieDB } from "./interfaces/movieTypes";
+import { MovieDB, UserData } from "./interfaces/movieTypes";
 
 interface MovieContextProps {
   movie: MovieDB | null;
@@ -8,8 +8,8 @@ interface MovieContextProps {
   updateCardMovie: (movie: MovieDB) => void;
   movieList: MovieDB[];
   setMovieList: React.Dispatch<React.SetStateAction<MovieDB[]>>;
-  userData: any; // Cambia 'any' por el tipo adecuado
-  setUserData: React.Dispatch<React.SetStateAction<any>>; // Cambia 'any' por el tipo adecuado
+  userData: UserData; // Cambia 'any' por el tipo adecuado
+  setUserData: React.Dispatch<React.SetStateAction<UserData>>; // Cambia 'any' por el tipo adecuado
 }
 
 export const movieContext = createContext<MovieContextProps | undefined>(undefined);
@@ -29,7 +29,7 @@ interface MovieProviderProps {
 const MovieProvider = ({ children }: MovieProviderProps) => {
   const [movie, setMovie] = useState<MovieDB | null>(null);
   const [movieList, setMovieList] = useState<MovieDB[]>([]);
-  const [userData, setUserData] = useState<any>(null); 
+  const [userData, setUserData] = useState<UserData | null>(null); 
 
   const updateCardMovie = (movie: MovieDB) => {
     setMovie(movie);

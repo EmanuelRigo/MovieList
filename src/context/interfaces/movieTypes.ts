@@ -154,16 +154,19 @@ export interface UserMovie {
 
 export interface isOnline {
   message: string;
-  response: {
-    email: string;
-    firstname: string;
-    isOnline: boolean;
-    mode: string;
-    role: string;
-    user_id: string;
-    username: string;
-  };
+  response: UserData
 }
+
+export interface UserData {
+  email: string;
+  firstname: string;
+  isOnline: boolean;
+  mode: string;
+  role: string;
+  user_id: string;
+  username: string;
+}
+
 
 export interface User {
   username: string;

@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
       try {
         const response = await checkOnlineStatus();
 
-        if (response.status === 200) {
+        if (response.response.isOnline === true) {
           router.push("/"); // Redirige a la página de inicio si el usuario está online
         } else {
           setIsLoading(false); // Establece isLoading en false si el usuario está offline
