@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
