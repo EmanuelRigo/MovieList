@@ -20,7 +20,7 @@ export async function createUser(userData: User): Promise<Response> {
 }
 
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
-    const res = await fetch(`${API_URL}/api/sessions/login`, { // CORREGIDO: uso de backticks
+    const res = await fetch(`${API_URL}/api/sessions/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
 import { useRouter } from "next/navigation";

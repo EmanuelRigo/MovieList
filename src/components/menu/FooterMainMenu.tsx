@@ -23,7 +23,7 @@ import { IoIosLogOut } from "react-icons/io";
 export const FooterMainMenu = () => {
   const router = useRouter();
   const { movieList, setMovieList, userData } = useMovieContext(); // Accede a setMovieList desde el contexto
-  const [username] = useState<string | null>(null);
+
 
   // Función para cargar las películas al montar el componente
   const fetchMovies = async () => {

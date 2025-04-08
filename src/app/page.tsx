@@ -5,23 +5,14 @@ import { useEffect, useState } from "react";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 import { useMovieContext } from "@/context/MovieContext";
-import { useRouter } from "next/navigation";
-
 
 
 console.log("procceess:::", process.argv)
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
-  const {setMovie, userData} = useMovieContext()
+  const {setMovie} = useMovieContext()
   console.log("holaaa apps");
-
-  const router = useRouter()
-
-  // if (!userData) {
-  //   console.log("🚀 ~ Home ~ userData:", userData)
-  //   router.push('/login')
-  // }
 
   
   useEffect(()=>{
