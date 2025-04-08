@@ -1,8 +1,6 @@
 // middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { checkOnlineStatus } from './components/widgets/users.api'
-
 
 export async function middleware(request: NextRequest) {
   
