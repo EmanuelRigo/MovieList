@@ -4,33 +4,32 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
 import { useRouter } from "next/navigation";
-import { checkOnlineStatus } from "@/components/widgets/users.api";
+
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 
-  useEffect(() => {
-    const fetchOnlineStatus = async () => {
-      try {
-        const response = await checkOnlineStatus();
-        console.log("🚀 ~ fetchOnlineStatus ~ response!!:", response)
+  // useEffect(() => {
+  //   const fetchOnlineStatus = async () => {
+  //     try {
+  //       const response = await checkOnlineStatus();
+  //       console.log("🚀 ~ fetchOnlineStatus ~ response!!:", response)
 
-        if (response.response.isOnline === true) {
-          router.push("/"); // Redirige a la página de inicio si el usuario está online
-        } else {
-          setIsLoading(false); // Establece isLoading en false si el usuario está offline
-        }
-      } catch (error) {
-        console.error("Error checking online status:", error);
-        setIsLoading(false); // Asegúrate de detener la carga incluso si hay un error
-      }
-    };
+  //       if (response.response.isOnline === true) {
+  //         router.push("/"); // Redirige a la página de inicio si el usuario está online
+  //       } else {
+  //         setIsLoading(false); // Establece isLoading en false si el usuario está offline
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking online status:", error);
+  //       setIsLoading(false); // Asegúrate de detener la carga incluso si hay un error
+  //     }
+  //   };
 
-    fetchOnlineStatus();
-  }, [router]);
+  //   fetchOnlineStatus();
+  // }, [router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +40,7 @@ const LoginPage: React.FC = () => {
         password,
       };
       const response = await loginUser(credentials);
-      console.log("🚀 ~ handleLogin ~ response:", response)
+      console.log("🚀🚀🚀  ~ handleLogin ~ response:", response)
 
       if (response.ok) {
         console.log("Inicio de sesión exitoso");
@@ -54,14 +53,8 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  console.log("🚀🚀🚀");
   // Mostrar un indicador de carga mientras se verifica el estado online
-  if (isLoading) {
-    return (
-      <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
-        <p className="text-black dark:text-white">Cargando...</p>
-      </div>
-    );
-  }
 
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">

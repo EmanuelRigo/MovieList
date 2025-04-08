@@ -36,38 +36,15 @@ const ThemeHandler = ({ children }: ThemeHandlerProps) => {
     }
   };
 
-  const toggleDarkMode = () => {
-    const newMode = !darkMode ? "dark" : "light";
-    setDarkMode(!darkMode);
-
-    // Actualiza la clase del body
-    if (newMode === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-
-    // Actualiza la cookie "mode"
-    document.cookie = `mode=${newMode}; path=/; max-age=31536000; SameSite=Strict`;
-  };
 
   useEffect(() => {
     initializeTheme(userData);
   }, [userData]);
 
   return (
-    <div>
-      <button
-        onClick={toggleDarkMode}
-        className={`p-2 rounded-lg transition-colors duration-300 ${
-          darkMode ? "text-white bg-black" : "text-black bg-white"
-        }`}
-        title={darkMode ? "Modo Claro" : "Modo Oscuro"}
-      >
-        {darkMode ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
-      </button>
+    <>
       {children}
-    </div>
+    </>
   );
 };
 
