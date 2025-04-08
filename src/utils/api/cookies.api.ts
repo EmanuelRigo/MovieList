@@ -1,5 +1,5 @@
 export async function getCookie(): Promise<Response> {
-    const res = await fetch(`https://movielist-backend.vercel.app/api/cookies/read`, {
+    const res = await fetch(`/api/cookies/read`, {
         method: "GET",
         credentials: "include", // Asegura que las cookies se envíen con la solicitud
         headers: {

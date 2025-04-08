@@ -1,7 +1,9 @@
 import { Movie, MovieDB, UserMovie, UserMoviesResponse, UserMovieResponse } from "@/context/interfaces/movieTypes";
 
-const API_URL = "https://movielist-backend.vercel.app";
+// const API_URL = "https://movielist-backend.vercel.app";
 // const API_URL = "http://localhost:9000"
+const API_URL = ""
+
 
 // USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {
