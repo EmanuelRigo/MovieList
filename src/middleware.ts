@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
       await jwtVerify(jwt, new TextEncoder().encode(envsUtils.SECRET_KEY));
       return NextResponse.redirect(new URL("/", request.url)); // o la ruta principal de tu app
     } catch (error) {
-      // Token inválido, dejalo ir al login
+      console.error("Invalid token:", error);
     }
   }
 

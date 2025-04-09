@@ -3,12 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
-import { useRouter } from "next/navigation";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   // useEffect(() => {
   //   const fetchOnlineStatus = async () => {
