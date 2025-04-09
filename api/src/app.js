@@ -32,10 +32,8 @@ app.use(cookieParser(envsUtils.SECRET_KEY));
 
 // const allowedOrigins = [
 //   "http://localhost:3000", // Desarrollo local
-//   "https://movie-list-rvqh.vercel.app", // Producción
+//   "https://movie-list-pphmzfnq8-emanuelrigos-projects.vercel.app", // Producción
 // ];
-
-
 
 
 // app.use(
