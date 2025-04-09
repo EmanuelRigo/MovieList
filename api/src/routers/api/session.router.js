@@ -84,12 +84,18 @@ async function login(req, res) {
     const token = req.token;
     const name = req.user.username;
     const mode = req.user.mode;
+    const onlineUser = req.onlineUser
     const optsToken = {
       maxAge: 60 * 60 * 24 * 7 * 1000,
       httpOnly: true,
       secure: true, 
       sameSite: "none",
     };
+    const optsOnlineToken = {
+      maxAge: 60 * 60 * 24 * 7 * 1000,
+      secure: true, 
+      sameSite: "none",
+    }
     const optsName = {
       maxAge: 60 * 60 * 24 * 7 * 1000,
       secure: true, 
@@ -104,6 +110,7 @@ async function login(req, res) {
 
     return res
       .cookie("token", token, optsToken)
+      .cookie("onlineUser", onlineUser, optsOnlineToken)
       .cookie("name", name, optsName)
       .cookie("mode", mode, optsMode)
       .json200(response, message);

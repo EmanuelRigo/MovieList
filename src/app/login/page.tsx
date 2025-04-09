@@ -5,7 +5,6 @@ import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
 import { useRouter } from "next/navigation";
 
-
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,11 +39,11 @@ const LoginPage: React.FC = () => {
         password,
       };
       const response = await loginUser(credentials);
-      console.log("🚀🚀🚀  ~ handleLogin ~ response:", response)
+      console.log("🚀🚀🚀  ~ handleLogin ~ response:", response);
 
       if (response.ok) {
         console.log("Inicio de sesión exitoso");
-        router.push("/");
+        window.location.href = "/";
       } else {
         console.error("Error en el inicio de sesión");
       }
@@ -59,10 +58,14 @@ const LoginPage: React.FC = () => {
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
       <div className="bg-white dark:bg-neutral-800 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">Iniciar Sesión</h1>
+        <h1 className="text-2xl font-bold mb-6 text-black dark:text-white">
+          Iniciar Sesión
+        </h1>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-black dark:text-gray-100">Correo Electrónico</label>
+            <label className="block text-black dark:text-gray-100">
+              Correo Electrónico
+            </label>
             <input
               type="email"
               value={email}
@@ -72,7 +75,9 @@ const LoginPage: React.FC = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-black dark:text-gray-100">Contraseña</label>
+            <label className="block text-black dark:text-gray-100">
+              Contraseña
+            </label>
             <input
               type="password"
               value={password}
@@ -89,7 +94,10 @@ const LoginPage: React.FC = () => {
           </button>
         </form>
         <div className="mt-4 text-center">
-          <Link href="/register" className="text-blue-500 dark:text-orange-500 hover:underline">
+          <Link
+            href="/register"
+            className="text-blue-500 dark:text-orange-500 hover:underline"
+          >
             ¿No tienes una cuenta? Regístrate
           </Link>
         </div>

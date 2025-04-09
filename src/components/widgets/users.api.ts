@@ -2,8 +2,8 @@ import { User, isOnline } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
 //const API_URL = "https://movielist-backend.vercel.app";
-const API_URL = "";
-// const API_URL = "http://localhost:9000"
+// const API_URL = "";
+const API_URL = "http://localhost:9000"
 console.log("🚀 ~ API_URL:", API_URL);
 
 
@@ -21,14 +21,18 @@ export async function createUser(userData: User): Promise<Response> {
 }
 
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
+    console.log("🚀 ~ loginUser ~ credentials:", credentials);
     const res = await fetch(`${API_URL}/api/sessions/login`, {
         method: "POST",
+        
         headers: {
             "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify(credentials),
     });
+
+  
     return res;
 }
 

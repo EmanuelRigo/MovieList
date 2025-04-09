@@ -95,7 +95,11 @@ passport.use(
           mode: user.mode,
         };
         const token = createTokenUtil(data);
-        req.token = token;        
+        req.token = token;
+        const onlineUser = createTokenUtil({
+          isOnline: true,
+        });
+        req.onlineUser = onlineUser;
         return done(null, user);
       } catch (error) {
         console.error("Error durante el proceso de autenticación:", error);

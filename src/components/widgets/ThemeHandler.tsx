@@ -1,30 +1,34 @@
 "use client";
+
 import { useEffect } from "react";
-import { useMovieContext } from "@/context/MovieContext";
 
 type ThemeHandlerProps = {
   children: React.ReactNode;
 };
 
 const ThemeHandler = ({ children }: ThemeHandlerProps) => {
-  const { userData } = useMovieContext();
+  const getCookie = (name: string) => {
+    const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : null;
+  };
 
-  const initializeTheme = (userData: { mode?: string } | null) => {
-    try {
-      if (userData?.mode) {
-        const isDarkMode = userData.mode === "dark";
-        document.body.classList.toggle("dark", isDarkMode);
-      } else {
-        console.warn("No se pudo inicializar el tema: userData es nulo o no tiene un modo definido.");
-      }
-    } catch (error) {
-      console.error("Error inicializando el tema:", error);
-    }
+  const applyTheme = () => {
+    const cookieMode = getCookie("mode");
+    const isDark = cookieMode === "dark";
+    document.documentElement.classList.toggle("dark", isDark);
   };
 
   useEffect(() => {
-    initializeTheme(userData);
-  }, [userData]);
+    // Aplica el tema cuando carga
+    applyTheme();
+
+    // Observador para detectar cambios en las cookies
+    const interval = setInterval(() => {
+      applyTheme();
+    }, 1000); // cada segundo (puede bajarse si querés)
+
+    return () => clearInterval(interval);
+  }, []);
 
   return <>{children}</>;
 };

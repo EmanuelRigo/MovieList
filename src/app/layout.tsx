@@ -1,16 +1,14 @@
+import { cookies } from "next/headers";
 import localFont from "next/font/local";
-import Head from "next/head";
 import "./globals.css";
-
 import MovieProvider from "../context/MovieContext";
-import ThemeHandler from "@/components/widgets/ThemeHandler";
-
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -26,22 +24,24 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const cookieStore = await cookies(); // ✅ ahora sí
+  const mode = cookieStore.get("mode")?.value;
+  const isDark = mode === "dark";
+
   return (
-    <html lang="en">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-      </Head>
-      <MovieProvider>
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <ThemeHandler>
-              <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
-                {children}
-              </div>
-          </ThemeHandler>
-        </body>
-      </MovieProvider>
+    <html lang="en" className={isDark ? "dark" : ""}>
+      <head />
+      <body
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable}`}
+      >
+        <MovieProvider>
+          <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
+            {children}
+          </div>
+        </MovieProvider>
+      </body>
     </html>
   );
 }
