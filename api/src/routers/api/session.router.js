@@ -102,6 +102,7 @@ async function login(req, res) {
       sameSite: "none",
     };
     const optsMode = {
+      maxAge: 31536000,
       secure: true, 
       sameSite: "none",
     };
