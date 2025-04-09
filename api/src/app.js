@@ -55,7 +55,7 @@ app.use(
     origin: (origin, callback) => {
       const allowedOrigins = [
         "http://localhost:3000", // Desarrollo local
-        "https://movie-list-pphmzfnq8-emanuelrigos-projects.vercel.app", // Producción
+        "https://movie-list-jade-kappa.vercel.app", // Producción
       ];
 
       // Permitir solicitudes sin origen (por ejemplo, herramientas como Postman)

@@ -1,6 +1,6 @@
 import { Movie, MovieDB, UserMovie, UserMoviesResponse, UserMovieResponse } from "@/context/interfaces/movieTypes";
 
-const API_URL = "https://movie-list-pphmzfnq8-emanuelrigos-projects.vercel.app";
+const API_URL = "https://movie-list-jade-kappa.vercel.app";
 // const API_URL = "http://localhost:9000"
 // const API_URL = ""
 

@@ -1,7 +1,7 @@
 import { User, isOnline } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
-const API_URL = "https://movie-list-pphmzfnq8-emanuelrigos-projects.vercel.app";
+const API_URL = "https://movie-list-jade-kappa.vercel.app";
 // const API_URL = "";
 // const API_URL = "http://localhost:9000"
 console.log("🚀 ~ API_URL:", API_URL);
