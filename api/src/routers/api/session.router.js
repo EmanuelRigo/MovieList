@@ -89,12 +89,12 @@ async function login(req, res) {
       maxAge: 60 * 60 * 24 * 7 * 1000,
       httpOnly: true,
       secure: true, 
-      sameSite: "none",
+      sameSite: "strict",
     };
     const optsOnlineToken = {
       maxAge: 60 * 60 * 24 * 7 * 1000,
       secure: true, 
-      sameSite: "none",
+      sameSite: "strict",
     }
     const optsName = {
       maxAge: 60 * 60 * 24 * 7 * 1000,
