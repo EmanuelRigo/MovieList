@@ -1,3 +1,4 @@
+"use client"
 import { useMovieContext } from "@/context/MovieContext";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -41,7 +42,7 @@ const RandomButton = ({ className }: RandomButtonProps) => {
       className={className} // Aplica la clase pasada como prop
     >
       <GiCardRandom />
-      <span className={`text-xl lg:hidden ${isList ? "hidden" : ""}`}>Random</span>
+      <span className={`text-xl `}>Random</span>
          </button>
   );
 };

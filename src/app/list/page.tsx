@@ -3,23 +3,25 @@ import SearchBar from "@/components/widgets/SearchBar";
 import OrderListButtons from "@/components/menu/OrderListButtons";
 import FilterFormatsButtons from "@/components/menu/FilterFormatsButtons";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
+import RandomButton from "@/components/menu/RandomButton";
 
 const page = () => {
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
-      <SearchBar></SearchBar>
-      <div className="flex rounded-lg h-44 bg-neutral-100 dark:bg-neutral-900 overflow-hidden">
-        <div className="flex flex-col flex-grow justify-evenly overflow-hidden">
-          <div>
-            <OrderListButtons></OrderListButtons>
-          </div>
-          <FilterFormatsButtons></FilterFormatsButtons>
+      <div className="flex rounded-lg h-44  overflow-hidden">
+        <div className="w-9/12 flex flex-col justify-between pe-4 bg-red">
+          <SearchBar></SearchBar>
+          <div className=""><FilterFormatsButtons></FilterFormatsButtons></div>
+          
+          <OrderListButtons></OrderListButtons>
         </div>
-        <div className="overflow-hidden">
+
+        <div className="overflow-hidden rounded-lg w-3/12 flex justify-center items-center bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-300 dark:border-neutral-800">
           <MiniCardViewer></MiniCardViewer>
         </div>
       </div>
       <MovieList></MovieList>
+      <RandomButton className="w-full bg-blue-500 dark:bg-yellow-500 p-4 rounded-md flex items-center gap-2 text-3xl  text-neutral-100 dark:text-neutral-900"></RandomButton>
     </div>
   );
 };

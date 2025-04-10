@@ -45,6 +45,16 @@ const SearchBar: React.FC<SearchBarProps> = () => {
 
   return (
     <div className="w-full flex">
+      {/* <Link
+        className={`${
+          pathname === "/list"
+            ? " w-2/12 text-blue-500 dark:text-yellow-500 flex justify-center items-center text-3xl"
+            : "hidden"
+        }`}
+        href="/"
+      >
+        <IoIosArrowBack />
+      </Link> */}
       <form
         onSubmit={handleSearch}
         className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-400  dark:border-neutral-800 p-2"
@@ -53,8 +63,8 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          placeholder="Buscar en mi lista"
-          className="flex-grow px-4 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
+          placeholder="Search"
+          className="flex-grow ps-2 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
         />
         <button
           type="submit"
@@ -63,16 +73,6 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           <LuSearch />
         </button>
       </form>
-      <Link
-        className={`${
-          pathname === "/list"
-            ? " w-2/12 text-blue-500 dark:text-yellow-500 flex justify-center ps-2 items-center text-3xl"
-            : "hidden"
-        }`}
-        href="/"
-      >
-        <IoIosArrowBack />
-      </Link>
     </div>
   );
 };

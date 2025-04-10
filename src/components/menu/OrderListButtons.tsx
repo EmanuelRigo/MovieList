@@ -25,7 +25,7 @@ const OrderListButtons = () => {
   }
 
   return (
-    <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 rounded-lg  text-black  dark:text-neutral-200 text-3xl lg:text-xl 2xl:text-3xl p-3 2xl:p-4">
+    <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 rounded-lg  text-black  dark:text-neutral-200 text-3xl lg:text-xl 2xl:text-3xl px-3 2xl:p-4">
       <button
         className=" hover:text-blue-500 dark:hover:text-orange-400"
         onClick={ordenarPorFecha}
@@ -38,7 +38,7 @@ const OrderListButtons = () => {
       >
         <RiSortAlphabetAsc />
       </button>
-      <RandomButton className=" hover:text-blue-500 dark:hover:text-orange-400"></RandomButton>
+      {/* <RandomButton className=" hover:text-blue-500 dark:hover:text-orange-400"></RandomButton> */}
     </div>
   );
 };
