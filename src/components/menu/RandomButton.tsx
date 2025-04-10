@@ -12,7 +12,7 @@ const RandomButton = ({ className }: RandomButtonProps) => {
   const pathname = usePathname();
   const { movieList, setMovie } = useMovieContext();
   const [hasExecuted, setHasExecuted] = useState(false); // Estado para rastrear si el efecto ya se ejecutó
-  const [isList, setIsList] = useState(false); // Estado para rastrear si estamos en la lista
+  // const [isList, setIsList] = useState(false); // Estado para rastrear si estamos en la lista
 
   function obtenerObjetoAleatorio() {
     if (movieList.length > 0) {
@@ -23,11 +23,11 @@ const RandomButton = ({ className }: RandomButtonProps) => {
     }
   }
 
-  useEffect(() => {
-    if (pathname === "/list") {
-      setIsList(true); // Cambia el estado a true si estamos en la lista
-    }
-  },[])
+  // useEffect(() => {
+  //   if (pathname === "/list") {
+  //     setIsList(true); // Cambia el estado a true si estamos en la lista
+  //   }
+  // },[])
 
   useEffect(() => {
     if (!hasExecuted && pathname === "/" && movieList.length > 0) {
