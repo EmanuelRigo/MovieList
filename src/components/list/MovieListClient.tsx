@@ -34,8 +34,8 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
 
   return (
     <>
-      <div className="relative rounded-lg flex-grow scrollbar-hidden overflow-auto scroll-smooth scoll-duration-600">
-        <div className="w-full absolute">
+      <div className="relative flex-grow scrollbar-hidden overflow-auto scroll-smooth scoll-duration-600">
+        <div className="w-full h-full absolute">
           {movieList && movieList.length > 0 ? (
             movieList.map((element, index) => (
               <div
@@ -56,7 +56,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
               </div>
             ))
           ) : (
-            <div className="flex flex-col items-center justify-center h-full bg-neutral-200 dark:bg-neutral-800 rounded-lg p-4">
+            <div className="flex flex-col items-center justify-center h-full rounded-lg border-2 border-neutral-300 dark:border-neutral-800 ">
               <FaFilm className="text-neutral-500 dark:text-neutral-400 text-6xl mb-4" />
               <p className="text-black dark:text-white text-lg font-bold">
                 No hay películas disponibles
