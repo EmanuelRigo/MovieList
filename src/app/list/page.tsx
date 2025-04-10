@@ -8,15 +8,18 @@ import RandomButton from "@/components/menu/RandomButton";
 const page = () => {
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
-      <div className="flex rounded-lg h-44  overflow-hidden">
-        <div className="w-9/12 flex flex-col justify-between pe-4 bg-red">
+      <div className="flex h-44 ">
+        <div className="flex-grow flex flex-col justify-between pe-4 bg-red">
           <SearchBar></SearchBar>
-          <div className=""><FilterFormatsButtons></FilterFormatsButtons></div>
-          
-          <OrderListButtons></OrderListButtons>
+          <div className="flex items-center justify-between ">
+            <div className=" ">
+              <FilterFormatsButtons></FilterFormatsButtons>
+            </div>
+            <OrderListButtons></OrderListButtons>
+          </div>
         </div>
 
-        <div className="overflow-hidden rounded-lg w-3/12 flex justify-center items-center bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-300 dark:border-neutral-800">
+        <div className="overflow-hidden rounded-lg aspect-3-4 flex justify-center items-center bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-300 dark:border-neutral-800">
           <MiniCardViewer></MiniCardViewer>
         </div>
       </div>

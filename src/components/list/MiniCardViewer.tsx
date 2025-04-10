@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { IoIosArrowBack } from "react-icons/io";
+import { FaFilm } from "react-icons/fa"; // Importa el ícono de react-icons
 
 const MiniCardViewer = () => {
   const { movie } = useMovieContext();
@@ -32,7 +33,7 @@ const MiniCardViewer = () => {
       <>
         {/* Imagen que abre el modal */}
         <div
-          className="relative h-full aspect-3-4 overflow-hidden"
+          className="relative h-full w-full overflow-hidden"
           onClick={handleImageClick}
         >
           <Image
@@ -102,7 +103,7 @@ const MiniCardViewer = () => {
       </>
     );
   } else {
-    return <h1 className="text-neutral-900 dark:text-neutral-100">No hay película</h1>;
+    return <h1 className="flex justify-center items-center text-4xl text-neutral-400 dark:text-neutral-700"> < FaFilm/></h1>;
   }
 };
 
