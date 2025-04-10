@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useMovieContext } from "@/context/MovieContext";
-import RandomButton from "./RandomButton";
+// import RandomButton from "./RandomButton";
 import { RiSortAlphabetAsc } from "react-icons/ri";
 import { PiCalendarLight } from "react-icons/pi";
 

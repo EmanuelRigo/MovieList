@@ -2,10 +2,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
 
-import { IoIosArrowBack } from "react-icons/io";
+// import { IoIosArrowBack } from "react-icons/io";
 import { LuSearch } from "react-icons/lu";
 
 interface SearchBarProps {
@@ -13,7 +13,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = () => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const { movie, setMovie, movieList } = useMovieContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
 
