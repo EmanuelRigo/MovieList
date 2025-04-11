@@ -57,14 +57,14 @@ const SearchBar: React.FC<SearchBarProps> = () => {
       </Link> */}
       <form
         onSubmit={handleSearch}
-        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-md border-2 border-neutral-400  dark:border-neutral-800 p-2"
+        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-lg border-2 border-neutral-400  dark:border-neutral-800 p-3 px-4"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
           placeholder="Search"
-          className="flex-grow ps-2 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
+          className="flex-grow 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
         />
         <button
           type="submit"

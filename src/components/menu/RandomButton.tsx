@@ -40,10 +40,9 @@ const RandomButton = ({ className }: RandomButtonProps) => {
     <button
       onClick={obtenerObjetoAleatorio}
       className={className} // Aplica la clase pasada como prop
-    >
+    >   <span className={`text-xl`}>Random</span>
       <GiCardRandom />
-      <span className={`text-xl `}>Random</span>
-         </button>
+    </button>
   );
 };
 

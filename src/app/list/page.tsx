@@ -5,6 +5,8 @@ import FilterFormatsButtons from "@/components/menu/FilterFormatsButtons";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
 import RandomButton from "@/components/menu/RandomButton";
 import CounterList from "@/components/list/CounterList";
+import Link from "next/link";
+import { IoIosArrowBack } from "react-icons/io";
 
 const page = () => {
   return (
@@ -23,7 +25,7 @@ const page = () => {
           </div>
           <div className="flex justify-between">
             <div className=""></div>
-            <div className="min-w-14 h-10 rounded-lg flex justify-center items-center px-3  border-2 border-yellow-500 text-2xl ">
+            <div className="min-w-14 h-10 rounded-lg flex justify-center items-center px-3  border-2 border-neutral-800 text-2xl ">
               <CounterList></CounterList>
             </div>
           </div>
@@ -34,7 +36,16 @@ const page = () => {
         </div>
       </div>
       <MovieList></MovieList>
-      <RandomButton className="w-full bg-blue-500 dark:bg-yellow-500 p-4 rounded-md flex items-center gap-2 text-3xl  text-neutral-100 dark:text-neutral-900"></RandomButton>
+      <div className="flex bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900">
+        <div className="w-3/12  p-4">
+        <Link href="/">
+          <IoIosArrowBack className="text-3xl" />
+        </Link>
+        </div>
+        <div className="w-9/12 flex justify-center">
+          <RandomButton className=" flex gap-2 text-3xl p-4 "></RandomButton>
+        </div>
+      </div>
     </div>
   );
 };

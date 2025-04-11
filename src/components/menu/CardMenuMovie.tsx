@@ -14,7 +14,7 @@ const CardMenuMovie = () => {
 
   if (movie && movie._id) {
     return (
-      <div className="relative w-full rounded-lg overflow-hidden h-36 md:h-1/3 2xl:h-48">
+      <div className="relative w-full rounded-lg overflow-hidden h-52 md:h-1/3 2xl:h-48">
         <div className="absolute inset-0">
           <Image
             loader={myLoader}
@@ -26,8 +26,8 @@ const CardMenuMovie = () => {
             className="rounded-lg"
           />
         </div>
-        <div className="absolute bottom-0 w-full bg-neutral-100 bg-opacity-70 dark:bg-black dark:bg-opacity-50 dark:text-white p-4">
-          <h2 className="text-xs xl:text-xl">{movie._id.title || "Unknown Title"}</h2>
+        <div className="absolute bottom-0 w-full bg-neutral-100 bg-opacity-70 dark:bg-black dark:bg-opacity-50 dark:text-white p-2 ps-3">
+          <h2 className="text-xl xl:text-xl mb-1">{movie._id.title || "Unknown Title"}</h2>
           <p className="text-xs xl:text-lg">
             {movie._id.release_date ? movie._id.release_date.split("T")[0] : "Unknown Date"}
           </p>

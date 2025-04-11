@@ -3,6 +3,7 @@ import MovieListClient from "./MovieListClient";
 import { useMovies } from "./useMovies";
 
 export default function MovieList() {
+  
   const { data, error, loading } = useMovies();
 
   if (loading) {

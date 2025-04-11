@@ -14,13 +14,13 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (list && Array.isArray(list)) {
+    if (list) {
       setMovieList(list);
-      if (!movie && list.length > 0) {
-        setMovie(list[0]);
-      }
+      // if (!movie && list.length > 0) {
+      //   setMovie(list[0]);
+      // }
     }
-  }, [list, setMovieList, setMovie]);
+  }, []);
 
   useEffect(() => {
     const elementToScroll = movieRows.current.find((row) =>

@@ -67,7 +67,7 @@ export const FooterMainMenu = () => {
           "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
         }
       >
-        <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4">
+        <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4 px-3">
           <span className="text-md 2xl:text-xl ms-2">{userData?.username || "Guest"}</span> 
           <div className="flex gap-4">
             <button
@@ -78,15 +78,17 @@ export const FooterMainMenu = () => {
             </button>
           </div>
         </div>
-        <div className="flex-grow flex flex-col gap-4">
+        <div className="flex-grow flex flex-col gap-4">          <div>
+          <SearchBar />
+        </div>
           <CardMenuMovie />
           <Link
             className="rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
-              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-2 2xl:p-4"
+              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-4 ps-3 "
             href="/add-movie"
           >
             <span className="ms-2 2xl:ms-0 text-lg">Movies: {movieList.length}</span>
-            <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-orange-500" />
+            <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-yellow-500" />
           </Link>
 
           <div className="hidden lg:block">
@@ -98,18 +100,18 @@ export const FooterMainMenu = () => {
           <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl ps-3 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
             <FilterFormatsButtons></FilterFormatsButtons>
           </div>
-          <div className="">
+          {/* <div className="">
             <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
-          </div>
-          <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-orange-500 p-4 rounded-md">
+          </div> */}
+          <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-yellow-500 p-4 rounded-md">
             <Link className="flex items-center gap-2" href="/list">
               <BsListUl className="text-3xl" /> <span>List</span>
             </Link>
           </div>
+
         </div>
-        <div>
-          <SearchBar />
-        </div>
+
+          <RandomButton className="flex justify-center gap-2 text-3xl p-4 bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900"></RandomButton>
       </div>
 
   );
