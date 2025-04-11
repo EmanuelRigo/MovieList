@@ -51,7 +51,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
         </select>
         <button
           type="submit"
-          className="flex items-center justify-center w-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500 me-2"
+          className="flex items-center justify-center w-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500"
         >
           Buscar
         </button>

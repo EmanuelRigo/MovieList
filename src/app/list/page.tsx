@@ -4,18 +4,28 @@ import OrderListButtons from "@/components/menu/OrderListButtons";
 import FilterFormatsButtons from "@/components/menu/FilterFormatsButtons";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
 import RandomButton from "@/components/menu/RandomButton";
+import CounterList from "@/components/list/CounterList";
 
 const page = () => {
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
-      <div className="flex h-44 ">
+      <div className="flex h-48">
         <div className="flex-grow flex flex-col justify-between pe-4 bg-red">
           <SearchBar></SearchBar>
+
           <div className="flex items-center justify-between ">
-            <div className=" ">
+            <div className="flex items-center justify-between w-9/12 pe-8">
               <FilterFormatsButtons></FilterFormatsButtons>
             </div>
-            <OrderListButtons></OrderListButtons>
+            <div className="text-3xl flex items-center justify-between  w-3/12">
+              <OrderListButtons></OrderListButtons>
+            </div>
+          </div>
+          <div className="flex justify-between">
+            <div className=""></div>
+            <div className="min-w-14 h-10 rounded-lg flex justify-center items-center px-3  border-2 border-yellow-500 text-2xl ">
+              <CounterList></CounterList>
+            </div>
           </div>
         </div>
 

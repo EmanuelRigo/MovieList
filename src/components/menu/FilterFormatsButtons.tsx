@@ -50,7 +50,7 @@ const FilterFormatsButtons = () => {
   }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
-      <div className="flex justify-between lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">
+      <>
         <button
           className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
             activeFilters.vhs ? "font-bold" : "opacity-20"
@@ -75,7 +75,7 @@ const FilterFormatsButtons = () => {
         >
           <SvgBluRay className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
         </button>
-      </div>
+      </>
   );
 };
 

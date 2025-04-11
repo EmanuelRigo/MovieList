@@ -92,10 +92,10 @@ export const FooterMainMenu = () => {
           <div className="hidden lg:block">
             <YearSearch onSearch={handleSearchByYear} />
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
             <OrderListButtons />
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl ps-3 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
             <FilterFormatsButtons></FilterFormatsButtons>
           </div>
           <div className="">

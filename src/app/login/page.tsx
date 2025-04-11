@@ -5,33 +5,55 @@ import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
 import { useRouter } from "next/navigation";
 
+
 function getCookie(name: string) {
   const cookies = document.cookie.split("; ");
   const cookie = cookies.find((c) => c.startsWith(name + "="));
   return cookie ? cookie.split("=")[1] : undefined;
 }
 
-const LoginPage = () => {
+
+const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isCheckingCookie, setIsCheckingCookie] = useState(true);
   const router = useRouter();
+
+  // useEffect(() => {
+  //   const fetchOnlineStatus = async () => {
+  //     try {
+  //       const response = await checkOnlineStatus();
+  //       console.log("🚀 ~ fetchOnlineStatus ~ response!!:", response)
+
+  //       if (response.response.isOnline === true) {
+  //         router.push("/"); // Redirige a la página de inicio si el usuario está online
+  //       } else {
+  //         setIsLoading(false); // Establece isLoading en false si el usuario está offline
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking online status:", error);
+  //       setIsLoading(false); // Asegúrate de detener la carga incluso si hay un error
+  //     }
+  //   };
+
+  //   fetchOnlineStatus();
+  // }, [router]);
 
   useEffect(() => {
     const token = getCookie("onlineUser");
-
     if (token) {
       router.push("/");
-    } else {
-      setIsCheckingCookie(false); // Terminó de verificar, ahora puede renderizar
     }
   }, []);
+  
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const credentials = { email, password };
+      const credentials = {
+        email,
+        password,
+      };
       const response = await loginUser(credentials);
       console.log("🚀🚀🚀  ~ handleLogin ~ response:", response);
 
@@ -46,10 +68,8 @@ const LoginPage = () => {
     }
   };
 
-  // 🔒 Mientras se verifica la cookie, no mostramos nada
-  if (isCheckingCookie) {
-    return null;
-  }
+  console.log("🚀🚀🚀");
+  // Mostrar un indicador de carga mientras se verifica el estado online
 
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto  md:h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 w-full">
