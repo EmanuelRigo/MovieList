@@ -10,7 +10,7 @@ interface MovieListClientProps {
 }
 
 const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
-  const { movieList, setMovieList, movie, setMovie } = useMovieContext();
+  const { movieList, setMovieList, movie} = useMovieContext();
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
