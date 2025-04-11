@@ -5,8 +5,10 @@ import { jwtVerify } from "jose";
 import envsUtils from "./utils/envs.utils";
 
 export async function middleware(request: NextRequest) {
+  
   const tokenCookie = request.cookies.get("onlineUser");
   const jwt = tokenCookie?.value;
+  console.log("🚀 ~ middleware ~ jwt:", jwt)
 
   // ✅ Si el usuario ya tiene token y quiere ir al login, lo redirigimos a la home
   if (request.nextUrl.pathname === "/login" && jwt) {

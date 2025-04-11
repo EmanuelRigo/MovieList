@@ -1,12 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
+import { useRouter } from "next/navigation";
+
+
+function getCookie(name: string) {
+  const cookies = document.cookie.split("; ");
+  const cookie = cookies.find((c) => c.startsWith(name + "="));
+  return cookie ? cookie.split("=")[1] : undefined;
+}
+
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   // useEffect(() => {
   //   const fetchOnlineStatus = async () => {
@@ -27,6 +37,14 @@ const LoginPage: React.FC = () => {
 
   //   fetchOnlineStatus();
   // }, [router]);
+
+  useEffect(() => {
+    const token = getCookie("onlineUser");
+    if (token) {
+      router.push("/");
+    }
+  }, []);
+  
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

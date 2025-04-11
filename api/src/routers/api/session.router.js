@@ -3,6 +3,7 @@ import { verifyTokenUtil } from "../../utils/token.util.js";
 import passportCb from "../../middlewares/passportCb.middleware.js";
 import { userController } from "../../controllers/users.controller.js";
 import userMoviesServices from "../../services/userMovies.services.js";
+import exp from "constants";
 
 class SessionRouter extends CustomRouter {
   constructor() {
@@ -86,25 +87,29 @@ async function login(req, res) {
     const mode = req.user.mode;
     const onlineUser = req.onlineUser
     const optsToken = {
-      maxAge: 60 * 60 * 24 * 7 * 1000,
+      maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
       httpOnly: true,
       secure: true, 
       sameSite: "strict",
+      expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
     };
     const optsOnlineToken = {
-      maxAge: 60 * 60 * 24 * 7 * 1000,
+      maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
       secure: true, 
       sameSite: "strict",
+      expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
     }
     const optsName = {
-      maxAge: 60 * 60 * 24 * 7 * 1000,
+      maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
       secure: true, 
       sameSite: "none",
+      expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
     };
     const optsMode = {
-      maxAge: 31536000,
+      maxAge: 31536000 * 1000,
       secure: true, 
       sameSite: "none",
+      expires: new Date(Date.now() + 31536000 * 1000), // 1 year
     };
     const message = "USER LOGGED IN";
     const response = "ok";
