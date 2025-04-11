@@ -1,24 +1,21 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 import envsUtils from "./utils/envs.utils";
 
-export async function middleware(request: NextRequest) {
-  
-  const tokenCookie = request.cookies.get("onlineUser");
-  const jwt = tokenCookie?.value;
-  console.log("🚀 ~ middleware ~ jwt:", jwt)
+// Función personalizada para leer la cookie de manera asincrónica
+async function getTokenCookie(request: NextRequest): Promise<string | undefined> {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const tokenCookie = request.cookies.get("onlineUser");
+      resolve(tokenCookie?.value);
+    }, 0); // Simula una operación asincrónica
+  });
+}
 
-  // ✅ Si el usuario ya tiene token y quiere ir al login, lo redirigimos a la home
-  if (request.nextUrl.pathname === "/login" && jwt) {
-    try {
-      await jwtVerify(jwt, new TextEncoder().encode(envsUtils.SECRET_KEY));
-      return NextResponse.redirect(new URL("/", request.url)); // o la ruta principal de tu app
-    } catch (error) {
-      console.error("Invalid token:", error);
-    }
-  }
+export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const jwt = await getTokenCookie(request); // Ahora usamos await
+  console.log("🚀 ~ middleware ~ jwt:", jwt);
 
   // ✅ Para cualquier otra ruta que no sea /login, necesita el token
   if (request.nextUrl.pathname !== "/login") {
@@ -31,6 +28,16 @@ export async function middleware(request: NextRequest) {
     } catch (error) {
       console.error("Invalid token:", error);
       return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
+  // ✅ Si el usuario ya tiene token y quiere ir al login, lo redirigimos a la home
+  if (request.nextUrl.pathname === "/login" && jwt) {
+    try {
+      await jwtVerify(jwt, new TextEncoder().encode(envsUtils.SECRET_KEY));
+      return NextResponse.redirect(new URL("/", request.url)); // Ruta principal de tu app
+    } catch (error) {
+      console.error("Invalid token:", error);
     }
   }
 
