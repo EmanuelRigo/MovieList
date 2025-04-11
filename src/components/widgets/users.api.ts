@@ -1,16 +1,17 @@
 import { User, isOnline } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
-const API_URL = "https://movie-list-jade-kappa.vercel.app";
-// const API_URL = "";
-// const API_URL = "http://localhost:9000"
-console.log("🚀 ~ API_URL:", API_URL);
+// const BACKEND_URL = "https://movie-list-jade-kappa.vercel.app";
+// const BACKEND_URL = "";
+// const BACKEND_URL = "http://localhost:9000"
+const BACKEND_URL = envsUtils.BACKEND_URL // CORREGIDO: uso de envsUtils para obtener la URL del backend
+console.log("🚀 ~ API_URL:", BACKEND_URL);
 
 
 
 export async function createUser(userData: User): Promise<Response> {
     console.log("🚀 ~ envsUtils:", envsUtils);
-    const res = await fetch(`${API_URL}/api/sessions/register`, {
+    const res = await fetch(`${BACKEND_URL}/api/sessions/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -22,7 +23,7 @@ export async function createUser(userData: User): Promise<Response> {
 
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
     console.log("🚀 ~ loginUser ~ credentials:", credentials);
-    const res = await fetch(`${API_URL}/api/sessions/login`, {
+    const res = await fetch(`${BACKEND_URL}/api/sessions/login`, {
         method: "POST",
         
         headers: {
@@ -37,7 +38,7 @@ export async function loginUser(credentials: { email: string; password: string }
 }
 
 export async function checkOnlineStatus(): Promise<isOnline> {
-    const res = await fetch(`${API_URL}/api/sessions/online`, { // CORREGIDO: uso de backticks
+    const res = await fetch(`${BACKEND_URL}/api/sessions/online`, { // CORREGIDO: uso de backticks
         method: "POST",
         credentials: "include",
         headers: {
@@ -55,7 +56,7 @@ export async function checkOnlineStatus(): Promise<isOnline> {
 }
 
 export async function logoutUser(): Promise<Response> {
-    const res = await fetch(`${API_URL}/api/sessions/signout`, { // CORREGIDO: uso de backticks
+    const res = await fetch(`${BACKEND_URL}/api/sessions/signout`, { // CORREGIDO: uso de backticks
         method: "POST",
         credentials: "include",
     });
@@ -63,7 +64,7 @@ export async function logoutUser(): Promise<Response> {
 }
 
 export async function createCookie(): Promise<Response> {
-    const res = await fetch(`${API_URL}/api/cookies/create`, {
+    const res = await fetch(`${BACKEND_URL}/api/cookies/create`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -79,7 +80,7 @@ export async function createCookie(): Promise<Response> {
 }
 
 export async function getCookie(): Promise<Response> {
-    const res = await fetch(`${API_URL}/api/cookies/read`, {
+    const res = await fetch(`${BACKEND_URL}/api/cookies/read`, {
         method: "GET",
         credentials: "include",
         headers: {

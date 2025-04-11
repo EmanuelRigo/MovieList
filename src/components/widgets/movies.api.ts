@@ -1,13 +1,18 @@
 import { Movie, MovieDB, UserMovie, UserMoviesResponse, UserMovieResponse } from "@/context/interfaces/movieTypes";
+import envsUtils from "@/utils/envs.utils";
 
-const API_URL = "https://movie-list-jade-kappa.vercel.app";
-// const API_URL = "http://localhost:9000"
-// const API_URL = ""
+
+
+// const BACKEND_URL = "https://movie-list-jade-kappa.vercel.app";
+// const BACKEND_URL = "";
+// const BACKEND_URL = "http://localhost:9000"
+const BACKEND_URL = envsUtils.BACKEND_URL // CORREGIDO: uso de envsUtils para obtener la URL del backend
+console.log("🚀 ~ BACKEND_URL:", BACKEND_URL)
 
 
 // USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {
-  const res = await fetch(`${API_URL}/api/userMovies`, {
+  const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
     method: "GET",
     credentials: "include",
     headers: {
@@ -23,7 +28,7 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
 }
 
 export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
-  const res = await fetch(`${API_URL}/api/usermovies/movies/${mid}`, {
+  const res = await fetch(`${BACKEND_URL}/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +44,7 @@ export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
 }
 
 export async function CreateMovie(movieData: MovieDB): Promise<UserMovieResponse> {
-  const res = await fetch(`${API_URL}/api/userMovies`, {
+  const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -52,7 +57,7 @@ export async function CreateMovie(movieData: MovieDB): Promise<UserMovieResponse
 }
 
 export async function getMovieByIdUpdate(mid: string, movieData: UserMovie): Promise<UserMovieResponse> {
-  const res = await fetch(`${API_URL}/api/userMovies/movies/${mid}`, {
+  const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${mid}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +76,7 @@ export async function getMovieByIdUpdate(mid: string, movieData: UserMovie): Pro
 }
 
 export async function deleteMovieById(id: string): Promise<Response> {
-  const res = await fetch(`${API_URL}/api/userMovies/movies/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -86,7 +91,7 @@ export async function deleteMovieById(id: string): Promise<Response> {
 }
 
 export async function getMovieById(id: string): Promise<Movie> {
-  const res = await fetch(`${API_URL}/api/movies/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/api/movies/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
