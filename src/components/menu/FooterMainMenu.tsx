@@ -20,9 +20,9 @@ import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 
 
-export const FooterMainMenu = () => {
+export const FooterMainMenu = () => { 
   const router = useRouter();
-  const { movieList, setMovieList, userData } = useMovieContext(); 
+  const { movieList, setMovieList} = useMovieContext(); 
 
 
   const fetchMovies = async () => {
@@ -66,7 +66,7 @@ useEffect(() => {
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
       }
-      router.push("/login"); // Redirige a la página de inicio de sesión después del logout
+      router.push("/login"); 
     } catch (error) {
       console.error("Error during logout:", error);
     }
