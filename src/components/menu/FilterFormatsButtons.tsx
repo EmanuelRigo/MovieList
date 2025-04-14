@@ -52,7 +52,7 @@ const FilterFormatsButtons = () => {
   return (
     <>
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
           activeFilters.vhs ? "" : "opacity-30"
         }`}
         onClick={() => toggleFilter("vhs")}
@@ -60,7 +60,7 @@ const FilterFormatsButtons = () => {
         <SvgVhs className="w-14 h-5 lg:h-3 2xl:h-5 text-current -ms-2" />
       </button>
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
           activeFilters.dvd ? "" : "opacity-30"
         }`}
         onClick={() => toggleFilter("dvd")}
@@ -68,7 +68,7 @@ const FilterFormatsButtons = () => {
         <SvgDvd className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
       </button>
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
           activeFilters.bluray ? "" : "opacity-30"
         }`}
         onClick={() => toggleFilter("bluray")}
