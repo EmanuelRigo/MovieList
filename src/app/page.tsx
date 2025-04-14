@@ -34,7 +34,7 @@ export default function Home() {
 
 
   return (
-    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
+    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
       <div
         className="container h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4"
       >

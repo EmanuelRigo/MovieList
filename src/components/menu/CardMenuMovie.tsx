@@ -37,7 +37,7 @@ const CardMenuMovie = () => {
   } else {
     return (
       <div
-        className="relative w-full rounded-lg overflow-hidden flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 h-36 md:h-1/3 2xl:h-48"
+        className="relative w-full rounded-lg overflow-hidden flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 h-52  md:h-1/3 2xl:h-48"
       >
         <FaFilm className="text-neutral-500 dark:text-neutral-400 text-4xl" />
       </div>

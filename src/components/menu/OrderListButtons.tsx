@@ -26,7 +26,7 @@ const OrderListButtons = () => {
   return (
     <>
       <button
-        className=" hover:text-blue-500 dark:hover:text-orange-400"
+        className="hover:text-blue-500 dark:hover:text-orange-400"
         onClick={ordenarPorFecha}
       >
         <PiCalendarLight />

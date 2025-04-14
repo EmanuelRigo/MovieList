@@ -6,7 +6,7 @@ export default function Page() {
   const apiKey: string = envsUtils.API_KEY ?? "default-api-key";
 
   return (
-    <div>
+    <div className="">
       <AddMovie apiKey={apiKey} />
     </div>
   );

@@ -16,9 +16,6 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   useEffect(() => {
     if (list) {
       setMovieList(list);
-      // if (!movie && list.length > 0) {
-      //   setMovie(list[0]);
-      // }
     }
   }, []);
 

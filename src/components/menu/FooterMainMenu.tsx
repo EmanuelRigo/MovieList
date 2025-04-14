@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -22,30 +22,46 @@ import { IoIosLogOut } from "react-icons/io";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
-  const { movieList, setMovieList, userData } = useMovieContext(); // Accede a setMovieList desde el contexto
+  const { movieList, setMovieList, userData } = useMovieContext(); 
 
 
-  // Función para cargar las películas al montar el componente
   const fetchMovies = async () => {
     try {
-      const movies = await getUserMovies(); // Llama a la API para obtener las películas
-      console.log("🚀 ~ fetchMovies ~ movies:", movies);
-      setMovieList(movies.response.movies); // Actualiza la lista global de películas
+      const movies = await getUserMovies(); 
+      setMovieList(movies.response.movies); 
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
   };
 
-  useEffect(() => {
-    fetchMovies(); // Llama a fetchMovies cuando el componente se monta
-  }, []);
+  function getCookie(name: string): string | undefined {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop()?.split(';').shift();
+    }
+  }
+
+  const [username, setUsername] = useState<string | undefined>('');
+
+  
+useEffect(() => {
+  if (window.innerWidth < 1023) {
+    fetchMovies();
+  }
+
+  const name = getCookie("name");
+  setUsername(name);
+  console.log("🚀 ~ fetchMovies ~ usernameData:", name);
+}, []);
+
 
   const handleLogout = async () => {
     try {
       await logoutUser();
-      // Borra todas las cookies
       const cookies = document.cookie.split("; ");
       for (const cookie of cookies) {
+        console.log("🚀 ~ handleLogout ~ cookie:", cookie)
         const eqPos = cookie.indexOf("=");
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
@@ -67,8 +83,8 @@ export const FooterMainMenu = () => {
           "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
         }
       >
-        <div className="flex justify-between bg-neutral-100 dark:bg-neutral-900 rounded-lg items-center p-2 2xl:p-4 px-3">
-          <span className="text-md 2xl:text-xl ms-2">{userData?.username || "Guest"}</span> 
+        <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-2 2xl:p-4 px-3 ">
+          <span className="text-md 2xl:text-xl ms-2">{username || "Guest"}</span> 
           <div className="flex gap-4">
             <button
               onClick={handleLogout}
