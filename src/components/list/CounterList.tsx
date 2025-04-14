@@ -7,7 +7,7 @@ const CounterList = () => {
 
   return (
     <>
-      <p>{movieList.length}</p>
+      <p className='leading-none text-'>{movieList.length}</p>
     </>
   )
 }

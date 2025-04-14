@@ -57,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
       </Link> */}
       <form
         onSubmit={handleSearch}
-        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-lg border-2 border-neutral-400  dark:border-neutral-800 p-3 px-4"
+        className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-lg border-2 border-neutral-400  dark:border-neutral-800 p-2 px-4"
       >
         <input
           type="text"
