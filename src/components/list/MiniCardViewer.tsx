@@ -10,18 +10,27 @@ const MiniCardViewer = () => {
   const { movie } = useMovieContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
-    const url = `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
-    console.log("Image URL:", url); // Verifica la URL generada
+  const myLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string;
+    width: number;
+    quality?: number;
+  }) => {
+    const url = `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+      quality || 75
+    }`;
     return url;
   };
 
   const handleImageClick = () => {
-    setIsModalOpen(true); // Abre el modal al hacer clic en la imagen
+    setIsModalOpen(true); 
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Cierra el modal
+    setIsModalOpen(false);
   };
 
   if (movie && movie._id) {
@@ -31,7 +40,6 @@ const MiniCardViewer = () => {
 
     return (
       <>
-        {/* Imagen que abre el modal */}
         <div
           className="relative h-full w-full overflow-hidden"
           onClick={handleImageClick}
@@ -42,6 +50,7 @@ const MiniCardViewer = () => {
             fill
             style={{ objectFit: "cover" }}
             alt={movie._id.title || "Movie Poster"}
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
 
@@ -103,7 +112,12 @@ const MiniCardViewer = () => {
       </>
     );
   } else {
-    return <h1 className="flex justify-center items-center text-4xl text-neutral-400 dark:text-neutral-700"> < FaFilm/></h1>;
+    return (
+      <h1 className="flex justify-center items-center text-4xl text-neutral-400 dark:text-neutral-700">
+        {" "}
+        <FaFilm />
+      </h1>
+    );
   }
 };
 

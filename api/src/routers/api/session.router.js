@@ -32,6 +32,14 @@ class SessionRouter extends CustomRouter {
       login
     );
 
+    //UPDATE
+    this.update(
+      "/update",
+      ["PUBLIC"],
+      passportCb("update", { session: false }),
+      update
+    );
+
     //SIGNOUT
     this.create(
       "/signout",
@@ -122,6 +130,18 @@ async function login(req, res) {
       .json200(response, message);
   } catch (error) {
     console.error("Error during login:", error);
+    return res.json500("Internal Server Error");
+  }
+}
+
+async function update(req, res){
+  try {
+    
+    const message = "User Updated";
+    const response = req.user.email
+    return res.json200(response, message);
+  } catch (error) {
+    console.error("Error during update:", error);
     return res.json500("Internal Server Error");
   }
 }

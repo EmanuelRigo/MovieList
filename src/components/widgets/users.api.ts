@@ -1,12 +1,8 @@
 import { User, isOnline } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
-// const BACKEND_URL = "https://movie-list-jade-kappa.vercel.app";
-// const BACKEND_URL = "";
-// const BACKEND_URL = "http://localhost:9000"
-const BACKEND_URL = envsUtils.BACKEND_URL // CORREGIDO: uso de envsUtils para obtener la URL del backend
+const BACKEND_URL = envsUtils.BACKEND_URL 
 console.log("🚀 ~ API_URL:", BACKEND_URL);
-
 
 
 export async function createUser(userData: User): Promise<Response> {
@@ -20,6 +16,7 @@ export async function createUser(userData: User): Promise<Response> {
     });
     return res;
 }
+
 
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
     console.log("🚀 ~ loginUser ~ credentials:", credentials);
@@ -35,6 +32,18 @@ export async function loginUser(credentials: { email: string; password: string }
 
   
     return res;
+}
+
+export async function updateUser(userData: User): Promise<Response> {
+    const res = await fetch (`${BACKEND_URL}/api/sessions/update`, {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+    })
+    return res
 }
 
 export async function checkOnlineStatus(): Promise<isOnline> {

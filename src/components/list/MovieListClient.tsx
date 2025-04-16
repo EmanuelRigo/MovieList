@@ -18,7 +18,8 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
       setMovieList(list);
     }
   }, []);
-
+  
+  console.log("REDNDER!!!!")
   useEffect(() => {
     const elementToScroll = movieRows.current.find((row) =>
       row?.classList.contains("outline-offset-0")

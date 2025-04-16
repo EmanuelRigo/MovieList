@@ -22,7 +22,9 @@ const EditMovie: React.FC = () => {
   const [movieToEdit, setMovieToEdit] = useState<MovieDB | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [modalActions, setModalActions] = useState<{ label: string; onClick: () => void; className?: string }[]>([]);
+  const [modalActions, setModalActions] = useState<
+    { label: string; onClick: () => void; className?: string }[]
+  >([]);
   const pathname = usePathname();
   const router = useRouter();
   const movieContextValue = useContext(movieContext);
@@ -37,8 +39,8 @@ const EditMovie: React.FC = () => {
       if (id) {
         try {
           const movie = await getMovieUser(id);
-          console.log("🚀 ~ fetchMovie ~ movie:", movie)
-          console.log("🚀 ~ fetchMovie ~ getMovieUser:", getMovieUser)
+          console.log("🚀 ~ fetchMovie ~ movie:", movie);
+          console.log("🚀 ~ fetchMovie ~ getMovieUser:", getMovieUser);
           const movieData = await movie.response;
           setMovieToEdit(movieData);
         } catch (error) {
@@ -163,6 +165,7 @@ const EditMovie: React.FC = () => {
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
       <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
         <div className="relative flex h-full p-4 aspect-h-6-9">
+          import Image from 'next/image';
           <Image
             loader={myLoader}
             src={
@@ -171,9 +174,9 @@ const EditMovie: React.FC = () => {
                 : "/images/poster.jpg"
             }
             alt={movieToEdit._id.title || "Movie Poster"}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
+            fill
+            priority
+            className="object-cover rounded-lg"
           />
         </div>
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 lg:gap-4 ">

@@ -1,5 +1,5 @@
-import { userController } from "../../controllers/users.controller";
-import CustomRouter from "../../utils/CustomRouter.util";
+import { userController } from "../../controllers/users.controller.js";
+import CustomRouter from "../../utils/CustomRouter.util.js";
 
 class UserRouter extends CustomRouter {
   constructor() {
@@ -9,7 +9,7 @@ class UserRouter extends CustomRouter {
   init = () => {
     this.read("/", ["ADMIN"], userController.getAll);
     this.create("/", ["PUBLIC"], userController.create);
-    this.update("/:id", ["USER", "ADMIN"], userController.update);
+    this.update("/:id", ["PUBLIC"], userController.update);
     this.destroy("/:id", ["USER", "ADMIN"], userController.deleteOne);
   };
 }

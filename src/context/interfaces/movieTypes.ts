@@ -169,11 +169,12 @@ export interface UserData {
 
 
 export interface User {
-  username: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-  email: string;
+  username?: string;
+  password?: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  mode?: string;
 }
 
 export interface UserMoviesResponse {

@@ -108,6 +108,44 @@ passport.use(
     }
   )
 );
+
+//--UPDATE
+
+
+passport.use(
+  "update",
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
+      secretOrKey: envsUtils.SECRET_KEY,
+      passReqToCallback: true, // 👈 Esto es clave
+    },
+    async (req, data, done) => {
+      console.log("🚀 ~ data:", data)
+      console.log("📦 ~ req.body:", req.body) // Ahora sí tenés acceso al body
+
+      try {
+        const { user_id } = data;
+        const user = await userServices.getById(user_id);
+
+        if (!user) {
+          return done(null, false, { message: "USER NOT FOUND", statusCode: 404 });
+        }
+
+        // Usás lo que venga por body (lo nuevo que quiere actualizar el usuario)
+        const updatedUser = await userServices.update(user_id, req.body);
+        console.log("🚀 ~ updatedUser:", updatedUser)
+
+        return done(null, updatedUser);
+      } catch (error) {
+        return done(null, false, { message: "Error in update process", statusCode: 500 });
+      }
+    }
+  )
+);
+
+
+
 //--ADMIN
 passport.use(
   "admin",

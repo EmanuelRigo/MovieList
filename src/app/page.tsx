@@ -4,20 +4,16 @@ import MovieList from "@/components/list/MovieList";
 import { useEffect, useState } from "react";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
-import { useMovieContext } from "@/context/MovieContext";
+// import { useMovieContext } from "@/context/MovieContext";
 
 
 console.log("procceess:::", process.argv)
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
-  const {setMovie} = useMovieContext()
-  console.log("holaaa apps");
+  // const {setMovie} = useMovieContext()
 
-  
-  useEffect(()=>{
-    setMovie(null)
-  },[])
+  console.log("holaaa apps");
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +28,7 @@ export default function Home() {
     };
   }, []);
 
-
+  
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
       <div

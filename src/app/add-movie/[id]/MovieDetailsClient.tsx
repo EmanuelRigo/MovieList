@@ -141,14 +141,15 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
       <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
         <div className="relative flex rounded-lg h-full aspect-h-6-9">
-          <Image
-            loader={myLoader}
-            src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
-            alt={movie.title}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
-          />
+        <Image
+        loader={myLoader}
+        src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
+        alt={movie.title}
+        fill
+        priority
+        className="rounded-lg object-cover"
+/>
+
         </div>
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 md:gap-4">
           <div>

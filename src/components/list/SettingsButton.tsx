@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { PiGear } from "react-icons/pi";
+
 import SettingsFilterModal from "./SettingsFilterModal";
 import CounterList from "./CounterList";
-
+import { TbFilter } from "react-icons/tb";
 const SettingsButton = () => {
   const [open, setOpen] = useState(false);
 
@@ -12,8 +12,8 @@ const SettingsButton = () => {
       <button
         onClick={() => setOpen(true)}
         className="text-neutral-500 dark:text-neutral-100"
-      >
-        <PiGear className="text-xl" />
+      ><TbFilter className="text-xl"/>
+    
       </button>
       <CounterList></CounterList>
 

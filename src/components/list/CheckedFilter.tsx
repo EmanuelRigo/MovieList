@@ -10,20 +10,26 @@ interface CheckedFilterProps {
 
 const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
   const { movieList, setMovieList } = useMovieContext();
-  const [originalList, setOriginalList] = useState<MovieDB[]>([]);
+  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
   const [showChecked, setShowChecked] = useState<null | boolean>(null);
+  const [isMounted, setIsMounted] = useState(false); // ✅ Se controla el primer render
 
   useEffect(() => {
-    if (movieList.length > 0 && originalList.length === 0) {
-      setOriginalList(movieList);
+    if (movieList.length > 0 && originalMovieList.length === 0) {
+      setOriginalMovieList(movieList);
     }
   }, [movieList]);
 
   useEffect(() => {
+    if (!isMounted) {
+      setIsMounted(true);
+      return;
+    }
+
     if (showChecked === null) {
-      setMovieList(originalList);
+      setMovieList(originalMovieList);
     } else {
-      const filtered = originalList.filter((movie) => movie.checked === showChecked);
+      const filtered = originalMovieList.filter((movie) => movie.checked === showChecked);
       setMovieList(filtered);
     }
   }, [showChecked]);
@@ -35,10 +41,7 @@ const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
   };
 
   return (
-    <button
-      onClick={toggleChecked}
-      className={` ${className}`}
-    >
+    <button onClick={toggleChecked} className={`flex items-center gap-2 ${className}`}>
       {showChecked === true && (
         <>
           <FaRegCheckCircle className="text-green-500 text-2xl" />

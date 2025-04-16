@@ -8,6 +8,8 @@ interface MovieContextProps {
   updateCardMovie: (movie: MovieDB) => void;
   movieList: MovieDB[];
   setMovieList: React.Dispatch<React.SetStateAction<MovieDB[]>>;
+  originalMovieList: MovieDB[];
+  setOriginalMovieList: React.Dispatch<React.SetStateAction<MovieDB[]>>;
   userData: UserData | null; // Cambia 'any' por el tipo adecuado
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>; // Cambia 'any' por el tipo adecuado
 }
@@ -29,6 +31,7 @@ interface MovieProviderProps {
 const MovieProvider = ({ children }: MovieProviderProps) => {
   const [movie, setMovie] = useState<MovieDB | null>(null);
   const [movieList, setMovieList] = useState<MovieDB[]>([]);
+  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([])
   const [userData, setUserData] = useState<UserData | null>(null); 
 
   const updateCardMovie = (movie: MovieDB) => {
@@ -47,6 +50,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     updateCardMovie,
     movieList,
     setMovieList,
+    originalMovieList,
+    setOriginalMovieList
   };
 
   return <movieContext.Provider value={value}>{children}</movieContext.Provider>;
