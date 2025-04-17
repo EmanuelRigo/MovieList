@@ -17,7 +17,6 @@ export async function createUser(userData: User): Promise<Response> {
     return res;
 }
 
-
 export async function loginUser(credentials: { email: string; password: string }): Promise<Response> {
     console.log("🚀 ~ loginUser ~ credentials:", credentials);
     const res = await fetch(`${BACKEND_URL}/api/sessions/login`, {

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -183,12 +182,10 @@ const EditMovie: React.FC = () => {
           <div>
             <div className="flex justify-between items-center mb-1 lg:mb-4">
               <h1 className="text-xl md:text-2xl">{movieToEdit._id.title}</h1>
-              <Link
-                href="/"
-                className=" text-blue-500 dark:text-yellow-500 text-3xl"
-              >
-                <IoIosArrowBack />
-              </Link>
+
+              <button onClick={() => router.back()}>
+                <IoIosArrowBack className=" text-blue-500 dark:text-yellow-500 text-3xl" />
+              </button>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
               {movieToEdit._id.release_date &&

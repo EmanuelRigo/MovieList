@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { CreateMovie } from "@/components/widgets/movies.api";
 import SvgDvd from "@/utils/svgs/SvgDvd";
 import BluRaySvg from "@/utils/svgs/SvgBluRay";
@@ -155,12 +154,12 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           <div>
             <div className="flex justify-between items-center mb-1 md:mb-4">
               <h1 className="text-xl md:text-2xl">{movie.title}</h1>
-              <Link
-                href="/"
-                className="text-blue-500 dark:text-yellow-500 text-3xl"
-              >
-                <IoIosArrowBack></IoIosArrowBack>
-              </Link>
+              <button
+      onClick={() => router.back()}
+    
+    >
+       <IoIosArrowBack  className=" text-blue-500 dark:text-yellow-500 text-3xl"/>
+    </button>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
               {movie.release_date}

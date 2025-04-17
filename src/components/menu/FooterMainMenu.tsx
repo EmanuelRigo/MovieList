@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -40,8 +40,6 @@ export const FooterMainMenu = () => {
       return parts.pop()?.split(";").shift();
     }
   }
-
-  // const [username, setUsername] = useState<string | undefined>("");
 
   useEffect(() => {
     if (window.innerWidth < 1023) {
