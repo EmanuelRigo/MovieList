@@ -1,4 +1,4 @@
-import { User, isOnline } from "@/context/interfaces/movieTypes";
+import { User } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
 const BACKEND_URL = envsUtils.BACKEND_URL;
