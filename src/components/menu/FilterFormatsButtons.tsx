@@ -7,8 +7,9 @@ import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 
 const FilterFormatsButtons = () => {
-  const { movieList, setMovieList } = useMovieContext();
-  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
+  const { movieList, setMovieList, originalMovieList, setOriginalMovieList } =
+    useMovieContext();
+  // const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
   const [activeFilters, setActiveFilters] = useState({
     vhs: true,
     dvd: true,

@@ -65,16 +65,16 @@ const CardMovieViewer: React.FC = () => {
                 />
               </div> */}
 
-      <div className="flex flex-col flex-grow justify-between pt-4">
+      <div className="flex flex-col flex-grow justify-between pt-3">
         <div>
           <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
             {movie._id.title}
           </h3>
-          <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 mb-3 rounded-lg text-sm">
+          <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 mb-2 rounded-lg text-sm">
             {movie._id.release_date && movie._id.release_date.split("T")[0]}
           </p>
 
-          <div className="overflow-auto max-h-[150px] md:max-h-[60px] lg:max-h-[70px] 2xl:max-h-[150px] scrollbar-hidden">
+          <div className="overflow-auto max-h-[150px] md:max-h-[60px] lg:max-h-[70px] 2xl:max-h-[110px] scrollbar-hidden">
             <p className="text-xs text-black dark:text-white">
               {movie._id.overview}
             </p>

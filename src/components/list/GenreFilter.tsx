@@ -5,7 +5,8 @@ import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 
 const GenreFilter = () => {
-  const { movieList, setMovieList } = useMovieContext();
+  const { movieList, setMovieList, originalMovieList, setOriginalMovieList } =
+    useMovieContext();
   const [selectedGenre, setSelectedGenre] = useState<string>("");
 
   // Guardar la lista completa de películas
@@ -37,8 +38,8 @@ const GenreFilter = () => {
   };
 
   // Extraer géneros únicos de todas las películas originales
-  const allGenres = allMovies.flatMap((movie: MovieDB) =>
-    movie._id.genres?.map((g) => g.name) || []
+  const allGenres = allMovies.flatMap(
+    (movie: MovieDB) => movie._id.genres?.map((g) => g.name) || []
   );
   const uniqueGenres = Array.from(new Set(allGenres)).sort();
 
@@ -49,9 +50,18 @@ const GenreFilter = () => {
         onChange={handleGenreChange}
         className="w-full text-sm bg-transparent text-neutral-900 dark:text-neutral-100 outline-none rounded-lg justify-center items-center p-2 border-2  border-neutral-400 dark:border-neutral-800 bg-white dark:bg-transparent "
       >
-        <option value="" className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-800">Todos los géneros</option>
+        <option
+          value=""
+          className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-800"
+        >
+          Todos los géneros
+        </option>
         {uniqueGenres.map((genre) => (
-          <option key={genre} value={genre} className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-800">
+          <option
+            key={genre}
+            value={genre}
+            className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-800"
+          >
             {genre}
           </option>
         ))}
