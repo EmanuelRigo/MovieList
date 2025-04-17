@@ -22,7 +22,7 @@ import SettingsMenuModal from "./SettingsMenuModal";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
-  const { movieList, setMovieList } = useMovieContext();
+  const { movieList, setMovieList, username, setUsername } = useMovieContext();
 
   const fetchMovies = async () => {
     try {
@@ -41,7 +41,7 @@ export const FooterMainMenu = () => {
     }
   }
 
-  const [username, setUsername] = useState<string | undefined>("");
+  // const [username, setUsername] = useState<string | undefined>("");
 
   useEffect(() => {
     if (window.innerWidth < 1023) {

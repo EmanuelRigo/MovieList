@@ -18,25 +18,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const fetchOnlineStatus = async () => {
-  //     try {
-  //       const response = await checkOnlineStatus();
-  //       console.log("🚀 ~ fetchOnlineStatus ~ response!!:", response)
 
-  //       if (response.response.isOnline === true) {
-  //         router.push("/"); // Redirige a la página de inicio si el usuario está online
-  //       } else {
-  //         setIsLoading(false); // Establece isLoading en false si el usuario está offline
-  //       }
-  //     } catch (error) {
-  //       console.error("Error checking online status:", error);
-  //       setIsLoading(false); // Asegúrate de detener la carga incluso si hay un error
-  //     }
-  //   };
-
-  //   fetchOnlineStatus();
-  // }, [router]);
 
   useEffect(() => {
     const token = getCookie("onlineUser");

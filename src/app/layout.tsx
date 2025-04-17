@@ -3,6 +3,7 @@ import "./globals.css";
 import MovieProvider from "../context/MovieContext";
 import ThemeProvider from "@/components/widgets/ThemeProvider";
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

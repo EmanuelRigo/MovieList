@@ -4,6 +4,7 @@ import passportCb from "../../middlewares/passportCb.middleware.js";
 import { userController } from "../../controllers/users.controller.js";
 import userMoviesServices from "../../services/userMovies.services.js";
 import exp from "constants";
+import passport from "passport";
 
 class SessionRouter extends CustomRouter {
   constructor() {
@@ -55,6 +56,13 @@ class SessionRouter extends CustomRouter {
       passportCb("online", { session: false }),
       onlineToken
     );
+
+    this.destroy(
+      "/delete",
+      ["PUBLIC"],
+      passportCb("deleteAccount", { session: false }),
+      deleteAccount
+    )
 
     // GOOGLE
     this.read(
@@ -146,12 +154,21 @@ async function update(req, res){
   }
 }
 
+async function deleteAccount(req, res) {
+  for (const cookie in req.cookies) {
+    res.clearCookie(cookie, { sameSite: "None", secure: true });
+  }
+  const message = "Account Deleted";
+  return res.json200(req.user,"Account deleted")}
+
+
 function signout(req, res) {
   for (const cookie in req.cookies) {
     res.clearCookie(cookie, { sameSite: "None", secure: true });
   }
   return res.status(200).json({ response: "OK", message: "Todas las cookies eliminadas" });
 }
+
 
 
 async function onlineToken(req, res, next) {

@@ -10,7 +10,7 @@ class UserRouter extends CustomRouter {
     this.read("/", ["ADMIN"], userController.getAll);
     this.create("/", ["PUBLIC"], userController.create);
     this.update("/:id", ["PUBLIC"], userController.update);
-    this.destroy("/:id", ["USER", "ADMIN"], userController.deleteOne);
+    this.destroy("/delete", ["PUBLIC"], userController.deleteOne);
   };
 }
 

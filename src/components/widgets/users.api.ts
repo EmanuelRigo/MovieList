@@ -72,6 +72,18 @@ export async function logoutUser(): Promise<Response> {
     return res;
 }
 
+export async function deleteAccount(password: string): Promise<Response> {
+    const res = await fetch(`${BACKEND_URL}/api/sessions/delete`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+    });
+    return res
+}
+
 export async function createCookie(): Promise<Response> {
     const res = await fetch(`${BACKEND_URL}/api/cookies/create`, {
         method: "POST",

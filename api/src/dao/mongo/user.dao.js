@@ -26,7 +26,7 @@ class UserDao {
         return movie;
     }
 
-    async deleteOne(id) {
+    async delete(id) {
         const movie = await userModel.findByIdAndDelete(id);
         return movie;
     }

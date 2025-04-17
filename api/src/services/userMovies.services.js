@@ -54,6 +54,21 @@ class UserMoviesServices {
     return await userMoviesDao.getByUserId(user_id);
   }
 
+  async getByUserIdAndDelete(user_id) {
+    const deleted = await userMoviesDao.getByUserIdAndDelete(user_id);
+  
+    if (!deleted) {
+      throw new Error("No se encontró ningún registro para eliminar.");
+    }
+  
+    return {
+      success: true,
+      message: "Películas del usuario eliminadas correctamente",
+      data: deleted,
+    };
+  }
+  
+
   async getByUserIdAndMovieId(user_id, movie_id) {
     // Método adicional para obtener el documento `userMovies` por `user_id` y `movie_id`
     try {

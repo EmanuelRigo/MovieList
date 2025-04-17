@@ -25,6 +25,12 @@ class UserMoviesDao {
     return userMovies;
   }
 
+  async getByUserIdAndDelete(user_id) {
+    const userMovies = await userMoviesModel
+      .findOneAndDelete({ user_id: user_id })
+    return userMovies;
+  }
+
   async create(data) {
     const movie = await userMoviesModel.create(data);
     return movie;

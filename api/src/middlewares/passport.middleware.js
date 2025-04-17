@@ -11,6 +11,7 @@ import envsUtils from "../utils/envs.utils.js";
 import UserDTO from "../dto/user.dto.js";
 
 import userServices from "../services/users.services.js";
+import userMoviesServices from "../services/userMovies.services.js";
 
 // import dao from "../dao/factory.js";
 
@@ -110,19 +111,17 @@ passport.use(
 );
 
 //--UPDATE
-
-
 passport.use(
   "update",
   new JwtStrategy(
     {
       jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
       secretOrKey: envsUtils.SECRET_KEY,
-      passReqToCallback: true, // 👈 Esto es clave
+      passReqToCallback: true, 
     },
     async (req, data, done) => {
       console.log("🚀 ~ data:", data)
-      console.log("📦 ~ req.body:", req.body) // Ahora sí tenés acceso al body
+      console.log("📦 ~ req.body:", req.body) 
 
       try {
         const { user_id } = data;
@@ -144,6 +143,57 @@ passport.use(
   )
 );
 
+
+//-- DELETE ACOUNT 
+passport.use(
+  "deleteAccount",
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
+      secretOrKey: envsUtils.SECRET_KEY,
+      passReqToCallback: true
+    },
+    async (req ,data, done) => {
+    console.log("🚀 ~ data:", data)
+      console.log("-reqbody", req.body)
+     
+      try {
+        
+        const { user_id } = data;
+        const user = await userServices.getById(user_id)
+        console.log("🚀 ~ user:", user)
+        if(!user) {
+          const info = {
+            message: "INVALID CREDENTIALS1",
+            statusCode: 401,
+          };
+          return done(null, false, info);
+        }
+
+        const verify = verifyHashUtil(req.body.password, user.password)
+        if (!verify) {
+          const info = {
+            message: "INVALID CREDENTIALS2",
+            statusCode: 401,
+          };
+          return done(null, false, info);
+        }
+        
+        
+        const deletedUser = await userServices.delete(user_id)
+        console.log("🚀 ~ deletedUser:", deletedUser)
+        const userMoviesToDelete = await userMoviesServices.getByUserIdAndDelete(user_id)
+        console.log("🚀 ~ userMoviesToDelete:", userMoviesToDelete)
+        
+        console.log("🚀 ~ user_id:", user_id)
+        // await userServices.delete(user_id);
+        return done(null, { message: "User deleted successfully" });
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+)
 
 
 //--ADMIN

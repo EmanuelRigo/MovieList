@@ -1,73 +1,97 @@
 "use client";
 import { useState, useEffect } from "react";
 import { PiGear } from "react-icons/pi";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { updateUser } from "../widgets/users.api";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
+import { useMovieContext } from "@/context/MovieContext";
+import { deleteAccount } from "../widgets/users.api";
+import { useRouter } from "next/navigation";
 
 const SettingsMenuModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleUsernameChange = () => {
-    console.log("Nuevo username:", username);
-    // Acá podrías llamar a una API para cambiar el nombre de usuario
-  };
+  const { setUsername, username } = useMovieContext();
+  const [usernameInput, setUsernameInput] = useState("");
+  const router = useRouter();
 
   const handlePasswordChange = () => {
     console.log("Nueva contraseña:", password);
     // Acá podrías llamar a una API para cambiar la contraseña
   };
 
+  function deleteAllCookies() {
+    const cookies = ["mode", "name", "onlineUser", "token"];
+  
+    cookies.forEach(cookie => {
+      document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    });
+  }
+  
+
   const handleDeleteAccount = () => {
-    const confirmDelete = confirm("¿Estás seguro de que deseas borrar tu cuenta?");
-    if (confirmDelete) {
-      console.log("Cuenta eliminada");
-      // Acá podrías hacer la lógica para eliminar la cuenta
-    }
+    deleteAccount(password)
+      .then((response) => {
+        if (response.ok) {
+          console.log("Cuenta eliminada con éxito", response);
+          router.push("/login"); // Redirigir a la página de inicio o login
+          deleteAllCookies(); // Eliminar la cookie del nombre de usuario
+          // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
+        } else {
+          console.error("Error al eliminar la cuenta", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error al eliminar la cuenta", error);
+      }
+    );
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-useEffect(() => {
-  const modeCookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("mode="));
-  const mode = modeCookie ? modeCookie.split("=")[1] : "light";
+  useEffect(() => {
+    const modeCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("mode="));
+    const mode = modeCookie ? modeCookie.split("=")[1] : "light";
 
-  setIsDarkMode(mode === "dark");
-}, []);
+    setIsDarkMode(mode === "dark");
+  }, []);
 
+  const handleChangeMode = async () => {
+    const modeCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("mode="));
+    const mode = modeCookie ? modeCookie.split("=")[1] : "light";
 
-const handleChangeMode = async () => {
-  const modeCookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("mode="));
-  const mode = modeCookie ? modeCookie.split("=")[1] : "light";
-
-  if (mode === "dark") {
-    const response = await updateUser({ mode: "light" });
-    if (response.ok) {
-      document.documentElement.classList.remove("dark");
-      document.cookie = "mode=light; path=/";
-      setIsDarkMode(false); // 👈 actualizar estado
-      console.log("Modo claro activado", response);
+    if (mode === "dark") {
+      const response = await updateUser({ mode: "light" });
+      if (response.ok) {
+        document.documentElement.classList.remove("dark");
+        document.cookie = "mode=light; path=/";
+        setIsDarkMode(false); // 👈 actualizar estado
+        console.log("Modo claro activado", response);
+      }
+    } else {
+      const response = await updateUser({ mode: "dark" });
+      if (response.ok) {
+        document.documentElement.classList.add("dark");
+        document.cookie = "mode=dark; path=/";
+        setIsDarkMode(true); // 👈 actualizar estado
+        console.log("Modo oscuro activado", response);
+      }
     }
-  } else {
-    const response = await updateUser({ mode: "dark" });
+  };
+
+  const handleChangeUsername = async () => {
+    const response = await updateUser({ username: username });
     if (response.ok) {
-      document.documentElement.classList.add("dark");
-      document.cookie = "mode=dark; path=/";
-      setIsDarkMode(true); // 👈 actualizar estado
-      console.log("Modo oscuro activado", response);
+      document.cookie = `name=${usernameInput}; path=/`;
+      setUsername(usernameInput);
+    } else {
+      console.error("Error al actualizar el nombre de usuario", response);
     }
-  }
-};
-
-
-
-  
+  };
 
   return (
     <>
@@ -83,64 +107,76 @@ const handleChangeMode = async () => {
           <div className="bg-white dark:bg-neutral-900 rounded-lg p-6 w-full max-w-md shadow-lg relative lg:p-7">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl"
+              className="top-4 right-4 text-gray-500 hover:text-red-500 w-full flex justify-end mb-8"
             >
-              <IoIosArrowBack  className="text-xl text-blue-500 dark:text-yellow-500"/>
+              <IoIosArrowBack className="text-3xl text-blue-500 dark:text-yellow-500 " />
             </button>
-
-            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
-              Configuración
-            </h2>
 
             <div className="space-y-6">
               {/* Modo oscuro */}
               <div className="flex justify-between items-center">
-                <span className="text-gray-800 dark:text-gray-200">Cambiar Tema:</span>
-                <button
-  onClick={handleChangeMode}
-  className="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded-lg"
->
-  {isDarkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
-</button>
-
+                <span className="text-gray-800 dark:text-gray-200">
+                  Cambiar Tema:
+                </span>
+                <button onClick={handleChangeMode} className="text-3xl">
+                  {isDarkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
+                </button>
               </div>
 
               {/* Cambiar username */}
               <div className="flex flex-col gap-2">
-                <label className="text-gray-800 dark:text-gray-200">Nuevo nombre de usuario</label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-zinc-800 dark:text-white"
-                />
-                <button
-                  onClick={handleUsernameChange}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg self-end"
-                >
-                  Guardar nombre
-                </button>
+                <label className="text-gray-800 dark:text-gray-200">
+                  Nuevo nombre de usuario
+                </label>
+                <div className="w-full flex ">
+                  {" "}
+                  <input
+                    type="text"
+                    value={usernameInput}
+                    onChange={(e) => setUsernameInput(e.target.value)}
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow"
+                  />
+                  <button
+                    onClick={handleChangeUsername}
+                    className=" text-neutral-600 dark:text-neutral-300 ps-4  py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
+                  >
+                    <IoIosArrowForward />
+                  </button>
+                </div>
               </div>
 
               {/* Cambiar contraseña */}
               <div className="flex flex-col gap-2">
-                <label className="text-gray-800 dark:text-gray-200">Nueva contraseña</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 dark:bg-zinc-800 dark:text-white"
-                />
-                <button
-                  onClick={handlePasswordChange}
-                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg self-end"
-                >
-                  Cambiar contraseña
-                </button>
+                <label className="text-gray-800 dark:text-gray-200">
+                  Nueva contraseña
+                </label>
+                <div className="w-full flex">
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow"
+                  />
+                  <button
+                    onClick={handlePasswordChange}
+                    className="text-neutral-600 dark:text-neutral-300 ps-4 py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
+                  >
+                    <IoIosArrowForward />
+                  </button>
+                </div>
               </div>
 
               {/* Borrar cuenta */}
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="pt-4 border-t-2 border-neutral-400 dark:border-neutral-700">
+              <label className="text-gray-800 dark:text-gray-200 text-sm ">
+                Para borrar tu cuenta, ingresa tu contraseña:
+                </label>
+              <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white w-full my-3"
+                  />
                 <button
                   onClick={handleDeleteAccount}
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg w-full"

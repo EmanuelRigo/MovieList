@@ -26,10 +26,20 @@ class UserServices {
         return user;
     }
 
-    async deleteOne(id) {
-        const user = await userDao.deleteOne(id);
-        return user;
-    }
+    async delete(id) {
+        const deletedUser = await userDao.delete(id);
+      
+        if (!deletedUser) {
+          throw new Error("El usuario no fue encontrado o ya fue eliminado.");
+        }
+      
+        return {
+          success: true,
+          message: "Usuario eliminado correctamente.",
+          data: deletedUser,
+        };
+      }
+      
 }
 
 const userServices = new UserServices();
