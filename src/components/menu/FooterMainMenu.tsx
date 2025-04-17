@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect} from "react";
+import { useEffect } from "react";
 
 import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
@@ -77,7 +77,7 @@ export const FooterMainMenu = () => {
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-2 2xl:p-4 px-3 ">
-       <SettingsMenuModal />
+        <SettingsMenuModal />
         <span className="text-md 2xl:text-xl ms-1">{username || "Guest"}</span>
         <div className="flex gap-4">
           <button
@@ -107,11 +107,11 @@ export const FooterMainMenu = () => {
           <YearSearch onSearch={handleSearchByYear} />
         </div>
         <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-          <OrderListButtons />
+          <OrderListButtons /> <FilterFormatsButtons></FilterFormatsButtons>
         </div>
-        <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl ps-3 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-          <FilterFormatsButtons></FilterFormatsButtons>
-        </div>
+        {/* <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl ps-3 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
+    
+        </div> */}
         {/* <div className="">
             <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
           </div> */}

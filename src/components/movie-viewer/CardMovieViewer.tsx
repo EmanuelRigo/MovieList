@@ -7,8 +7,18 @@ import { FaFilm } from "react-icons/fa"; // Importa el ícono de react-icons
 const CardMovieViewer: React.FC = () => {
   const { movie } = useMovieContext();
 
-  const myLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+  const myLoader = ({
+    src,
+    width,
+    quality,
+  }: {
+    src: string;
+    width: number;
+    quality?: number;
+  }) => {
+    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+      quality || 75
+    }`;
   };
 
   if (!movie) {
@@ -44,7 +54,7 @@ const CardMovieViewer: React.FC = () => {
           className="rounded-lg"
         />
       </div>
-              {/* <div className="relative rounded-sm h-full bg-red-400">
+      {/* <div className="relative rounded-sm h-full bg-red-400">
                 <Image
                   loader={myLoader}
                   src={movie._id.poster_path ? movie._id.poster_path : "/images/poster.jpg"}
@@ -57,37 +67,47 @@ const CardMovieViewer: React.FC = () => {
 
       <div className="flex flex-col flex-grow justify-between pt-4">
         <div>
-          <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">{movie._id.title}</h3>
+          <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
+            {movie._id.title}
+          </h3>
+          <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 mb-3 rounded-lg text-sm">
+            {movie._id.release_date && movie._id.release_date.split("T")[0]}
+          </p>
 
           <div className="overflow-auto max-h-[150px] md:max-h-[60px] lg:max-h-[70px] 2xl:max-h-[150px] scrollbar-hidden">
-            <p className="text-xs text-black dark:text-white">{movie._id.overview}</p>
+            <p className="text-xs text-black dark:text-white">
+              {movie._id.overview}
+            </p>
           </div>
         </div>
-        <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2">
+        <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2  text-sm">
           <div
-            className={`flex items-center ${
-              movie.formats.vhs ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"
+            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-950 border-neutral-100 ${
+              movie.formats.vhs
+                ? "text-neutral-900 dark:text-neutral-300"
+                : "text-neutral-500 dark:text-neutral-700"
             }`}
           >
             <span>VHS</span>
           </div>
           <div
-            className={`flex items-center ${
-              movie.formats.dvd ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"
+            className={`flex items-center p-2 px-4 mx-1 rounded-lg bg-neutral-950 border-neutral-100  ${
+              movie.formats.dvd
+                ? "text-neutral-900 dark:text-neutral-300"
+                : "text-neutral-500 dark:text-neutral-700"
             }`}
           >
             <span>DVD</span>
           </div>
           <div
-            className={`flex items-center ${
-              movie.formats.bluray ? "text-neutral-900 dark:text-neutral-300" : "text-neutral-500 dark:text-neutral-700"
+            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-950 border-neutral-100  ${
+              movie.formats.bluray
+                ? "text-neutral-900 dark:text-neutral-300"
+                : "text-neutral-500 dark:text-neutral-700"
             }`}
           >
             <span>BLU RAY</span>
           </div>
-          <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 px-4 py-1 rounded-lg">
-            {movie._id.release_date && movie._id.release_date.split("T")[0]}
-          </p>
         </div>
       </div>
     </div>

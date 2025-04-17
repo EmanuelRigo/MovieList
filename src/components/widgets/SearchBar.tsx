@@ -2,10 +2,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
-// import Link from "next/link";
-// import { usePathname } from "next/navigation";
-
-// import { IoIosArrowBack } from "react-icons/io";
 import { LuSearch } from "react-icons/lu";
 
 interface SearchBarProps {
@@ -45,16 +41,6 @@ const SearchBar: React.FC<SearchBarProps> = () => {
 
   return (
     <div className="w-full flex">
-      {/* <Link
-        className={`${
-          pathname === "/list"
-            ? " w-2/12 text-blue-500 dark:text-yellow-500 flex justify-center items-center text-3xl"
-            : "hidden"
-        }`}
-        href="/"
-      >
-        <IoIosArrowBack />
-      </Link> */}
       <form
         onSubmit={handleSearch}
         className="flex flex-grow items-center bg-neutral-100 dark:bg-neutral-950 rounded-lg border-2 border-neutral-400  dark:border-neutral-800 p-2 px-4"
@@ -63,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = () => {
           type="text"
           value={searchTerm}
           onChange={handleSearchChange}
-          placeholder="Search"
+          placeholder="Search in my list"
           className="flex-grow 2xl:py-1 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 outline-none"
         />
         <button

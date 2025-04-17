@@ -1,45 +1,46 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useMovieContext } from '@/context/MovieContext'
-import { checkOnlineStatus } from '@/components/widgets/users.api'
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { checkOnlineStatus } from "@/components/widgets/users.api";
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 const OnlineStatus = ({ children }: RootLayoutProps) => {
-  const { setUserData } = useMovieContext()
-  const router = useRouter()
-  const [isReady, setIsReady] = useState(false) // antes era `loading`
+  const router = useRouter();
 
   useEffect(() => {
     const fetchOnlineStatus = async () => {
       try {
-        const response = await checkOnlineStatus()
+        const response = await checkOnlineStatus();
 
-        if (response.response.isOnline !== true) {
-          console.log("🚀 ~ Usuario offline:", response.response.isOnline)
-          router.push('/login')
-          return
+        if (response.status !== 200) {
+          const cookies = document.cookie.split("; ");
+          for (const cookie of cookies) {
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
+          }
+          router.push("/");
         }
 
-        setUserData(response.response)
-        setIsReady(true) // solo habilita el render si está online
+        const data = await response.json();
 
+        if (data.response.isOnline !== true) {
+          router.push("/login");
+          return;
+        }
       } catch (error) {
-        console.error('Error checking online status:', error)
-        setIsReady(true) // Si hay un error, aún habilita el render (puedes ajustar esto según tu lógica)
-        router.push('/login')
+        console.error("Error checking online status:", error);
+        router.push("/login");
       }
-    }
+    };
 
-    fetchOnlineStatus()
-  }, [router, setUserData])
+    fetchOnlineStatus();
+  }, []);
 
-  if (!isReady) return <h1>Loading...</h1> // spinner opcional
+  return <>{children}</>;
+};
 
-  return <>{children}</>
-}
-
-export default OnlineStatus
+export default OnlineStatus;

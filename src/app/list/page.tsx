@@ -15,9 +15,9 @@ const page = () => {
         <div className="flex-grow flex flex-col justify-between pe-3 bg-red gap-3">
           <div className="flex justify-between items-center">    
             <Link href="/" className="pe-3">
-              <IoIosArrowBack className="text-3xl text-yellow-500" />
+              <IoIosArrowBack className="text-3xl text-blue-500 dark:text-yellow-500" />
             </Link>
-            <div className="flex-grow h-full rounded-lg flex justify-end items-center border-2 border-neutral-800 gap-2 py-2 px-3">
+            <div className="flex-grow h-full rounded-lg flex justify-end items-center border-2 border-neutral-400 dark:border-neutral-800 bg-neutral-100 dark:bg-transparent gap-2 py-2 px-3">
               <SettingsButton></SettingsButton>
             </div>
           </div>

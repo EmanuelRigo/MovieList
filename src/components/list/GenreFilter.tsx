@@ -47,7 +47,7 @@ const GenreFilter = () => {
       <select
         value={selectedGenre}
         onChange={handleGenreChange}
-        className="w-full text-sm bg-transparent text-neutral-900 dark:text-neutral-100 outline-none rounded-lg justify-center items-center p-2 border-2 border-neutral-800"
+        className="w-full text-sm bg-transparent text-neutral-900 dark:text-neutral-100 outline-none rounded-lg justify-center items-center p-2 border-2  border-neutral-400 dark:border-neutral-800 bg-white dark:bg-transparent "
       >
         <option value="" className="bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-800">Todos los géneros</option>
         {uniqueGenres.map((genre) => (

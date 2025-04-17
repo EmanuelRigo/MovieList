@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import MovieProvider from "../context/MovieContext";
 import ThemeProvider from "@/components/widgets/ThemeProvider";
-
+import OnlineStatus from "@/components/widgets/OnlineStatus";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,9 +35,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider>
           <MovieProvider>
-            <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
-              {children}
-            </div>
+            <OnlineStatus>
+              <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
+                {children}
+              </div>
+            </OnlineStatus>
           </MovieProvider>
         </ThemeProvider>
       </body>

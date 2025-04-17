@@ -11,7 +11,7 @@ const SettingsButton = () => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="text-neutral-500 dark:text-neutral-100"
+        className="text-neutral-600 dark:text-neutral-300"
       ><TbFilter className="text-xl"/>
     
       </button>
