@@ -73,29 +73,29 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
 
   // Aplica todos los filtros combinados
   useEffect(() => {
-    let filtered = [...originalMovieList];
+    if (originalMovieList.length === 0) return;
 
-    // Filtro por formato
-    filtered = filtered.filter((movie) => {
-      return (
+    let filtered = originalMovieList.filter((movie) => {
+      // Filtrar por formato
+      const matchesFormat =
         (formatFilters.vhs && movie.formats.vhs) ||
         (formatFilters.dvd && movie.formats.dvd) ||
-        (formatFilters.bluray && movie.formats.bluray)
-      );
+        (formatFilters.bluray && movie.formats.bluray);
+
+      // Filtrar por género
+      const matchesGenre =
+        selectedGenre === "" ||
+        movie._id.genres?.some((g) => g.name === selectedGenre);
+
+      // Filtrar por estado checked
+      const matchesChecked =
+        checkedFilter === null || movie.checked === checkedFilter;
+
+      // Solo la película pasa si cumple con todos los filtros activos
+      return matchesFormat && matchesGenre && matchesChecked;
     });
 
-    // Filtro por género
-    if (selectedGenre !== "") {
-      filtered = filtered.filter((movie) =>
-        movie._id.genres?.some((g) => g.name === selectedGenre)
-      );
-    }
-
-    // Filtro por checked
-    if (checkedFilter !== null) {
-      filtered = filtered.filter((movie) => movie.checked === checkedFilter);
-    }
-
+    // Actualizar la lista de películas filtrada
     setMovieList(filtered);
   }, [formatFilters, selectedGenre, checkedFilter, originalMovieList]);
 

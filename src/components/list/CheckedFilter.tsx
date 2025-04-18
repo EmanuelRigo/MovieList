@@ -8,21 +8,22 @@ interface CheckedFilterProps {
 }
 
 const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
-  const { checkedFilter, setCheckedFilter } = useMovieContext();
-  const [isMounted, setIsMounted] = useState(false); // Controla el primer render
-
-  useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
-  }, [isMounted]);
+  const { checkedFilter, setCheckedFilter, originalMovieList, setMovieList } =
+    useMovieContext();
 
   const toggleChecked = () => {
     if (checkedFilter === null) setCheckedFilter(true);
     else if (checkedFilter === true) setCheckedFilter(false);
     else setCheckedFilter(null);
   };
+
+  useEffect(() => {
+    const listaFiltrada = originalMovieList.filter((movie) => {
+      if (checkedFilter === null) return true; // Si no hay filtro de checked, mostrar todas
+      return movie.checked === checkedFilter;
+    });
+    setMovieList(listaFiltrada);
+  }, [checkedFilter, originalMovieList, setMovieList]);
 
   return (
     <button

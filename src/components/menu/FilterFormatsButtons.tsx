@@ -7,29 +7,33 @@ import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 
 const FilterFormatsButtons = () => {
-  const { movieList, setMovieList, originalMovieList, setOriginalMovieList } =
-    useMovieContext();
-  // const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
+  const {
+    movieList,
+    setMovieList,
+    originalMovieList,
+    setOriginalMovieList,
+    checkedFilter,
+  } = useMovieContext();
   const [activeFilters, setActiveFilters] = useState({
     vhs: true,
     dvd: true,
     bluray: true,
   });
-  const [isMounted, setIsMounted] = useState(false); // 🧠 controla el primer render
-
-  useEffect(() => {
-    if (movieList.length > 0 && originalMovieList.length === 0) {
-      setOriginalMovieList(movieList);
-    }
-  }, [movieList]);
 
   const filtrarPeliculas = () => {
     const listaFiltrada = originalMovieList.filter((movie) => {
-      return (
+      // Filtra las películas por los formatos seleccionados
+      const matchesFormat =
         (activeFilters.vhs && movie.formats.vhs) ||
         (activeFilters.dvd && movie.formats.dvd) ||
-        (activeFilters.bluray && movie.formats.bluray)
-      );
+        (activeFilters.bluray && movie.formats.bluray);
+
+      // Filtra por el estado `checked` también
+      const matchesChecked =
+        checkedFilter === null || movie.checked === checkedFilter;
+
+      // La película pasa si cumple con ambos filtros
+      return matchesFormat && matchesChecked;
     });
     setMovieList(listaFiltrada);
   };
@@ -42,13 +46,8 @@ const FilterFormatsButtons = () => {
   };
 
   useEffect(() => {
-    if (isMounted) {
-      filtrarPeliculas();
-      console.log("Aplicando filtros...");
-    } else {
-      setIsMounted(true);
-    }
-  }, [activeFilters]);
+    filtrarPeliculas();
+  }, [activeFilters, checkedFilter, originalMovieList]);
 
   return (
     <>
