@@ -36,7 +36,7 @@ class SessionRouter extends CustomRouter {
     //UPDATE
     this.update(
       "/update",
-      ["PUBLIC"],
+      ["USER", "ADMIN"],
       passportCb("update", { session: false }),
       update
     );
@@ -44,7 +44,7 @@ class SessionRouter extends CustomRouter {
     //SIGNOUT
     this.create(
       "/signout",
-      ["PUBLIC"],
+      ["USER", "ADMIN"],
       passportCb("signout", { session: false }),
       signout
     );
@@ -52,17 +52,17 @@ class SessionRouter extends CustomRouter {
     //ONLINE
     this.create(
       "/online",
-      ["PUBLIC"],
+      ["USER", "ADMIN"],
       passportCb("online", { session: false }),
       onlineToken
     );
 
     this.destroy(
       "/delete",
-      ["PUBLIC"],
+      ["USER", "ADMIN"],
       passportCb("deleteAccount", { session: false }),
       deleteAccount
-    )
+    );
 
     // GOOGLE
     this.read(
@@ -101,29 +101,29 @@ async function login(req, res) {
     const token = req.token;
     const name = req.user.username;
     const mode = req.user.mode;
-    const onlineUser = req.onlineUser
+    const onlineUser = req.onlineUser;
     const optsToken = {
       maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
       httpOnly: true,
-      secure: true, 
+      secure: true,
       sameSite: "strict",
       expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
     };
     const optsOnlineToken = {
       maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
-      secure: true, 
+      secure: true,
       sameSite: "strict",
       expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
-    }
+    };
     const optsName = {
       maxAge: 60 * 60 * 24 * 7 * 30 * 1000,
-      secure: true, 
+      secure: true,
       sameSite: "none",
       expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 30 * 1000), // 30 days
     };
     const optsMode = {
       maxAge: 31536000 * 1000,
-      secure: true, 
+      secure: true,
       sameSite: "none",
       expires: new Date(Date.now() + 31536000 * 1000), // 1 year
     };
@@ -142,11 +142,10 @@ async function login(req, res) {
   }
 }
 
-async function update(req, res){
+async function update(req, res) {
   try {
-    
     const message = "User Updated";
-    const response = req.user.email
+    const response = req.user.email;
     return res.json200(response, message);
   } catch (error) {
     console.error("Error during update:", error);
@@ -159,20 +158,20 @@ async function deleteAccount(req, res) {
     res.clearCookie(cookie, { sameSite: "None", secure: true });
   }
   const message = "Account Deleted";
-  return res.json200(req.user,"Account deleted")}
-
+  return res.json200(req.user, "Account deleted");
+}
 
 function signout(req, res) {
   for (const cookie in req.cookies) {
     res.clearCookie(cookie, { sameSite: "None", secure: true });
   }
-  return res.status(200).json({ response: "OK", message: "Todas las cookies eliminadas" });
+  return res
+    .status(200)
+    .json({ response: "OK", message: "Todas las cookies eliminadas" });
 }
 
-
-
 async function onlineToken(req, res, next) {
-  console.log("🚀 ~ onlineToken ~ req:", req.user)
+  console.log("🚀 ~ onlineToken ~ req:", req.user);
   const message = req.user.email.toUpperCase() + " IS ONLINE";
   const response = req.user;
   return res.json200(response, message);

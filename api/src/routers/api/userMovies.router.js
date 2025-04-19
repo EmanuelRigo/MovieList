@@ -1,21 +1,25 @@
-import {userMoviesController} from "../../controllers/userMovies.controller.js";
+import { userMoviesController } from "../../controllers/userMovies.controller.js";
 import CustomRouter from "../../utils/CustomRouter.util.js";
 
 class UserMoviesRouter extends CustomRouter {
   constructor() {
-    super()
-    this.init()
+    super();
+    this.init();
   }
-  init =()=> {
+  init = () => {
     // this.read("/",["PUBLIC"], userMoviesController.getAll)
-    this.read("/:id", ["PUBLIC"], userMoviesController.getById)
-    this.read("/", ["PUBLIC"], userMoviesController.getByToken)
-    this.read("/movies/:mid", ["PUBLIC"], userMoviesController.getByTokenAndMovie)
-    this.update("/", ["PUBLIC"], userMoviesController.addMovie)
-    this.update("/movies/:mid", ["PUBLIC"], userMoviesController.updateMovie)
-    this.destroy("/movies/:mid", ["PUBLIC"], userMoviesController.removeMovie)
-  }
+    this.read("/:id", ["USER"], userMoviesController.getById);
+    this.read("/", ["USER"], userMoviesController.getByToken);
+    this.read(
+      "/movies/:mid",
+      ["USER"],
+      userMoviesController.getByTokenAndMovie
+    );
+    this.update("/", ["USER"], userMoviesController.addMovie);
+    this.update("/movies/:mid", ["USER"], userMoviesController.updateMovie);
+    this.destroy("/movies/:mid", ["USER"], userMoviesController.removeMovie);
+  };
 }
 
-const userMoviesRouter = new UserMoviesRouter()
-export default userMoviesRouter.getRouter()
+const userMoviesRouter = new UserMoviesRouter();
+export default userMoviesRouter.getRouter();

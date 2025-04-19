@@ -42,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({
               onClick={action.onClick}
               className={`p-2 rounded-md ${
                 action.className ||
-                "bg-blue-500 dark:bg-yellow-500 text-white dark:text-neutral-800 hover:bg-blue-600 px-5"
+                "bg-blue-500 dark:bg-yellow-500 text-white dark:text-neutral-800 hover:bg-blue-600 px-5sa"
               }`}
             >
               {action.label}

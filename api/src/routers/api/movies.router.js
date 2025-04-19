@@ -3,17 +3,17 @@ import CustomRouter from "../../utils/CustomRouter.util.js";
 
 class MovieRouter extends CustomRouter {
   constructor() {
-    super()
-    this.init()
+    super();
+    this.init();
   }
-  init =()=> {
-    this.read("/", ["PUBLIC"], movieController.getAll)
-    this.read("/:mid", ["PUBLIC"], movieController.getById)
-    this.create("/", ["PUBLIC"], movieController.create)
-    this.update("/:mid", ["PUBLIC"], movieController.update)
-    this.destroy("/:mid", ["PUBLIC"], movieController.deleteOne)
-  }
+  init = () => {
+    this.read("/", ["USER"], movieController.getAll);
+    this.read("/:mid", ["USER"], movieController.getById);
+    this.create("/", ["ADMIN", "USER"], movieController.create);
+    this.update("/:mid", ["ADMIN"], movieController.update);
+    this.destroy("/:mid", ["ADMIN"], movieController.deleteOne);
+  };
 }
 
-let movieRouter = new MovieRouter()
-export default movieRouter.getRouter()
+let movieRouter = new MovieRouter();
+export default movieRouter.getRouter();

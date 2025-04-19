@@ -13,12 +13,11 @@ class IndexRouter extends CustomRouter {
   }
 
   init = () => {
-    console.log("IndexRouter: Configurando rutas...");
-    this.use("/movies", ["PUBLIC"], moviesRouter);
+    this.use("/movies", ["USER"], moviesRouter);
     this.use("/sessions", ["PUBLIC"], sessionRouter);
-    this.use("/users", ["PUBLIC"], usersRouter);
-    this.use("/cookies", ["PUBLIC"], cookiesRouter);
-    this.use("/usermovies", ["PUBLIC"], userMoviesRouter);
+    this.use("/users", ["USER", "ADMIN"], usersRouter);
+    this.use("/cookies", ["USER"], cookiesRouter);
+    this.use("/usermovies", ["USER"], userMoviesRouter);
     console.log("IndexRouter: Rutas configuradas correctamente.");
   };
 }
