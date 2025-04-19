@@ -16,7 +16,13 @@ interface ModalProps {
   actions?: ModalAction[]; // Lista de acciones (botones)
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, actions }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  actions,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -34,7 +40,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, actions
             <button
               key={index}
               onClick={action.onClick}
-              className={`p-2 rounded-md ${action.className || "bg-blue-500 text-white hover:bg-blue-600"}`}
+              className={`p-2 rounded-md ${
+                action.className ||
+                "bg-blue-500 dark:bg-yellow-500 text-white dark:text-neutral-800 hover:bg-blue-600 px-5"
+              }`}
             >
               {action.label}
             </button>

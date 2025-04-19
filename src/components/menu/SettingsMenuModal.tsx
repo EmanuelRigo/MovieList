@@ -22,12 +22,11 @@ const SettingsMenuModal = () => {
 
   function deleteAllCookies() {
     const cookies = ["mode", "name", "onlineUser", "token"];
-  
-    cookies.forEach(cookie => {
+
+    cookies.forEach((cookie) => {
       document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     });
   }
-  
 
   const handleDeleteAccount = () => {
     deleteAccount(password)
@@ -43,8 +42,7 @@ const SettingsMenuModal = () => {
       })
       .catch((error) => {
         console.error("Error al eliminar la cuenta", error);
-      }
-    );
+      });
   };
 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -84,7 +82,7 @@ const SettingsMenuModal = () => {
   };
 
   const handleChangeUsername = async () => {
-    const response = await updateUser({ username: username });
+    const response = await updateUser({ username: usernameInput });
     if (response.ok) {
       document.cookie = `name=${usernameInput}; path=/`;
       setUsername(usernameInput);
@@ -116,7 +114,7 @@ const SettingsMenuModal = () => {
               {/* Modo oscuro */}
               <div className="flex justify-between items-center">
                 <span className="text-gray-800 dark:text-gray-200">
-                  Cambiar Tema:
+                  Change Theme:
                 </span>
                 <button onClick={handleChangeMode} className="text-3xl">
                   {isDarkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
@@ -126,7 +124,7 @@ const SettingsMenuModal = () => {
               {/* Cambiar username */}
               <div className="flex flex-col gap-2">
                 <label className="text-gray-800 dark:text-gray-200">
-                  Nuevo nombre de usuario
+                  New username
                 </label>
                 <div className="w-full flex ">
                   {" "}
@@ -148,7 +146,7 @@ const SettingsMenuModal = () => {
               {/* Cambiar contraseña */}
               <div className="flex flex-col gap-2">
                 <label className="text-gray-800 dark:text-gray-200">
-                  Nueva contraseña
+                  New password
                 </label>
                 <div className="w-full flex">
                   <input
@@ -168,20 +166,20 @@ const SettingsMenuModal = () => {
 
               {/* Borrar cuenta */}
               <div className="pt-4 border-t-2 border-neutral-400 dark:border-neutral-700">
-              <label className="text-gray-800 dark:text-gray-200 text-sm ">
-                Para borrar tu cuenta, ingresa tu contraseña:
+                <label className="text-gray-800 dark:text-gray-200 text-sm ">
+                  To delete your account, please enter your password:
                 </label>
-              <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white w-full my-3"
-                  />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white w-full my-3"
+                />
                 <button
                   onClick={handleDeleteAccount}
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg w-full"
                 >
-                  Borrar cuenta
+                  Delete Account
                 </button>
               </div>
             </div>

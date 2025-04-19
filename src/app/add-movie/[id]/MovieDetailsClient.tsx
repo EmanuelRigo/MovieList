@@ -97,7 +97,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       }
     } else {
       setModalMessage(
-        "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) debe estar disponible."
+        "At least one format (VHS, DVD, or Blu-ray) must be available."
       );
       setIsModalOpen(true);
     }
@@ -140,26 +140,22 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
       <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
         <div className="relative flex rounded-lg h-full aspect-h-6-9">
-        <Image
-        loader={myLoader}
-        src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
-        alt={movie.title}
-        fill
-        priority
-        className="rounded-lg object-cover"
-/>
-
+          <Image
+            loader={myLoader}
+            src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
+            alt={movie.title}
+            fill
+            priority
+            className="rounded-lg object-cover"
+          />
         </div>
         <div className="text-black dark:text-neutral-200 flex flex-col justify-between w-full gap-2 md:gap-4">
           <div>
             <div className="flex justify-between items-center mb-1 md:mb-4">
               <h1 className="text-xl md:text-2xl">{movie.title}</h1>
-              <button
-      onClick={() => router.back()}
-    
-    >
-       <IoIosArrowBack  className=" text-blue-500 dark:text-yellow-500 text-3xl"/>
-    </button>
+              <button onClick={() => router.back()}>
+                <IoIosArrowBack className=" text-blue-500 dark:text-yellow-500 text-3xl" />
+              </button>
             </div>
             <p className="text-sm md:text-base mb-1 md:mb-4">
               {movie.release_date}
@@ -215,7 +211,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
                 onClick={checkFormats}
                 className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-lg md:rounded-lg w-full text-black dark:text-neutral-900"
               >
-                Agregar película
+                Add movie
               </button>
             </div>
           </div>
@@ -225,14 +221,20 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Mensaje"
+        title=""
         actions={[
           {
             label: "Ok",
             onClick: () => {
               setIsModalOpen(false);
-              if (modalMessage === "Added to userMovies" || modalMessage === "Movie already exists") {
-                console.log("🚀 ~ MovieDetailsClient ~ modalMessage:", modalMessage)
+              if (
+                modalMessage === "Added to list" ||
+                modalMessage === "Movie already exists"
+              ) {
+                console.log(
+                  "🚀 ~ MovieDetailsClient ~ modalMessage:",
+                  modalMessage
+                );
                 router.push("/");
               }
             },

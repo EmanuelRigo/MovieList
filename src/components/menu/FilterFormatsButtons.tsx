@@ -7,75 +7,77 @@ import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 
 const FilterFormatsButtons = () => {
-  const {
-    movieList,
-    setMovieList,
-    originalMovieList,
-    setOriginalMovieList,
-    checkedFilter,
-  } = useMovieContext();
+  const { movieList, setMovieList } = useMovieContext();
+  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]); // Inicializa como un array vacío
   const [activeFilters, setActiveFilters] = useState({
     vhs: true,
     dvd: true,
     bluray: true,
   });
 
+  useEffect(() => {
+    if (movieList.length > 0 && originalMovieList.length === 0) {
+      setOriginalMovieList(movieList);
+    }
+  }, [movieList]);
+
+  // Función para filtrar películas según los filtros activos
   const filtrarPeliculas = () => {
     const listaFiltrada = originalMovieList.filter((movie) => {
-      // Filtra las películas por los formatos seleccionados
-      const matchesFormat =
+      return (
         (activeFilters.vhs && movie.formats.vhs) ||
         (activeFilters.dvd && movie.formats.dvd) ||
-        (activeFilters.bluray && movie.formats.bluray);
-
-      // Filtra por el estado `checked` también
-      const matchesChecked =
-        checkedFilter === null || movie.checked === checkedFilter;
-
-      // La película pasa si cumple con ambos filtros
-      return matchesFormat && matchesChecked;
+        (activeFilters.bluray && movie.formats.bluray)
+      );
     });
-    setMovieList(listaFiltrada);
+    setMovieList(listaFiltrada); // Actualiza la lista global con la lista filtrada
   };
 
+  // Función para alternar el estado de un filtro
   const toggleFilter = (formato: "vhs" | "dvd" | "bluray") => {
-    setActiveFilters((prevFilters) => ({
-      ...prevFilters,
-      [formato]: !prevFilters[formato],
-    }));
+    setActiveFilters((prevFilters) => {
+      const updatedFilters = {
+        ...prevFilters,
+        [formato]: !prevFilters[formato],
+      };
+      return updatedFilters;
+    });
   };
 
+  // Actualizar la lista filtrada cada vez que cambian los filtros
   useEffect(() => {
     filtrarPeliculas();
-  }, [activeFilters, checkedFilter, originalMovieList]);
+  }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
-    <>
+    // <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">
+    <div className="flex justify-between lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
-          activeFilters.vhs ? "" : "opacity-30"
+        className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+          activeFilters.vhs ? "font-bold" : "opacity-20"
         }`}
         onClick={() => toggleFilter("vhs")}
       >
+        {/* <SvgVhs className="w-14 h-5 lg:h-3 2xl:h-5 text-current" /> */}
         <SvgVhs className="w-14 h-5 lg:h-3 2xl:h-5 text-current -ms-2" />
       </button>
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
-          activeFilters.dvd ? "" : "opacity-30"
+        className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+          activeFilters.dvd ? "font-bold" : "opacity-20"
         }`}
         onClick={() => toggleFilter("dvd")}
       >
         <SvgDvd className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
       </button>
       <button
-        className={`text-neutral-600 dark:text-neutral-200 hover:text-blue-500 lg:dark:hover:text-orange-400 ${
-          activeFilters.bluray ? "" : "opacity-30"
+        className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
+          activeFilters.bluray ? "font-bold" : "opacity-20"
         }`}
         onClick={() => toggleFilter("bluray")}
       >
         <SvgBluRay className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
       </button>
-    </>
+    </div>
   );
 };
 

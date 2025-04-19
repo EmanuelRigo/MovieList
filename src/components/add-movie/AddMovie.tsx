@@ -51,14 +51,10 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
     const encodedQuery = encodeURIComponent(busqueda);
 
     // ✅ Actualiza la URL sin recargar la página, agregando el parámetro `query`
-    console.log("reee")
+    console.log("reee");
     // router.push("/")
     console.log("Actualizando URL con:", encodedQuery);
     router.replace(`?query=${encodedQuery}`);
-    
-
-
-
 
     // ✅ Ejecuta la búsqueda
     fetchPeliculas();
@@ -102,7 +98,9 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
     width: number;
     quality?: number;
   }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+      quality || 75
+    }`;
   };
 
   return (
@@ -116,7 +114,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
           >
             <input
               type="text"
-              placeholder="Busca la película a agregar"
+              placeholder="Search for the movie to add."
               className="flex-grow px-4 py-2 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-950 rounded-l-full outline-none"
               value={busqueda}
               onChange={handleInputChange}
@@ -144,14 +142,14 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
             <div className="h-full flex flex-col items-center justify-center">
               <BiCameraMovie className="text-8xl mb-4 text-blue-500 dark:text-yellow-500" />
               <p className="text-center text-lg text-neutral-700 dark:text-neutral-100">
-                Busca tu película para agregarla.
+                Find your movie to add it.
               </p>
             </div>
           ) : peliculas.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center">
               <LuSearchX className="text-8xl mb-4 text-blue-500 dark:text-yellow-500" />
               <p className="text-center text-neutral-900 dark:text-neutral-100 text-lg">
-                No hay películas con ese nombre.
+                There are no movies with that name.
               </p>
             </div>
           ) : (

@@ -10,19 +10,18 @@ interface MovieListClientProps {
 }
 
 const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
-  const { movieList, setMovieList, movie, setMovie} = useMovieContext();
+  const { movieList, setMovieList, movie, setMovie } = useMovieContext();
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
-  
-
   useEffect(() => {
+    console.log("1111");
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!movieList || movieList.length === 0) return;
-  
+
       const currentIndex = movieList.findIndex(
         (m) => m._id._id === movie?._id._id
       );
-  
+
       if (e.key === "ArrowDown") {
         const nextIndex = Math.min(currentIndex + 1, movieList.length - 1);
         if (nextIndex !== currentIndex) {
@@ -33,7 +32,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
           });
         }
       }
-  
+
       if (e.key === "ArrowUp") {
         const prevIndex = Math.max(currentIndex - 1, 0);
         if (prevIndex !== currentIndex) {
@@ -45,23 +44,27 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
         }
       }
     };
-  
+
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [movieList, movie, setMovie]);
-  
-
+  }, [
+    // movieList,
+    movie,
+  ]);
 
   useEffect(() => {
+    console.log("22");
     if (list) {
       setMovieList(list);
     }
   }, []);
-  
-  console.log("REDNDER!!!!")
+
+  console.log("REDNDER!!!!");
+
   useEffect(() => {
+    console.log("333");
     const elementToScroll = movieRows.current.find((row) =>
       row?.classList.contains("outline-offset-0")
     );
@@ -70,8 +73,6 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
       elementToScroll.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [movie]);
-
-  
 
   return (
     <>

@@ -24,8 +24,8 @@ interface MovieContextProps {
   setFormatFilters: React.Dispatch<
     React.SetStateAction<{ vhs: boolean; dvd: boolean; bluray: boolean }>
   >;
-  selectedGenre: string;
-  setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
+  // selectedGenre: string;
+  // setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
   checkedFilter: boolean | null;
   setCheckedFilter: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
@@ -60,7 +60,7 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     bluray: true,
   });
 
-  const [selectedGenre, setSelectedGenre] = useState<string>("");
+  // const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [checkedFilter, setCheckedFilter] = useState<boolean | null>(null);
 
   const updateCardMovie = (movie: MovieDB) => {
@@ -71,33 +71,32 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setMovie(null);
   }, [movieList]);
 
-  // Aplica todos los filtros combinados
+  //FILTERS
   useEffect(() => {
-    if (originalMovieList.length === 0) return;
+    // Si no hay películas originales, no hacemos nada
+    // if (!originalMovieList || originalMovieList.length === 0) {
+    //   return;
+    // }
+
+    // Si es la primera carga, establecemos la lista original
+    if (movieList.length === 0) {
+      setMovieList(originalMovieList);
+      console.log("🚀 ~ useEffect ~ originalMovieList:", originalMovieList);
+      console.log("🚀 ~ useEffect ~ MovieList:", movieList);
+
+      return;
+    }
 
     let filtered = originalMovieList.filter((movie) => {
-      // Filtrar por formato
-      const matchesFormat =
+      return (
         (formatFilters.vhs && movie.formats.vhs) ||
         (formatFilters.dvd && movie.formats.dvd) ||
-        (formatFilters.bluray && movie.formats.bluray);
-
-      // Filtrar por género
-      const matchesGenre =
-        selectedGenre === "" ||
-        movie._id.genres?.some((g) => g.name === selectedGenre);
-
-      // Filtrar por estado checked
-      const matchesChecked =
-        checkedFilter === null || movie.checked === checkedFilter;
-
-      // Solo la película pasa si cumple con todos los filtros activos
-      return matchesFormat && matchesGenre && matchesChecked;
+        (formatFilters.bluray && movie.formats.bluray)
+      );
     });
 
-    // Actualizar la lista de películas filtrada
     setMovieList(filtered);
-  }, [formatFilters, selectedGenre, checkedFilter, originalMovieList]);
+  }, [formatFilters, originalMovieList]);
 
   const value: MovieContextProps = {
     movie,
@@ -113,8 +112,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setUsername,
     formatFilters,
     setFormatFilters,
-    selectedGenre,
-    setSelectedGenre,
+    // selectedGenre,
+    // setSelectedGenre,
     checkedFilter,
     setCheckedFilter,
   };

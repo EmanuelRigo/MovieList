@@ -13,7 +13,7 @@ const page = () => {
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
       <div className="flex h-48">
         <div className="flex-grow flex flex-col justify-between pe-3 bg-red gap-3">
-          <div className="flex justify-between items-center">    
+          <div className="flex justify-between items-center">
             <Link href="/" className="pe-3">
               <IoIosArrowBack className="text-3xl text-blue-500 dark:text-yellow-500" />
             </Link>
@@ -36,9 +36,7 @@ const page = () => {
       </div>
       <MovieList></MovieList>
       <div className="flex justify-center bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900">
-
-          <RandomButton className=" flex gap-2 text-3xl p-4 "></RandomButton>
-
+        <RandomButton className=" flex gap-2 text-3xl p-4 "></RandomButton>
       </div>
     </div>
   );
