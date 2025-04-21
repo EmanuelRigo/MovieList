@@ -27,8 +27,6 @@ interface MovieContextProps {
   >;
   showChecked: boolean | null;
   setShowChecked: React.Dispatch<React.SetStateAction<boolean | null>>;
-  // selectedGenre: string;
-  // setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
   checkedFilter: boolean | null;
   setCheckedFilter: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
@@ -56,17 +54,14 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [username, setUsername] = useState<string | undefined>("");
 
-  // Estados nuevos para filtros
   const [activeFormatFilters, setActiveFormatFilters] = useState({
     vhs: true,
     dvd: true,
     bluray: true,
   });
 
-  // const [hasSetOriginalList, setHasSetOriginalList] = useState(false);
-
-  // const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [checkedFilter, setCheckedFilter] = useState<boolean | null>(null);
+  const [showChecked, setShowChecked] = useState<null | boolean>(null);
 
   const updateCardMovie = (movie: MovieDB) => {
     setMovie(movie);
@@ -76,50 +71,39 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setMovie(null);
   }, [movieList]);
 
-  //FILTERS FORMAT
+  // Set original list solo una vez
   const hasSetOriginal = useRef(false);
-
   useEffect(() => {
     if (!hasSetOriginal.current && movieList.length > 0) {
-      console.log("useEffect111");
       setOriginalMovieList(movieList);
       hasSetOriginal.current = true;
     }
   }, [movieList]);
 
-  // Función para filtrar películas según los filtros activos
-  const filterMoviesByFormats = () => {
-    const listaFiltrada = originalMovieList.filter((movie) => {
-      return (
+  // 🔁 Aplicar ambos filtros combinados
+  const applyAllFilters = () => {
+    let filtered = originalMovieList;
+
+    // Filtro por formato
+    filtered = filtered.filter(
+      (movie) =>
         (activeFormatFilters.vhs && movie.formats.vhs) ||
         (activeFormatFilters.dvd && movie.formats.dvd) ||
         (activeFormatFilters.bluray && movie.formats.bluray)
-      );
-    });
-    setMovieList(listaFiltrada); // Actualiza la lista global con la lista filtrada
-  };
+    );
 
-  useEffect(() => {
-    filterMoviesByFormats();
-  }, [activeFormatFilters]);
-
-  //FILTER CHECKED
-  const [showChecked, setShowChecked] = useState<null | boolean>(null);
-
-  const filterMoviesByChecked = () => {
-    if (showChecked === null) {
-      setMovieList(originalMovieList);
-    } else {
-      const filtered = originalMovieList.filter(
-        (movie) => movie.checked === showChecked
-      );
-      setMovieList(filtered);
+    // Filtro por checked (si está definido)
+    if (showChecked !== null) {
+      filtered = filtered.filter((movie) => movie.checked === showChecked);
     }
+
+    setMovieList(filtered);
   };
 
+  // 👂 Ejecutar filtrado combinado cada vez que cambien los filtros
   useEffect(() => {
-    filterMoviesByChecked();
-  }, [showChecked]);
+    applyAllFilters();
+  }, [activeFormatFilters, showChecked]);
 
   const value: MovieContextProps = {
     movie,
@@ -137,8 +121,6 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setActiveFormatFilters,
     showChecked,
     setShowChecked,
-    // selectedGenre,
-    // setSelectedGenre,
     checkedFilter,
     setCheckedFilter,
   };
