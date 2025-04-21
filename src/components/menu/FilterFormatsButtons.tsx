@@ -1,28 +1,13 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import { useMovieContext } from "@/context/MovieContext";
-import { MovieDB } from "@/context/interfaces/movieTypes";
 import SvgVhs from "@/utils/svgs/SvgVhs";
 import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 
 const FilterFormatsButtons = () => {
-  const {
-    movieList,
-    setMovieList,
-    activeFormatFilters,
-    setActiveFormatFilters,
-  } = useMovieContext();
-  const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]); // Inicializa como un array vacío
-  // const [activeFilters, setActiveFilters] = useState({
-  //   vhs: true,
-  //   dvd: true,
-  //   bluray: true,
-  // });
+  const { activeFormatFilters, setActiveFormatFilters } = useMovieContext();
 
-  // const [hasSetOriginalList, setHasSetOriginalList] = useState(false);
-
-  // Función para alternar el estado de un filtro
   const toggleFilter = (formato: "vhs" | "dvd" | "bluray") => {
     console.log("object3");
     setActiveFormatFilters((prevFilters) => {
@@ -33,12 +18,6 @@ const FilterFormatsButtons = () => {
       return updatedFilters;
     });
   };
-
-  // Actualizar la lista filtrada cada vez que cambian los filtros
-  // useEffect(() => {
-  //   console.log("object2");
-  //   filtrarPeliculas();
-  // }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
     // <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">

@@ -1,7 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
-import { MovieDB } from "@/context/interfaces/movieTypes";
 import { FaRegCircle, FaRegCheckCircle, FaRegDotCircle } from "react-icons/fa";
 
 interface CheckedFilterProps {
@@ -9,27 +7,7 @@ interface CheckedFilterProps {
 }
 
 const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
-  const { movieList, setMovieList, showChecked, setShowChecked } =
-    useMovieContext();
-  // const [originalList, setOriginalList] = useState<MovieDB[]>([]);
-  // const [showChecked, setShowChecked] = useState<null | boolean>(null);
-
-  // useEffect(() => {
-  //   if (movieList.length > 0 && originalList.length === 0) {
-  //     setOriginalList(movieList);
-  //   }
-  // }, [movieList]);
-
-  // useEffect(() => {
-  //   if (showChecked === null) {
-  //     setMovieList(originalList);
-  //   } else {
-  //     const filtered = originalList.filter(
-  //       (movie) => movie.checked === showChecked
-  //     );
-  //     setMovieList(filtered);
-  //   }
-  // }, [showChecked]);
+  const { showChecked, setShowChecked } = useMovieContext();
 
   const toggleChecked = () => {
     if (showChecked === null) setShowChecked(true);
