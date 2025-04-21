@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 import { FaRegCircle, FaRegCheckCircle, FaRegDotCircle } from "react-icons/fa";
 
 interface CheckedFilterProps {
@@ -8,41 +9,49 @@ interface CheckedFilterProps {
 }
 
 const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
-  const { checkedFilter, setCheckedFilter, originalMovieList, setMovieList } =
+  const { movieList, setMovieList, showChecked, setShowChecked } =
     useMovieContext();
+  // const [originalList, setOriginalList] = useState<MovieDB[]>([]);
+  // const [showChecked, setShowChecked] = useState<null | boolean>(null);
+
+  // useEffect(() => {
+  //   if (movieList.length > 0 && originalList.length === 0) {
+  //     setOriginalList(movieList);
+  //   }
+  // }, [movieList]);
+
+  // useEffect(() => {
+  //   if (showChecked === null) {
+  //     setMovieList(originalList);
+  //   } else {
+  //     const filtered = originalList.filter(
+  //       (movie) => movie.checked === showChecked
+  //     );
+  //     setMovieList(filtered);
+  //   }
+  // }, [showChecked]);
 
   const toggleChecked = () => {
-    if (checkedFilter === null) setCheckedFilter(true);
-    else if (checkedFilter === true) setCheckedFilter(false);
-    else setCheckedFilter(null);
+    if (showChecked === null) setShowChecked(true);
+    else if (showChecked === true) setShowChecked(false);
+    else setShowChecked(null);
   };
 
-  useEffect(() => {
-    const listaFiltrada = originalMovieList.filter((movie) => {
-      if (checkedFilter === null) return true; // Si no hay filtro de checked, mostrar todas
-      return movie.checked === checkedFilter;
-    });
-    setMovieList(listaFiltrada);
-  }, [checkedFilter, originalMovieList, setMovieList]);
-
   return (
-    <button
-      onClick={toggleChecked}
-      className={`flex items-center gap-2 ${className}`}
-    >
-      {checkedFilter === true && (
+    <button onClick={toggleChecked} className={` ${className}`}>
+      {showChecked === true && (
         <>
           <FaRegCheckCircle className="text-green-500 text-2xl" />
           <span>Checked</span>
         </>
       )}
-      {checkedFilter === false && (
+      {showChecked === false && (
         <>
           <FaRegCircle className="text-red-500 text-2xl" />
           <span>Unchecked</span>
         </>
       )}
-      {checkedFilter === null && (
+      {showChecked === null && (
         <>
           <FaRegDotCircle className="text-gray-400 text-2xl" />
           <span>All</span>

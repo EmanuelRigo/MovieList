@@ -7,6 +7,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import SettingsButton from "@/components/list/SettingsButton";
 
 import GenreFilter from "@/components/list/GenreFilter";
+import FilterFormatsButtons from "@/components/menu/FilterFormatsButtons";
+import CheckedFilter from "@/components/list/CheckedFilter";
+import OrderListButtons from "@/components/menu/OrderListButtons";
 
 const page = () => {
   return (
@@ -28,6 +31,12 @@ const page = () => {
               <GenreFilter></GenreFilter>
             </div>
           </div>
+        </div>
+        <div className="flex flex-col">
+          <h4>filtros</h4>
+          <CheckedFilter></CheckedFilter>
+          <FilterFormatsButtons></FilterFormatsButtons>
+          <OrderListButtons></OrderListButtons>
         </div>
 
         <div className="overflow-hidden rounded-lg aspect-3-4 flex justify-center items-center bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-300 dark:border-neutral-800">

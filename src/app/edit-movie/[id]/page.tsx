@@ -72,11 +72,11 @@ const EditMovie: React.FC = () => {
       const { vhs, dvd, bluray } = movieToEdit.formats;
       if (vhs || dvd || bluray) {
         setModalMessage(
-          "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) está disponible."
+          "Warning! One or more formats (VHS, DVD or Blu-ray) are selected."
         );
         setModalActions([
           {
-            label: "Aceptar",
+            label: "Confirm",
             onClick: async () => {
               await onSubmitEdit(movieToEdit);
               setIsModalOpen(false);
@@ -85,10 +85,10 @@ const EditMovie: React.FC = () => {
         ]);
         setIsModalOpen(true);
       } else {
-        setModalMessage("Al menos tiene que tener un formato.");
+        setModalMessage("At least one format must be selected.");
         setModalActions([
           {
-            label: "Cerrar",
+            label: "Close",
             onClick: () => setIsModalOpen(false),
           },
         ]);
@@ -122,15 +122,15 @@ const EditMovie: React.FC = () => {
   };
 
   const handleDelete = () => {
-    setModalMessage("¿Estás seguro? No podrás revertir esto.");
+    setModalMessage("Are you sure? This action cannot be undone.");
     setModalActions([
       {
-        label: "Cancelar",
+        label: "Cancel",
         onClick: () => setIsModalOpen(false),
         className: "bg-gray-500 text-white hover:bg-gray-600",
       },
       {
-        label: "Sí, bórralo",
+        label: "Yes, delete it",
         onClick: async () => {
           await onSubmitDelete();
           setIsModalOpen(false);
@@ -248,7 +248,7 @@ const EditMovie: React.FC = () => {
                 onClick={checkFormats}
                 className="p-3 md:p-5 bg-blue-500 dark:bg-yellow-500 rounded-lg md:rounded-lg w-full text-black dark:text-neutral-900"
               >
-                Terminar
+                Finish
               </button>
             </div>
           </div>
@@ -257,7 +257,7 @@ const EditMovie: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Mensaje"
+        title="Message"
         actions={modalActions}
       >
         {modalMessage}

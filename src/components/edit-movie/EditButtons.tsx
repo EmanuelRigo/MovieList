@@ -1,9 +1,12 @@
 import { useRouter } from "next/navigation";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import Swal from "sweetalert2";
-import { deleteMovieById, getMovieByIdUpdate } from "@/components/widgets/movies.api";
-import { useMovieContext } from "@/context/MovieContext"; 
-import { FaTrash } from "react-icons/fa"; 
+import {
+  deleteMovieById,
+  getMovieByIdUpdate,
+} from "@/components/widgets/movies.api";
+import { useMovieContext } from "@/context/MovieContext";
+import { FaTrash } from "react-icons/fa";
 
 interface EditButtonsProps {
   id: string;
@@ -13,16 +16,24 @@ interface EditButtonsProps {
 const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
   const router = useRouter();
   const { setMovie } = useMovieContext();
+
   const checkFormats = async () => {
     if (movie) {
       const { vhs, dvd, bluray } = movie.formats;
       if (vhs || dvd || bluray) {
-        alert(
-          "¡Atención! Alguno de los formatos (VHS, DVD o Blu-ray) está disponible."
-        );
-        onSubmitEdit(movie);
+        Swal.fire({
+          icon: "info",
+          title: "Heads up!",
+          text: "At least one format (VHS, DVD, or Blu-ray) is available.",
+        }).then(() => {
+          onSubmitEdit(movie);
+        });
       } else {
-        alert("Al menos tiene que tener un formato.");
+        Swal.fire({
+          icon: "error",
+          title: "Format required",
+          text: "The movie must have at least one format.",
+        });
       }
     }
   };
@@ -39,19 +50,19 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
 
   const handleDelete = () => {
     Swal.fire({
-      title: "¿Estás seguro?",
-      text: "No podrás revertir esto",
+      title: "Are you sure?",
+      text: "This action cannot be undone",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, bórralo",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         onSubmitDelete();
-        Swal.fire("¡Borrado!", "La película ha sido borrada.", "success");
-        setMovie(null); // Limpia la película seleccionada en el contexto
+        Swal.fire("Deleted!", "The movie has been deleted.", "success");
+        setMovie(null); // Clear the selected movie from context
       }
     });
   };
@@ -76,7 +87,7 @@ const EditButtons: React.FC<EditButtonsProps> = ({ id, movie }) => {
         onClick={checkFormats}
         className="p-3 md:p-5 bg-blue-500 dark:bg-orange-500 rounded-md md:rounded-lg w-full text-black dark:text-white me-2 md:me-4"
       >
-        Terminar
+        Finish
       </button>
       <button
         onClick={handleDelete}

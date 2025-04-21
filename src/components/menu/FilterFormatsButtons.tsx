@@ -7,35 +7,25 @@ import SvgDvd from "@/utils/svgs/SvgDvd";
 import SvgBluRay from "@/utils/svgs/SvgBluRay";
 
 const FilterFormatsButtons = () => {
-  const { movieList, setMovieList } = useMovieContext();
+  const {
+    movieList,
+    setMovieList,
+    activeFormatFilters,
+    setActiveFormatFilters,
+  } = useMovieContext();
   const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]); // Inicializa como un array vacío
-  const [activeFilters, setActiveFilters] = useState({
-    vhs: true,
-    dvd: true,
-    bluray: true,
-  });
+  // const [activeFilters, setActiveFilters] = useState({
+  //   vhs: true,
+  //   dvd: true,
+  //   bluray: true,
+  // });
 
-  useEffect(() => {
-    if (movieList.length > 0 && originalMovieList.length === 0) {
-      setOriginalMovieList(movieList);
-    }
-  }, [movieList]);
-
-  // Función para filtrar películas según los filtros activos
-  const filtrarPeliculas = () => {
-    const listaFiltrada = originalMovieList.filter((movie) => {
-      return (
-        (activeFilters.vhs && movie.formats.vhs) ||
-        (activeFilters.dvd && movie.formats.dvd) ||
-        (activeFilters.bluray && movie.formats.bluray)
-      );
-    });
-    setMovieList(listaFiltrada); // Actualiza la lista global con la lista filtrada
-  };
+  // const [hasSetOriginalList, setHasSetOriginalList] = useState(false);
 
   // Función para alternar el estado de un filtro
   const toggleFilter = (formato: "vhs" | "dvd" | "bluray") => {
-    setActiveFilters((prevFilters) => {
+    console.log("object3");
+    setActiveFormatFilters((prevFilters) => {
       const updatedFilters = {
         ...prevFilters,
         [formato]: !prevFilters[formato],
@@ -45,35 +35,43 @@ const FilterFormatsButtons = () => {
   };
 
   // Actualizar la lista filtrada cada vez que cambian los filtros
-  useEffect(() => {
-    filtrarPeliculas();
-  }, [activeFilters]); // Escucha cambios en los filtros
+  // useEffect(() => {
+  //   console.log("object2");
+  //   filtrarPeliculas();
+  // }, [activeFilters]); // Escucha cambios en los filtros
 
   return (
     // <div className="flex justify-between bg-neutral-100 dark:bg-transparent lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">
     <div className="flex justify-between lg:dark:bg-neutral-800 lg:rounded-lg 2xl:py-4">
       <button
         className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
-          activeFilters.vhs ? "font-bold" : "opacity-20"
+          activeFormatFilters.vhs ? "font-bold" : "opacity-20"
         }`}
-        onClick={() => toggleFilter("vhs")}
+        onClick={() => {
+          console.log("vhs!!!!!!!!!!!!!!!!");
+          toggleFilter("vhs");
+        }}
       >
         {/* <SvgVhs className="w-14 h-5 lg:h-3 2xl:h-5 text-current" /> */}
         <SvgVhs className="w-14 h-5 lg:h-3 2xl:h-5 text-current -ms-2" />
       </button>
       <button
         className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
-          activeFilters.dvd ? "font-bold" : "opacity-20"
+          activeFormatFilters.dvd ? "font-bold" : "opacity-20"
         }`}
-        onClick={() => toggleFilter("dvd")}
+        onClick={() => {
+          toggleFilter("dvd");
+        }}
       >
         <SvgDvd className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
       </button>
       <button
         className={`text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400 ${
-          activeFilters.bluray ? "font-bold" : "opacity-20"
+          activeFormatFilters.bluray ? "font-bold" : "opacity-20"
         }`}
-        onClick={() => toggleFilter("bluray")}
+        onClick={() => {
+          toggleFilter("bluray");
+        }}
       >
         <SvgBluRay className="w-14 h-5 lg:h-3 2xl:h-5 text-current" />
       </button>

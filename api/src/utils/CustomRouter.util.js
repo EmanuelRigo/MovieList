@@ -35,19 +35,13 @@ class CustomRouter {
     try {
       if (policies.includes("PUBLIC")) return next();
       const token = req?.cookies?.token;
-      console.log("🚀 ~ CustomRouter ~ policies= ~ token:", token);
       if (!token) return res.json401();
       const data = jwt.verify(token, envUtil.SECRET_KEY);
       const { role, user_id } = data;
-      console.log(
-        "🚀 ~ CustomRouter ~ policies= ~ role, user_id:",
-        role,
-        user_id
-      );
       if (!role || !user_id) return res.json401();
       if (
-        (policies.includes("USER") && role == "USER") ||
-        (policies.includes("ADMIN") && role == "ADMIN")
+        (policies.includes("USER") && role === "USER") ||
+        (policies.includes("ADMIN") && role === "ADMIN")
       ) {
         const user = await userDao.getById(user_id);
         if (!user) return res.json401();

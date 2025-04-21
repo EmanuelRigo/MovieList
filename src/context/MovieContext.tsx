@@ -5,6 +5,7 @@ import React, {
   useState,
   ReactNode,
   useEffect,
+  useRef,
 } from "react";
 import { MovieDB, UserData } from "./interfaces/movieTypes";
 
@@ -20,10 +21,12 @@ interface MovieContextProps {
   setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
   username: string | undefined;
   setUsername: React.Dispatch<React.SetStateAction<string | undefined>>;
-  formatFilters: { vhs: boolean; dvd: boolean; bluray: boolean };
-  setFormatFilters: React.Dispatch<
+  activeFormatFilters: { vhs: boolean; dvd: boolean; bluray: boolean };
+  setActiveFormatFilters: React.Dispatch<
     React.SetStateAction<{ vhs: boolean; dvd: boolean; bluray: boolean }>
   >;
+  showChecked: boolean | null;
+  setShowChecked: React.Dispatch<React.SetStateAction<boolean | null>>;
   // selectedGenre: string;
   // setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
   checkedFilter: boolean | null;
@@ -54,11 +57,13 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const [username, setUsername] = useState<string | undefined>("");
 
   // Estados nuevos para filtros
-  const [formatFilters, setFormatFilters] = useState({
+  const [activeFormatFilters, setActiveFormatFilters] = useState({
     vhs: true,
     dvd: true,
     bluray: true,
   });
+
+  // const [hasSetOriginalList, setHasSetOriginalList] = useState(false);
 
   // const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [checkedFilter, setCheckedFilter] = useState<boolean | null>(null);
@@ -71,32 +76,50 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setMovie(null);
   }, [movieList]);
 
-  //FILTERS
+  //FILTERS FORMAT
+  const hasSetOriginal = useRef(false);
+
   useEffect(() => {
-    // Si no hay películas originales, no hacemos nada
-    // if (!originalMovieList || originalMovieList.length === 0) {
-    //   return;
-    // }
-
-    // Si es la primera carga, establecemos la lista original
-    if (movieList.length === 0) {
-      setMovieList(originalMovieList);
-      console.log("🚀 ~ useEffect ~ originalMovieList:", originalMovieList);
-      console.log("🚀 ~ useEffect ~ MovieList:", movieList);
-
-      return;
+    if (!hasSetOriginal.current && movieList.length > 0) {
+      console.log("useEffect111");
+      setOriginalMovieList(movieList);
+      hasSetOriginal.current = true;
     }
+  }, [movieList]);
 
-    let filtered = originalMovieList.filter((movie) => {
+  // Función para filtrar películas según los filtros activos
+  const filterMoviesByFormats = () => {
+    const listaFiltrada = originalMovieList.filter((movie) => {
       return (
-        (formatFilters.vhs && movie.formats.vhs) ||
-        (formatFilters.dvd && movie.formats.dvd) ||
-        (formatFilters.bluray && movie.formats.bluray)
+        (activeFormatFilters.vhs && movie.formats.vhs) ||
+        (activeFormatFilters.dvd && movie.formats.dvd) ||
+        (activeFormatFilters.bluray && movie.formats.bluray)
       );
     });
+    setMovieList(listaFiltrada); // Actualiza la lista global con la lista filtrada
+  };
 
-    setMovieList(filtered);
-  }, [formatFilters, originalMovieList]);
+  useEffect(() => {
+    filterMoviesByFormats();
+  }, [activeFormatFilters]);
+
+  //FILTER CHECKED
+  const [showChecked, setShowChecked] = useState<null | boolean>(null);
+
+  const filterMoviesByChecked = () => {
+    if (showChecked === null) {
+      setMovieList(originalMovieList);
+    } else {
+      const filtered = originalMovieList.filter(
+        (movie) => movie.checked === showChecked
+      );
+      setMovieList(filtered);
+    }
+  };
+
+  useEffect(() => {
+    filterMoviesByChecked();
+  }, [showChecked]);
 
   const value: MovieContextProps = {
     movie,
@@ -110,8 +133,10 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setUserData,
     username,
     setUsername,
-    formatFilters,
-    setFormatFilters,
+    activeFormatFilters,
+    setActiveFormatFilters,
+    showChecked,
+    setShowChecked,
     // selectedGenre,
     // setSelectedGenre,
     checkedFilter,

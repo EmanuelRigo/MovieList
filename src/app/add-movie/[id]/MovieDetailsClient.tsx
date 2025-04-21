@@ -39,13 +39,13 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           logo_path: company.logo_path || null,
           name: company.name,
           origin_country: company.origin_country,
-          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+          _id: { $oid: "" },
         })) || [],
       production_countries:
         movie.production_countries?.map((country) => ({
           iso_3166_1: country.iso_3166_1,
           name: country.name,
-          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+          _id: { $oid: "" },
         })) || [],
       revenue: movie.revenue || 0,
       runtime: movie.runtime || 0,
@@ -54,20 +54,20 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           english_name: language.english_name,
           iso_639_1: language.iso_639_1,
           name: language.name,
-          _id: { $oid: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+          _id: { $oid: "" },
         })) || [],
       status: movie.status || "",
       tagline: movie.tagline || "",
       video: movie.video || false,
       vote_average: movie.vote_average || 0,
       vote_count: movie.vote_count || 0,
-      createdAt: { $date: "" }, // Puedes dejarlo vacío si no tienes un valor inicial
+      createdAt: { $date: "" },
       updatedAt: { $date: "" },
-      // Puedes dejarlo vacío si no tienes un valor inicial
     },
     formats: { vhs: false, dvd: false, bluray: false },
-    checked: false, // Inicializa como `false` si no tienes un valor inicial
+    checked: false,
   });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const router = useRouter();
@@ -78,7 +78,7 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     if (vhs || dvd || bluray) {
       try {
         if (!movieToAdd || !movieToAdd._id) {
-          throw new Error("Los datos de la película están incompletos.");
+          throw new Error("Movie data is incomplete.");
         }
 
         const data = await CreateMovie(movieToAdd);
@@ -88,16 +88,16 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
           setModalMessage(data.message);
           setIsModalOpen(true);
         } else {
-          throw new Error("No se pudo agregar la película.");
+          throw new Error("Movie could not be added.");
         }
       } catch (error) {
-        console.error("Error al agregar la película:", error);
-        setModalMessage("Ocurrió un error al agregar la película.");
+        console.error("Error while adding the movie:", error);
+        setModalMessage("An error occurred while adding the movie.");
         setIsModalOpen(true);
       }
     } else {
       setModalMessage(
-        "At least one format (VHS, DVD, or Blu-ray) must be available."
+        "At least one format (VHS, DVD, or Blu-ray) must be selected."
       );
       setIsModalOpen(true);
     }
@@ -117,11 +117,6 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     });
   };
 
-  // const handleModalClose = () => {
-  //   setIsModalOpen(false);
-  //   router.push("/");
-  // };
-
   const myLoader = ({
     src,
     width,
@@ -137,8 +132,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
   };
 
   return (
-    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
-      <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
+    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
+      <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto">
         <div className="relative flex rounded-lg h-full aspect-h-6-9">
           <Image
             loader={myLoader}
@@ -189,8 +184,8 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
                 onClick={() => handleFormatChange("dvd")}
                 className={`p-2 md:p-2 w-28 h-10 rounded-lg outline outline-none hover:outline-offset-3 hover:cursor-pointer ${
                   movieToAdd.formats?.dvd ?? false
-                    ? "text-blue-500 dark:text-yellow-500 "
-                    : "text-neutral-400 dark:text-neutral-700 "
+                    ? "text-blue-500 dark:text-yellow-500"
+                    : "text-neutral-400 dark:text-neutral-700"
                 } hover:outline-blue-500 dark:hover:outline-yellow-500 bg-neutral-100 dark:bg-neutral-900`}
               >
                 <SvgDvd className="w-16 h-5 mx-auto" />

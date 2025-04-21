@@ -26,7 +26,7 @@ const MiniCardViewer = () => {
   };
 
   const handleImageClick = () => {
-    setIsModalOpen(true); 
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -63,11 +63,16 @@ const MiniCardViewer = () => {
               </h2>
 
               <p className="text-black dark:text-neutral-200 mb-2">
-                {movie._id.overview || "Sin descripción"}
+                {movie._id.overview || "No description"}
               </p>
-              <p className="text-black dark:text-neutral-200 mb-2">
-                {movie._id.release_date?.split("T")[0] || "Desconocido"}
-              </p>
+              <div className="flex justify-between">
+                <p className="text-black dark:text-neutral-200 mb-2">
+                  {movie._id.release_date?.split("T")[0] || "Unknown"}
+                </p>
+                <p className="text-black dark:text-neutral-200 mb-2">
+                  {movie._id.runtime} min
+                </p>
+              </div>
               <p className="text-black dark:text-neutral-200">
                 <strong>Formats:</strong>{" "}
                 <span

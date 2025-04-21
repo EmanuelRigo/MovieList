@@ -9,7 +9,7 @@ interface YearSearchProps {
 }
 
 const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
-  const { movieList, updateCardMovie } = useMovieContext()
+  const { movieList, updateCardMovie } = useMovieContext();
   const [selectedYear, setSelectedYear] = useState<string>("");
 
   const handleYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -21,8 +21,10 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
     onSearch(selectedYear);
 
     // Filtrar las películas por el año seleccionado
-    const matchedMovie = movieList.find((movie: MovieDB) =>
-      new Date(movie._id.release_date).getFullYear().toString() === selectedYear
+    const matchedMovie = movieList.find(
+      (movie: MovieDB) =>
+        new Date(movie._id.release_date).getFullYear().toString() ===
+        selectedYear
     );
 
     // Establecer la primera película que cumpla con el año seleccionado
@@ -32,17 +34,26 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
   };
 
   // Generar un array de años únicos a partir de las fechas de lanzamiento de las películas
-  const years = Array.from(new Set(movieList.map((movie: MovieDB) => new Date(movie._id.release_date).getFullYear()))).sort((a, b) => b - a);
+  const years = Array.from(
+    new Set(
+      movieList.map((movie: MovieDB) =>
+        new Date(movie._id.release_date).getFullYear()
+      )
+    )
+  ).sort((a, b) => b - a);
 
   return (
     <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg ps-3 p-4">
-      <form onSubmit={handleSubmit} className="flex items-center justify-between w-full">
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center justify-between w-full"
+      >
         <select
           value={selectedYear}
           onChange={handleYearChange}
           className="w-32 text-sm text-neutral-900 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-800 rounded-l-full outline-none"
         >
-          <option value="">Todos los años</option>
+          <option value="">Select a year</option>
           {years.map((year) => (
             <option key={year} value={year.toString()}>
               {year}
@@ -53,7 +64,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
           type="submit"
           className="flex items-center justify-center w-12 text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-yellow-500"
         >
-          Buscar
+          Search
         </button>
       </form>
     </div>
