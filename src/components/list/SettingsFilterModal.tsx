@@ -15,7 +15,7 @@ const SettingsFilterModal = ({ onClose }: { onClose: () => void }) => {
             <FilterFormatsButtons></FilterFormatsButtons>
           </div>
           <div className="border-b-2 border-neutral-950 py-5 w-full flex justify-between text-3xl">
-            {/* <CheckedFilter className="w-2/3 py-3 text-neutral-600 dark:text-neutral-200 flex items-center gap-2 text-xl"></CheckedFilter> */}
+            <CheckedFilter className="w-2/3 py-3 text-neutral-600 dark:text-neutral-200 flex items-center gap-2 text-xl"></CheckedFilter>
             <OrderListButtons></OrderListButtons>
           </div>
           <div className="py-3"></div>

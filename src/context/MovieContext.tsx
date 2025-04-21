@@ -29,6 +29,8 @@ interface MovieContextProps {
   setShowChecked: React.Dispatch<React.SetStateAction<boolean | null>>;
   checkedFilter: boolean | null;
   setCheckedFilter: React.Dispatch<React.SetStateAction<boolean | null>>;
+  selectedGenre: string;
+  setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const movieContext = createContext<MovieContextProps | undefined>(
@@ -53,6 +55,7 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [username, setUsername] = useState<string | undefined>("");
+  const [selectedGenre, setSelectedGenre] = useState<string>("");
 
   const [activeFormatFilters, setActiveFormatFilters] = useState({
     vhs: true,
@@ -82,19 +85,27 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
 
   // 🔁 Aplicar ambos filtros combinados
   const applyAllFilters = () => {
-    let filtered = originalMovieList;
+    let filtered = [...originalMovieList];
 
     // Filtro por formato
-    filtered = filtered.filter(
-      (movie) =>
+    filtered = filtered.filter((movie) => {
+      return (
         (activeFormatFilters.vhs && movie.formats.vhs) ||
         (activeFormatFilters.dvd && movie.formats.dvd) ||
         (activeFormatFilters.bluray && movie.formats.bluray)
-    );
+      );
+    });
 
-    // Filtro por checked (si está definido)
+    // Filtro por checked
     if (showChecked !== null) {
       filtered = filtered.filter((movie) => movie.checked === showChecked);
+    }
+
+    // Filtro por género
+    if (selectedGenre !== "") {
+      filtered = filtered.filter((movie) =>
+        movie._id.genres?.some((g) => g.name === selectedGenre)
+      );
     }
 
     setMovieList(filtered);
@@ -103,7 +114,7 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   // 👂 Ejecutar filtrado combinado cada vez que cambien los filtros
   useEffect(() => {
     applyAllFilters();
-  }, [activeFormatFilters, showChecked]);
+  }, [activeFormatFilters, showChecked, selectedGenre]);
 
   const value: MovieContextProps = {
     movie,
@@ -121,6 +132,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setActiveFormatFilters,
     showChecked,
     setShowChecked,
+    selectedGenre,
+    setSelectedGenre,
     checkedFilter,
     setCheckedFilter,
   };

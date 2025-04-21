@@ -32,12 +32,12 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <h4>filtros</h4>
           <CheckedFilter></CheckedFilter>
           <FilterFormatsButtons></FilterFormatsButtons>
           <OrderListButtons></OrderListButtons>
-        </div>
+        </div> */}
 
         <div className="overflow-hidden rounded-lg aspect-3-4 flex justify-center items-center bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-300 dark:border-neutral-800">
           <MiniCardViewer></MiniCardViewer>
