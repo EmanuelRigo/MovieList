@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 const SettingsMenuModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
-  const { setUsername, username } = useMovieContext();
+  const { setUsername } = useMovieContext();
   const [usernameInput, setUsernameInput] = useState("");
   const router = useRouter();
 
