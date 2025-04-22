@@ -107,14 +107,9 @@ export const FooterMainMenu = () => {
           <YearSearch onSearch={handleSearchByYear} />
         </div>
         <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-          <OrderListButtons /> <FilterFormatsButtons></FilterFormatsButtons>
+          <OrderListButtons />
+          <FilterFormatsButtons />
         </div>
-        {/* <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl ps-3 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
-    
-        </div> */}
-        {/* <div className="">
-            <RandomButton className="w-full lg:hidden bg-neutral-100 dark:bg-neutral-900 p-4 rounded-md flex items-center gap-2 text-black text-3xl dark:text-neutral-200 hover:text-blue-500 dark:hover:text-orange-400" />
-          </div> */}
         <div className="lg:hidden text-lg bg-neutral-100 dark:bg-neutral-900 hover:text-blue-500 dark:hover:text-yellow-500 p-4 rounded-md">
           <Link className="flex items-center gap-2" href="/list">
             <BsListUl className="text-3xl" /> <span>List</span>

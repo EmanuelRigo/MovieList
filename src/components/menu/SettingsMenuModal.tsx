@@ -113,7 +113,7 @@ const SettingsMenuModal = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-neutral-500 dark:text-neutral-100 text-2xl hover:text-orange-500 transition-colors"
+        className="text-neutral-500 dark:text-neutral-100 text-2xl hover:text-yellow-500 transition-colors"
       >
         <PiGear />
       </button>
@@ -121,21 +121,22 @@ const SettingsMenuModal = () => {
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
           <div className="bg-white dark:bg-neutral-900 rounded-lg p-6 w-full max-w-md shadow-lg relative lg:p-7">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="top-4 right-4 text-gray-500 hover:text-red-500 w-full flex justify-end mb-8"
-            >
-              <IoIosArrowBack className="text-3xl text-blue-500 dark:text-yellow-500 " />
-            </button>
-
             <div className="space-y-6">
               {/* Modo oscuro */}
               <div className="flex justify-between items-center">
-                <span className="text-gray-800 dark:text-gray-200">
-                  Change Theme:
-                </span>
-                <button onClick={handleChangeMode} className="text-3xl">
-                  {isDarkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
+                <div className="flex items-center gap-3">
+                  <span className="text-gray-800 dark:text-gray-200">
+                    Change Theme:
+                  </span>
+                  <button onClick={handleChangeMode} className="text-3xl">
+                    {isDarkMode ? <IoSunnyOutline /> : <IoMoonOutline />}
+                  </button>
+                </div>{" "}
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className=" text-gray-500 hover:text-red-500  flex justify-end "
+                >
+                  <IoIosArrowBack className="text-3xl text-blue-500 dark:text-yellow-500 " />
                 </button>
               </div>
 
@@ -145,13 +146,13 @@ const SettingsMenuModal = () => {
                   New username
                 </label>
                 <div className="w-full flex ">
-                  {" "}
                   <input
                     type="text"
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
-                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow"
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-500"
                   />
+
                   <button
                     onClick={handleChangeUsername}
                     className=" text-neutral-600 dark:text-neutral-300 hover:text-blue-500 dark:hover:text-yellow-500  ps-4  py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
@@ -163,7 +164,6 @@ const SettingsMenuModal = () => {
 
               {/* Cambiar contraseña */}
               <div className="flex flex-col gap-4 border-y-2 border-neutral-400 dark:border-neutral-700 py-6">
-                {/* Contraseña actual */}
                 <div className="flex flex-col gap-2">
                   <p className="text-sm text-gray-700 dark:text-gray-300">
                     To change your password, please enter your current password
@@ -176,7 +176,7 @@ const SettingsMenuModal = () => {
                     type="password"
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
-                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-500"
                   />
                 </div>
                 {/* Confirmar nueva contraseña */}
@@ -188,7 +188,7 @@ const SettingsMenuModal = () => {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-500"
                   />
                 </div>{" "}
                 {/* Nueva contraseña */}
@@ -201,7 +201,7 @@ const SettingsMenuModal = () => {
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                      className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-500"
                     />
                     <button
                       onClick={handlePasswordChange}
