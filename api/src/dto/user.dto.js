@@ -5,7 +5,7 @@ class UserDTO {
     this.firstname = data.firstname;
     this.lastname = data.lastname;
     this.email = data.email;
-    this.role = data.role || "user";
+    this.role = data.role || "USER";
     this.verifyUser = data.verifyUser || false;
     this.verifyCode = data.verifyCode || "";
     this.isOnline = data.isOnline || false

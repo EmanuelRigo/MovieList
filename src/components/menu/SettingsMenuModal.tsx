@@ -19,6 +19,7 @@ const SettingsMenuModal = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const router = useRouter();
 
@@ -75,12 +76,21 @@ const SettingsMenuModal = () => {
   };
 
   const handlePasswordChange = async () => {
-    console.log("passschasewo")
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
     const response = await updateUserPassword(currentPassword, newPassword);
-    console.log("🚀 ~ handlePasswordChange ~ response:", response)
     if (response.ok) {
-      alert("password changed");
+      alert("Password changed");
       setIsOpen(false);
+      // Limpiar inputs
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } else {
+      alert("Failed to change password");
     }
   };
 
@@ -169,11 +179,22 @@ const SettingsMenuModal = () => {
                     className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
-
-                {/* Nueva contraseña */}
+                {/* Confirmar nueva contraseña */}
                 <div className="flex flex-col gap-2">
                   <label className="text-gray-800 dark:text-gray-200">
                     New password
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  />
+                </div>{" "}
+                {/* Nueva contraseña */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-800 dark:text-gray-200">
+                    Confirm new password
                   </label>
                   <div className="w-full flex">
                     <input
