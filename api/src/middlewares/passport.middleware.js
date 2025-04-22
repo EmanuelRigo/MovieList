@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 //mport { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 
-import { createHashUtil, verifyHashUtil  } from "../utils/hash.util.js";
+import { createHashUtil, verifyHashUtil } from "../utils/hash.util.js";
 import { createTokenUtil, verifyTokenUtil } from "../utils/token.util.js";
 
 import envsUtils from "../utils/envs.utils.js";
@@ -14,7 +14,6 @@ import userServices from "../services/users.services.js";
 import userMoviesServices from "../services/userMovies.services.js";
 
 // import dao from "../dao/factory.js";
-
 
 // const { UsersManager } = dao;
 // const { readByEmail, create, readById, update } = UsersManager;
@@ -32,7 +31,7 @@ passport.use(
     async (req, email, password, done) => {
       try {
         const userExists = await userServices.getByEmail(email);
- 
+
         if (userExists) {
           const info = {
             message: "User already exists",
@@ -68,7 +67,7 @@ passport.use(
           return done(null, false, info);
         }
         const user = await userServices.getByEmail(email);
-          
+
         if (!user) {
           const info = {
             message: "INVALID CREDENTIALS1",
@@ -110,6 +109,58 @@ passport.use(
   )
 );
 
+//--UPDATE-PASSWORD
+passport.use(
+  "updatePassword",
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
+      secretOrKey: envsUtils.SECRET_KEY,
+      passReqToCallback: true,
+    },
+    async (req, data, done) => {
+      console.log("🚀 ~ req:", req.body)
+      try {
+        const { user_id } = data;
+        const user = await userServices.getById(user_id);
+
+        if (!user) {
+          return done(null, false, {
+            message: "USER NOT FOUND",
+            statusCode: 404,
+          });
+        }
+
+        const { currentPassword, newPassword } = req.body;
+
+        // 1. Verificar contraseña actual
+        const verify = verifyHashUtil(currentPassword, user.password);
+        if (!verify) {
+          return done(null, false, {
+            message: "INVALID CURRENT PASSWORD",
+            statusCode: 401,
+          });
+        }
+
+        // 2. Hashear la nueva contraseña
+        const hashedPassword = createHashUtil(newPassword);
+
+        // 3. Actualizar usuario
+        const updatedUser = await userServices.update(user_id, {
+          password: hashedPassword,
+        });
+
+        return done(null, updatedUser);
+      } catch (error) {
+        return done(null, false, {
+          message: "Error in password update process",
+          statusCode: 500,
+        });
+      }
+    }
+  )
+);
+
 //--UPDATE
 passport.use(
   "update",
@@ -117,52 +168,56 @@ passport.use(
     {
       jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
       secretOrKey: envsUtils.SECRET_KEY,
-      passReqToCallback: true, 
+      passReqToCallback: true,
     },
     async (req, data, done) => {
-      console.log("🚀 ~ data:", data)
-      console.log("📦 ~ req.body:", req.body) 
+      console.log("🚀 ~ data:", data);
+      console.log("📦 ~ req.body:", req.body);
 
       try {
         const { user_id } = data;
         const user = await userServices.getById(user_id);
 
         if (!user) {
-          return done(null, false, { message: "USER NOT FOUND", statusCode: 404 });
+          return done(null, false, {
+            message: "USER NOT FOUND",
+            statusCode: 404,
+          });
         }
 
         // Usás lo que venga por body (lo nuevo que quiere actualizar el usuario)
         const updatedUser = await userServices.update(user_id, req.body);
-        console.log("🚀 ~ updatedUser:", updatedUser)
+        console.log("🚀 ~ updatedUser:", updatedUser);
 
         return done(null, updatedUser);
       } catch (error) {
-        return done(null, false, { message: "Error in update process", statusCode: 500 });
+        return done(null, false, {
+          message: "Error in update process",
+          statusCode: 500,
+        });
       }
     }
   )
 );
 
-
-//-- DELETE ACOUNT 
+//-- DELETE ACOUNT
 passport.use(
   "deleteAccount",
   new JwtStrategy(
     {
       jwtFromRequest: ExtractJwt.fromExtractors([(req) => req?.cookies?.token]),
       secretOrKey: envsUtils.SECRET_KEY,
-      passReqToCallback: true
+      passReqToCallback: true,
     },
-    async (req ,data, done) => {
-    console.log("🚀 ~ data:", data)
-      console.log("-reqbody", req.body)
-     
+    async (req, data, done) => {
+      console.log("🚀 ~ data:", data);
+      console.log("-reqbody", req.body);
+
       try {
-        
         const { user_id } = data;
-        const user = await userServices.getById(user_id)
-        console.log("🚀 ~ user:", user)
-        if(!user) {
+        const user = await userServices.getById(user_id);
+        console.log("🚀 ~ user:", user);
+        if (!user) {
           const info = {
             message: "INVALID CREDENTIALS1",
             statusCode: 401,
@@ -170,7 +225,7 @@ passport.use(
           return done(null, false, info);
         }
 
-        const verify = verifyHashUtil(req.body.password, user.password)
+        const verify = verifyHashUtil(req.body.password, user.password);
         if (!verify) {
           const info = {
             message: "INVALID CREDENTIALS2",
@@ -178,14 +233,14 @@ passport.use(
           };
           return done(null, false, info);
         }
-        
-        
-        const deletedUser = await userServices.delete(user_id)
-        console.log("🚀 ~ deletedUser:", deletedUser)
-        const userMoviesToDelete = await userMoviesServices.getByUserIdAndDelete(user_id)
-        console.log("🚀 ~ userMoviesToDelete:", userMoviesToDelete)
-        
-        console.log("🚀 ~ user_id:", user_id)
+
+        const deletedUser = await userServices.delete(user_id);
+        console.log("🚀 ~ deletedUser:", deletedUser);
+        const userMoviesToDelete =
+          await userMoviesServices.getByUserIdAndDelete(user_id);
+        console.log("🚀 ~ userMoviesToDelete:", userMoviesToDelete);
+
+        console.log("🚀 ~ user_id:", user_id);
         // await userServices.delete(user_id);
         return done(null, { message: "User deleted successfully" });
       } catch (error) {
@@ -193,8 +248,7 @@ passport.use(
       }
     }
   )
-)
-
+);
 
 //--ADMIN
 passport.use(
@@ -233,7 +287,7 @@ passport.use(
       secretOrKey: envsUtils.SECRET_KEY,
     },
     async (data, done) => {
-      try {     
+      try {
         const { user_id } = data;
         await userServices.update(user_id, { isOnline: false });
         return done(null, { user_id: null });
@@ -257,9 +311,8 @@ passport.use(
       secretOrKey: envsUtils.SECRET_KEY,
     },
     async (data, done) => {
-      console.log("🚀 ~ data:", data)
+      console.log("🚀 ~ data:", data);
       try {
-
         const { user_id } = data;
         const user = await userServices.getById(user_id);
         console.log("Usuario encontrado:", user);
@@ -280,7 +333,7 @@ passport.use(
           };
           return done(null, false, info);
         }
-        
+
         const userData = {
           firstName: user.firstname,
           username: user.username,
@@ -288,7 +341,8 @@ passport.use(
           role: user.role,
           isOnline: user.isOnline,
           mode: user.mode,
-          email: user.email};
+          email: user.email,
+        };
 
         console.log("Usuario en línea:", userData);
         return done(null, userData);
@@ -366,6 +420,5 @@ passport.use(
 //     }
 //   )
 // );
-
 
 export default passport;

@@ -46,6 +46,25 @@ export async function updateUser(userData: User): Promise<Response> {
   return res;
 }
 
+export async function updateUserPassword(
+  currentPassword: string,
+  newPassword: string
+): Promise<Response> {
+  const res = await fetch(`${BACKEND_URL}/api/sessions/update-password`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      currentPassword,
+      newPassword,
+    }),
+  });
+
+  return res;
+}
+
 export async function checkOnlineStatus(): Promise<Response> {
   const res = await fetch(`${BACKEND_URL}/api/sessions/online`, {
     // CORREGIDO: uso de backticks

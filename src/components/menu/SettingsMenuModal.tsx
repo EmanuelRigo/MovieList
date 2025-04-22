@@ -2,23 +2,25 @@
 import { useState, useEffect } from "react";
 import { PiGear } from "react-icons/pi";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { updateUser } from "../widgets/users.api";
+import {
+  updateUser,
+  updateUserPassword,
+  deleteAccount,
+} from "../widgets/users.api";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 import { useMovieContext } from "@/context/MovieContext";
-import { deleteAccount } from "../widgets/users.api";
 import { useRouter } from "next/navigation";
 
 const SettingsMenuModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const { setUsername } = useMovieContext();
   const [usernameInput, setUsernameInput] = useState("");
-  const router = useRouter();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
 
-  const handlePasswordChange = () => {
-    console.log("Nueva contraseña:", password);
-    // Acá podrías llamar a una API para cambiar la contraseña
-  };
+  const router = useRouter();
 
   function deleteAllCookies() {
     const cookies = ["mode", "name", "onlineUser", "token"];
@@ -27,25 +29,6 @@ const SettingsMenuModal = () => {
       document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     });
   }
-
-  const handleDeleteAccount = () => {
-    deleteAccount(password)
-      .then((response) => {
-        if (response.ok) {
-          console.log("Cuenta eliminada con éxito", response);
-          router.push("/login"); // Redirigir a la página de inicio o login
-          deleteAllCookies(); // Eliminar la cookie del nombre de usuario
-          // Aquí puedes redirigir al usuario o mostrar un mensaje de éxito
-        } else {
-          console.error("Error al eliminar la cuenta", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error al eliminar la cuenta", error);
-      });
-  };
-
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const modeCookie = document.cookie
@@ -91,6 +74,31 @@ const SettingsMenuModal = () => {
     }
   };
 
+  const handlePasswordChange = async () => {
+    console.log("passschasewo")
+    const response = await updateUserPassword(currentPassword, newPassword);
+    console.log("🚀 ~ handlePasswordChange ~ response:", response)
+    if (response.ok) {
+      alert("password changed");
+      setIsOpen(false);
+    }
+  };
+
+  const handleDeleteAccount = () => {
+    deleteAccount(password)
+      .then((response) => {
+        if (response.ok) {
+          console.log("Cuenta eliminada con éxito", response);
+          router.push("/login");
+          deleteAllCookies();
+        } else {
+          console.error("Error al eliminar la cuenta", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error al eliminar la cuenta", error);
+      });
+  };
   return (
     <>
       <button
@@ -122,7 +130,7 @@ const SettingsMenuModal = () => {
               </div>
 
               {/* Cambiar username */}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 border-t-2 border-neutral-400 dark:border-neutral-700 pt-6">
                 <label className="text-gray-800 dark:text-gray-200">
                   New username
                 </label>
@@ -136,7 +144,7 @@ const SettingsMenuModal = () => {
                   />
                   <button
                     onClick={handleChangeUsername}
-                    className=" text-neutral-600 dark:text-neutral-300 ps-4  py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
+                    className=" text-neutral-600 dark:text-neutral-300 hover:text-blue-500 dark:hover:text-yellow-500  ps-4  py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
                   >
                     <IoIosArrowForward />
                   </button>
@@ -144,28 +152,48 @@ const SettingsMenuModal = () => {
               </div>
 
               {/* Cambiar contraseña */}
-              <div className="flex flex-col gap-2">
-                <label className="text-gray-800 dark:text-gray-200">
-                  New password
-                </label>
-                <div className="w-full flex">
+              <div className="flex flex-col gap-4 border-y-2 border-neutral-400 dark:border-neutral-700 py-6">
+                {/* Contraseña actual */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    To change your password, please enter your current password
+                    first.
+                  </p>
+                  <label className="text-gray-800 dark:text-gray-200">
+                    Current password
+                  </label>
                   <input
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow"
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                   />
-                  <button
-                    onClick={handlePasswordChange}
-                    className="text-neutral-600 dark:text-neutral-300 ps-4 py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end"
-                  >
-                    <IoIosArrowForward />
-                  </button>
+                </div>
+
+                {/* Nueva contraseña */}
+                <div className="flex flex-col gap-2">
+                  <label className="text-gray-800 dark:text-gray-200">
+                    New password
+                  </label>
+                  <div className="w-full flex">
+                    <input
+                      type="password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      className="px-3 py-2 rounded-lg border-2 border-neutral-400 dark:border-neutral-700 dark:bg-zinc-800 dark:text-white flex-grow focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    />
+                    <button
+                      onClick={handlePasswordChange}
+                      className="text-neutral-600 dark:text-neutral-300 hover:text-blue-500 dark:hover:text-yellow-500  ps-4 py-2 rounded-lg self-end h-full text-3xl flex items-center justify-end transition-colors"
+                    >
+                      <IoIosArrowForward />
+                    </button>
+                  </div>
                 </div>
               </div>
 
               {/* Borrar cuenta */}
-              <div className="pt-4 border-t-2 border-neutral-400 dark:border-neutral-700">
+              <div className="">
                 <label className="text-gray-800 dark:text-gray-200 text-sm ">
                   To delete your account, please enter your password:
                 </label>

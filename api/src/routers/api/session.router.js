@@ -33,6 +33,14 @@ class SessionRouter extends CustomRouter {
       login
     );
 
+    //UPDATE-PASSWORD
+    this.update(
+      "/update-password",
+      ["USER", "ADMIN"],
+      passportCb("updatePassword", { session: false }),
+      update
+    );
+
     //UPDATE
     this.update(
       "/update",
