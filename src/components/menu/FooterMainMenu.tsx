@@ -8,7 +8,6 @@ import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import { BsPlusCircle } from "react-icons/bs";
 import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
@@ -19,6 +18,8 @@ import { getUserMovies } from "../widgets/movies.api";
 import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import SettingsMenuModal from "./SettingsMenuModal";
+import CheckedFilter from "../list/CheckedFilter";
+import { FaRegTimesCircle } from "react-icons/fa";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
@@ -101,10 +102,11 @@ export const FooterMainMenu = () => {
           <span className="ms-2 2xl:ms-0 text-lg">
             Movies: {movieList.length}
           </span>
-          <BsPlusCircle className="text-2xl text-black dark:text-gray-200 hover:text-blue-500 dark:hover:text-yellow-500" />
+          <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:hover:text-yellow-500 rotate-45" />
         </Link>
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex justify-between w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg ps-3 p-4 ">
           <YearSearch onSearch={handleSearchByYear} />
+          <CheckedFilter></CheckedFilter>
         </div>
         <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
           <OrderListButtons />
@@ -117,7 +119,7 @@ export const FooterMainMenu = () => {
         </div>
       </div>
 
-      <RandomButton className="flex justify-center gap-2 text-3xl p-4 bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900"></RandomButton>
+      <RandomButton className="flex justify-center items-center gap-2 text-2xl p-4 bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900"></RandomButton>
     </div>
   );
 };

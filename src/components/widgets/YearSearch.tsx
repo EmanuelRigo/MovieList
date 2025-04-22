@@ -43,7 +43,7 @@ const YearSearch: React.FC<YearSearchProps> = ({ onSearch }) => {
   ).sort((a, b) => b - a);
 
   return (
-    <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg ps-3 p-4">
+    <div>
       <form
         onSubmit={handleSubmit}
         className="flex items-center justify-between w-full"

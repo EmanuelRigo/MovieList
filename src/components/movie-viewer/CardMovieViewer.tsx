@@ -60,8 +60,8 @@ const CardMovieViewer: React.FC = () => {
           <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
             {movie._id.title}
           </h3>
-          <div className="flex justify-between  mb-2">
-            <p className="text-black dark:text-white bg-neutral-300 dark:bg-neutral-900 rounded-lg text-sm">
+          <div className="flex justify-between  mb-2 text-black dark:text-white">
+            <p className=" bg-neutral-300 dark:bg-neutral-900 rounded-lg text-sm">
               {movie._id.release_date && movie._id.release_date.split("T")[0]}
             </p>
             <p>{movie._id.runtime} min</p>
@@ -75,28 +75,28 @@ const CardMovieViewer: React.FC = () => {
         </div>
         <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2  text-sm">
           <div
-            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-950 border-neutral-100 ${
+            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-300 dark:bg-neutral-950 border-neutral-100 ${
               movie.formats.vhs
                 ? "text-neutral-900 dark:text-neutral-300"
-                : "text-neutral-500 dark:text-neutral-700"
+                : "text-neutral-400 dark:text-neutral-700"
             }`}
           >
             <span>VHS</span>
           </div>
           <div
-            className={`flex items-center p-2 px-4 mx-1 rounded-lg bg-neutral-950 border-neutral-100  ${
+            className={`flex items-center p-2 px-4 mx-1 rounded-lg bg-neutral-300 dark:bg-neutral-950 border-neutral-100  ${
               movie.formats.dvd
                 ? "text-neutral-900 dark:text-neutral-300"
-                : "text-neutral-500 dark:text-neutral-700"
+                : "text-neutral-400 dark:text-neutral-700"
             }`}
           >
             <span>DVD</span>
           </div>
           <div
-            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-950 border-neutral-100  ${
+            className={`flex items-center p-2 px-4 rounded-lg bg-neutral-300 dark:bg-neutral-950 border-neutral-100  ${
               movie.formats.bluray
                 ? "text-neutral-900 dark:text-neutral-300"
-                : "text-neutral-500 dark:text-neutral-700"
+                : "text-neutral-400 dark:text-neutral-700"
             }`}
           >
             <span>BLU RAY</span>

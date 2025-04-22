@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { useMovieContext } from "@/context/MovieContext";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { GiCardRandom } from "react-icons/gi";
+import { FaRandom } from "react-icons/fa";
 
 type RandomButtonProps = {
   className?: string; // Prop opcional para estilos personalizados
@@ -40,8 +40,9 @@ const RandomButton = ({ className }: RandomButtonProps) => {
     <button
       onClick={obtenerObjetoAleatorio}
       className={className} // Aplica la clase pasada como prop
-    >   <span className={`text-xl`}>Random</span>
-      <GiCardRandom />
+    >
+      <span className={`text-xl`}>Random</span>
+      <FaRandom />
     </button>
   );
 };

@@ -20,19 +20,19 @@ const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
       {showChecked === true && (
         <>
           <FaRegCheckCircle className="text-green-500 text-2xl" />
-          <span>Checked</span>
+          <span className="lg:hidden">Checked</span>
         </>
       )}
       {showChecked === false && (
         <>
           <FaRegCircle className="text-red-500 text-2xl" />
-          <span>Unchecked</span>
+          <span className="lg:hidden">Unchecked</span>
         </>
       )}
       {showChecked === null && (
         <>
-          <FaRegDotCircle className="text-gray-400 text-2xl" />
-          <span>All</span>
+          <FaRegDotCircle className="text-neutral-300 text-2xl" />
+          <span className="lg:hidden">All</span>
         </>
       )}
     </button>

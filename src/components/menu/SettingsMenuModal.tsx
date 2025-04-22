@@ -113,7 +113,7 @@ const SettingsMenuModal = () => {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="text-neutral-500 dark:text-neutral-100 text-2xl hover:text-yellow-500 transition-colors"
+        className="text-neutral-500 dark:text-neutral-100 text-2xl hover:text-blue-500 dark:hover:text-yellow-500 transition-colors"
       >
         <PiGear />
       </button>
