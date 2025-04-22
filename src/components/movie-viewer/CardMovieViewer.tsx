@@ -60,8 +60,8 @@ const CardMovieViewer: React.FC = () => {
           <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
             {movie._id.title}
           </h3>
-          <div className="flex justify-between  mb-2 text-black dark:text-white">
-            <p className=" bg-neutral-300 dark:bg-neutral-900 rounded-lg text-sm">
+          <div className="flex justify-between text-sm mb-2 text-black dark:text-neutral-200">
+            <p>
               {movie._id.release_date && movie._id.release_date.split("T")[0]}
             </p>
             <p>{movie._id.runtime} min</p>
