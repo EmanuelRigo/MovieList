@@ -105,7 +105,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
 
   return (
     <div className="h-[calc(100vh-56px)] overflow-auto md:h-screen w-screen flex items-center">
-      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-950 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
+      <div className="container rounded-lg bg-neutral-300 dark:bg-neutral-900 p-4 mx-auto h-full lg:h-5/6 flex flex-col items-start lg:items-center justify-center">
         <div className="flex justify-between items-center w-full pb-6">
           {/* 🔍 Barra de búsqueda */}
           <form
@@ -129,7 +129,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
 
           {/* 🔙 Botón de volver */}
           <Link
-            className="flex items-center justify-center w-2/12 h-12 text-blue-500 dark:text-yellow-500 hover:text-blue-600 dark:hover:text-orange-500 text-3xl ps-2"
+            className="flex items-center justify-center lg:px-8 h-12 text-blue-500 dark:text-yellow-500 hover:text-blue-600 dark:hover:text-orange-500 text-3xl ps-2"
             href="/"
           >
             <IoIosArrowBack />
@@ -158,14 +158,14 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
                 <Link
                   key={pelicula.id}
                   href={`/add-movie/${pelicula.id}`}
-                  className="h-80 pt-0 rounded-md overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer"
+                  className="group h-80 pt-0 rounded-md overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer"
                 >
                   <div className="h-full w-full flex relative">
-                    <div className="absolute bottom-0 bg-black bg-opacity-45 w-full text-white">
+                    <div className="absolute bottom-0 bg-black bg-opacity-75 group-hover:bg-opacity-95 w-full text-white min-h-16 p-2 transition-opacity duration-200">
                       <p>{pelicula.title}</p>
                       <p>{pelicula.release_date}</p>
                     </div>
-                    {pelicula.poster_path && (
+                    {pelicula.poster_path ? (
                       <Image
                         loader={myLoader}
                         src={pelicula.poster_path}
@@ -180,6 +180,10 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
                         }}
                         className="w-full h-full object-cover"
                       />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-neutral-700 text-neutral-600 dark:text-gray-300">
+                        <p>No Image</p>
+                      </div>
                     )}
                   </div>
                 </Link>

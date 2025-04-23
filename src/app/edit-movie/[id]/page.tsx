@@ -162,7 +162,7 @@ const EditMovie: React.FC = () => {
 
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
-      <div className="container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row w-full overflow-auto ">
+      <div className="w-full 1-5xl:container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row overflow-auto ">
         <div className="relative flex h-full p-4 aspect-h-6-9">
           <Image
             loader={myLoader}
@@ -198,7 +198,7 @@ const EditMovie: React.FC = () => {
                   </p>
                 ))}
             </div>
-            <div className="h-[80px] lg:h-96 overflow-y-auto">
+            <div className="h-[80px] lg:h-60 overflow-y-auto">
               <p className="text-xs md:text-base text-neutral-500">
                 {movieToEdit._id.overview}
               </p>
