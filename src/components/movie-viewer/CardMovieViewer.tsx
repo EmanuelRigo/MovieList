@@ -44,15 +44,21 @@ const CardMovieViewer: React.FC = () => {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="relative aspect-h-6-9 rounded-lg">
-        <Image
-          loader={myLoader}
-          src={movie._id.poster_path || ""}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-          style={{ objectFit: "cover" }}
-          alt={movie._id.title || "Movie Poster"}
-          className="rounded-lg"
-        />
+        {movie._id.poster_path ? (
+          <Image
+            loader={myLoader}
+            src={movie._id.poster_path || ""}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            style={{ objectFit: "cover" }}
+            alt={movie._id.title || "Movie Poster"}
+            className="rounded-lg"
+          />
+        ) : (
+          <div className="bg-neutral-500">
+            <p>no image</p>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col flex-grow justify-between pt-3">

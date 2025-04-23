@@ -1,7 +1,7 @@
 "use client";
 import React, { ChangeEvent } from "react";
 import { useMovieContext } from "@/context/MovieContext";
-import { LuSearch } from "react-icons/lu";
+// import { LuSearch } from "react-icons/lu";
 import { FaSearch } from "react-icons/fa";
 
 const SearchBarWidget: React.FC = () => {
