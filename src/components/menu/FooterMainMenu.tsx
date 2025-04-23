@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-import SearchBar from "../widgets/SearchBar";
+// import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
@@ -20,6 +20,7 @@ import { IoIosLogOut } from "react-icons/io";
 import SettingsMenuModal from "./SettingsMenuModal";
 import CheckedFilter from "../list/CheckedFilter";
 import { FaRegTimesCircle } from "react-icons/fa";
+import SearchBarWidget from "../widgets/SearchBarWidget";
 
 export const FooterMainMenu = () => {
   const router = useRouter();
@@ -91,7 +92,8 @@ export const FooterMainMenu = () => {
       </div>
       <div className="flex-grow flex flex-col gap-4">
         <div>
-          <SearchBar />
+          {/* <SearchBar /> */}
+          <SearchBarWidget />
         </div>
         <CardMenuMovie />
         <Link

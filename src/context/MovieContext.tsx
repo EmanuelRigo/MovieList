@@ -31,6 +31,8 @@ interface MovieContextProps {
   setCheckedFilter: React.Dispatch<React.SetStateAction<boolean | null>>;
   selectedGenre: string;
   setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const movieContext = createContext<MovieContextProps | undefined>(
@@ -56,6 +58,7 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [username, setUsername] = useState<string | undefined>("");
   const [selectedGenre, setSelectedGenre] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const [activeFormatFilters, setActiveFormatFilters] = useState({
     vhs: true,
@@ -83,6 +86,11 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     }
   }, [movieList]);
 
+  const normalizeString = (str: string) =>
+    str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
   // 🔁 Aplicar ambos filtros combinados
   const applyAllFilters = () => {
     let filtered = [...originalMovieList];
@@ -108,13 +116,19 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
       );
     }
 
+    if (searchTerm.trim() !== "") {
+      filtered = filtered.filter((movie) =>
+        normalizeString(movie._id.title).includes(normalizeString(searchTerm))
+      );
+    }
+
     setMovieList(filtered);
   };
 
   // 👂 Ejecutar filtrado combinado cada vez que cambien los filtros
   useEffect(() => {
     applyAllFilters();
-  }, [activeFormatFilters, showChecked, selectedGenre]);
+  }, [activeFormatFilters, showChecked, selectedGenre, searchTerm]);
 
   const value: MovieContextProps = {
     movie,
@@ -136,6 +150,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setSelectedGenre,
     checkedFilter,
     setCheckedFilter,
+    searchTerm,
+    setSearchTerm,
   };
 
   return (
