@@ -2,6 +2,7 @@
 import React, { ChangeEvent } from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { LuSearch } from "react-icons/lu";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBarWidget: React.FC = () => {
   const { searchTerm, setSearchTerm } = useMovieContext();
@@ -28,7 +29,7 @@ const SearchBarWidget: React.FC = () => {
           type="submit"
           className="flex items-center justify-center text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-orange-500"
         >
-          <LuSearch />
+          <FaSearch />
         </button>
       </form>
     </div>

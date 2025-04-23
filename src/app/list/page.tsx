@@ -1,5 +1,6 @@
 import MovieList from "@/components/list/MovieList";
-import SearchBar from "@/components/widgets/SearchBar";
+// import SearchBar from "@/components/widgets/SearchBar";
+import SearchBarWidget from "@/components/widgets/SearchBarWidget";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
 import RandomButton from "@/components/menu/RandomButton";
 import Link from "next/link";
@@ -21,7 +22,7 @@ const page = () => {
             </div>
           </div>
 
-          <SearchBar></SearchBar>
+          <SearchBarWidget></SearchBarWidget>
           <div className="flex justify-between gap-2">
             <div className="w-full">
               <GenreFilter></GenreFilter>
