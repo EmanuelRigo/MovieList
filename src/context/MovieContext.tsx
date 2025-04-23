@@ -33,6 +33,8 @@ interface MovieContextProps {
   setSelectedGenre: React.Dispatch<React.SetStateAction<string>>;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  selectedYear: string;
+  setSelectedYear: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const movieContext = createContext<MovieContextProps | undefined>(
@@ -59,6 +61,7 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
   const [username, setUsername] = useState<string | undefined>("");
   const [selectedGenre, setSelectedGenre] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedYear, setSelectedYear] = useState<string>("");
 
   const [activeFormatFilters, setActiveFormatFilters] = useState({
     vhs: true,
@@ -122,13 +125,27 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
       );
     }
 
+    if (selectedYear !== "") {
+      filtered = filtered.filter(
+        (movie) =>
+          new Date(movie._id.release_date).getFullYear().toString() ===
+          selectedYear
+      );
+    }
+
     setMovieList(filtered);
   };
 
   // 👂 Ejecutar filtrado combinado cada vez que cambien los filtros
   useEffect(() => {
     applyAllFilters();
-  }, [activeFormatFilters, showChecked, selectedGenre, searchTerm]);
+  }, [
+    activeFormatFilters,
+    showChecked,
+    selectedGenre,
+    searchTerm,
+    selectedYear,
+  ]);
 
   const value: MovieContextProps = {
     movie,
@@ -152,6 +169,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setCheckedFilter,
     searchTerm,
     setSearchTerm,
+    selectedYear,
+    setSelectedYear,
   };
 
   return (

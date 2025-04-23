@@ -22,6 +22,7 @@ import CheckedFilter from "../list/CheckedFilter";
 import { FaRegTimesCircle } from "react-icons/fa";
 import SearchBarWidget from "../widgets/SearchBarWidget";
 
+import GenreFilter from "../list/GenreFilter";
 export const FooterMainMenu = () => {
   const router = useRouter();
   const { movieList, setMovieList, username, setUsername } = useMovieContext();
@@ -68,9 +69,9 @@ export const FooterMainMenu = () => {
     }
   };
 
-  const handleSearchByYear = (year: string) => {
-    console.log("Searching movies from year:", year);
-  };
+  // const handleSearchByYear = (year: string) => {
+  //   console.log("Searching movies from year:", year);
+  // };
 
   return (
     <div
@@ -106,9 +107,16 @@ export const FooterMainMenu = () => {
           </span>
           <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:group-hover:text-yellow-500 rotate-45" />
         </Link>
-        <div className="hidden lg:flex justify-between w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg ps-3 p-4 ">
-          <YearSearch onSearch={handleSearchByYear} />
-          <CheckedFilter></CheckedFilter>
+        <div className="hidden lg:flex w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2">
+          <div className="w-1/3 flex items-center justify-center">
+            <YearSearch />
+          </div>
+          <div className="flex-grow flex justify-center border-l-2 border-r-2 border-neutral-300 dark:border-neutral-600">
+            <GenreFilter />
+          </div>
+          <div className="w-1/3 flex items-center justify-center">
+            <CheckedFilter className="w-full flex items-center justify-center" />
+          </div>
         </div>
         <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
           <OrderListButtons />
