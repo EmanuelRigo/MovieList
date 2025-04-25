@@ -1,16 +1,25 @@
 import MovieListClient from "./MovieListClient";
 import { getUserMovies } from "../widgets/movies.api";
+import { MovieDB } from "@/context/interfaces/movieTypes";
 
-const res = await getUserMovies();
-const data = res.response.movies;
+export default async function MovieList() {
+  let data: MovieDB[] = [];
 
-export default function MovieList() {
+  try {
+    const res = await getUserMovies();
+    data = res?.response?.movies ?? [];
+  } catch (error) {
+    console.error("Error loading movies:", error);
+  }
+
   return (
     <div className="flex flex-grow-1 h-full">
-      {data && data.length > 0 ? (
+      {data.length > 0 ? (
         <MovieListClient list={data} />
       ) : (
-        <div className="text-gray-400 m-auto text-center">No movies found.</div>
+        <div className="text-gray-400 m-auto text-center">
+          No movies found or failed to load.
+        </div>
       )}
     </div>
   );
