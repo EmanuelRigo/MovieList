@@ -12,7 +12,7 @@ interface CardRowProps {
   index: number;
 }
 
-export const CardRow: React.FC<CardRowProps> = ({ movieProp, index }) => {
+export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const { setMovie, movie, movieList } = useMovieContext();
   // const [isButtonActive, setIsButtonActive] = useState(false);
