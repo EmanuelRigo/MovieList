@@ -3,12 +3,14 @@ import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import MovieListClient from "@/components/list/MovieListClient";
+import envsUtils from "@/utils/envs.utils";
 
 export default async function Home() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
 
   let movies: MovieDB[] = [];
+  const BACKEND_URL = envsUtils.BACKEND_URL;
 
   if (!token) {
     console.error("No token found");
@@ -16,7 +18,7 @@ export default async function Home() {
   }
 
   try {
-    const res = await fetch("http://localhost:9000/api/userMovies/", {
+    const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
