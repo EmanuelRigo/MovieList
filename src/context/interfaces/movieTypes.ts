@@ -51,13 +51,15 @@ export interface MovieDB {
     title: string;
     release_date: string;
     backdrop_path: string;
-    _id?: string | undefined;
+    _id?: string;
     poster_path: string;
     overview: string;
     genres: {
       id: number;
       name: string;
-      _id: string;
+      _id: {
+        $oid: string;
+      };
     }[];
     belongs_to_collection?: {
       id: number;
@@ -77,12 +79,16 @@ export interface MovieDB {
       logo_path: string | null;
       name: string;
       origin_country: string;
-      _id: string;
+      _id: {
+        $oid: string;
+      };
     }[];
     production_countries: {
       iso_3166_1: string;
       name: string;
-      _id: string;
+      _id: {
+        $oid: string;
+      };
     }[];
     revenue: number;
     runtime: number;
@@ -90,17 +96,21 @@ export interface MovieDB {
       english_name: string;
       iso_639_1: string;
       name: string;
-      _id: string;
+      _id: {
+        $oid: string;
+      };
     }[];
     status: string;
     tagline: string;
     video: boolean;
     vote_average: number;
     vote_count: number;
-    createdAt: string;
-    updatedAt: string;
-    adult: boolean;
-    __v: number;
+    createdAt: {
+      $date: string;
+    };
+    updatedAt: {
+      $date: string;
+    };
   };
   formats: {
     vhs: boolean;
