@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <ThemeProvider>
           <MovieProvider>
             <OnlineStatus>
-              <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center">
+              <div className="h-[calc(100vh-56px)] md:h-full overflow-auto w-screen flex items-center bg-red-500">
                 {children}
               </div>
             </OnlineStatus>

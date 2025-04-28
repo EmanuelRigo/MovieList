@@ -1,4 +1,3 @@
-import MovieList from "@/components/list/MovieList";
 // import SearchBar from "@/components/widgets/SearchBar";
 import SearchBarWidget from "@/components/widgets/SearchBarWidget";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
@@ -7,8 +6,45 @@ import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 import SettingsButton from "@/components/list/SettingsButton";
 import GenreFilter from "@/components/list/GenreFilter";
+import MovieListClient from "@/components/list/MovieListClient";
+import { cookies } from "next/headers";
+import { MovieDB } from "@/context/interfaces/movieTypes";
+import envsUtils from "@/utils/envs.utils";
 
-const page = () => {
+const page = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  let movies: MovieDB[] = [];
+  const BACKEND_URL = envsUtils.BACKEND_URL;
+
+  if (!token) {
+    console.error("No token found");
+    return <div className="text-center p-4">No token found.</div>;
+  }
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      console.error("Error fetching movies:", res.status);
+    } else {
+      const moviesData = await res.json();
+      movies = moviesData.response.movies;
+      console.log("🚀 ~ Home ~ movies:", movies);
+    }
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
+
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
       <div className="flex h-48">
@@ -33,7 +69,7 @@ const page = () => {
           <MiniCardViewer></MiniCardViewer>
         </div>
       </div>
-      <MovieList></MovieList>
+      <MovieListClient list={movies}></MovieListClient>
       <div className="flex justify-center bg-blue-500 dark:bg-yellow-500 rounded-md text-neutral-100 dark:text-neutral-900">
         <RandomButton className=" flex gap-2 text-3xl p-4 "></RandomButton>
       </div>
