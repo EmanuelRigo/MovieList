@@ -1,14 +1,12 @@
 import { cookies } from "next/headers";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
-import MovieList from "@/components/list/MovieList";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import MovieListClient from "@/components/list/MovieListClient";
 
 export default async function Home() {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-  console.log("🚀 ~ Home ~ token:", token);
 
   let movies: MovieDB[] = [];
 
