@@ -14,7 +14,22 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    console.log("1111");
+    console.log("🚀 ~ props list:", list);
+
+    if (movieList.length === 0 && list.length > 0) {
+      setMovieList(list);
+      console.log("✅ setMovieList ejecutado.");
+    } else if (list.length === 0) {
+      console.log("⚠️ El prop list vino vacío, no se actualiza movieList.");
+    }
+  }, [list, movieList, setMovieList]);
+
+  useEffect(() => {
+    console.log("🎬 movieList actual:", movieList);
+  }, [movieList]);
+
+  // Escuchar las teclas ArrowDown y ArrowUp para cambiar de película
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!movieList || movieList.length === 0) return;
 
@@ -49,65 +64,33 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [
-    // movieList,
-    movie,
-  ]);
+  }, [movieList, setMovie]);
 
-  useEffect(() => {
-    console.log("22");
-    if (list) {
-      setMovieList(list);
-    }
-  }, []);
-
-  console.log("REDNDER!!!!");
-
-  useEffect(() => {
-    console.log("333");
-    const elementToScroll = movieRows.current.find((row) =>
-      row?.classList.contains("outline-offset-0")
-    );
-
-    if (elementToScroll) {
-      elementToScroll.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }, [movie]);
-
+  console.log("🚀 ~ list:", list);
   return (
-    <>
-      <div className="relative flex-grow scrollbar-hidden overflow-auto scroll-smooth scoll-duration-600">
-        <div className="w-full h-full absolute">
-          {movieList && movieList.length > 0 ? (
-            movieList.map((element, index) => (
-              <div
-                key={element._id._id}
-                ref={(el) => {
-                  movieRows.current[index] = el;
-                }}
-                className={
-                  movie?._id._id === element._id._id
-                    ? "outline-offset-0 outline-orange-500 rounded-lg"
-                    : ""
-                }
-              >
-                <CardRow
-                  movieProp={element}
-                  isFocused={movie?._id._id === element._id._id}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full rounded-lg border-2 border-neutral-300 dark:border-neutral-800 ">
-              <FaFilm className="text-neutral-500 dark:text-neutral-400 text-6xl mb-4" />
-              <p className="text-black dark:text-white text-lg font-bold">
-                No hay películas disponibles
-              </p>
+    <div className="relative flex-grow scrollbar-hidden overflow-auto scroll-smooth scroll-duration-600 ">
+      <div className="w-full h-full absolute">
+        {movieList && movieList.length > 0 ? (
+          movieList.map((element, index) => (
+            <div
+              key={element._id._id}
+              ref={(el) => {
+                if (el) movieRows.current[index] = el;
+              }}
+            >
+              <CardRow movieProp={element} index={index} />
             </div>
-          )}
-        </div>
+          ))
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full rounded-lg border-2 border-neutral-300 dark:border-neutral-800 ">
+            <FaFilm className="text-neutral-500 dark:text-neutral-400 text-6xl mb-4" />
+            <p className="text-black dark:text-white text-lg font-bold">
+              No hay películas disponibles
+            </p>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

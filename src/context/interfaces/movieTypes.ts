@@ -57,9 +57,7 @@ export interface MovieDB {
     genres: {
       id: number;
       name: string;
-      _id: {
-        $oid: string;
-      };
+      _id: string;
     }[];
     belongs_to_collection?: {
       id: number;
@@ -79,16 +77,12 @@ export interface MovieDB {
       logo_path: string | null;
       name: string;
       origin_country: string;
-      _id: {
-        $oid: string;
-      };
+      _id: string;
     }[];
     production_countries: {
       iso_3166_1: string;
       name: string;
-      _id: {
-        $oid: string;
-      };
+      _id: string;
     }[];
     revenue: number;
     runtime: number;
@@ -96,21 +90,17 @@ export interface MovieDB {
       english_name: string;
       iso_639_1: string;
       name: string;
-      _id: {
-        $oid: string;
-      };
+      _id: string;
     }[];
     status: string;
     tagline: string;
     video: boolean;
     vote_average: number;
     vote_count: number;
-    createdAt: {
-      $date: string;
-    };
-    updatedAt: {
-      $date: string;
-    };
+    createdAt: string;
+    updatedAt: string;
+    adult: boolean;
+    __v: number;
   };
   formats: {
     vhs: boolean;
@@ -121,13 +111,13 @@ export interface MovieDB {
 }
 
 export interface CreateMovieInterface {
-  checked: boolean
+  checked: boolean;
   formats: {
-    vhs: boolean
-    dvd: boolean
-    bluray: boolean
-  }
-  _id: string
+    vhs: boolean;
+    dvd: boolean;
+    bluray: boolean;
+  };
+  _id: string;
 }
 
 export interface LocalMovie {
@@ -141,20 +131,19 @@ export interface LocalMovie {
   };
 }
 
-
 export interface UserMovie {
-  _id?: string
+  _id?: string;
   formats?: {
-    vhs: boolean
-    dvd: boolean
-    bluray: boolean
-  }
-  checked?: boolean
+    vhs: boolean;
+    dvd: boolean;
+    bluray: boolean;
+  };
+  checked?: boolean;
 }
 
 export interface isOnline {
   message: string;
-  response: UserData
+  response: UserData;
 }
 
 export interface UserData {
@@ -166,7 +155,6 @@ export interface UserData {
   user_id: string;
   username: string;
 }
-
 
 export interface User {
   username?: string;
@@ -191,5 +179,5 @@ export interface UserMoviesResponse {
 
 export interface UserMovieResponse {
   message: string;
-  response: MovieDB
+  response: MovieDB;
 }

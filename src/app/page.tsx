@@ -1,48 +1,63 @@
-"use client";
-
-import MovieList from "@/components/list/MovieList";
-import { useEffect, useState } from "react";
+import { cookies } from "next/headers";
 import { FooterMainMenu } from "@/components/menu/FooterMainMenu";
 import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
-// import { useMovieContext } from "@/context/MovieContext";
+import MovieList from "@/components/list/MovieList";
+import { MovieDB } from "@/context/interfaces/movieTypes";
+import MovieListClient from "@/components/list/MovieListClient";
 
-console.log("procceess:::", process.argv);
+export default async function Home() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+  console.log("🚀 ~ Home ~ token:", token);
 
-export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-  // const {setMovie} = useMovieContext()
+  let movies: MovieDB[] = [];
 
-  console.log("holaaa apps");
+  if (!token) {
+    console.error("No token found");
+    return <div className="text-center p-4">No token found.</div>;
+  }
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth > 1023);
-    };
+  try {
+    const res = await fetch("http://localhost:9000/api/userMovies/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+      cache: "no-store",
+    });
 
-    handleResize(); // Verifica el tamaño inicial
-    window.addEventListener("resize", handleResize); // Escucha cambios de tamaño
-
-    return () => {
-      window.removeEventListener("resize", handleResize); // Limpia el listener
-    };
-  }, []);
+    if (!res.ok) {
+      console.error("Error fetching movies:", res.status);
+    } else {
+      const moviesData = await res.json();
+      movies = moviesData.response.movies;
+      console.log("🚀 ~ Home ~ movies:", movies);
+    }
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+  }
 
   return (
-    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center ">
+    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
       <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4">
+        {/* Menú */}
         <div className="h-full w-full flex flex-col justify-between mb-8 lg:mb-auto">
           <FooterMainMenu />
         </div>
-        {isMobile && (
-          <div className="block h-full">
-            <MovieList />
+
+        {/* Lista de películas */}
+        <div className="hidden lg:block h-full">
+          <div className="flex flex-grow-1 h-full">
+            <MovieListClient list={movies} /> {/* Pasamos movies como prop */}
           </div>
-        )}
-        {isMobile && (
-          <div className="h-full">
-            <CardMovieViewer />
-          </div>
-        )}
+        </div>
+
+        {/* Viewer de películas */}
+        <div className="h-full hidden lg:block">
+          <CardMovieViewer />
+        </div>
       </div>
     </div>
   );

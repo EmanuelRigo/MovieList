@@ -1,31 +1,33 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { AiOutlineEdit } from "react-icons/ai";
+import Link from "next/link";
 
 interface CardRowProps {
-  isFocused: boolean;
   movieProp: MovieDB;
+  index: number;
 }
 
-export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
+export const CardRow: React.FC<CardRowProps> = ({ movieProp, index }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
+  const { setMovie, movie, movieList } = useMovieContext();
   const [isButtonActive, setIsButtonActive] = useState(false);
-  const { setMovie } = useMovieContext();
   const [localMovie, setLocalMovie] = useState(movieProp);
 
+  // Handle click to set the movie
   const handleClick = () => {
     setMovie(movieProp);
   };
 
-  const handleCheckClick = async () => {
-    const updatedMovie = {
-      checked: !localMovie.checked,
-    };
+  // Handle check click
+  const handleCheckClick = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const updatedMovie = { checked: !localMovie.checked };
+
     try {
       const movieupdate = await getMovieByIdUpdate(
         localMovie._id._id ?? "",
@@ -43,10 +45,6 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
           return {
             ...prev,
             checked: updatedMovie.checked,
-            title: prev._id.title || "",
-            release_date: prev._id.release_date || "",
-            backdrop_path: prev._id.backdrop_path || "",
-            formats: prev.formats || { vhs: false, dvd: false, bluray: false },
           };
         });
       }
@@ -55,6 +53,9 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
     }
   };
 
+  // Activate button when card is focused
+  const isFocused = movie?._id._id === movieProp._id._id; // Check if this card is focused
+
   useEffect(() => {
     if (isFocused) {
       setIsButtonActive(true);
@@ -62,16 +63,54 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, isFocused }) => {
       setIsButtonActive(false);
     }
   }, [isFocused]);
-  
+
+  // Handle key events for ArrowUp and ArrowDown
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!movieList || movieList.length === 0) return;
+
+      const currentIndex = movieList.findIndex(
+        (m) => m._id._id === movie?._id._id
+      );
+
+      let nextIndex = currentIndex;
+
+      if (e.key === "ArrowDown" && currentIndex !== -1) {
+        nextIndex = Math.min(currentIndex + 1, movieList.length - 1);
+      }
+
+      if (e.key === "ArrowUp" && currentIndex !== -1) {
+        nextIndex = Math.max(currentIndex - 1, 0);
+      }
+
+      if (nextIndex !== currentIndex) {
+        const nextMovie = movieList[nextIndex];
+        setMovie(nextMovie);
+
+        // Asegúrate de enfocar el siguiente componente
+        const nextButton = document.getElementById(nextMovie._id._id);
+        nextButton?.focus();
+      }
+    };
+
+    if (isFocused) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [movie, movieList, setMovie, isFocused]);
 
   return (
     <div
       ref={buttonRef}
       id={movieProp._id._id}
+      tabIndex={0} // Hacer que sea enfocable
       onClick={handleClick}
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
-          isButtonActive
+          isFocused
             ? "outline-offset-0 border-blue-700 dark:border-yellow-500"
             : ""
         } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
