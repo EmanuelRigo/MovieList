@@ -51,7 +51,7 @@ export interface MovieDB {
     title: string;
     release_date: string;
     backdrop_path: string;
-    _id?: string;
+    _id?: string | undefined;
     poster_path: string;
     overview: string;
     genres: {

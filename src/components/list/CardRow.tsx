@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
@@ -15,7 +15,7 @@ interface CardRowProps {
 export const CardRow: React.FC<CardRowProps> = ({ movieProp, index }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const { setMovie, movie, movieList } = useMovieContext();
-  const [isButtonActive, setIsButtonActive] = useState(false);
+  // const [isButtonActive, setIsButtonActive] = useState(false);
   const [localMovie, setLocalMovie] = useState(movieProp);
 
   // Handle click to set the movie
@@ -53,61 +53,50 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, index }) => {
     }
   };
 
-  // Activate button when card is focused
-  const isFocused = movie?._id._id === movieProp._id._id; // Check if this card is focused
+  // Handle if the card is focused
+  const isFocused = movie?._id._id === movieProp._id._id;
 
-  useEffect(() => {
-    if (isFocused) {
-      setIsButtonActive(true);
-    } else {
-      setIsButtonActive(false);
-    }
-  }, [isFocused]);
-
-  // Handle key events for ArrowUp and ArrowDown
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!movieList || movieList.length === 0) return;
-
-      const currentIndex = movieList.findIndex(
-        (m) => m._id._id === movie?._id._id
-      );
-
-      let nextIndex = currentIndex;
-
-      if (e.key === "ArrowDown" && currentIndex !== -1) {
-        nextIndex = Math.min(currentIndex + 1, movieList.length - 1);
-      }
-
-      if (e.key === "ArrowUp" && currentIndex !== -1) {
-        nextIndex = Math.max(currentIndex - 1, 0);
-      }
-
-      if (nextIndex !== currentIndex) {
-        const nextMovie = movieList[nextIndex];
-        setMovie(nextMovie);
-
-        // Asegúrate de enfocar el siguiente componente
-        const nextButton = document.getElementById(nextMovie._id._id);
-        nextButton?.focus();
-      }
-    };
-
-    if (isFocused) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [movie, movieList, setMovie, isFocused]);
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     setIsButtonActive(true);
+  //   } else {
+  //     setIsButtonActive(false);
+  //   }
+  // }, [isFocused]);
 
   return (
     <div
       ref={buttonRef}
       id={movieProp._id._id}
-      tabIndex={0} // Hacer que sea enfocable
+      tabIndex={0}
       onClick={handleClick}
+      onKeyDown={(e) => {
+        if (!movieList || movieList.length === 0) return;
+
+        const currentIndex = movieList.findIndex(
+          (m) => m._id._id === movieProp._id._id
+        );
+
+        let nextIndex = currentIndex;
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          nextIndex = Math.min(currentIndex + 1, movieList.length - 1);
+        }
+
+        if (e.key === "ArrowUp") {
+          e.preventDefault();
+          nextIndex = Math.max(currentIndex - 1, 0);
+        }
+
+        if (nextIndex !== currentIndex) {
+          const nextMovie = movieList[nextIndex];
+          setMovie(nextMovie);
+
+          const nextButton = document.getElementById(nextMovie._id._id ?? "");
+          nextButton?.focus();
+        }
+      }}
       className={`bg-neutral-100 dark:bg-neutral-950 border-2 border-neutral-400 dark:border-neutral-700 mb-2 md:mb-3 p-3 md:py-2
         md:px-4 rounded-lg outline outline-none hover:outline-offset-3 ${
           isFocused
@@ -139,7 +128,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp, index }) => {
           className="text-lg lg:text-lg text-blue-700 dark:text-orange-500 hover:text-blue-900 dark:hover:text-orange-700"
           href={`/edit-movie/${movieProp._id._id}`}
         >
-          <AiOutlineEdit />{" "}
+          <AiOutlineEdit />
         </Link>
       </div>
     </div>
