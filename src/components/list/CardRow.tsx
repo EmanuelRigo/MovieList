@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
@@ -15,15 +15,12 @@ interface CardRowProps {
 export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
   const { setMovie, movie, movieList } = useMovieContext();
-  // const [isButtonActive, setIsButtonActive] = useState(false);
   const [localMovie, setLocalMovie] = useState(movieProp);
 
-  // Handle click to set the movie
   const handleClick = () => {
     setMovie(movieProp);
   };
 
-  // Handle check click
   const handleCheckClick = async (e: React.MouseEvent) => {
     e.stopPropagation();
     const updatedMovie = { checked: !localMovie.checked };
@@ -53,16 +50,13 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
     }
   };
 
-  // Handle if the card is focused
   const isFocused = movie?._id._id === movieProp._id._id;
 
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     setIsButtonActive(true);
-  //   } else {
-  //     setIsButtonActive(false);
-  //   }
-  // }, [isFocused]);
+  useEffect(() => {
+    if (isFocused && buttonRef.current) {
+      buttonRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [isFocused]);
 
   return (
     <div
@@ -92,7 +86,6 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
         if (nextIndex !== currentIndex) {
           const nextMovie = movieList[nextIndex];
           setMovie(nextMovie);
-
           const nextButton = document.getElementById(nextMovie._id._id ?? "");
           nextButton?.focus();
         }
@@ -104,7 +97,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
             : ""
         } hover:border-blue-700 dark:hover:border-yellow-500 hover:cursor-pointer flex justify-between w-full`}
     >
-      <div className="flex items-center gap-2 ">
+      <div className="flex items-center gap-2">
         <button
           onClick={handleCheckClick}
           className="focus:outline-none text-neutral-500 dark:text-neutral-400"

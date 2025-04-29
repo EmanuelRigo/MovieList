@@ -47,7 +47,7 @@ const page = async () => {
 
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen  w-full bg-neutral-300 dark:bg-neutral-950 flex flex-col p-4 gap-4">
-      <div className="flex h-48">
+      <div className="flex">
         <div className="flex-grow flex flex-col justify-between pe-3 bg-red gap-3">
           <div className="flex justify-between items-center">
             <Link href="/" className="pe-3">
