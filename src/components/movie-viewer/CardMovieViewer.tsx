@@ -42,9 +42,9 @@ const CardMovieViewer: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-full  justify-between bg-green-500">
+    <div className="flex flex-col h-full  justify-between ">
       {/* Imagen */}
-      <div className="relative aspect-h-6-9 rounded-lg shrink-0 1">
+      <div className="relative aspect-h-6-9 rounded-lg shrink-0 ">
         {movie._id.poster_path ? (
           <Image
             loader={myLoader}
@@ -62,7 +62,7 @@ const CardMovieViewer: React.FC = () => {
         )}
       </div>
 
-      <div className="flex flex-col  bg-yellow-500 min-h-0 shrink-0 2">
+      <div className="flex flex-col min-h-0 shrink-0 pt-3">
         <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
           {movie._id.title}
         </h3>
@@ -72,8 +72,8 @@ const CardMovieViewer: React.FC = () => {
         </div>
       </div>
       {/* Overview con scroll interno */}
-      <div className="overflow-y-auto min-h-0 scrollbar-hidden bg-pink-500 shrink-[2] grow-[2] 3">
-        <p className="text-xs text-black dark:text-white p-2">
+      <div className="overflow-y-auto min-h-0 scrollbar-hidden shrink-[2] grow-[2]">
+        <p className="text-xs text-black dark:text-white">
           {movie._id.overview}
         </p>
       </div>

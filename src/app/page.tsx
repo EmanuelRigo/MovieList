@@ -40,22 +40,21 @@ export default async function Home() {
   }
 
   return (
-    <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
+    <div className="h-[calc(100vh-56px)] lg:h-screen w-screen flex flex-col overflow-hidden justify-center">
+      {/* <div className="flex-1 w-full container mx-auto grid grid-cols-1 md-grid-template gap-4 p-4 rounded-xl bg-neutral-300 dark:bg-neutral-900"> */}
       <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4">
         {/* Menú */}
-        <div className="h-full w-full flex flex-col justify-between mb-8 lg:mb-auto">
+        <div className="flex flex-col justify-between">
           <FooterMainMenu />
         </div>
 
         {/* Lista de películas */}
-        <div className="hidden lg:block h-full">
-          <div className="flex flex-grow-1 h-full">
-            <MovieListClient list={movies} /> {/* Pasamos movies como prop */}
-          </div>
+        <div className="hidden lg:block h-full overflow-auto">
+          <MovieListClient list={movies} />
         </div>
 
         {/* Viewer de películas */}
-        <div className="h-full hidden lg:block">
+        <div className="hidden lg:block h-full overflow-auto">
           <CardMovieViewer />
         </div>
       </div>

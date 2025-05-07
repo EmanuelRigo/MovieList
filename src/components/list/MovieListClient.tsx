@@ -33,7 +33,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   }, [movieList]);
 
   return (
-    <div className="relative flex-grow scrollbar-hidden overflow-auto scroll-smooth scroll-duration-600">
+    <div className="relative h-full w-full flex-grow scrollbar-hidden overflow-auto scroll-smooth scroll-duration-600">
       <div className="w-full h-full absolute">
         {movieList.length > 0 ? (
           movieList.map((element, index) => (
