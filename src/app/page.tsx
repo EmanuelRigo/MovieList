@@ -40,7 +40,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="h-[calc(100vh-56px)] lg:h-screen w-screen flex flex-col overflow-hidden justify-center">
+    <div className="h-svh w-screen flex flex-col overflow-hidden justify-center">
       {/* <div className="flex-1 w-full container mx-auto grid grid-cols-1 md-grid-template gap-4 p-4 rounded-xl bg-neutral-300 dark:bg-neutral-900"> */}
       <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4">
         {/* Menú */}
@@ -49,7 +49,7 @@ export default async function Home() {
         </div>
 
         {/* Lista de películas */}
-        <div className="hidden lg:block h-full overflow-auto">
+        <div className="hidden lg:block h-full w-full overflow-auto">
           <MovieListClient list={movies} />
         </div>
 
