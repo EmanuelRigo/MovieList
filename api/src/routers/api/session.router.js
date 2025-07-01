@@ -171,7 +171,7 @@ async function deleteAccount(req, res) {
 
 function signout(req, res) {
   for (const cookie in req.cookies) {
-    res.clearCookie(cookie, { sameSite: "None", secure: true });
+    res.clearCookie(cookie, { sameSite: "none", secure: true });
   }
   return res
     .status(200)
