@@ -1,8 +1,8 @@
 import express from "express";
-import http from "http";
+// import http from "http";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
-import cors from 'cors';
+import cors from "cors";
 import indexRouter from "./routers/api/index.router.js";
 import MongoSingleton from "./utils/mongoDB.utils.js";
 import pathHandler from "./middlewares/pathHandler.middleware.js";
@@ -26,15 +26,12 @@ app.use(cookieParser(envsUtils.SECRET_KEY));
 // })
 //CORS
 
-
 // app.use(cors({ origin: true, credentials: true }));
-
 
 // const allowedOrigins = [
 //   "http://localhost:3000", // Desarrollo local
 //   "https://movie-list-pphmzfnq8-emanuelrigos-projects.vercel.app", // Producción
 // ];
-
 
 // app.use(
 //   cors({
@@ -49,12 +46,12 @@ app.use(cookieParser(envsUtils.SECRET_KEY));
 //   })
 // );
 
-
 app.use(
   cors({
     origin: (origin, callback) => {
       const allowedOrigins = [
         "http://localhost:3000", // Desarrollo local
+        "http://localhost:3001",
         "https://movie-list-jade-kappa.vercel.app", // Producción
       ];
 

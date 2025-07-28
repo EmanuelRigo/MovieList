@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
     const token = getCookie("onlineUser");
     if (token) {
       console.log("onlineUser");
-      // router.push("/");
+      router.push("/");
     }
   }, [router]);
 

@@ -78,7 +78,7 @@ class SessionRouter extends CustomRouter {
       ["PUBLIC"],
       passportCb("google", { scope: ["email", "profile"] })
     );
-
+    //GOOGLE-CB
     this.read(
       "/google/cb",
       ["PUBLIC"],
@@ -163,7 +163,7 @@ async function update(req, res) {
 
 async function deleteAccount(req, res) {
   for (const cookie in req.cookies) {
-    res.clearCookie(cookie, { sameSite: "None", secure: true });
+    res.clearCookie(cookie, { sameSite: "none", secure: true });
   }
   const message = "Account Deleted";
   return res.json200(req.user, "Account deleted");
