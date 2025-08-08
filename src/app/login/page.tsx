@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import Link from "next/link";
 import { loginUser } from "@/components/widgets/users.api";
 import { useRouter } from "next/navigation";
@@ -17,11 +17,10 @@ const LoginPage: React.FC = () => {
   const [error, setError] = useState(""); // Estado para el error de login
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const token = getCookie("onlineUser");
     if (token) {
-      console.log("onlineUser");
-      router.push("/");
+      router.replace("/"); // replace evita que pueda volver con "Atrás"
     }
   }, [router]);
 

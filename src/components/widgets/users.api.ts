@@ -2,7 +2,6 @@ import { User } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
 const BACKEND_URL = envsUtils.BACKEND_URL;
-console.log("🚀 ~ API_URL:", BACKEND_URL);
 
 export async function createUser(userData: User): Promise<Response> {
   console.log("🚀 ~ envsUtils:", envsUtils);
@@ -20,7 +19,6 @@ export async function loginUser(credentials: {
   email: string;
   password: string;
 }): Promise<Response> {
-  console.log("🚀 ~ loginUser ~ credentials:", credentials);
   const res = await fetch(`${BACKEND_URL}/api/sessions/login`, {
     method: "POST",
 
@@ -67,7 +65,6 @@ export async function updateUserPassword(
 
 export async function checkOnlineStatus(): Promise<Response> {
   const res = await fetch(`${BACKEND_URL}/api/sessions/online`, {
-    // CORREGIDO: uso de backticks
     method: "POST",
     credentials: "include",
     headers: {
