@@ -1,14 +1,17 @@
-import { Movie, MovieDB, UserMovie, UserMoviesResponse, UserMovieResponse } from "@/context/interfaces/movieTypes";
+import {
+  Movie,
+  MovieDB,
+  UserMovie,
+  UserMoviesResponse,
+  UserMovieResponse,
+} from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
-
-
 
 // const BACKEND_URL = "https://movie-list-jade-kappa.vercel.app";
 // const BACKEND_URL = "";
 // const BACKEND_URL = "http://localhost:9000"
-const BACKEND_URL = envsUtils.BACKEND_URL // CORREGIDO: uso de envsUtils para obtener la URL del backend
-console.log("🚀 ~ BACKEND_URL:", BACKEND_URL)
-
+const BACKEND_URL = envsUtils.BACKEND_URL; // CORREGIDO: uso de envsUtils para obtener la URL del backend
+console.log("🚀 ~ BACKEND_URL:", BACKEND_URL);
 
 // USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {
@@ -28,6 +31,7 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
 }
 
 export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
+  console.log("🚀 ~ getMovieUser ~ mid:", mid);
   const res = await fetch(`${BACKEND_URL}/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
@@ -43,7 +47,9 @@ export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
   return data;
 }
 
-export async function CreateMovie(movieData: MovieDB): Promise<UserMovieResponse> {
+export async function CreateMovie(
+  movieData: MovieDB
+): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
     method: "PUT",
     credentials: "include",
@@ -56,7 +62,10 @@ export async function CreateMovie(movieData: MovieDB): Promise<UserMovieResponse
   return data;
 }
 
-export async function getMovieByIdUpdate(mid: string, movieData: UserMovie): Promise<UserMovieResponse> {
+export async function getMovieByIdUpdate(
+  mid: string,
+  movieData: UserMovie
+): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${mid}`, {
     method: "PUT",
     headers: {
