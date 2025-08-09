@@ -4,11 +4,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaFilm } from "react-icons/fa"; // Importa el ícono de react-icons
+import { FaFilm, FaImage, FaTimes } from "react-icons/fa";
 
 const MiniCardViewer = () => {
   const { movie } = useMovieContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const myLoader = ({
     src,
@@ -31,6 +32,10 @@ const MiniCardViewer = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleToggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
   };
 
   if (movie && movie._id) {
@@ -103,14 +108,43 @@ const MiniCardViewer = () => {
                   BLU-RAY
                 </span>
               </p>
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-between mt-4">
+                <button
+                  onClick={handleToggleFullScreen}
+                  className="p-2 text-blue-500 dark:text-yellow-500 text-4xl"
+                >
+                  <FaImage />
+                </button>
                 <button
                   onClick={handleCloseModal}
                   className="p-2 text-blue-500 dark:text-yellow-500 text-4xl"
                 >
-                  <IoIosArrowBack></IoIosArrowBack>
+                  <IoIosArrowBack />
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {isFullScreen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-90 p-4">
+            <button
+              onClick={handleToggleFullScreen}
+              className="absolute top-4 right-4 text-white text-4xl z-10"
+            >
+              <FaTimes />
+            </button>
+            <div
+              className="relative w-full h-full"
+              onClick={handleToggleFullScreen}
+            >
+              <Image
+                loader={myLoader}
+                src={imagePath || "/images/default-backdrop.jpg"}
+                layout="fill"
+                objectFit="contain"
+                alt={movie._id.title || "Movie Poster"}
+              />
             </div>
           </div>
         )}
