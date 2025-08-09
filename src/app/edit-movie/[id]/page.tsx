@@ -2,8 +2,8 @@ import { getMovieUser } from "@/components/widgets/movies.api";
 import { cookies } from "next/headers";
 import EditMovieCard from "@/components/edit-movie/EditMovieCard";
 
-const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
 
   const nextCookies = await cookies();
   const cookieHeader = nextCookies.get("token")?.value;

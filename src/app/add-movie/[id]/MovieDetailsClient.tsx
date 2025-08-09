@@ -14,6 +14,7 @@ import { Movie, MovieDB } from "@/context/interfaces/movieTypes";
 export default function MovieDetailsClient({ movie }: { movie: Movie }) {
   const [movieToAdd, setMovieToAdd] = useState<MovieDB>({
     _id: {
+      _id: "",
       id: movie.id,
       title: movie.title,
       release_date: movie.release_date,
