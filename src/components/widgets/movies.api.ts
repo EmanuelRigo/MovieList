@@ -30,19 +30,27 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
   return data;
 }
 
-export async function getMovieUser(mid: string): Promise<UserMovieResponse> {
+export async function getMovieUser(
+  mid: string,
+  options?: { headers?: Record<string, string> }
+): Promise<UserMovieResponse> {
   console.log("🚀 ~ getMovieUser ~ mid:", mid);
+
   const res = await fetch(`${BACKEND_URL}/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      ...(options?.headers || {}),
     },
-    credentials: "include",
+    // No es necesario credentials: include en server side
   });
+
   console.log("🚀 ~ getMovieUser ~ res:", res);
+
   if (!res.ok) {
     throw new Error("Failed to get movie");
   }
+
   const data = await res.json();
   return data;
 }
