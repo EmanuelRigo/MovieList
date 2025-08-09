@@ -46,7 +46,7 @@ const MiniCardViewer = () => {
     return (
       <>
         <div
-          className="relative h-full w-full overflow-hidden"
+          className="relative h-full w-full overflow-hidden rounded-md"
           onClick={handleImageClick}
         >
           <Image
@@ -56,6 +56,7 @@ const MiniCardViewer = () => {
             style={{ objectFit: "cover" }}
             alt={movie._id.title || "Movie Poster"}
             sizes="(max-width: 768px) 100vw, 50vw"
+            className="rounded-md"
           />
         </div>
 
@@ -127,17 +128,17 @@ const MiniCardViewer = () => {
         )}
 
         {isFullScreen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-90 p-4">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-90 p-4"
+            onClick={handleToggleFullScreen}
+          >
             <button
               onClick={handleToggleFullScreen}
               className="absolute top-4 right-4 text-white text-4xl z-10"
             >
               <FaTimes />
             </button>
-            <div
-              className="relative w-full h-full"
-              onClick={handleToggleFullScreen}
-            >
+            <div className="relative w-full h-2/3">
               <Image
                 loader={myLoader}
                 src={imagePath || "/images/default-backdrop.jpg"}
