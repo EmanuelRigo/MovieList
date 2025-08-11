@@ -4,7 +4,6 @@ import envsUtils from "@/utils/envs.utils";
 const BACKEND_URL = envsUtils.BACKEND_URL;
 
 export async function createUser(userData: User): Promise<Response> {
-  console.log("🚀 ~ envsUtils:", envsUtils);
   const res = await fetch(`${BACKEND_URL}/api/sessions/register`, {
     method: "POST",
     headers: {

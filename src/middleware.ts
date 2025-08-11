@@ -54,11 +54,11 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/", // Home privado
+    "/",
     "/list",
     "/add-movie/:path*",
     "/edit-movie/:path*",
-    "/login", // Login público
-    "/register", // Registro público
+    // "/login", // Login público
+    // "/register", // Registro público
   ],
 };

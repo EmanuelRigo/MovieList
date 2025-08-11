@@ -12,8 +12,6 @@ export default function MovieList({ list }: MovieListProps) {
   const { movieList, setMovieList } = useMovieContext();
 
   useEffect(() => {
-    console.log("🚀 ~ props list:", list);
-
     if (movieList.length === 0 && list.length > 0) {
       setMovieList(list);
       console.log("✅ setMovieList ejecutado.");

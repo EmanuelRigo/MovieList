@@ -57,7 +57,6 @@ export const FooterMainMenu = () => {
       await logoutUser();
       const cookies = document.cookie.split("; ");
       for (const cookie of cookies) {
-        console.log("🚀 ~ handleLogout ~ cookie:", cookie);
         const eqPos = cookie.indexOf("=");
         const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
@@ -67,10 +66,6 @@ export const FooterMainMenu = () => {
       console.error("Error during logout:", error);
     }
   };
-
-  // const handleSearchByYear = (year: string) => {
-  //   console.log("Searching movies from year:", year);
-  // };
 
   return (
     <div

@@ -37,9 +37,10 @@ class UserMoviesServices {
       await userMovies.save();
       return userMovies;
     } catch (error) {
-      console.error("Error in removeMovie service:", error);    
+      console.error("Error in removeMovie service:", error);
       throw error;
-    }}
+    }
+  }
 
   async update(id, data) {
     return await userMoviesDao.update(id, data);
@@ -56,30 +57,27 @@ class UserMoviesServices {
 
   async getByUserIdAndDelete(user_id) {
     const deleted = await userMoviesDao.getByUserIdAndDelete(user_id);
-  
+
     if (!deleted) {
       throw new Error("No se encontró ningún registro para eliminar.");
     }
-  
+
     return {
       success: true,
       message: "Películas del usuario eliminadas correctamente",
       data: deleted,
     };
   }
-  
 
   async getByUserIdAndMovieId(user_id, movie_id) {
     // Método adicional para obtener el documento `userMovies` por `user_id` y `movie_id`
     try {
-      const userMovies = await userMoviesDao.getById(user_id)
-      console.log("🚀 ~ UserMoviesServices ~ getByUserIdAndMovieId ~ userMovies:", userMovies)
-      const userMovie = userMovies.movies.find(_id == movie_id)
-      console.log("🚀 ~ UserMoviesServices ~ getByUserIdAndMovieId ~ movie:", userMovie)
-      return userMovie
-    } catch (error){
-      console.error("Error in getUserMovie", error)
-      throw error
+      const userMovies = await userMoviesDao.getById(user_id);
+      const userMovie = userMovies.movies.find(_id == movie_id);
+      return userMovie;
+    } catch (error) {
+      console.error("Error in getUserMovie", error);
+      throw error;
     }
   }
 
@@ -89,20 +87,20 @@ class UserMoviesServices {
       if (!userMovies) {
         throw new Error("User movies not found");
       }
-  
+
       const movie = userMovies.movies.find(
         (m) => m._id._id.toString() === movie_id
       );
       if (!movie) {
         throw new Error("Movie not found in user's movies");
       }
-  
+
       // Actualizar los campos de la película
       Object.assign(movie, data);
-  
+
       // Guardar los cambios
       await userMovies.save();
-  
+
       // Retornar solo la película actualizada
       return movie;
     } catch (error) {
@@ -110,8 +108,6 @@ class UserMoviesServices {
       throw error;
     }
   }
-
-
 }
 
 const userMoviesServices = new UserMoviesServices();

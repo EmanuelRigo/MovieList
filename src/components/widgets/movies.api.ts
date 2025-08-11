@@ -7,11 +7,7 @@ import {
 } from "@/context/interfaces/movieTypes";
 import envsUtils from "@/utils/envs.utils";
 
-// const BACKEND_URL = "https://movie-list-jade-kappa.vercel.app";
-// const BACKEND_URL = "";
-// const BACKEND_URL = "http://localhost:9000"
-const BACKEND_URL = envsUtils.BACKEND_URL; // CORREGIDO: uso de envsUtils para obtener la URL del backend
-console.log("🚀 ~ BACKEND_URL:", BACKEND_URL);
+const BACKEND_URL = envsUtils.BACKEND_URL;
 
 // USERMOVIES
 export async function getUserMovies(): Promise<UserMoviesResponse> {
@@ -22,11 +18,8 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
       "Content-Type": "application/json",
     },
   });
-  console.log("🚀 ~ getUserMovies ~ res:", res);
 
   const data = await res.json();
-  console.log("🚀 ~ getUserMovies ~ data:", data);
-
   return data;
 }
 
@@ -34,18 +27,13 @@ export async function getMovieUser(
   mid: string,
   options?: { headers?: Record<string, string> }
 ): Promise<UserMovieResponse> {
-  console.log("🚀 ~ getMovieUser ~ mid:", mid);
-
   const res = await fetch(`${BACKEND_URL}/api/usermovies/movies/${mid}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       ...(options?.headers || {}),
     },
-    // No es necesario credentials: include en server side
   });
-
-  console.log("🚀 ~ getMovieUser ~ res:", res);
 
   if (!res.ok) {
     throw new Error("Failed to get movie");
@@ -86,9 +74,6 @@ export async function getMovieByIdUpdate(
     throw new Error("Failed to update movie.");
   }
   const data = await res.json();
-  console.log("🚀 ~ getMovieByIdUpdate ~ res:", res);
-  console.log("🚀 ~ data:", data);
-
   return data;
 }
 

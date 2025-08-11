@@ -52,7 +52,6 @@ const SettingsMenuModal = () => {
         document.documentElement.classList.remove("dark");
         document.cookie = "mode=light; path=/";
         setIsDarkMode(false); // 👈 actualizar estado
-        console.log("Modo claro activado", response);
       }
     } else {
       const response = await updateUser({ mode: "dark" });
@@ -60,7 +59,6 @@ const SettingsMenuModal = () => {
         document.documentElement.classList.add("dark");
         document.cookie = "mode=dark; path=/";
         setIsDarkMode(true); // 👈 actualizar estado
-        console.log("Modo oscuro activado", response);
       }
     }
   };

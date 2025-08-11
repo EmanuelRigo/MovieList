@@ -33,15 +33,14 @@ const LoginPage: React.FC = () => {
         password,
       };
       const response = await loginUser(credentials);
-      console.log("🚀🚀🚀  ~ handleLogin ~ response:", response);
 
       if (response.ok) {
         console.log("Inicio de sesión exitoso");
-        setError(""); // Limpiamos el error en caso de éxito
+        setError("");
         window.location.href = "/";
       } else {
         console.error("Error en el inicio de sesión");
-        setError("Email o contraseña incorrecta."); // Actualizamos el estado con el error
+        setError("Email o contraseña incorrecta.");
       }
     } catch (error) {
       console.error("Error en el inicio de sesión:", error);

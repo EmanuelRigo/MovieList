@@ -83,7 +83,6 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
         }
 
         const data = await CreateMovie(movieToAdd);
-        console.log("🚀 ~ checkFormats ~ data:", data);
 
         if (data) {
           setModalMessage(data.message);

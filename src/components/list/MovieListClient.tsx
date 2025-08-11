@@ -27,7 +27,6 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
     }
   }, [list, movieList, setMovieList]);
 
-  // Debug: ver cambios en movieList
   useEffect(() => {
     console.log("🎬 movieList actual:", movieList);
   }, [movieList]);

@@ -38,7 +38,6 @@ const page = async () => {
     } else {
       const moviesData = await res.json();
       movies = moviesData.response.movies;
-      console.log("🚀 ~ Home ~ movies:", movies);
     }
   } catch (error) {
     console.error("Error fetching movies:", error);

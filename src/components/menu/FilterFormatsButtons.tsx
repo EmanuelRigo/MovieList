@@ -9,7 +9,6 @@ const FilterFormatsButtons = () => {
   const { activeFormatFilters, setActiveFormatFilters } = useMovieContext();
 
   const toggleFilter = (formato: "vhs" | "dvd" | "bluray") => {
-    console.log("object3");
     setActiveFormatFilters((prevFilters) => {
       const updatedFilters = {
         ...prevFilters,
@@ -27,7 +26,6 @@ const FilterFormatsButtons = () => {
           activeFormatFilters.vhs ? "font-bold" : "opacity-20"
         }`}
         onClick={() => {
-          console.log("vhs!!!!!!!!!!!!!!!!");
           toggleFilter("vhs");
         }}
       >
