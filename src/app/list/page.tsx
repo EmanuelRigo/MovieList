@@ -1,4 +1,3 @@
-// import SearchBar from "@/components/widgets/SearchBar";
 import SearchBarWidget from "@/components/widgets/SearchBarWidget";
 import MiniCardViewer from "@/components/list/MiniCardViewer";
 import RandomButton from "@/components/menu/RandomButton";

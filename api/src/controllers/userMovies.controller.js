@@ -25,32 +25,23 @@ class UserMoviesController {
     const data = req.body;
 
     const { _id, formats } = req.body;
-    console.log("🚀 ~ UserMoviesController ~ addMovie ~ id:", _id.id)
-    
+
     try {
       const token = req.cookies.token;
       if (!token) {
         return res.json401("No token provided");
       }
-  
+
       const decoded = jwt.verify(token, envsUtils.SECRET_KEY);
       const user_id = decoded.user_id;
-  
+
       async function checkExistsInUserMovies(movieToAdd) {
-        console.log("🚀 ~ UserMoviesController ~ checkExistsInUserMovies ~ movieToAdd:", movieToAdd);
-  
         const existingUserMovie = await userMoviesServices.getByUserId(user_id);
-        const movieExist =   existingUserMovie.movies.find(
+        const movieExist = existingUserMovie.movies.find(
           (movie) => movie._id._id.toString() === movieToAdd._id.toString()
-        )
-        if (
-          movieExist
-        ) {
-          console.log("::::: YA EXISTE::::::::");
-          return res.json200(
-            movieExist,
-            "Movie already exists"
-          );
+        );
+        if (movieExist) {
+          return res.json200(movieExist, "Movie already exists");
         } else {
           const updatedUserMovies = await userMoviesServices.addMovie(user_id, {
             _id: movieToAdd._id,
@@ -60,15 +51,15 @@ class UserMoviesController {
           return res.json200(updatedUserMovies, "Added to userMovies");
         }
       }
-  
+
       // Verificar si la película ya existe en la colección `movies`
       const existingMovie = await moviesServices.getByIdAPI(_id.id);
       if (existingMovie) {
         return checkExistsInUserMovies(existingMovie); // Agregar `return` para detener la ejecución
       }
-  
+
       // Crear la película si no existe y luego verificar
-      console.log("dataaa:::!!", data)
+
       const newMovie = await moviesServices.create(data._id);
       return checkExistsInUserMovies(newMovie); // Agregar `return` para detener la ejecución
     } catch (error) {
@@ -102,22 +93,22 @@ class UserMoviesController {
       if (!token) {
         return res.json401("No token provided");
       }
-  
+
       const decoded = jwt.verify(token, envsUtils.SECRET_KEY);
       const user_id = decoded.user_id;
-  
+
       const mid = req.params.mid; // ID de la película
       const userMovies = await userMoviesServices.getByUserId(user_id);
-      console.log("🚀 ~ UserMoviesController ~ getByTokenAndMovie ~ userMovies:", userMovies.movies);
-  
+
       // Buscar la película específica en el array `movies`
-      const userMovie = userMovies.movies.find((movie) => movie._id._id.toString() === mid);
-      console.log("🚀 ~ UserMoviesController ~ getByTokenAndMovie ~ userMovie:", userMovie)
-  
+      const userMovie = userMovies.movies.find(
+        (movie) => movie._id._id.toString() === mid
+      );
+
       if (!userMovie) {
         return res.json404("Movie not found in user's movies");
       }
-      
+
       return res.json201(userMovie, "User movie read");
     } catch (error) {
       console.error("Error in getByTokenAndMovie:", error);

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-// import SearchBar from "../widgets/SearchBar";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
@@ -93,7 +92,6 @@ export const FooterMainMenu = () => {
       </div>
       <div className="flex-grow flex flex-col gap-4">
         <div>
-          {/* <SearchBar /> */}
           <SearchBarWidget />
         </div>
         <CardMenuMovie />

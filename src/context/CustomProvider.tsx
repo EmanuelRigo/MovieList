@@ -2,14 +2,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { Movie } from "@/context/interfaces/movieTypes";
 
-
 interface CustomContextProps {
   updateCardMovie: (movie: Movie) => void;
   movieList: Movie[];
   setMovieList: (movies: Movie[]) => void;
 }
 
-export const contexto = createContext<CustomContextProps | undefined>(undefined);
+export const contexto = createContext<CustomContextProps | undefined>(
+  undefined
+);
 
 export const useCart = () => {
   const valorDelContexto = useContext(contexto);
@@ -30,7 +31,6 @@ const CustomProvider = ({ children }: CustomProviderProps) => {
 
   const updateCardMovie = (movie: Movie) => {
     setMovieList((prevMovies) => [...prevMovies, movie]);
-    console.log(movie);
   };
 
   const valorDelContexto = { updateCardMovie, movieList, setMovieList };

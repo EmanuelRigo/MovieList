@@ -119,7 +119,6 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, data, done) => {
-      console.log("🚀 ~ req:", req.body)
       try {
         const { user_id } = data;
         const user = await userServices.getById(user_id);
@@ -171,9 +170,6 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, data, done) => {
-      console.log("🚀 ~ data:", data);
-      console.log("📦 ~ req.body:", req.body);
-
       try {
         const { user_id } = data;
         const user = await userServices.getById(user_id);
@@ -187,8 +183,6 @@ passport.use(
 
         // Usás lo que venga por body (lo nuevo que quiere actualizar el usuario)
         const updatedUser = await userServices.update(user_id, req.body);
-        console.log("🚀 ~ updatedUser:", updatedUser);
-
         return done(null, updatedUser);
       } catch (error) {
         return done(null, false, {
@@ -210,13 +204,9 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, data, done) => {
-      console.log("🚀 ~ data:", data);
-      console.log("-reqbody", req.body);
-
       try {
         const { user_id } = data;
         const user = await userServices.getById(user_id);
-        console.log("🚀 ~ user:", user);
         if (!user) {
           const info = {
             message: "INVALID CREDENTIALS1",
@@ -235,13 +225,9 @@ passport.use(
         }
 
         const deletedUser = await userServices.delete(user_id);
-        console.log("🚀 ~ deletedUser:", deletedUser);
         const userMoviesToDelete =
           await userMoviesServices.getByUserIdAndDelete(user_id);
-        console.log("🚀 ~ userMoviesToDelete:", userMoviesToDelete);
 
-        console.log("🚀 ~ user_id:", user_id);
-        // await userServices.delete(user_id);
         return done(null, { message: "User deleted successfully" });
       } catch (error) {
         return done(error);
@@ -311,7 +297,6 @@ passport.use(
       secretOrKey: envsUtils.SECRET_KEY,
     },
     async (data, done) => {
-      console.log("🚀 ~ data:", data);
       try {
         const { user_id } = data;
         const user = await userServices.getById(user_id);

@@ -14,12 +14,11 @@ export default {
         foreground: "var(--foreground)",
       },
       aspectRatio: {
-        '9/16': '9 / 16',
+        "9/16": "9 / 16",
       },
       screens: {
-        '1-5xl': '1600px', 
+        "1-5xl": "1600px",
       },
-
     },
   },
   plugins: [],
