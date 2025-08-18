@@ -59,7 +59,7 @@ export async function CreateMovie(
 }
 
 export async function getMovieByIdUpdate(
-  mid: string,
+  mid: string | undefined,
   movieData: UserMovie
 ): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${mid}`, {
@@ -77,7 +77,9 @@ export async function getMovieByIdUpdate(
   return data;
 }
 
-export async function deleteMovieById(id: string): Promise<Response> {
+export async function deleteMovieById(
+  id: string | undefined
+): Promise<Response> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${id}`, {
     method: "DELETE",
     headers: {
