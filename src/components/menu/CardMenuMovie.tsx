@@ -8,19 +8,19 @@ import { FaFilm } from "react-icons/fa"; // Importa un ícono de react-icons
 const CardMenuMovie = () => {
   const { movie } = useMovieContext();
 
-  const myLoader = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string;
-    width: number;
-    quality?: number;
-  }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
-      quality || 75
-    }`;
-  };
+  // const myLoader = ({
+  //   src,
+  //   width,
+  //   quality,
+  // }: {
+  //   src: string;
+  //   width: number;
+  //   quality?: number;
+  // }) => {
+  //   return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+  //     quality || 75
+  //   }`;
+  // };
 
   if (movie && movie._id) {
     return (

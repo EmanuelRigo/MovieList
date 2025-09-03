@@ -114,15 +114,15 @@ export default function EditMovieCard({ movieData }: EditMovieCardProps) {
     setIsModalOpen(true);
   };
 
-  const myLoader = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string;
-    width: number;
-    quality?: number;
-  }) => `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
+  // const myLoader = ({
+  //   src,
+  //   width,
+  //   quality,
+  // }: {
+  //   src: string;
+  //   width: number;
+  //   quality?: number;
+  // }) => `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${quality || 75}`;
 
   return (
     <div className="w-full 1-5xl:container h-full md:max-h-[956px] 2xl:h-5/6 rounded-lg bg-neutral-300 dark:bg-neutral-900 mx-auto gap-4 p-4 flex flex-col lg:flex-row overflow-auto">
