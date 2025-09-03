@@ -11,21 +11,6 @@ const MiniCardViewer = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const myLoader = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string;
-    width: number;
-    quality?: number;
-  }) => {
-    const url = `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
-      quality || 75
-    }`;
-    return url;
-  };
-
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
@@ -39,24 +24,26 @@ const MiniCardViewer = () => {
   };
 
   if (movie && movie._id) {
+    // Asegura que el path siempre comience con "/"
     const imagePath = movie._id.poster_path?.startsWith("/")
       ? movie._id.poster_path
       : `/${movie._id.poster_path}`;
 
     return (
       <>
+        {/* Imagen principal */}
         <div
           className="relative h-full w-full overflow-hidden rounded-md"
           onClick={handleImageClick}
         >
           <Image
-            loader={myLoader}
-            src={imagePath || "/images/default-backdrop.jpg"}
-            fill
-            style={{ objectFit: "cover" }}
+            src={`https://image.tmdb.org/t/p/w500${imagePath}`}
             alt={movie._id.title || "Movie Poster"}
+            fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="rounded-md"
+            unoptimized
+            className="rounded-md object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+            onLoadingComplete={(img) => img.classList.remove("opacity-0")}
           />
         </div>
 
@@ -82,29 +69,29 @@ const MiniCardViewer = () => {
               <p className="text-black dark:text-neutral-200">
                 <strong>Formats:</strong>{" "}
                 <span
-                  className={`${
+                  className={
                     movie.formats.vhs
                       ? "text-blue-500 dark:text-yellow-500"
                       : "text-neutral-400 dark:text-neutral-600"
-                  }`}
+                  }
                 >
                   VHS
                 </span>{" "}
                 <span
-                  className={`${
+                  className={
                     movie.formats.dvd
                       ? "text-blue-500 dark:text-yellow-500"
                       : "text-neutral-400 dark:text-neutral-600"
-                  }`}
+                  }
                 >
                   DVD
                 </span>{" "}
                 <span
-                  className={`${
+                  className={
                     movie.formats.bluray
                       ? "text-blue-500 dark:text-yellow-500"
                       : "text-neutral-400 dark:text-neutral-600"
-                  }`}
+                  }
                 >
                   BLU-RAY
                 </span>
@@ -127,6 +114,7 @@ const MiniCardViewer = () => {
           </div>
         )}
 
+        {/* Imagen en pantalla completa */}
         {isFullScreen && (
           <div
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 bg-opacity-90 p-4"
@@ -140,11 +128,12 @@ const MiniCardViewer = () => {
             </button>
             <div className="relative w-full h-2/3">
               <Image
-                loader={myLoader}
-                src={imagePath || "/images/default-backdrop.jpg"}
-                layout="fill"
-                objectFit="contain"
+                src={`https://image.tmdb.org/t/p/w500${imagePath}`}
                 alt={movie._id.title || "Movie Poster"}
+                fill
+                unoptimized
+                className="object-contain opacity-0 transition-opacity duration-500 ease-in-out"
+                onLoadingComplete={(img) => img.classList.remove("opacity-0")}
               />
             </div>
           </div>
@@ -154,7 +143,6 @@ const MiniCardViewer = () => {
   } else {
     return (
       <h1 className="flex justify-center items-center text-4xl text-neutral-400 dark:text-neutral-700">
-        {" "}
         <FaFilm />
       </h1>
     );

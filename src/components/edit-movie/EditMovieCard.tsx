@@ -129,12 +129,17 @@ export default function EditMovieCard({ movieData }: EditMovieCardProps) {
       {/* Poster */}
       <div className="relative flex h-full p-4 aspect-h-6-9">
         <Image
-          loader={myLoader}
-          src={movieToEdit._id.poster_path || "/images/poster.jpg"}
+          src={
+            movieToEdit._id.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movieToEdit._id.poster_path}`
+              : "/images/poster.jpg"
+          }
           alt={movieToEdit._id.title || "Movie Poster"}
           fill
           priority
-          className="object-cover rounded-lg"
+          unoptimized
+          className="object-cover rounded-lg opacity-0 transition-opacity duration-500 ease-in-out"
+          onLoadingComplete={(img) => img.classList.remove("opacity-0")}
         />
       </div>
 

@@ -31,7 +31,7 @@ const CheckedFilter = ({ className = "" }: CheckedFilterProps) => {
       )}
       {showChecked === null && (
         <>
-          <FaRegDotCircle className="text-neutral-300 text-2xl" />
+          <FaRegDotCircle className="text-neutral-500 dark:text-neutral-300 text-2xl" />
           <span className="lg:hidden">All</span>
         </>
       )}

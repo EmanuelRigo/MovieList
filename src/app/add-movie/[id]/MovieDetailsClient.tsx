@@ -141,7 +141,9 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
               alt={movie.title}
               fill
               priority
-              className="rounded-lg object-cover"
+              unoptimized
+              className="rounded-lg object-cover opacity-0 transition-opacity duration-500 ease-in-out"
+              onLoadingComplete={(img) => img.classList.remove("opacity-0")}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-neutral-200 dark:bg-neutral-800 rounded-lg">
