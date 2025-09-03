@@ -37,6 +37,7 @@ const MiniCardViewer = () => {
           onClick={handleImageClick}
         >
           <Image
+            key={imagePath} // 🔑 fuerza el remount cuando cambia la imagen
             src={`https://image.tmdb.org/t/p/w500${imagePath}`}
             alt={movie._id.title || "Movie Poster"}
             fill
