@@ -116,19 +116,19 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
     });
   };
 
-  const myLoader = ({
-    src,
-    width,
-    quality,
-  }: {
-    src: string;
-    width: number;
-    quality?: number;
-  }) => {
-    return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
-      quality || 75
-    }`;
-  };
+  // const myLoader = ({
+  //   src,
+  //   width,
+  //   quality,
+  // }: {
+  //   src: string;
+  //   width: number;
+  //   quality?: number;
+  // }) => {
+  //   return `https://image.tmdb.org/t/p/w500${src}?w=${width}&q=${
+  //     quality || 75
+  //   }`;
+  // };
 
   return (
     <div className="h-[calc(100vh-56px)] lg:h-screen overflow-auto w-screen flex items-center">
@@ -136,8 +136,11 @@ export default function MovieDetailsClient({ movie }: { movie: Movie }) {
         <div className="relative flex rounded-lg h-full aspect-h-6-9">
           {movie.poster_path ? (
             <Image
-              loader={myLoader}
-              src={movie.poster_path ? movie.poster_path : "/images/poster.jpg"}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : "/images/poster.jpg"
+              }
               alt={movie.title}
               fill
               priority
