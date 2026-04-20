@@ -18,9 +18,21 @@ class MovieController {
     }
   }
 
+  async getByIdAPI(req, res) {
+    const mid = req.params.mid;
+    console.log("🚀 ~ MovieController ~ getByIdAPI ~ mid:", mid);
+    const response = await moviesServices.getByIdAPI(mid);
+    const message = "movie read";
+    if (response) {
+      return res.json201(response, message);
+    } else {
+      return res.json404();
+    }
+  }
+
   async create(req, res) {
     const message = "movie created";
-    const data = req.body;  
+    const data = req.body;
 
     const response = await moviesServices.create(data);
 
@@ -65,8 +77,6 @@ class MovieController {
       return res.json404();
     }
   }
-
-
 }
 
 export const movieController = new MovieController();

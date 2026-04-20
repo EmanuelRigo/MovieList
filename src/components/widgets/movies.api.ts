@@ -25,7 +25,7 @@ export async function getUserMovies(): Promise<UserMoviesResponse> {
 
 export async function getMovieUser(
   mid: string,
-  options?: { headers?: Record<string, string> }
+  options?: { headers?: Record<string, string> },
 ): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/usermovies/movies/${mid}`, {
     method: "GET",
@@ -44,7 +44,7 @@ export async function getMovieUser(
 }
 
 export async function CreateMovie(
-  movieData: MovieDB
+  movieData: MovieDB,
 ): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies`, {
     method: "PUT",
@@ -60,7 +60,7 @@ export async function CreateMovie(
 
 export async function getMovieByIdUpdate(
   mid: string | undefined,
-  movieData: UserMovie
+  movieData: UserMovie,
 ): Promise<UserMovieResponse> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${mid}`, {
     method: "PUT",
@@ -78,7 +78,7 @@ export async function getMovieByIdUpdate(
 }
 
 export async function deleteMovieById(
-  id: string | undefined
+  id: string | undefined,
 ): Promise<Response> {
   const res = await fetch(`${BACKEND_URL}/api/userMovies/movies/${id}`, {
     method: "DELETE",
@@ -90,6 +90,27 @@ export async function deleteMovieById(
   if (!res.ok) {
     throw new Error("Failed to delete movie.");
   }
+  const data = await res.json();
+  return data;
+}
+
+export async function getMovieByIdAPI(
+  mid: string,
+  options?: { headers?: Record<string, string> },
+): Promise<UserMovieResponse> {
+  console.log("🚀 ~ getMovieByIdAPI ~ mid:", mid);
+  const res = await fetch(`${BACKEND_URL}/api/movies/movieidapi/${mid}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      ...(options?.headers || {}),
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to get movie");
+  }
+
   const data = await res.json();
   return data;
 }

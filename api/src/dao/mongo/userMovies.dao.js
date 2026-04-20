@@ -13,6 +13,19 @@ class UserMoviesDao {
     return userMovies;
   }
 
+  async getByIdApi(id) {
+    const userMovies = await userMoviesModel.findById(id).populate("movies.id");
+    return userMovies;
+  }
+
+  async getUserMovieById(user_id, movie_id) {
+    const userMovies = await userMoviesModel
+      .findOne({ user_id: user_id, "movies.id": movie_id }, { "movies.$": 1 })
+      .populate("movies.id");
+
+    return userMovies ? userMovies.movies[0] : null;
+  }
+
   async getByEmail(email) {
     const user = await userMoviesModel.findOne({ email: email });
     return user;
@@ -26,8 +39,9 @@ class UserMoviesDao {
   }
 
   async getByUserIdAndDelete(user_id) {
-    const userMovies = await userMoviesModel
-      .findOneAndDelete({ user_id: user_id })
+    const userMovies = await userMoviesModel.findOneAndDelete({
+      user_id: user_id,
+    });
     return userMovies;
   }
 
@@ -52,12 +66,11 @@ class UserMoviesDao {
     const updatedUserMovies = await userMoviesModel.findOneAndUpdate(
       { user_id: user_id },
       { $push: { movies: movie } },
-      { new: true }
+      { new: true },
     );
 
     return updatedUserMovies;
   }
-
 }
 
 export const userMoviesDao = new UserMoviesDao();

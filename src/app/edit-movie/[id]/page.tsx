@@ -4,6 +4,7 @@ import EditMovieCard from "@/components/edit-movie/EditMovieCard";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
+  console.log("🚀 ~ Page ~ id:", id);
 
   const nextCookies = await cookies();
   const cookieHeader = nextCookies.get("token")?.value;

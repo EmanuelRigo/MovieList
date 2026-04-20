@@ -34,7 +34,9 @@ class CustomRouter {
   policies = (policies) => async (req, res, next) => {
     try {
       if (policies.includes("PUBLIC")) return next();
+      console.log("🚀 ~ CustomRouter ~ cookies:", req.cookies);
       const token = req?.cookies?.token;
+      console.log("🚀 ~ CustomRouter ~ token:", token);
       if (!token) return res.json401();
       const data = jwt.verify(token, envUtil.SECRET_KEY);
       const { role, user_id } = data;

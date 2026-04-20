@@ -9,6 +9,7 @@ class MovieRouter extends CustomRouter {
   init = () => {
     this.read("/", ["USER"], movieController.getAll);
     this.read("/:mid", ["USER"], movieController.getById);
+    this.read("/movieidapi/:mid", ["USER"], movieController.getByIdAPI);
     this.create("/", ["ADMIN", "USER"], movieController.create);
     this.update("/:mid", ["ADMIN"], movieController.update);
     this.destroy("/:mid", ["ADMIN"], movieController.deleteOne);
