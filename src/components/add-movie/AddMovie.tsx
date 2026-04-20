@@ -104,7 +104,6 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
         router.push(`/add-movie/${movieId}`);
       }
     } catch (error) {
-      // Si hay error (posiblemente no encontrada), vamos a agregar por defecto
       console.log(
         "No se encontró la película en la DB personal, redirigiendo a /add-movie",
         error,
