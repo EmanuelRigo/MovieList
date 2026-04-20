@@ -101,6 +101,7 @@ export async function getMovieByIdAPI(
   console.log("🚀 ~ getMovieByIdAPI ~ mid:", mid);
   const res = await fetch(`${BACKEND_URL}/api/movies/movieidapi/${mid}`, {
     method: "GET",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       ...(options?.headers || {}),

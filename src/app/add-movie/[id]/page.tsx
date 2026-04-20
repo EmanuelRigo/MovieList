@@ -30,6 +30,30 @@ export default async function MoviePage({
   params: Promise<Params>;
 }) {
   const resolvedParams = await params;
+
+  let moviePersonal = null;
+  try {
+    const nextCookies = await cookies();
+    const token = nextCookies.get("token")?.value;
+
+    // Comprobamos si ya existe en la base de datos personal ANTES del fetch de TMDB
+    moviePersonal = await getMovieByIdAPI(resolvedParams.id, {
+      headers: {
+        Cookie: `token=${token}`,
+      },
+    });
+  } catch (error) {
+    console.log(
+      "No se encontró la película en la base de datos personal (API)",
+      error,
+    );
+  }
+
+  if (moviePersonal && moviePersonal.response) {
+    redirect(`/edit-movie/${moviePersonal.response._id}`);
+  }
+
+  // Si llegamos aquí, es que no está en la base de datos personal, así que buscamos en TMDB
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${resolvedParams.id}?api_key=${envsUtils.API_KEY}`,
   );
@@ -39,27 +63,6 @@ export default async function MoviePage({
   }
 
   const movie: Movie = await res.json();
-
-  let moviePersonal = null;
-  try {
-    const nextCookies = await cookies();
-    const token = nextCookies.get("token")?.value;
-
-    // res.ok ya es true en este punto, hacemos el GET de base de datos
-    moviePersonal = await getMovieByIdAPI(resolvedParams.id, {
-      headers: {
-        Cookie: `token=${token}`,
-      },
-    });
-  } catch (error) {
-    console.log(
-      "No se encontró la película en la base de datos personal (API)",
-    );
-  }
-
-  if (moviePersonal && moviePersonal.response) {
-    redirect(`/edit-movie/${moviePersonal.response._id}`);
-  }
 
   return <MovieDetailsClient movie={movie} />;
 }

@@ -7,6 +7,8 @@ import Link from "next/link";
 import { BiCameraMovie } from "react-icons/bi";
 import { LuSearchX, LuSearch } from "react-icons/lu";
 import { useRouter } from "next/navigation";
+import { getMovieByIdAPI } from "../widgets/movies.api";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface Movie {
   id: number;
@@ -26,6 +28,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   const [busqueda, setBusqueda] = useState<string>("");
   const [peliculas, setPeliculas] = useState<Movie[]>([]);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
+  const [loadingMovieId, setLoadingMovieId] = useState<number | null>(null);
   const router = useRouter();
 
   // ✅ Al cargar el componente, revisa si hay un query param en la URL (?query=...)
@@ -64,7 +67,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   const fetchPeliculas = async () => {
     try {
       const response = await fetch(
-        `${urlBase}?query=${busqueda}&api_key=${API_KEY}`
+        `${urlBase}?query=${busqueda}&api_key=${API_KEY}`,
       );
       const data = await response.json();
       setPeliculas(data.results);
@@ -78,13 +81,38 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   const fetchPeliculasWithQuery = async (query: string) => {
     try {
       const response = await fetch(
-        `${urlBase}?query=${query}&api_key=${API_KEY}`
+        `${urlBase}?query=${query}&api_key=${API_KEY}`,
       );
       const data = await response.json();
       setPeliculas(data.results);
       setHasSearched(true);
     } catch (error) {
       console.error("Error al buscar películas:", error);
+    }
+  };
+
+  // ✅ Redirección inteligente al hacer click
+  const handleMovieClick = async (movieId: number) => {
+    setLoadingMovieId(movieId);
+    try {
+      const moviePersonal = await getMovieByIdAPI(movieId.toString());
+      if (moviePersonal && moviePersonal.response) {
+        // Si ya existe en la base de datos personal, vamos a editarla
+        router.push(`/edit-movie/${moviePersonal.response._id}`);
+      } else {
+        // Si no existe, vamos a la página de agregar
+        router.push(`/add-movie/${movieId}`);
+      }
+    } catch (error) {
+      // Si hay error (posiblemente no encontrada), vamos a agregar por defecto
+      console.log(
+        "No se encontró la película en la DB personal, redirigiendo a /add-movie",
+        error,
+      );
+      router.push(`/add-movie/${movieId}`);
+    } finally {
+      // No reseteamos loadingMovieId inmediatamente para evitar parpadeos si la navegación es rápida
+      // pero Next.js cambiará de página pronto.
     }
   };
 
@@ -155,11 +183,16 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 absolute w-full p-1">
               {peliculas.map((pelicula) => (
-                <Link
+                <div
                   key={pelicula.id}
-                  href={`/add-movie/${pelicula.id}`}
-                  className="group h-80 pt-0 rounded-md overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer"
+                  onClick={() => handleMovieClick(pelicula.id)}
+                  className="group h-80 pt-0 rounded-md overflow-hidden outline outline-none hover:outline-offset-3 hover:outline-blue-500 dark:hover:outline-yellow-500 hover:cursor-pointer relative"
                 >
+                  {loadingMovieId === pelicula.id && (
+                    <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                      <AiOutlineLoading3Quarters className="text-4xl text-white animate-spin" />
+                    </div>
+                  )}
                   <div className="h-full w-full flex relative">
                     <div className="absolute bottom-0 bg-black bg-opacity-75 group-hover:bg-opacity-95 w-full text-white min-h-16 p-2 transition-opacity duration-200">
                       <p>{pelicula.title}</p>
@@ -186,7 +219,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
                       </div>
                     )}
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           )}
