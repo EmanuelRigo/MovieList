@@ -100,7 +100,7 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
         // Si ya existe en la base de datos personal, vamos a editarla
         router.push(`/edit-movie/${moviePersonal.response._id}`);
       } else {
-        // Si no existe, vamos a la página de agregar
+        // Si no existe, vamos a la página de agrega
         router.push(`/add-movie/${movieId}`);
       }
     } catch (error) {
