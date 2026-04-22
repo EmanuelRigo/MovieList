@@ -49,9 +49,9 @@ export default async function MoviePage({
     );
   }
 
-  if (moviePersonal && moviePersonal.response) {
-    redirect(`/edit-movie/${moviePersonal.response._id}`);
-  }
+  // if (moviePersonal && moviePersonal.response) {
+  //   redirect(`/edit-movie/${moviePersonal.response._id}`);
+  // }
 
   // Si llegamos aquí, es que no está en la base de datos personal, así que buscamos en TMDB
   const res = await fetch(

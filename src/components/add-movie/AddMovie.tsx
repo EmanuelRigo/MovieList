@@ -7,7 +7,7 @@ import Link from "next/link";
 import { BiCameraMovie } from "react-icons/bi";
 import { LuSearchX, LuSearch } from "react-icons/lu";
 import { useRouter } from "next/navigation";
-import { getMovieByIdAPI } from "../widgets/movies.api";
+import { getMovieByIdAPI } from "../widgets/userMovies.api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface Movie {
@@ -95,7 +95,12 @@ export const AddMovie: React.FC<AddMovieProps> = ({ apiKey }) => {
   const handleMovieClick = async (movieId: number) => {
     setLoadingMovieId(movieId);
     try {
-      const moviePersonal = await getMovieByIdAPI(movieId.toString());
+      const moviePersonal = await getMovieByIdAPI(movieId);
+      console.log("🚀 ~ handleMovieClick ~ moviePersonal:", moviePersonal);
+      console.log(
+        "🚀 ~ handleMovieClick ~ moviePersonal.response:",
+        moviePersonal.response,
+      );
       if (moviePersonal && moviePersonal.response) {
         // Si ya existe en la base de datos personal, vamos a editarla
         router.push(`/edit-movie/${moviePersonal.response._id}`);

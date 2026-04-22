@@ -18,13 +18,13 @@ export async function getMovieByIdAPI(mid: number) {
     },
   });
 
-  console.log("🚀 ~ getUserMovieByIdAPI ~ res1:", res);
+  console.log("🚀 ~ getUserMovieByIdAPI ~ resAPI:", res);
   if (res.status === 404) {
     return null;
   }
 
   if (!res.ok) {
-    console.log("🚀 ~ getUserMovieByIdAPI ~ res2:", res);
+    console.log("🚀 ~ getUserMovieByIdAPI ~ res2API2:", res);
     throw new Error(`Error: ${res.status}`);
   }
 
