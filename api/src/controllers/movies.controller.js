@@ -22,6 +22,7 @@ class MovieController {
     const mid = req.params.mid;
     console.log("🚀 ~ MovieController ~ getByIdAPI ~ mid:", mid);
     const response = await moviesServices.getByIdAPI(mid);
+    console.log("🚀 ~ MovieController ~ getByIdAPI ~ response:", response);
     const message = "movie read";
     if (response) {
       return res.json201(response, message);

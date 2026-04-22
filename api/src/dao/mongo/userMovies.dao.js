@@ -18,6 +18,42 @@ class UserMoviesDao {
     return userMovies;
   }
 
+  async existsByUserAndMovieId(movie_id) {
+    console.log(
+      "🚀 ~ UserMoviesDao ~ existsByUserAndMovieId ~ movie_id:",
+      movie_id,
+    );
+    const exists = await userMoviesModel.exists({
+      "movies._id": movie_id,
+    });
+    console.log(
+      "🚀 ~ UserMoviesDao ~ existsByUserAndMovieId ~ exists:",
+      exists,
+    );
+
+    return !!exists;
+  }
+
+  async getUserMovieByUserAndMovieId(movie_id) {
+    const result = await userMoviesModel.findOne(
+      { "movies._id": movie_id },
+      { "movies.$": 1 },
+    );
+    console.log(
+      "🚀 ~ UserMoviesDao ~ getUserMovieByUserAndMovieId ~ result:",
+      result,
+    );
+
+    return result ? result.movies[0] : null;
+  }
+
+  async getMovieByIdAPI(id) {
+    console.log("🚀 ~ MovieDao ~ getByIdAPI ~ id:", id);
+    const movie = await userMoviesModel.findOne({ "movies._id": id });
+    console.log("🚀 ~ MovieDao ~ getByIdAPI ~ result:", movie);
+    return movie;
+  }
+
   async getUserMovieById(user_id, movie_id) {
     const userMovies = await userMoviesModel
       .findOne({ user_id: user_id, "movies.id": movie_id }, { "movies.$": 1 })

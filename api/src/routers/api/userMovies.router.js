@@ -13,7 +13,12 @@ class UserMoviesRouter extends CustomRouter {
     this.read(
       "/movies/:mid",
       ["USER"],
-      userMoviesController.getByTokenAndMovie
+      userMoviesController.getByTokenAndMovie,
+    );
+    this.read(
+      "/movieidapi/:mid",
+      ["USER"],
+      userMoviesController.getMovieByIdAPI,
     );
     this.update("/", ["USER"], userMoviesController.addMovie);
     this.update("/movies/:mid", ["USER"], userMoviesController.updateMovie);

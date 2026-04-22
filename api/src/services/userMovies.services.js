@@ -1,4 +1,5 @@
 import { userMoviesDao } from "../dao/mongo/userMovies.dao.js";
+import moviesDao from "../dao/mongo/movie.dao.js";
 
 class UserMoviesServices {
   async getAll() {
@@ -7,6 +8,25 @@ class UserMoviesServices {
 
   async getById(id) {
     return await userMoviesDao.getById(id);
+  }
+
+  async existsUserMovie(tmdbId) {
+    console.log("🚀 ~ UserMoviesServices ~ existsUserMovie ~ tmdbId:", tmdbId);
+    // 1. buscar la movie por id (TMDB)
+    const movie = await moviesDao.getByIdAPI(tmdbId);
+    if (!movie) return false;
+
+    // 2. verificar si existe en userMovies
+    const exists = await userMoviesDao.getUserMovieByUserAndMovieId(
+      movie._id._id,
+    );
+
+    return exists;
+  }
+
+  async getMovieByIdAPI(id) {
+    console.log("🚀🚀🚀🚀 ~ UserMoviesServices ~ getMovieIdAPI ~ id:", id);
+    return await userMoviesDao.getMovieByIdAPI(id);
   }
 
   async getByEmail(email) {
@@ -28,7 +48,7 @@ class UserMoviesServices {
         throw new Error("User movies not found");
       }
       const movieIndex = userMovies.movies.findIndex(
-        (movie) => movie._id._id.toString() === mid
+        (movie) => movie._id._id.toString() === mid,
       );
       if (movieIndex === -1) {
         throw new Error("Movie not found in user's movies");
@@ -89,7 +109,7 @@ class UserMoviesServices {
       }
 
       const movie = userMovies.movies.find(
-        (m) => m._id._id.toString() === movie_id
+        (m) => m._id._id.toString() === movie_id,
       );
       if (!movie) {
         throw new Error("Movie not found in user's movies");

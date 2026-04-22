@@ -21,6 +21,17 @@ class UserMoviesController {
     }
   }
 
+  async getMovieByIdAPI(req, res) {
+    const mid = req.params.mid;
+    const response = await userMoviesServices.existsUserMovie(mid);
+    const message = "movie read";
+    if (response) {
+      return res.json201(response, message);
+    } else {
+      return res.json404();
+    }
+  }
+
   async addMovie(req, res) {
     const data = req.body;
 
@@ -38,7 +49,7 @@ class UserMoviesController {
       async function checkExistsInUserMovies(movieToAdd) {
         const existingUserMovie = await userMoviesServices.getByUserId(user_id);
         const movieExist = existingUserMovie.movies.find(
-          (movie) => movie._id._id.toString() === movieToAdd._id.toString()
+          (movie) => movie._id._id.toString() === movieToAdd._id.toString(),
         );
         if (movieExist) {
           return res.json200(movieExist, "Movie already exists");
@@ -102,7 +113,7 @@ class UserMoviesController {
 
       // Buscar la película específica en el array `movies`
       const userMovie = userMovies.movies.find(
-        (movie) => movie._id._id.toString() === mid
+        (movie) => movie._id._id.toString() === mid,
       );
 
       if (!userMovie) {
@@ -131,7 +142,7 @@ class UserMoviesController {
       const userMovies = await userMoviesServices.updateMovie(
         user_id,
         mid,
-        data
+        data,
       );
       return res.json200(userMovies, "Updated with success");
     } catch (error) {

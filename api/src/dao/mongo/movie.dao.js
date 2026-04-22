@@ -12,7 +12,7 @@ class MovieDao {
   }
 
   async getByIdAPI(id) {
-    console.log("🚀 ~ MovieDao ~ getByIdAPI ~ id:", id);
+    console.log("🚀🚀🚀🚀🚀 ~ MovieDao ~ getByIdAPI ~ id:", id);
     const movie = await movieModel.findOne({ id });
     console.log("🚀 ~ MovieDao ~ getByIdAPI ~ result:", movie);
     return movie;
