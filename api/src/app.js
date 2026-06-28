@@ -1,14 +1,15 @@
 import express from "express";
-// import http from "http";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dns from "dns";
 import indexRouter from "./routers/api/index.router.js";
 import MongoSingleton from "./utils/mongoDB.utils.js";
 import pathHandler from "./middlewares/pathHandler.middleware.js";
 import errorHandler from "./middlewares/errorHandler.middleware.js";
 import envsUtils from "./utils/envs.utils.js";
 
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 //server
 const app = express();
 const port = envsUtils.PORT || 8080;
@@ -65,7 +66,7 @@ app.use(
     credentials: true, // Permitir cookies
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
     allowedHeaders: ["Content-Type", "Authorization"], // Encabezados permitidos
-  })
+  }),
 );
 
 MongoSingleton.getInstance();
