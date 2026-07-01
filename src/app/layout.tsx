@@ -1,20 +1,8 @@
-import localFont from "next/font/local";
+import { raleway, customFont } from "./fonts";
 import "./globals.css";
 import MovieProvider from "../context/MovieContext";
 import ThemeProvider from "@/components/widgets/ThemeProvider";
 import OnlineStatus from "@/components/widgets/OnlineStatus";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata = {
   title: "MovieList",
@@ -32,7 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable}`}
+        className={`${raleway.className} ${raleway.variable} ${customFont.variable} antialiased`}
       >
         <ThemeProvider>
           <MovieProvider>

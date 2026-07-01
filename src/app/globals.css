@@ -5,6 +5,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Design tokens (Grises neutros) */
+  --background-primary: #0a0a0a;
+  --background-secondary: #121212;
+  --background-elevated: #1a1a1a;
+  --surface-primary: #1e1e1e;
+  --surface-hover: #2a2a2a;
+  --surface-active: #353535;
+  --border-subtle: #2e2e2e;
+  --border-strong: #404040;
+  --accent-primary: #f4b400;
+  --accent-hover: #ffc93d;
+  --accent-muted: #d79a00;
+  --text-primary: #f8f8f8;
+  --text-secondary: #a1a1aa;
+  --text-muted: #6b7280;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
@@ -52,7 +67,6 @@ body {
     aspect-ratio: 6 / 9;
   }
 }
-
 
 @media screen and (min-width: 1280px) {
   .md-grid-template {

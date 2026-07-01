@@ -32,23 +32,25 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   }, [movieList]);
 
   return (
-    <div className="relative h-full w-full flex-grow scrollbar-hidden overflow-auto scroll-smooth scroll-duration-600">
-      <div className="w-full h-full absolute">
+    <div className="relative h-full w-full flex-grow scrollbar-hidden overflow-auto scroll-smooth">
+      <div className="w-full min-h-full">
         {movieList.length > 0 ? (
-          movieList.map((element, index) => (
-            <div
-              key={element._id._id}
-              ref={(el) => {
-                movieRows.current[index] = el;
-              }}
-            >
-              <CardRow movieProp={element} index={index} />
-            </div>
-          ))
+          <div className="flex flex-col gap-1.5 p-2 rounded-2xl md:rounded-3xl bg-background-elevated border border-border-subtle">
+            {movieList.map((element, index) => (
+              <div
+                key={element._id._id}
+                ref={(el) => {
+                  movieRows.current[index] = el;
+                }}
+              >
+                <CardRow movieProp={element} index={index} />
+              </div>
+            ))}
+          </div>
         ) : (
-          <div className="flex flex-col items-center justify-center h-full rounded-lg border-2 border-neutral-300 dark:border-neutral-800">
-            <FaFilm className="text-neutral-500 dark:text-neutral-400 text-6xl mb-4" />
-            <p className="text-black dark:text-white text-lg font-bold">
+          <div className="flex flex-col items-center justify-center min-h-[300px] h-full rounded-2xl md:rounded-3xl border border-border-subtle bg-surface-primary p-8">
+            <FaFilm className="text-text-muted text-6xl mb-4" />
+            <p className="text-text-primary text-lg font-semibold">
               No hay películas disponibles
             </p>
           </div>
