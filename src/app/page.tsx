@@ -4,6 +4,7 @@ import CardMovieViewer from "@/components/movie-viewer/CardMovieViewer";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import MovieListClient from "@/components/list/MovieListClient";
 import envsUtils from "@/utils/envs.utils";
+import ToolkitList from "@/components/list/ToolkitList";
 
 export default async function Home() {
   const cookieStore = await cookies();
@@ -41,6 +42,11 @@ export default async function Home() {
   return (
     <div className="h-svh w-screen flex flex-col overflow-hidden justify-center">
       <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 overflow-auto md-grid-template gap-4 p-4">
+        {/* Banner: ToolkitList ocupa las 3 columnas */}
+        <div className="md:col-span-3">
+          <ToolkitList />
+        </div>
+
         {/* Menú */}
         <div className="flex flex-col justify-between">
           <FooterMainMenu />

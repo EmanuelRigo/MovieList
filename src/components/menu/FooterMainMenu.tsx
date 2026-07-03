@@ -19,7 +19,6 @@ import { IoIosLogOut } from "react-icons/io";
 import SettingsMenuModal from "./SettingsMenuModal";
 import CheckedFilter from "../list/CheckedFilter";
 import { FaRegTimesCircle } from "react-icons/fa";
-import SearchBarWidget from "../widgets/SearchBarWidget";
 
 import GenreFilter from "../list/GenreFilter";
 export const FooterMainMenu = () => {
@@ -86,9 +85,6 @@ export const FooterMainMenu = () => {
         </div>
       </div>
       <div className="flex-grow flex flex-col gap-4">
-        <div>
-          <SearchBarWidget />
-        </div>
         <CardMenuMovie />
         <Link
           className="group rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
