@@ -5,13 +5,14 @@ import { CardRow } from "./CardRow";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import { useMovieContext } from "@/context/MovieContext";
 import { FaFilm } from "react-icons/fa";
+import { GridCard } from "./GridCard";
 
 interface MovieListClientProps {
   list: MovieDB[];
 }
 
 const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
-  const { movieList, setMovieList } = useMovieContext();
+  const { movieList, setMovieList, viewMode } = useMovieContext();
   const movieRows = useRef<(HTMLDivElement | null)[]>([]);
 
   console.log("🔄 MovieListClient renderizado.");
@@ -35,7 +36,17 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
     <div className="relative h-full w-full flex-grow scrollbar-hidden overflow-auto scroll-smooth">
       <div className="w-full min-h-full">
         {movieList.length > 0 ? (
-          <div className="flex flex-col gap-1.5 p-2 rounded-2xl md:rounded-3xl bg-background-elevated border border-border-subtle">
+          <div
+            className={`
+              p-2 rounded-2xl md:rounded-3xl
+              bg-background-elevated border border-border-subtle
+              ${
+                viewMode === "grid"
+                  ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
+                  : "flex flex-col gap-1.5"
+              }
+            `}
+          >
             {movieList.map((element, index) => (
               <div
                 key={element._id._id}
@@ -43,7 +54,11 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
                   movieRows.current[index] = el;
                 }}
               >
-                <CardRow movieProp={element} index={index} />
+                {viewMode === "list" ? (
+                  <CardRow movieProp={element} index={index} />
+                ) : (
+                  <GridCard movieProp={element} index={index} />
+                )}
               </div>
             ))}
           </div>

@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { FaListUl, FaThLarge, FaChevronDown } from "react-icons/fa";
 import { useMovieContext } from "@/context/MovieContext";
 import SearchBarWidget from "@/components/widgets/SearchBarWidget";
 
-type ViewMode = "list" | "grid";
+// View mode now provided by context
 
 const ToolkitList = () => {
   const { movieList, selectedYear, setSelectedYear, selectedGenre, setSelectedGenre } =
     useMovieContext();
 
-  const [viewMode, setViewMode] = useState<ViewMode>("list");
+  const { viewMode, setViewMode } = useMovieContext();
 
   const movieCount = movieList.length;
 

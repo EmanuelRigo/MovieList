@@ -10,6 +10,8 @@ import React, {
 import { MovieDB, UserData } from "./interfaces/movieTypes";
 
 interface MovieContextProps {
+  viewMode: 'list' | 'grid';
+  setViewMode: React.Dispatch<React.SetStateAction<'list' | 'grid'>>;
   movie: MovieDB | null;
   setMovie: React.Dispatch<React.SetStateAction<MovieDB | null>>;
   updateCardMovie: (movie: MovieDB) => void;
@@ -56,6 +58,7 @@ interface MovieProviderProps {
 const MovieProvider = ({ children }: MovieProviderProps) => {
   const [movie, setMovie] = useState<MovieDB | null>(null);
   const [movieList, setMovieList] = useState<MovieDB[]>([]);
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [originalMovieList, setOriginalMovieList] = useState<MovieDB[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [username, setUsername] = useState<string | undefined>("");
@@ -171,6 +174,8 @@ const MovieProvider = ({ children }: MovieProviderProps) => {
     setSearchTerm,
     selectedYear,
     setSelectedYear,
+    viewMode,
+    setViewMode,
   };
 
   return (

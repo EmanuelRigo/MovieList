@@ -9,8 +9,8 @@ Este documento define las directrices y normas que deben seguir **todos los agen
 ## 1. Ámbito del proyecto
 
 - **Backend**: Node.js + Express (API REST) bajo `api/src/`.
-- **Frontend**: React con Vite bajo `frontend/`.
-- **Base de datos**: PostgreSQL (acceso vía `pg` en el backend).
+- **Frontend**: React con Nextjs bajo `src/`.
+- **Base de datos**: MongoDB (acceso vía `mongoose` en el backend).
 - **Entorno de desarrollo**: Windows, con los scripts `npm run dev:backend` y `npm run dev:frontend` en ejecución.
 
 ---
@@ -655,7 +655,9 @@ Rediseñar antes de aprobar.
 ## 6.17 Gestión de Fuentes con next/font
 
 ### Decisión de Diseño: next/font vs @import
+
 En este proyecto Next.js se debe utilizar obligatoriamente el módulo `next/font` en lugar de directivas `@import` en archivos CSS por las siguientes razones:
+
 1. **Rendimiento óptimo (Zero Layout Shift)**: `next/font` descarga y hospeda automáticamente las fuentes en tiempo de compilación. Esto elimina cualquier parpadeo de texto sin estilo (FOUT) o de texto invisible (FOIT), previniendo los saltos de diseño acumulativos (CLS).
 2. **Privacidad y Autohospedaje automático**: Al usar `next/font/google`, las fuentes de Google se descargan en la build y se sirven directamente desde el mismo dominio de la app. Ninguna petición es enviada a los servidores de Google por parte del navegador del usuario.
 3. **Caché y compresión**: Las fuentes servidas se optimizan de forma nativa e incluyen cabeceras de control de caché eficientes en formatos modernos (`.woff2`).
@@ -665,7 +667,9 @@ En este proyecto Next.js se debe utilizar obligatoriamente el módulo `next/font
 Todas las fuentes de la aplicación se centralizan en el archivo `src/app/fonts.ts`.
 
 #### 1. Fuentes Globales (ej. Inter)
+
 Se importan desde `next/font/google` y se configuran con subsets y una variable CSS:
+
 ```typescript
 import { Inter } from "next/font/google";
 
@@ -675,10 +679,13 @@ export const inter = Inter({
   variable: "--font-inter",
 });
 ```
+
 En el layout principal (`src/app/layout.tsx`), se aplica `inter.className` al tag `body` para que afecte globalmente a todo el documento por defecto.
 
 #### 2. Fuentes Locales (ej. CustomFont)
+
 Se importan usando `next/font/local` apuntando al archivo físico en `public/fonts/`:
+
 ```typescript
 import localFont from "next/font/local";
 
@@ -688,7 +695,9 @@ export const customFont = localFont({
   display: "swap",
 });
 ```
+
 Para usarlas en cualquier componente específico, importa la fuente y aplica su clase de utilidad:
+
 ```tsx
 import { customFont } from "@/app/fonts";
 
@@ -698,4 +707,3 @@ export default function MiComponente() {
 ```
 
 ---
-
