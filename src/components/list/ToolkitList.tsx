@@ -72,8 +72,8 @@ const ToolkitList = () => {
         >
           My Movies
         </h1>
-        <span className="text-sm md:text-base text-text-secondary font-normal">
-          ({movieCount})
+        <span className="text-sm md:text-base text-text-secondary font-normal border-2 border-accent-primary rounded-lg p-2">
+          {movieCount}
         </span>
       </div>
 
