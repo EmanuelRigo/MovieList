@@ -33,17 +33,19 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
   }, [movieList]);
 
   return (
-    <div className="relative h-full w-full flex-grow scrollbar-hidden overflow-auto scroll-smooth">
-      <div className="w-full min-h-full">
+    <div className="relative h-full w-full flex-grow scrollbar-hidden">
+      <div className="w-full h-full">
         {movieList.length > 0 ? (
           <div
             className={`
               p-2 rounded-2xl md:rounded-3xl
               bg-background-elevated border border-border-subtle
+              h-full overflow-auto scroll-smooth scrollbar-hidden
+              flex flex-col
               ${
                 viewMode === "grid"
-                  ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3"
-                  : "flex flex-col gap-1.5"
+                  ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3 content-start"
+                  : "gap-1.5"
               }
             `}
           >
