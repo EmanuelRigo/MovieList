@@ -1,7 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { FaRegCircle, FaCheckCircle, FaEllipsisH, FaFilm } from "react-icons/fa";
+import {
+  FaRegCircle,
+  FaCheckCircle,
+  FaEllipsisH,
+  FaFilm,
+} from "react-icons/fa";
 import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
@@ -36,10 +41,9 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
     }
   };
 
-  const posterUrl =
-    localMovie._id.poster_path
-      ? `https://image.tmdb.org/t/p/w500${localMovie._id.poster_path}`
-      : null;
+  const posterUrl = localMovie._id.poster_path
+    ? `https://image.tmdb.org/t/p/w500${localMovie._id.poster_path}`
+    : null;
 
   const year = localMovie._id.release_date
     ? new Date(localMovie._id.release_date).getFullYear()
@@ -53,7 +57,7 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
         group relative flex flex-col
         rounded-2xl overflow-hidden
         bg-surface-primary border border-border-subtle
-        hover:border-accent-primary hover:-translate-y-1
+        hover:border-accent-primary
         transition-all duration-300 cursor-pointer
       "
     >
@@ -63,7 +67,7 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
           <img
             src={posterUrl}
             alt={localMovie._id.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
@@ -72,17 +76,21 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
         )}
 
         {/* Gradient overlay (visible on hover) */}
-        <div className="
+        <div
+          className="
           absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent
           opacity-0 group-hover:opacity-100 transition-opacity duration-300
-        " />
+        "
+        />
 
         {/* Check button – top-right */}
         <button
           type="button"
           onClick={handleCheckClick}
           aria-pressed={localMovie.checked}
-          aria-label={localMovie.checked ? "Marcar como no vista" : "Marcar como vista"}
+          aria-label={
+            localMovie.checked ? "Marcar como no vista" : "Marcar como vista"
+          }
           className="
             absolute top-2 right-2
             p-1.5 rounded-full
@@ -124,7 +132,7 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
           className={`
             ${raleway.className}
             text-sm font-medium text-text-primary
-            leading-tight line-clamp-2
+            leading-tight line-clamp-1
           `}
         >
           {localMovie._id.title}

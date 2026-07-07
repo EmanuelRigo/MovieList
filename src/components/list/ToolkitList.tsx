@@ -8,8 +8,13 @@ import SearchBarWidget from "@/components/widgets/SearchBarWidget";
 // View mode now provided by context
 
 const ToolkitList = () => {
-  const { movieList, selectedYear, setSelectedYear, selectedGenre, setSelectedGenre } =
-    useMovieContext();
+  const {
+    movieList,
+    selectedYear,
+    setSelectedYear,
+    selectedGenre,
+    setSelectedGenre,
+  } = useMovieContext();
 
   const { viewMode, setViewMode } = useMovieContext();
 
@@ -49,13 +54,9 @@ const ToolkitList = () => {
         md:items-center
         md:justify-between
         w-full
-        p-4
-        md:p-5
+        p-3
         rounded-2xl
         md:rounded-3xl
-        bg-background-elevated
-        border
-        border-border-subtle
       "
     >
       {/* Título + contador */}
@@ -76,37 +77,28 @@ const ToolkitList = () => {
         </span>
       </div>
 
-      {/* Buscador */}
-      <div className="w-full md:max-w-xs">
-        <SearchBarWidget />
-      </div>
-
       {/* Controles */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-2">
+        {/* Buscador */}
+        <div className="w-full md:max-w-xs">
+          <SearchBarWidget />
+        </div>
         {/* Select: Years */}
-        <div className="relative">
+        <div className="relative w-full sm:w-auto flex items-center self-stretch bg-surface-primary border-2 border-border-subtle rounded-lg px-4 hover:border-accent-primary focus-within:border-accent-primary transition-colors duration-150">
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
             className="
               appearance-none
               w-full
-              sm:w-auto
-              bg-surface-primary
-              border
-              border-border-subtle
+              h-full
+              bg-transparent
+              border-none
               text-text-primary
               text-sm
-              rounded-full
-              pl-4
-              pr-9
-              py-2
-              hover:border-accent-primary
-              focus:outline-none
-              focus:border-accent-primary
-              transition-colors
-              duration-150
+              outline-none
               cursor-pointer
+              pr-6
             "
             aria-label="Filtrar por año"
           >
@@ -122,8 +114,6 @@ const ToolkitList = () => {
               pointer-events-none
               absolute
               right-3
-              top-1/2
-              -translate-y-1/2
               text-text-muted
               text-xs
             "
@@ -131,29 +121,21 @@ const ToolkitList = () => {
         </div>
 
         {/* Select: Genres */}
-        <div className="relative">
+        <div className="relative w-full sm:w-auto flex items-center self-stretch bg-surface-primary border-2 border-border-subtle rounded-lg px-4 hover:border-accent-primary focus-within:border-accent-primary transition-colors duration-150">
           <select
             value={selectedGenre}
             onChange={(e) => setSelectedGenre(e.target.value)}
             className="
               appearance-none
               w-full
-              sm:w-auto
-              bg-surface-primary
-              border
-              border-border-subtle
+              h-full
+              bg-transparent
+              border-none
               text-text-primary
               text-sm
-              rounded-full
-              pl-4
-              pr-9
-              py-2
-              hover:border-accent-primary
-              focus:outline-none
-              focus:border-accent-primary
-              transition-colors
-              duration-150
+              outline-none
               cursor-pointer
+              pr-6
             "
             aria-label="Filtrar por género"
           >
@@ -169,8 +151,6 @@ const ToolkitList = () => {
               pointer-events-none
               absolute
               right-3
-              top-1/2
-              -translate-y-1/2
               text-text-muted
               text-xs
             "
@@ -180,35 +160,35 @@ const ToolkitList = () => {
         {/* Toggle: vista lista / cuadricula */}
         <div
           className="
-            inline-flex
-            items-center
-            gap-1
-            p-1
-            rounded-full
-            bg-surface-primary
-            border
-            border-border-subtle
-            self-start
-            sm:self-auto
+            relative inline-flex items-center
+            gap-0 p-1 rounded-lg
+            bg-surface-primary border border-border-subtle
+            self-stretch
           "
           role="group"
           aria-label="Modo de visualización"
         >
+          {/* Pastilla deslizante */}
+          <span
+            aria-hidden="true"
+            className={`
+              absolute top-1 bottom-1 left-1
+              w-[calc(50%-4px)]
+              rounded-md bg-accent-primary
+              transition-transform duration-300 ease-in-out
+              ${viewMode === "grid" ? "translate-x-full" : "translate-x-0"}
+            `}
+          />
+
           <button
             type="button"
             onClick={() => setViewMode("list")}
             aria-label="Ver como lista"
             aria-pressed={viewMode === "list"}
             className={`
-              p-2
-              rounded-full
-              transition-all
-              duration-150
-              ${
-                viewMode === "list"
-                  ? "bg-accent-primary text-background-primary"
-                  : "text-text-muted hover:text-text-primary hover:bg-surface-hover"
-              }
+              relative z-10 p-2 rounded-md
+              transition-colors duration-150
+              ${viewMode === "list" ? "text-background-primary" : "text-text-muted hover:text-text-primary"}
             `}
           >
             <FaListUl className="text-sm md:text-base" />
@@ -219,15 +199,9 @@ const ToolkitList = () => {
             aria-label="Ver como cuadricula"
             aria-pressed={viewMode === "grid"}
             className={`
-              p-2
-              rounded-full
-              transition-all
-              duration-150
-              ${
-                viewMode === "grid"
-                  ? "bg-accent-primary text-background-primary"
-                  : "text-text-muted hover:text-text-primary hover:bg-surface-hover"
-              }
+              relative z-10 p-2 rounded-md
+              transition-colors duration-150
+              ${viewMode === "grid" ? "text-background-primary" : "text-text-muted hover:text-text-primary"}
             `}
           >
             <FaThLarge className="text-sm md:text-base" />

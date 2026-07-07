@@ -42,7 +42,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
               bg-background-elevated border border-border-subtle
               ${
                 viewMode === "grid"
-                  ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3"
+                  ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3"
                   : "flex flex-col gap-1.5"
               }
             `}
