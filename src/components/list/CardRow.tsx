@@ -5,7 +5,7 @@ import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import Link from "next/link";
-import { customFont, raleway } from "@/app/fonts";
+import { customFont, manrope } from "@/app/fonts";
 
 interface CardRowProps {
   movieProp: MovieDB;
@@ -130,7 +130,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
           )}
         </button>
         <h1
-          className={`${raleway.className} text-sm font-normal md:text-base text-text-primary`}
+          className={`${manrope.className} text-sm font-normal md:text-base text-text-primary`}
         >
           {movieProp._id.title}
         </h1>

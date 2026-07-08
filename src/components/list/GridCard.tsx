@@ -11,7 +11,7 @@ import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import Link from "next/link";
-import { raleway } from "@/app/fonts";
+import { manrope } from "@/app/fonts";
 
 interface GridCardProps {
   movieProp: MovieDB;
@@ -55,7 +55,7 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
       onClick={handleClick}
       className="
         group relative flex flex-col
-        rounded-2xl overflow-hidden
+        rounded-md md:rounded-md overflow-hidden
         bg-surface-primary border border-border-subtle
         hover:border-accent-primary
         transition-all duration-300 cursor-pointer
@@ -130,7 +130,7 @@ export const GridCard: React.FC<GridCardProps> = ({ movieProp }) => {
       <div className="flex flex-col gap-1 p-3">
         <h2
           className={`
-            ${raleway.className}
+            ${manrope.className}
             text-sm font-medium text-text-primary
             leading-tight line-clamp-1
           `}

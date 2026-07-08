@@ -31,6 +31,20 @@
   scrollbar-width: none; /* Firefox */
 }
 
+/* Scroll sectorizado: el contenedor ancla el scroll a la card más cercana
+   sin forzar saltos largos (proximity = snap sólo si estás "cerca" del punto). */
+.snap-y-proximity {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+/* El padding del scroller se aplica por clase de Tailwind en el componente. */
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

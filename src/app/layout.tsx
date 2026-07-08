@@ -1,4 +1,4 @@
-import { raleway, customFont } from "./fonts";
+import { manrope, customFont } from "./fonts";
 import "./globals.css";
 import MovieProvider from "../context/MovieContext";
 import ThemeProvider from "@/components/widgets/ThemeProvider";
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body
         suppressHydrationWarning
-        className={`${raleway.className} ${raleway.variable} ${customFont.variable} antialiased`}
+        className={`${manrope.className} ${manrope.variable} ${customFont.variable} antialiased`}
       >
         <ThemeProvider>
           <MovieProvider>

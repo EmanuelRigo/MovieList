@@ -707,3 +707,43 @@ export default function MiComponente() {
 ```
 
 ---
+
+## 6.18 Inventario de Clases Modo Claro / Modo Oscuro (Legacy)
+
+> **Contexto**: Al auditar `src/components/menu/FooterMainMenu.tsx` se detectó que el componente usa clases nativas de Tailwind (`neutral-*`, `gray-*`, `blue-*`) en lugar de los tokens del Design System. Se documenta aquí el mapa de equivalencias para guiar la migración.
+
+### Clases encontradas en `FooterMainMenu.tsx`
+
+| Elemento                       | Clase claro (light)      | Clase oscuro (dark)                              | Token DS equivalente        |
+| ------------------------------ | ------------------------ | ------------------------------------------------ | --------------------------- |
+| Texto principal                | `text-black`             | `dark:text-neutral-200`                          | `text-text-primary`         |
+| Fondo contenedor header/footer | `bg-neutral-100`         | `dark:bg-neutral-800`                            | `bg-surface-primary`        |
+| Fondo link lista de películas  | `bg-gray-100`            | `dark:bg-neutral-900` / `dark:lg:bg-neutral-800` | `bg-surface-primary`        |
+| Texto link lista               | `text-black`             | `dark:text-gray-200`                             | `text-text-primary`         |
+| Ícono add-movie                | `text-black`             | `dark:text-neutral-200`                          | `text-text-primary`         |
+| Hover ícono add-movie          | `hover:text-blue-500`    | `dark:group-hover:text-yellow-500`               | `hover:text-accent-primary` |
+| Botón logout                   | `text-blue-500`          | `dark:text-yellow-500`                           | `text-accent-primary`       |
+| Hover botón logout             | `hover:text-blue-700`    | `dark:hover:text-orange-700`                     | `hover:text-accent-hover`   |
+| Separador filtros              | `border-neutral-300`     | `dark:border-neutral-600`                        | `border-border-strong`      |
+| Fondo barra de herramientas    | `bg-neutral-100`         | `dark:bg-neutral-800`                            | `bg-surface-primary`        |
+| Texto barra de herramientas    | `text-black`             | `dark:text-neutral-200`                          | `text-text-primary`         |
+| Fondo enlace móvil             | `bg-neutral-100`         | `dark:bg-neutral-900`                            | `bg-surface-primary`        |
+| Hover enlace móvil             | `hover:text-blue-500`    | `dark:hover:text-yellow-500`                     | `hover:text-accent-primary` |
+| Botón Random (fondo)           | `bg-blue-500`            | `dark:bg-yellow-500`                             | `bg-accent-primary`         |
+| Botón Random (texto)           | `text-neutral-100`       | `dark:text-neutral-900`                          | inverso según modo          |
+
+### Regla de migración
+
+Al refactorizar este o cualquier otro componente con el mismo patrón legacy, reemplazar siempre el par `clase-claro / dark:clase-oscuro` por el **token unificado** del Design System:
+
+```tsx
+// ❌ Antes (legacy)
+className="text-black dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800"
+
+// ✅ Después (Design System)
+className="text-text-primary bg-surface-primary"
+```
+
+> **Nota**: El botón de acción principal (Random / Logout) usa en modo claro `bg-blue-500` y en oscuro `dark:bg-yellow-500`. Al migrar, unificar a `bg-accent-primary` (`#F4B400`) y decidir si el accent en modo claro debe ser diferente o se mantiene el mismo token.
+
+---
