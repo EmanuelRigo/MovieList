@@ -1,100 +1,133 @@
 "use client";
+
 import Image from "next/image";
 import React from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { FaFilm } from "react-icons/fa";
+import { FiCalendar, FiClock, FiStar } from "react-icons/fi";
 
 const CardMovieViewer: React.FC = () => {
   const { movie } = useMovieContext();
 
   if (!movie) {
     return (
-      <div className="flex flex-col h-full justify-between">
-        {/* Contenedor para el ícono */}
-        <div className="relative aspect-[2/3] rounded-lg bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center">
-          <FaFilm className="text-neutral-500 dark:text-neutral-400 text-6xl" />
+      <div className="flex h-full flex-col">
+        <div className="flex aspect-[2/3] items-center justify-center rounded-3xl border border-neutral-800 bg-neutral-900">
+          <FaFilm className="text-7xl text-neutral-600" />
         </div>
 
-        {/* Contenedor para el mensaje */}
-        <div className="flex flex-col flex-grow justify-between pt-4">
-          <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold text-center">
-            Movie
-          </h3>
+        <div className="mt-8 text-center">
+          <h3 className="text-3xl font-bold text-neutral-200">Movie</h3>
+          <p className="mt-2 text-sm text-neutral-500">
+            Select a movie to view its details.
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full justify-between">
-      {/* Imagen */}
-      <div className="relative rounded-lg shrink-0">
+    <div className="flex h-full flex-col">
+      {/* Poster */}
+      <div className="relative aspect-[2/3] overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900">
         {movie._id.poster_path ? (
           <Image
-            key={movie._id.poster_path} // 🔑 fuerza el remount cuando cambia la película
+            key={movie._id.poster_path}
             src={`https://image.tmdb.org/t/p/w500${movie._id.poster_path}`}
             alt={movie._id.title || "Movie Poster"}
             width={500}
             height={750}
             unoptimized
-            className="rounded-lg object-cover opacity-0 transition-opacity duration-700 ease-in-out"
+            className="h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-in-out"
             onLoadingComplete={(img) => img.classList.remove("opacity-0")}
           />
         ) : (
-          <div className="bg-neutral-500 h-[375px] flex items-center justify-center rounded-lg">
-            <p className="text-white text-sm">no image</p>
+          <div className="flex h-full items-center justify-center">
+            <FaFilm className="text-7xl text-neutral-600" />
           </div>
         )}
       </div>
 
-      {/* Info */}
-      <div className="flex flex-col min-h-0 shrink-0 pt-3">
-        <h3 className="text-black dark:text-white pt-4 lg:pt-0 pb-2 font-bold">
+      {/* Información */}
+      <div className="mt-6">
+        <h1 className="text-4xl font-bold leading-tight text-white">
           {movie._id.title}
-        </h3>
-        <div className="flex justify-between text-sm mb-2 text-black dark:text-neutral-200">
-          <p>{movie._id.release_date?.split("T")[0]}</p>
-          <p>{movie._id.runtime} min</p>
+        </h1>
+
+        <div className="mt-4 flex flex-wrap items-center gap-5 text-sm text-neutral-400">
+          <div className="flex items-center gap-2">
+            <FiCalendar size={14} />
+            {movie._id.release_date?.split("T")[0]}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <FiClock size={14} />
+            {movie._id.runtime} min
+          </div>
+
+          <div className="flex items-center gap-2">
+            <FiStar size={14} />
+            {movie._id.vote_average?.toFixed(1) ?? "-"}
+          </div>
         </div>
       </div>
 
-      {/* Overview con scroll interno */}
-      <div className="overflow-y-auto min-h-0 scrollbar-hidden shrink-[2] grow-[2]">
-        <p className="text-xs text-black dark:text-white">
-          {movie._id.overview}
-        </p>
+      {/* Sinopsis */}
+      <div className="mt-8 flex min-h-0 flex-1 flex-col overflow-hidden border-t border-neutral-800 pt-6">
+        <span className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
+          Synopsis
+        </span>
+
+        <div className="flex-1 overflow-y-auto scrollbar-hidden">
+          <p className="text-sm leading-7 text-neutral-300">
+            {movie._id.overview}
+          </p>
+        </div>
       </div>
 
       {/* Formatos */}
-      <div className="flex items-center justify-evenly bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 text-sm mt-2 shrink-0">
-        <div
-          className={`flex items-center p-2 px-4 rounded-lg bg-neutral-300 dark:bg-neutral-950 ${
-            movie.formats.vhs
-              ? "text-neutral-900 dark:text-neutral-300"
-              : "text-neutral-400 dark:text-neutral-700"
-          }`}
-        >
-          <span>VHS</span>
-        </div>
-        <div
-          className={`flex items-center p-2 px-4 mx-1 rounded-lg bg-neutral-300 dark:bg-neutral-950 ${
-            movie.formats.dvd
-              ? "text-neutral-900 dark:text-neutral-300"
-              : "text-neutral-400 dark:text-neutral-700"
-          }`}
-        >
-          <span>DVD</span>
-        </div>
-        <div
-          className={`flex items-center p-2 px-4 rounded-lg bg-neutral-300 dark:bg-neutral-950 ${
-            movie.formats.bluray
-              ? "text-neutral-900 dark:text-neutral-300"
-              : "text-neutral-400 dark:text-neutral-700"
-          }`}
-        >
-          <span>BLU RAY</span>
+      <div className="mt-8 border-t border-neutral-800 pt-6">
+        <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
+          Collection Formats
+        </span>
+
+        <div className="flex gap-3">
+          <div
+            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+              movie.formats.vhs
+                ? "border-yellow-500 bg-yellow-500 text-black"
+                : "border-neutral-700 bg-neutral-900 text-neutral-500"
+            }`}
+          >
+            VHS
+          </div>
+
+          <div
+            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+              movie.formats.dvd
+                ? "border-yellow-500 bg-yellow-500 text-black"
+                : "border-neutral-700 bg-neutral-900 text-neutral-500"
+            }`}
+          >
+            DVD
+          </div>
+
+          <div
+            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+              movie.formats.bluray
+                ? "border-yellow-500 bg-yellow-500 text-black"
+                : "border-neutral-700 bg-neutral-900 text-neutral-500"
+            }`}
+          >
+            BLU-RAY
+          </div>
         </div>
       </div>
+
+      {/* Botón */}
+      <button className="mt-8 flex h-14 w-full items-center justify-center rounded-2xl border border-yellow-600 text-base font-semibold text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
+        Watch Trailer
+      </button>
     </div>
   );
 };
