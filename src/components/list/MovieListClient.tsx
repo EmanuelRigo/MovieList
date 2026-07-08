@@ -41,21 +41,20 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
               relative
               h-full w-full
               rounded-md md:rounded-md
-              bg-background-secondary
-              overflow-hidden
+              overflow-visible
             `}
           >
             <div
               className={`
                 snap-container
                 h-full w-full
-                overflow-auto scrollbar-custom
+                overflow-y-auto overflow-x-visible scrollbar-custom
                 snap-y-proximity
                 flex flex-col
                 ${
                   viewMode === "grid"
                     ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3 content-start pb-3 md:pb-4"
-                    : "gap-1.5 pt-2 pb-6 md:pt-6 md:pb-8"
+                    : "gap-1.5 pt-4 pb-6 md:pt-0 md:pb-8"
                 }
               `}
             >
@@ -68,7 +67,9 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
                   }}
                 >
                   {viewMode === "list" ? (
-                    <CardRow movieProp={element} index={index} />
+                    <div className="px-6">
+                      <CardRow movieProp={element} index={index} />
+                    </div>
                   ) : (
                     <GridCard movieProp={element} index={index} />
                   )}

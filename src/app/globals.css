@@ -193,7 +193,17 @@ body {
 
 @media screen and (min-width: 1280px) {
   .md-grid-template {
-    grid-template-columns: 0.7fr 1.3fr 22rem;
+    grid-template-columns: 0.7fr 1.3fr 16rem;
+  }
+
+  /* .aspect-h-6-9 {
+    aspect-ratio: 6 / 9;
+  } */
+}
+
+@media screen and (max-height: 600px) {
+  .md-grid-template {
+    grid-template-columns: 0.7fr 1.3fr 15rem;
   }
 
   /* .aspect-h-6-9 {
@@ -203,7 +213,7 @@ body {
 
 @media screen and (min-width: 1920px) {
   .md-grid-template {
-    grid-template-columns: 0.7fr 1.3fr 24rem;
+    grid-template-columns: 0.7fr 1.3fr 18rem;
   }
 }
 
@@ -213,11 +223,21 @@ body {
    desborda el contenedor y el usuario no está haciendo hover.
    ─────────────────────────────────────────────────────────────────────────── */
 @keyframes marquee-scroll {
-  0%   { transform: translateX(0); }
-  45%  { transform: translateX(-50%); }
-  50%  { transform: translateX(-50%); } /* pausa en el extremo */
-  95%  { transform: translateX(0); }
-  100% { transform: translateX(0); }    /* pausa antes de reiniciar */
+  0% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(-50%);
+  } /* pausa en el extremo */
+  95% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  } /* pausa antes de reiniciar */
 }
 
 .marquee-track {

@@ -5,7 +5,7 @@ import { getMovieByIdUpdate } from "@/components/widgets/movies.api";
 import { useMovieContext } from "@/context/MovieContext";
 import { MovieDB } from "@/context/interfaces/movieTypes";
 import Link from "next/link";
-import { customFont, manrope } from "@/app/fonts";
+import { manrope } from "@/app/fonts";
 
 interface CardRowProps {
   movieProp: MovieDB;
@@ -91,14 +91,17 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
         }
       }}
       className={`
+        relative
+        overflow-visible
+        z-10
         hover:bg-background-secondary
         flex
         items-center
         justify-between
         w-full
         p-3.5
-        md:py-2.5
-        md:px-4
+        md:py-2
+        md:px-5
         gap-4
         text-text-primary
         border
@@ -108,7 +111,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
         outline-none
         ${
           isFocused
-            ? "bg-surface-hover/30 border-accent-primary"
+            ? "bg-accent-primary/10 border-accent-primary shadow-accent "
             : "bg-transparent border-transparent hover:bg-surface-hover/40"
         }
         group

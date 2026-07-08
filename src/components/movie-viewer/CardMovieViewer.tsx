@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useMovieContext } from "@/context/MovieContext";
 import { FaFilm, FaPlay, FaCompactDisc } from "react-icons/fa";
 import { FiCalendar, FiClock, FiStar, FiVideo, FiDisc } from "react-icons/fi";
+import FormatBadge from "./FormatBadge";
 
 const CardMovieViewer: React.FC = () => {
   const { movie } = useMovieContext();
-  console.log("🚀 ~ CardMovieViewer ~ movie:", movie);
-
   if (!movie) {
     return (
       <div className="flex h-full flex-col">
@@ -28,11 +27,11 @@ const CardMovieViewer: React.FC = () => {
   }
 
   return (
-    <div className="flex h-full flex-col ">
+    <div className="flex h-full flex-col bg-background-elevated pb-3">
       {/* Scrollable upper content */}
       <div className="flex-1 min-h-0 overflow-y-auto scrollbar-invisible">
         {/* Poster */}
-        <div className="bg-gradient-to-b from-accent-primary/10 via-accent-primary/10 to-transparent p-6">
+        <div className="bg-gradient-to-b from-accent-primary/10 via-accent-primary/10 to-transparent p-4">
           <div className="relative aspect-[2/3] overflow-hidden rounded-xl  bg-background-secondary">
             {movie._id.poster_path ? (
               <Image
@@ -53,8 +52,12 @@ const CardMovieViewer: React.FC = () => {
           </div>
         </div>
         {/* Título */}
-        <div className="px-6">
-          <MarqueeTitle text={movie._id.title} />
+        <div className="px-4">
+          {/* <MarqueeTitle text={movie._id.title} /> */}
+          <h1 className="text-2xl font-bold leading-tight">
+            {" "}
+            {movie._id.title}{" "}
+          </h1>
 
           {/* Información */}
           <div className="mt-3 flex flex-wrap items-center gap-5  text-sm text-text-secondary">
@@ -89,50 +92,30 @@ const CardMovieViewer: React.FC = () => {
       </div>
 
       {/* Formatos */}
-      <div className="mt-4 border-t border-neutral-800 pt-4 px-6">
+      <div className="mt-4 border-t border-neutral-800 pt-4 px-4">
         <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
           Collection Formats
         </span>
 
         <div className="flex gap-2">
-          {/* VHS */}
-          <div
-            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
-              movie.formats.vhs
-                ? "border-yellow-500 bg-yellow-500 text-black"
-                : "border-neutral-700 bg-neutral-900 text-neutral-500"
-            }`}
+          <FormatBadge
+            active={movie.formats.vhs}
             title="VHS"
-          >
-            <FiVideo size={18} />
-            <span>VHS</span>
-          </div>
-
-          {/* DVD */}
-          <div
-            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
-              movie.formats.dvd
-                ? "border-yellow-500 bg-yellow-500 text-black"
-                : "border-neutral-700 bg-neutral-900 text-neutral-500"
-            }`}
+            icon={<FiVideo size={18} />}
+            label="VHS"
+          />
+          <FormatBadge
+            active={movie.formats.dvd}
             title="DVD"
-          >
-            <FiDisc size={18} />
-            <span>DVD</span>
-          </div>
-
-          {/* BLU-RAY */}
-          <div
-            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
-              movie.formats.bluray
-                ? "border-yellow-500 bg-yellow-500 text-black"
-                : "border-neutral-700 bg-neutral-900 text-neutral-500"
-            }`}
+            icon={<FiDisc size={18} />}
+            label="DVD"
+          />
+          <FormatBadge
+            active={movie.formats.bluray}
             title="Blu-ray"
-          >
-            <FaCompactDisc size={18} />
-            <span>BLU-RAY</span>
-          </div>
+            icon={<FaCompactDisc size={18} />}
+            label="BLU-RAY"
+          />
         </div>
 
         {/* Botón Watch Trailer */}
@@ -153,93 +136,93 @@ const CardMovieViewer: React.FC = () => {
  *   de derecha a izquierda, hace una pausa, y reinicia el ciclo.
  * - Al hacer hover, vuelve al inicio.
  */
-interface MarqueeTitleProps {
-  text: string;
-}
+// interface MarqueeTitleProps {
+//   text: string;
+// }
 
-const MarqueeTitle: React.FC<MarqueeTitleProps> = ({ text }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
-  const [overflows, setOverflows] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [animationDelayPassed, setAnimationDelayPassed] = useState(false);
+// const MarqueeTitle: React.FC<MarqueeTitleProps> = ({ text }) => {
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const textRef = useRef<HTMLSpanElement>(null);
+//   const [overflows, setOverflows] = useState(false);
+//   const [isHovered, setIsHovered] = useState(false);
+//   const [animationDelayPassed, setAnimationDelayPassed] = useState(false);
 
-  // Detectar si el texto se desborda.
-  useEffect(() => {
-    const checkOverflow = () => {
-      const container = containerRef.current;
-      const inner = textRef.current;
-      if (!container || !inner) return;
-      setOverflows(inner.scrollWidth > container.clientWidth);
-    };
+//   // Detectar si el texto se desborda.
+//   useEffect(() => {
+//     const checkOverflow = () => {
+//       const container = containerRef.current;
+//       const inner = textRef.current;
+//       if (!container || !inner) return;
+//       setOverflows(inner.scrollWidth > container.clientWidth);
+//     };
 
-    checkOverflow();
-    window.addEventListener("resize", checkOverflow);
-    return () => window.removeEventListener("resize", checkOverflow);
-  }, [text]);
+//     checkOverflow();
+//     window.addEventListener("resize", checkOverflow);
+//     return () => window.removeEventListener("resize", checkOverflow);
+//   }, [text]);
 
-  // Delay de 2s antes de empezar a animar (sólo si hay overflow y no hay hover).
-  useEffect(() => {
-    if (!overflows || isHovered) {
-      setAnimationDelayPassed(false);
-      return;
-    }
+//   // Delay de 2s antes de empezar a animar (sólo si hay overflow y no hay hover).
+//   useEffect(() => {
+//     if (!overflows || isHovered) {
+//       setAnimationDelayPassed(false);
+//       return;
+//     }
 
-    const timeout = setTimeout(() => {
-      setAnimationDelayPassed(true);
-    }, 2000);
+//     const timeout = setTimeout(() => {
+//       setAnimationDelayPassed(true);
+//     }, 2000);
 
-    return () => clearTimeout(timeout);
-  }, [overflows, isHovered, text]);
+//     return () => clearTimeout(timeout);
+//   }, [overflows, isHovered, text]);
 
-  // Si no hay overflow, mostrar título normal sin wrapper especial.
-  if (!overflows) {
-    return (
-      <h1
-        ref={containerRef as React.RefObject<HTMLHeadingElement>}
-        className="text-4xl font-bold leading-tight text-white"
-      >
-        {text}
-      </h1>
-    );
-  }
+//   // Si no hay overflow, mostrar título normal sin wrapper especial.
+//   if (!overflows) {
+//     return (
+//       <h1
+//         ref={containerRef as React.RefObject<HTMLHeadingElement>}
+//         className="text-4xl font-bold leading-tight text-white"
+//       >
+//         {text}
+//       </h1>
+//     );
+//   }
 
-  return (
-    <div
-      ref={containerRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group relative overflow-hidden"
-    >
-      {/* Fade-out en el borde derecho para suavizar el corte */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-neutral-900 to-transparent z-10" />
+//   return (
+//     <div
+//       ref={containerRef}
+//       onMouseEnter={() => setIsHovered(true)}
+//       onMouseLeave={() => setIsHovered(false)}
+//       className="group relative overflow-hidden"
+//     >
+//       {/* Fade-out en el borde derecho para suavizar el corte */}
+//       <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-neutral-900 to-transparent z-10" />
 
-      <h1
-        className={`
-          text-4xl font-bold leading-tight text-white
-          whitespace-nowrap
-          ${isHovered ? "" : "marquee-track"}
-        `}
-        style={
-          animationDelayPassed && !isHovered
-            ? ({
-                "--marquee-duration": `${Math.max(4, text.length * 0.35)}s`,
-              } as React.CSSProperties)
-            : {
-                transform: "translateX(0)",
-                transition: "transform 0.3s ease-out",
-              }
-        }
-      >
-        <span ref={textRef} className="inline-block pr-12">
-          {text}
-        </span>
-        <span className="inline-block pr-12" aria-hidden>
-          {text}
-        </span>
-      </h1>
-    </div>
-  );
-};
+//       <h1
+//         className={`
+//           text-4xl font-bold leading-tight text-white
+//           whitespace-nowrap
+//           ${isHovered ? "" : "marquee-track"}
+//         `}
+//         style={
+//           animationDelayPassed && !isHovered
+//             ? ({
+//                 "--marquee-duration": `${Math.max(4, text.length * 0.35)}s`,
+//               } as React.CSSProperties)
+//             : {
+//                 transform: "translateX(0)",
+//                 transition: "transform 0.3s ease-out",
+//               }
+//         }
+//       >
+//         <span ref={textRef} className="inline-block pr-12">
+//           {text}
+//         </span>
+//         <span className="inline-block pr-12" aria-hidden>
+//           {text}
+//         </span>
+//       </h1>
+//     </div>
+//   );
+// };
 
 export default CardMovieViewer;

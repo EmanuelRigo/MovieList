@@ -43,6 +43,10 @@ export default {
       screens: {
         "1-5xl": "1600px",
       },
+      boxShadow: {
+        accent:
+          "0 0 18px -2px rgb(244 180 0 / 0.35), 0 0 4px rgb(244 180 0 / 0.15)",
+      },
     },
   },
   plugins: [],

@@ -1,48 +1,35 @@
 "use client";
 
-import { useMemo } from "react";
-import { FaListUl, FaThLarge, FaChevronDown } from "react-icons/fa";
+import { FaListUl, FaThLarge } from "react-icons/fa";
+import { IoIosLogOut } from "react-icons/io";
+import { useRouter } from "next/navigation";
 import { useMovieContext } from "@/context/MovieContext";
 import SearchBarWidget from "@/components/widgets/SearchBarWidget";
+import YearSearch from "@/components/widgets/YearSearch";
+import GenreFilter from "@/components/list/GenreFilter";
+import CheckedFilter from "@/components/list/CheckedFilter";
+import { logoutUser } from "@/components/widgets/users.api";
 
 // View mode now provided by context
 
 const ToolkitList = () => {
-  const {
-    movieList,
-    selectedYear,
-    setSelectedYear,
-    selectedGenre,
-    setSelectedGenre,
-  } = useMovieContext();
-
+  const router = useRouter();
   const { viewMode, setViewMode } = useMovieContext();
 
-  const movieCount = movieList.length;
-
-  // Años disponibles a partir de la lista actual
-  const years = useMemo(() => {
-    const set = new Set<string>();
-    movieList.forEach((m) => {
-      const date = m._id.release_date;
-      if (date) {
-        const year = new Date(date).getFullYear().toString();
-        if (year !== "NaN") set.add(year);
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      const cookies = document.cookie.split("; ");
+      for (const cookie of cookies) {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname}; secure; samesite=strict`;
       }
-    });
-    return Array.from(set).sort((a, b) => b.localeCompare(a));
-  }, [movieList]);
-
-  // Géneros disponibles a partir de la lista actual
-  const genres = useMemo(() => {
-    const set = new Set<string>();
-    movieList.forEach((m) => {
-      m._id.genres?.forEach((g) => {
-        if (g?.name) set.add(g.name);
-      });
-    });
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
-  }, [movieList]);
+      router.push("/login");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   return (
     <header
@@ -55,8 +42,7 @@ const ToolkitList = () => {
         md:justify-between
         w-full
         p-3
-        rounded-2xl
-        md:rounded-3xl
+
         bg-background-elevated
       "
     >
@@ -65,97 +51,68 @@ const ToolkitList = () => {
         <h1
           className="
             text-xl
-            md:text-2xl
-            font-semibold
-            text-text-primary
-            tracking-tight
+            md:text-3xl
+            font-bold
+            text-accent-hover
+            tracking-tight ps-4
           "
         >
-          My Movies
+          My MovieList
         </h1>
-        <span className="text-sm md:text-base text-text-secondary font-normal border-2 border-accent-primary rounded-lg p-2">
-          {movieCount}
-        </span>
       </div>
 
       {/* Controles */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 md:gap-2 justify-between">
         {/* Buscador */}
         <div className="w-full md:max-w-xs">
           <SearchBarWidget />
         </div>
-        {/* Select: Years */}
-        <div className="relative w-full sm:w-auto flex items-center self-stretch bg-surface-primary border-2 border-border-subtle rounded-lg px-4 hover:border-accent-primary focus-within:border-accent-primary transition-colors duration-150">
-          <select
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className="
-              appearance-none
-              w-full
-              h-full
-              bg-transparent
-              border-none
-              text-text-primary
-              text-sm
-              outline-none
-              cursor-pointer
-              pr-6
-            "
-            aria-label="Filtrar por año"
-          >
-            <option value="all years">All years</option>
-            {years.map((y) => (
-              <option key={y} value={y}>
-                {y}
-              </option>
-            ))}
-          </select>
-          <FaChevronDown
-            className="
-              pointer-events-none
-              absolute
-              right-3
-              text-text-muted
-              text-xs
-            "
-          />
-        </div>
 
-        {/* Select: Genres */}
-        <div className="relative w-full sm:w-auto flex items-center self-stretch bg-surface-primary border-2 border-border-subtle rounded-lg px-4 hover:border-accent-primary focus-within:border-accent-primary transition-colors duration-150">
-          <select
-            value={selectedGenre}
-            onChange={(e) => setSelectedGenre(e.target.value)}
+        {/* Filtros movidos: visibles solo desde md: hacia pantallas más grandes */}
+        <div className="hidden md:flex items-center gap-2">
+          <div
             className="
-              appearance-none
-              w-full
-              h-full
-              bg-transparent
-              border-none
-              text-text-primary
-              text-sm
-              outline-none
-              cursor-pointer
-              pr-6
+              relative
+              flex items-center self-stretch
+              bg-surface-primary
+              border-2 border-border-subtle
+              rounded-lg
+              px-4
+              hover:border-accent-primary
+              focus-within:border-accent-primary
+              transition-colors duration-150
             "
-            aria-label="Filtrar por género"
           >
-            <option value="genres">Genres</option>
-            {genres.map((g) => (
-              <option key={g} value={g}>
-                {g}
-              </option>
-            ))}
-          </select>
-          <FaChevronDown
+            <YearSearch />
+          </div>
+
+          <div
             className="
-              pointer-events-none
-              absolute
-              right-3
-              text-text-muted
-              text-xs
+              relative
+              flex items-center self-stretch
+              bg-surface-primary
+              border-2 border-border-subtle
+              rounded-lg
+              px-4
+              hover:border-accent-primary
+              focus-within:border-accent-primary
+              transition-colors duration-150
             "
-          />
+          >
+            <GenreFilter />
+          </div>
+
+          <div
+            className="
+              flex items-center justify-center self-stretch
+              bg-surface-primary
+              border-2 border-border-subtle
+              rounded-lg
+              px-4
+            "
+          >
+            <CheckedFilter />
+          </div>
         </div>
 
         {/* Toggle: vista lista / cuadricula */}
@@ -197,8 +154,8 @@ const ToolkitList = () => {
           <button
             type="button"
             onClick={() => setViewMode("grid")}
-            aria-label="Ver como cuadricula"
             aria-pressed={viewMode === "grid"}
+            aria-label="Ver como cuadricula"
             className={`
               relative z-10 p-2 rounded-md
               transition-colors duration-150
@@ -208,6 +165,15 @@ const ToolkitList = () => {
             <FaThLarge className="text-sm md:text-base" />
           </button>
         </div>
+
+        {/* Botón logout */}
+        <button
+          onClick={handleLogout}
+          className="flex items-center justify-center text-text-secondary hover:text-accent-primary transition-colors duration-150 text-lg md:text-xl p-2"
+          aria-label="Cerrar sesión"
+        >
+          <IoIosLogOut className="rotate-180" />
+        </button>
       </div>
     </header>
   );

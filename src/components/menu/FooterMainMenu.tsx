@@ -69,7 +69,7 @@ export const FooterMainMenu = () => {
   return (
     <div
       className={
-        "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 "
+        "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 md:ps-6 md:py-6"
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-2 2xl:p-4 px-3 ">
@@ -78,7 +78,7 @@ export const FooterMainMenu = () => {
         <div className="flex gap-4">
           <button
             onClick={handleLogout}
-            className="flex items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180"
+            className="flex md:hidden items-center justify-center text-blue-500 dark:text-yellow-500 hover:text-blue-700 dark:hover:text-orange-700 transition-colors duration-300 text-3xl rotate-180 "
           >
             <IoIosLogOut />
           </button>
@@ -96,6 +96,19 @@ export const FooterMainMenu = () => {
           </span>
           <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:group-hover:text-yellow-500 rotate-45" />
         </Link>
+
+        <div
+          className="group rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
+              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-4 ps-3 "
+        >
+          <span className="ms-2 2xl:ms-0 text-lg">
+            Movies: {movieList.length}
+          </span>
+          <Link href="/add-movie">
+            {" "}
+            <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:group-hover:text-yellow-500 rotate-45" />
+          </Link>
+        </div>
         <div className="hidden lg:flex w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2">
           <div className="w-1/3 flex items-center justify-center">
             <YearSearch />
