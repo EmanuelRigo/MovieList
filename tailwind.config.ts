@@ -27,9 +27,9 @@ export default {
           strong: "var(--border-strong)",
         },
         accent: {
-          primary: "var(--accent-primary)",
-          hover: "var(--accent-hover)",
-          muted: "var(--accent-muted)",
+          primary: "rgb(244 180 0 / <alpha-value>)",
+          hover: "rgb(255 201 61 / <alpha-value>)",
+          muted: "rgb(215 154 0 / <alpha-value>)",
         },
         text: {
           primary: "var(--text-primary)",

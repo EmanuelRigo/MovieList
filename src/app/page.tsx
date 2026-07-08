@@ -41,14 +41,14 @@ export default async function Home() {
 
   return (
     <div className="h-svh w-screen flex flex-col overflow-hidden justify-center">
-      <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 md-grid-template md:grid-rows-[auto_1fr] gap-4 p-4">
+      <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-neutral-900 dark:bg-transparent mx-auto grid grid-cols-1 md-grid-template md:grid-rows-[auto_1fr] gap-4 p-4 md:pe-0">
         {/* Banner: ToolkitList ocupa las 3 columnas */}
         <div className="md:col-span-3">
           <ToolkitList />
         </div>
 
         {/* Fila inferior: ocupa el alto restante y distribuye en 3 columnas */}
-        <div className="md:col-span-3 grid grid-cols-1 md-grid-template gap-4 min-h-0 h-full">
+        <div className="md:col-span-3 grid grid-cols-1 md-grid-template gap-0 min-h-0 h-full">
           {/* Menú */}
           <div className="flex flex-col justify-between h-full min-h-0">
             <FooterMainMenu />

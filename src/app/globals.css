@@ -45,6 +45,47 @@
 
 /* El padding del scroller se aplica por clase de Tailwind en el componente. */
 
+/* Animación marquee para títulos largos.
+   El título se desplaza de derecha a izquierda en bucle.
+   El contenedor padre tiene overflow-hidden y altura fija (1.2em),
+   así que sólo se ve una copia del texto a la vez. */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* El segundo copy del texto está justo después del primero,
+       así que al desplazar -50% el ciclo queda perfecto. */
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 8s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* El track es un flex en línea, sin whitespace wrapping,
+   y nunca excede la altura de su padre (1.2em). */
+.marquee-text {
+  display: inline-flex;
+  white-space: nowrap;
+  height: 100%;
+  align-items: center;
+  width: max-content;
+}
+
+/* Cada copia del texto: bloque inline con padding derecho para
+   que haya separación visual entre repeticiones. */
+.marquee-content {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -96,4 +137,21 @@ body {
   .md-grid-template {
     grid-template-columns: 1fr 1.5fr 19rem;
   }
+}
+
+/* ── Marquee title (CardMovieViewer) ────────────────────────────────────────
+   El componente MarqueeTitle inyecta --marquee-duration via style inline
+   según el largo del texto. La animación se activa sólo cuando el texto
+   desborda el contenedor y el usuario no está haciendo hover.
+   ─────────────────────────────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  45%  { transform: translateX(-50%); }
+  50%  { transform: translateX(-50%); } /* pausa en el extremo */
+  95%  { transform: translateX(0); }
+  100% { transform: translateX(0); }    /* pausa antes de reiniciar */
+}
+
+.marquee-track {
+  animation: marquee-scroll var(--marquee-duration, 8s) linear infinite;
 }
