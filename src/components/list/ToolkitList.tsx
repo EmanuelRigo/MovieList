@@ -57,6 +57,7 @@ const ToolkitList = () => {
         p-3
         rounded-2xl
         md:rounded-3xl
+        bg-background-elevated
       "
     >
       {/* Título + contador */}

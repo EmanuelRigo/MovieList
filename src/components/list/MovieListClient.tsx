@@ -55,7 +55,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
                 ${
                   viewMode === "grid"
                     ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3 content-start pb-3 md:pb-4"
-                    : "gap-1.5 pt-2 pb-6 md:pt-2.5 md:pb-8"
+                    : "gap-1.5 pt-2 pb-6 md:pt-6 md:pb-8"
                 }
               `}
             >
