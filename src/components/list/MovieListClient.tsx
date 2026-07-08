@@ -49,7 +49,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
               className={`
                 snap-container
                 h-full w-full
-                overflow-auto scrollbar-hidden
+                overflow-auto scrollbar-custom
                 snap-y-proximity
                 flex flex-col
                 ${

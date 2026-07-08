@@ -3,11 +3,12 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { useMovieContext } from "@/context/MovieContext";
-import { FaFilm } from "react-icons/fa";
-import { FiCalendar, FiClock, FiStar } from "react-icons/fi";
+import { FaFilm, FaPlay, FaCompactDisc } from "react-icons/fa";
+import { FiCalendar, FiClock, FiStar, FiVideo, FiDisc } from "react-icons/fi";
 
 const CardMovieViewer: React.FC = () => {
   const { movie } = useMovieContext();
+  console.log("🚀 ~ CardMovieViewer ~ movie:", movie);
 
   if (!movie) {
     return (
@@ -17,8 +18,8 @@ const CardMovieViewer: React.FC = () => {
         </div>
 
         <div className="mt-8 text-center">
-          <h3 className="text-3xl font-bold text-neutral-200">Movie</h3>
-          <p className="mt-2 text-sm text-neutral-500">
+          <h3 className="text-3xl font-bold text-text-primary">Movie</h3>
+          <p className="mt-2 text-sm text-text-muted">
             Select a movie to view its details.
           </p>
         </div>
@@ -28,106 +29,118 @@ const CardMovieViewer: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col ">
-      {/* Poster */}
-      <div className="bg-gradient-to-b from-accent-primary/30 via-accent-primary/10 to-transparent p-5">
-        <div className="relative aspect-[2/3] overflow-hidden rounded-xl  bg-background-secondary">
-          {movie._id.poster_path ? (
-            <Image
-              key={movie._id.poster_path}
-              src={`https://image.tmdb.org/t/p/w500${movie._id.poster_path}`}
-              alt={movie._id.title || "Movie Poster"}
-              width={500}
-              height={750}
-              unoptimized
-              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-in-out"
-              onLoadingComplete={(img) => img.classList.remove("opacity-0")}
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <FaFilm className="text-7xl text-neutral-600" />
+      {/* Scrollable upper content */}
+      <div className="flex-1 min-h-0 overflow-y-auto scrollbar-invisible">
+        {/* Poster */}
+        <div className="bg-gradient-to-b from-accent-primary/10 via-accent-primary/10 to-transparent p-6">
+          <div className="relative aspect-[2/3] overflow-hidden rounded-xl  bg-background-secondary">
+            {movie._id.poster_path ? (
+              <Image
+                key={movie._id.poster_path}
+                src={`https://image.tmdb.org/t/p/w500${movie._id.poster_path}`}
+                alt={movie._id.title || "Movie Poster"}
+                width={500}
+                height={750}
+                unoptimized
+                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-in-out"
+                onLoadingComplete={(img) => img.classList.remove("opacity-0")}
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <FaFilm className="text-7xl text-neutral-600" />
+              </div>
+            )}
+          </div>
+        </div>
+        {/* Título */}
+        <div className="px-6">
+          <MarqueeTitle text={movie._id.title} />
+
+          {/* Información */}
+          <div className="mt-3 flex flex-wrap items-center gap-5  text-sm text-text-secondary">
+            <div className="flex items-center gap-2">
+              <FiCalendar size={14} />
+              {movie._id.release_date?.split("T")[0]}
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* Información */}
-      <div className="mt-6">
-        <MarqueeTitle text={movie._id.title} />
+            <div className="flex items-center gap-2 text-accent-primary">
+              <FiClock size={14} />
+              {movie._id.runtime} min
+            </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-5 text-sm text-neutral-400">
-          <div className="flex items-center gap-2">
-            <FiCalendar size={14} />
-            {movie._id.release_date?.split("T")[0]}
+            <div className="flex items-center gap-2">
+              <FiStar size={14} />
+              {movie._id.vote_average?.toFixed(1) ?? "-"}
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <FiClock size={14} />
-            {movie._id.runtime} min
+          {/* Sinopsis */}
+          <div className="mt-4 flex flex-col">
+            <span className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-text-muted">
+              Synopsis
+            </span>
+            <div className="pr-2">
+              <p className="text-sm leading-6 text-text-secondary">
+                {movie._id.overview}
+              </p>
+            </div>
           </div>
-
-          <div className="flex items-center gap-2">
-            <FiStar size={14} />
-            {movie._id.vote_average?.toFixed(1) ?? "-"}
-          </div>
-        </div>
-      </div>
-
-      {/* Sinopsis */}
-      <div className="mt-8 flex min-h-0 flex-1 flex-col overflow-hidden border-t border-neutral-800 pt-6">
-        <span className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
-          Synopsis
-        </span>
-
-        <div className="flex-1 overflow-y-auto scrollbar-hidden">
-          <p className="text-sm leading-7 text-neutral-300">
-            {movie._id.overview}
-          </p>
-        </div>
+        </div>{" "}
       </div>
 
       {/* Formatos */}
-      <div className="mt-8 border-t border-neutral-800 pt-6">
-        <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
+      <div className="mt-4 border-t border-neutral-800 pt-4 px-6">
+        <span className="mb-3 block text-[11px] font-semibold uppercase tracking-[0.28em] text-neutral-500">
           Collection Formats
         </span>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
+          {/* VHS */}
           <div
-            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
               movie.formats.vhs
                 ? "border-yellow-500 bg-yellow-500 text-black"
                 : "border-neutral-700 bg-neutral-900 text-neutral-500"
             }`}
+            title="VHS"
           >
-            VHS
+            <FiVideo size={18} />
+            <span>VHS</span>
           </div>
 
+          {/* DVD */}
           <div
-            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
               movie.formats.dvd
                 ? "border-yellow-500 bg-yellow-500 text-black"
                 : "border-neutral-700 bg-neutral-900 text-neutral-500"
             }`}
+            title="DVD"
           >
-            DVD
+            <FiDisc size={18} />
+            <span>DVD</span>
           </div>
 
+          {/* BLU-RAY */}
           <div
-            className={`rounded-xl border px-4 py-2 text-xs font-semibold transition ${
+            className={`flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl border px-3 py-3 text-xs font-semibold transition ${
               movie.formats.bluray
                 ? "border-yellow-500 bg-yellow-500 text-black"
                 : "border-neutral-700 bg-neutral-900 text-neutral-500"
             }`}
+            title="Blu-ray"
           >
-            BLU-RAY
+            <FaCompactDisc size={18} />
+            <span>BLU-RAY</span>
           </div>
         </div>
-      </div>
 
-      {/* Botón */}
-      <button className="mt-8 flex h-14 w-full items-center justify-center rounded-2xl border border-yellow-600 text-base font-semibold text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
-        Watch Trailer
-      </button>
+        {/* Botón Watch Trailer */}
+        <button className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border border-yellow-600 text-base font-semibold text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
+          <FaPlay size={14} />
+          <span>Watch Trailer</span>
+        </button>
+      </div>
     </div>
   );
 };

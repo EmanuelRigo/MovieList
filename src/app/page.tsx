@@ -60,7 +60,7 @@ export default async function Home() {
           </div>
 
           {/* Viewer de películas */}
-          <div className="hidden lg:block h-full overflow-auto min-h-0">
+          <div className="hidden lg:block h-full overflow-auto min-h-0 scrollbar-invisible">
             <CardMovieViewer />
           </div>
         </div>

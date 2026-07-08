@@ -31,6 +31,74 @@
   scrollbar-width: none; /* Firefox */
 }
 
+/* Scrollbar invisible: oculta la barra Y no reserva espacio (WebKit overlay).
+   Útil en columnas estrechas (CardMovieViewer) donde cualquier px de scrollbar
+   rompe el layout. Funciona en:
+   - Firefox:        scrollbar-width: none + scrollbar-gutter: auto
+   - WebKit/Chromium: ::-webkit-scrollbar { width:0; display:none } con !important
+   - IE/Edge legacy:  -ms-overflow-style: none */
+.scrollbar-invisible {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
+}
+
+.scrollbar-invisible::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+.scrollbar-invisible::-webkit-scrollbar-track,
+.scrollbar-invisible::-webkit-scrollbar-thumb,
+.scrollbar-invisible::-webkit-scrollbar-corner {
+  background: transparent !important;
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+/* Scrollbar personalizada — Design System MovieList
+   Estilo minimalista con tokens del proyecto:
+   - track:        background-secondary (#121212)
+   - thumb:        surface-primary (#1E1E1E) en reposo, surface-hover (#2A2A2A) en hover
+   - thumb active: border-strong (#404040) para dar feedback al hacer click
+   Ancho delgado (8px) para mantener la estética cinematográfica. */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #1e1e1e #121212;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #121212;
+  border-radius: 9999px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 9999px;
+  border: 2px solid #121212;
+  transition: background 200ms ease-in-out;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:active {
+  background: #404040;
+}
+
+.scrollbar-custom::-webkit-scrollbar-corner {
+  background: #121212;
+}
+
 /* Scroll sectorizado: el contenedor ancla el scroll a la card más cercana
    sin forzar saltos largos (proximity = snap sólo si estás "cerca" del punto). */
 .snap-y-proximity {
@@ -115,7 +183,7 @@ body {
 
 @media screen and (min-width: 1024px) {
   .md-grid-template {
-    grid-template-columns: 1fr 1.5fr 17rem;
+    grid-template-columns: 0.7fr 1.3fr 20rem;
   }
 
   .aspect-h-6-9 {
@@ -125,7 +193,7 @@ body {
 
 @media screen and (min-width: 1280px) {
   .md-grid-template {
-    grid-template-columns: 1fr 1.5fr 17rem;
+    grid-template-columns: 0.7fr 1.3fr 22rem;
   }
 
   /* .aspect-h-6-9 {
@@ -135,7 +203,7 @@ body {
 
 @media screen and (min-width: 1920px) {
   .md-grid-template {
-    grid-template-columns: 1fr 1.5fr 19rem;
+    grid-template-columns: 0.7fr 1.3fr 24rem;
   }
 }
 
