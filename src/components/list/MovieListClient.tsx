@@ -53,7 +53,7 @@ const MovieListClient: React.FC<MovieListClientProps> = ({ list }) => {
                 flex flex-col
                 ${
                   viewMode === "grid"
-                    ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3 content-start pb-3 md:pb-4"
+                    ? "grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-5 gap-3 content-start pb-3 md:pb-4 px-4"
                     : "gap-1.5 pt-4 pb-6 md:pt-0 md:pb-8"
                 }
               `}

@@ -119,7 +119,7 @@ const CardMovieViewer: React.FC = () => {
         </div>
 
         {/* Botón Watch Trailer */}
-        <button className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border border-yellow-600 text-base font-semibold text-yellow-500 transition-all duration-300 hover:bg-yellow-500 hover:text-black">
+        <button className="mt-4 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-accent-hover text-base font-semibold text-yellow-500 transition-all duration-300 hover:bg-accent-hover hover:text-black">
           <FaPlay size={14} />
           <span>Watch Trailer</span>
         </button>

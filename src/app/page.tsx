@@ -41,7 +41,7 @@ export default async function Home() {
 
   return (
     <div className="h-svh w-screen flex flex-col overflow-hidden justify-center">
-      <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-background-secondary dark:bg-transparent mx-auto grid grid-cols-1 md-grid-template md:grid-rows-[auto_1fr] gap-0 p-4  md:py-0 md:px-0 overflow-hidden">
+      <div className="w-full h-full 1-5xl:max-h-[956px] 1-5xl:h-5/6 lg:w-full 1-5xl:container rounded-xl bg-neutral-300 dark:lg:bg-background-primary dark:bg-transparent mx-auto grid grid-cols-1 md-grid-template md:grid-rows-[auto_1fr] gap-0 p-4  md:py-0 md:px-0 overflow-hidden">
         {/* Banner: ToolkitList ocupa las 3 columnas */}
         <div className="md:col-span-3">
           <ToolkitList />

@@ -100,7 +100,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
         justify-between
         w-full
         p-3.5
-        md:py-2
+        md:py-3
         md:px-5
         gap-4
         text-text-primary
@@ -112,7 +112,7 @@ export const CardRow: React.FC<CardRowProps> = ({ movieProp }) => {
         ${
           isFocused
             ? "bg-accent-primary/10 border-accent-primary shadow-accent "
-            : "bg-transparent border-transparent hover:bg-surface-hover/40"
+            : "bg-transparent border-transparent hover:bg-accent-primary/10"
         }
         group
         hover:cursor-pointer

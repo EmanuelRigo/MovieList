@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import CardMenuMovie from "./CardMenuMovie";
 import OrderListButtons from "./OrderListButtons";
 
-import YearSearch from "../widgets/YearSearch";
+//import YearSearch from "../widgets/YearSearch";
 
 import { logoutUser } from "../widgets/users.api";
 import { useMovieContext } from "@/context/MovieContext";
@@ -17,10 +17,11 @@ import { getUserMovies } from "../widgets/movies.api";
 import { BsListUl } from "react-icons/bs";
 import { IoIosLogOut } from "react-icons/io";
 import SettingsMenuModal from "./SettingsMenuModal";
-import CheckedFilter from "../list/CheckedFilter";
-import { FaRegTimesCircle } from "react-icons/fa";
+//import CheckedFilter from "../list/CheckedFilter";
+//import { FaRegTimesCircle } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
 
-import GenreFilter from "../list/GenreFilter";
+//import GenreFilter from "../list/GenreFilter";
 export const FooterMainMenu = () => {
   const router = useRouter();
   const { movieList, setMovieList, username, setUsername } = useMovieContext();
@@ -69,7 +70,7 @@ export const FooterMainMenu = () => {
   return (
     <div
       className={
-        "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 md:ps-6 md:py-6"
+        "w-full flex flex-col gap-4 justify-between h-full  text-black dark:text-neutral-200 md:ps-6 md:pe-6 md:py-6 bg-background-secondary "
       }
     >
       <div className="flex justify-between bg-neutral-100 dark:bg-neutral-800 rounded-lg items-center p-2 2xl:p-4 px-3 ">
@@ -86,7 +87,7 @@ export const FooterMainMenu = () => {
       </div>
       <div className="flex-grow flex flex-col gap-4">
         <CardMenuMovie />
-        <Link
+        {/* <Link
           className="group rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
               dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-4 ps-3 "
           href="/add-movie"
@@ -95,21 +96,21 @@ export const FooterMainMenu = () => {
             Movies: {movieList.length}
           </span>
           <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:group-hover:text-yellow-500 rotate-45" />
-        </Link>
+        </Link> */}
 
-        <div
-          className="group rounded-lg w-full flex justify-between items-center bg-gray-100 dark:bg-neutral-900
-              dark:lg:bg-neutral-800 text-black dark:text-gray-200 p-4 ps-3 "
-        >
-          <span className="ms-2 2xl:ms-0 text-lg">
-            Movies: {movieList.length}
-          </span>
-          <Link href="/add-movie">
-            {" "}
-            <FaRegTimesCircle className="text-2xl text-black dark:text-neutral-200 hover:text-blue-500 dark:group-hover:text-yellow-500 rotate-45" />
+        <div className="rounded-lg w-full flex justify-between items-center  text-black dark:text-gray-200 p-2">
+          <p className="2xl:ms-0 text-2xl font-semibold">
+            Movies:
+            <span className="text-accent-hover"> {movieList.length}</span>
+          </p>
+          <Link
+            className="bg-accent-hover/10  transition-colors p-2 rounded-lg text-xl text-accent-hover/40 hover:text-accent-hover"
+            href="/add-movie"
+          >
+            <FaPlus />
           </Link>
         </div>
-        <div className="hidden lg:flex w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2">
+        {/* <div className="hidden w-full bg-neutral-100 dark:bg-neutral-800 rounded-lg py-2 ">
           <div className="w-1/3 flex items-center justify-center">
             <YearSearch />
           </div>
@@ -119,7 +120,7 @@ export const FooterMainMenu = () => {
           <div className="w-1/3 flex items-center justify-center">
             <CheckedFilter className="w-full flex items-center justify-center" />
           </div>
-        </div>
+        </div> */}
         <div className="hidden lg:flex justify-between text-black dark:text-neutral-200 lg:text-3xl p-3 bg-neutral-100 dark:bg-neutral-800 rounded-lg">
           <OrderListButtons />
           <FilterFormatsButtons />
