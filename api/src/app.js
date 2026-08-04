@@ -53,6 +53,7 @@ app.use(
       const allowedOrigins = [
         "http://localhost:3000", // Desarrollo local
         "http://localhost:3001",
+        "http://localhost:8081", //React Native
         "https://movie-list-jade-kappa.vercel.app", // Producción
       ];
 
