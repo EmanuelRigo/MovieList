@@ -1,0 +1,205 @@
+---
+description: Enforces the MovieList design system. Replaces Tailwind default colors (blue-500, yellow-500, red-500, neutral-*, gray-*, etc.) with custom design tokens (accent-primary, surface-*, background-*, danger, text-*) in both light and dark mode.
+globs: ["**/*.tsx", "**/*.ts", "**/*.css"]
+alwaysApply: false
+---
+
+# MovieList Design System
+
+## When to apply
+
+Apply these rules when you are about to:
+
+- Create or modify a React component under `src/components/**` or `src/app/**`.
+- Write Tailwind classes that use colors (`bg-*`, `text-*`, `border-*`, `ring-*`, `divide-*`, `from-*`, `to-*`, `via-*`, `placeholder-*`, `caret-*`, `outline-*`, `shadow-*` with color).
+- Edit `globals.css` or `tailwind.config.ts`.
+
+If the change does not involve color (logic, layout, animations, fetch), you can ignore this rule.
+
+## Core principle
+
+**Never use Tailwind default colors directly** (`blue-500`, `yellow-500`, `red-500`, `neutral-100`, `gray-200`, `white` without dark context, `zinc-800`, `slate-*`, etc.). Always replace them with the **design system tokens** defined in `src/app/globals.css` and registered in `tailwind.config.ts`.
+
+## Available tokens
+
+Defined in `src/app/globals.css` (`:root`) and consumed via `tailwind.config.ts`:
+
+| Category  | Token                | Typical use                                          |
+| --------- | -------------------- | ---------------------------------------------------- |
+| Background | `background`         | Root background (changes with `prefers-color-scheme`). |
+| Background | `background-primary` | Main shell background (near-black).                  |
+| Background | `background-secondary` | Secondary panels.                                   |
+| Background | `background-elevated` | Header / cards / elevated widgets.                  |
+| Surface    | `surface-primary`    | Input, chip, toggle backgrounds.                     |
+| Surface    | `surface-hover`      | Hover state for interactive surfaces.                |
+| Surface    | `surface-active`     | Pressed / active state.                              |
+| Border     | `border-subtle`      | 1-2px borders on dark backgrounds.                   |
+| Border     | `border-strong`      | Higher contrast borders (focus visible, etc.).       |
+| Accent     | `accent-primary`     | Brand color, CTAs, indicators, focus.                |
+| Accent     | `accent-hover`       | Hover/active for accent (slightly lighter).          |
+| Accent     | `accent-muted`       | Disabled states / muted variants.                    |
+| Text       | `text-primary`       | Primary text on dark backgrounds.                    |
+| Text       | `text-secondary`     | Secondary text, labels.                              |
+| Text       | `text-muted`         | Disabled or decorative text.                         |
+| Danger     | `danger`             | Errors, destructive actions (delete, cancel).        |
+| Danger     | `danger-hover`       | Hover for danger.                                    |
+
+## Replacement table (light + dark)
+
+When you see a default Tailwind class, map it like this:
+
+### Action accents (hardcoded blue ↔ yellow)
+
+| Before (❌)                                                | After (✅)                                                                 |
+| --------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `bg-blue-500`                                             | `bg-accent-primary`                                                        |
+| `bg-blue-600` / `hover:bg-blue-600`                       | `bg-accent-hover` / `hover:bg-accent-hover`                                |
+| `text-blue-500`                                           | `text-accent-primary`                                                      |
+| `hover:text-blue-500`                                     | `hover:text-accent-primary`                                                |
+| `text-blue-700`                                           | `text-accent-muted`                                                        |
+| `bg-blue-500 dark:bg-yellow-500`                          | `bg-accent-primary dark:bg-accent-primary` (one token covers both)         |
+| `text-blue-500 dark:text-yellow-500`                      | `text-accent-primary dark:text-accent-primary`                             |
+| `hover:text-blue-700 dark:hover:text-orange-700`          | `hover:text-accent-muted dark:hover:text-accent-muted`                     |
+| `focus:ring-blue-500`                                     | `focus:ring-accent-primary`                                                |
+| `border-yellow-500 bg-yellow-500`                         | `border-accent-primary bg-accent-primary`                                  |
+
+### Danger / destructive (red)
+
+| Before (❌)                                  | After (✅)                                   |
+| ------------------------------------------- | -------------------------------------------- |
+| `bg-red-500`                                | `bg-danger`                                  |
+| `bg-red-600` / `hover:bg-red-600`           | `bg-danger-hover` / `hover:bg-danger-hover`  |
+| `text-red-500`                              | `text-danger`                                |
+| `hover:text-red-500`                        | `hover:text-danger`                          |
+| `border-red-500`                            | `border-danger`                              |
+
+### Neutrals (replace gray / neutral / slate / zinc with semantic tokens)
+
+| Before (❌)                                                | After (✅)                                            |
+| --------------------------------------------------------- | ----------------------------------------------------- |
+| `bg-white` (no dark counterpart)                           | `bg-background-elevated` or `bg-surface-primary`      |
+| `bg-white dark:bg-neutral-800`                            | `bg-background-elevated dark:bg-background-elevated`  |
+| `bg-neutral-100 dark:bg-neutral-900` (input, search)      | `bg-surface-primary dark:bg-surface-primary`          |
+| `bg-neutral-100 dark:bg-neutral-800` (cards/header)       | `bg-surface-primary dark:bg-surface-hover`            |
+| `bg-neutral-200 dark:bg-neutral-800`                      | `bg-surface-primary dark:bg-surface-primary`          |
+| `bg-neutral-300 dark:bg-neutral-900` (shell)              | `bg-neutral-300 dark:bg-background-primary`           |
+| `text-neutral-100 dark:text-neutral-900`                  | `text-text-primary dark:text-text-primary`            |
+| `text-neutral-200 dark:text-neutral-200`                  | `text-text-secondary dark:text-text-secondary`        |
+| `text-neutral-300 dark:text-gray-300`                     | `text-text-muted dark:text-text-muted`                |
+| `text-neutral-500 dark:text-neutral-100`                  | `text-text-muted dark:text-text-primary`              |
+| `text-neutral-600 dark:text-neutral-300`                  | `text-text-secondary dark:text-text-secondary`        |
+| `text-neutral-900 dark:text-neutral-100`                  | `text-text-primary dark:text-text-primary`            |
+| `text-gray-500` / `text-gray-200`                         | `text-text-muted` / `text-text-secondary`             |
+| `border-neutral-400 dark:border-neutral-700`              | `border-border-subtle dark:border-border-subtle`      |
+| `border-neutral-700` / `border-neutral-800`               | `border-border-subtle`                                |
+| `bg-zinc-800`                                             | `bg-surface-hover`                                    |
+| `bg-gray-100` / `bg-gray-500`                             | `bg-surface-primary` / `bg-surface-active`            |
+| `hover:bg-gray-600`                                       | `hover:bg-surface-active`                             |
+| `bg-black/50` / `bg-black/70` (overlay)                   | `bg-background-primary/50` / `bg-background-primary/70` |
+| `text-white` (on light background)                        | `text-text-primary` (tokens already cover both modes) |
+
+## Common code patterns
+
+### Primary button (replaces hardcoded blue/yellow)
+
+```tsx
+// ❌ Before
+<button className="bg-blue-500 dark:bg-yellow-500 hover:bg-blue-600 text-white dark:text-neutral-900">
+  Guardar
+</button>
+
+// ✅ After
+<button className="bg-accent-primary hover:bg-accent-hover text-background-primary">
+  Guardar
+</button>
+```
+
+### Destructive button
+
+```tsx
+// ❌ Before
+<button className="bg-red-500 hover:bg-red-600 text-white">Eliminar</button>
+
+// ✅ After
+<button className="bg-danger hover:bg-danger-hover text-text-primary">Eliminar</button>
+```
+
+### Input / Search bar
+
+```tsx
+// ❌ Before
+<input className="bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 border-2 border-neutral-400 dark:border-neutral-800" />
+
+// ✅ After
+<input className="bg-surface-primary text-text-primary border-2 border-border-subtle focus:border-accent-primary" />
+```
+
+### Visible focus (replaces Tailwind focus:ring)
+
+```tsx
+// ❌ Before
+focus:ring-2 focus:ring-blue-500 dark:focus:ring-yellow-500
+
+// ✅ After
+focus:ring-2 focus:ring-accent-primary
+```
+
+### Elevated card / modal
+
+```tsx
+// ❌ Before
+<div className="bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100" />
+
+// ✅ After
+<div className="bg-background-elevated text-text-primary" />
+```
+
+### Navigation icon (back arrow, etc.)
+
+```tsx
+// ❌ Before
+<IoIosArrowBack className="text-blue-500 dark:text-yellow-500 text-3xl" />
+
+// ✅ After
+<IoIosArrowBack className="text-accent-primary text-3xl" />
+```
+
+## How to extend the system
+
+If you need a token that does not exist (e.g. `success`, `warning`, `info`):
+
+1. Add the CSS variable in `:root` and in the `@media (prefers-color-scheme: dark)` block of `src/app/globals.css`. Keep the semantic pattern (`*-primary`, `*-hover`, `*-muted`).
+2. Register it in `tailwind.config.ts → theme.extend.colors` as `name: "var(--name)"`.
+3. Document the usage here (a row in the table + a pattern example).
+4. Never add a color with a direct hex value in `tailwind.config.ts`: always use the CSS variable so it respects dark mode.
+
+## Golden rules
+
+1. **Zero hardcoded colors**: if you see a hex (`#f4b400`, `#1e1e1e`) or a Tailwind palette name (`blue-*`, `yellow-*`, `red-*`, `gray-*`, `neutral-*`, `slate-*`, `zinc-*`, `stone-*`, `orange-*`, `amber-*`, `lime-*`, `emerald-*`, `teal-*`, `cyan-*`, `sky-*`, `indigo-*`, `violet-*`, `fuchsia-*`, `pink-*`, `rose-*`, `white`, `black`) in a Tailwind class, migrate it.
+2. **One token, both modes**: if the dark and light version come from the same accent, do not duplicate with `dark:`. A single `bg-accent-primary` works for both.
+3. **Always pair text and background**: use `text-text-primary` on `bg-background-primary`/`bg-background-elevated`. On `bg-accent-primary` the text goes in `text-background-primary` (inverted contrast).
+4. **Subtle borders, never black**: avoid `border-black` or `border-gray-900`. Use `border-border-subtle` or `border-border-strong`.
+5. **Consistent shadows**: `boxShadow.accent` is already registered; use `shadow-accent` for brand highlights.
+6. **Check with `prefers-color-scheme`**: if you modify `globals.css`, make sure every token has a counterpart in the `@media (prefers-color-scheme: dark)` block.
+
+## Quick verification on edit
+
+Before closing a change, run a mental grep:
+
+```bash
+# Search for forbidden classes inside src/components and src/app
+rg "bg-(blue|yellow|red|green|purple|pink|orange|amber|emerald|teal|cyan|sky|indigo|violet|fuchsia|lime|rose|slate|zinc|stone|neutral|gray)-[0-9]" src
+rg "text-(blue|yellow|red|green|purple|pink|orange|amber|emerald|teal|cyan|sky|indigo|violet|fuchsia|lime|rose|slate|zinc|stone|neutral|gray)-[0-9]" src
+rg "(bg|text|border|ring|from|to|via|placeholder|caret|outline|divide|shadow)-(white|black)([^a-z0-9-]|$)" src
+```
+
+If anything appears, migrate it using the replacement table above.
+
+## Common anti-examples
+
+- ❌ `text-yellow-500` for a badge → ✅ `text-accent-primary`
+- ❌ `bg-white dark:bg-neutral-800` in a modal → ✅ `bg-background-elevated`
+- ❌ `border-neutral-700` in a card → ✅ `border-border-subtle`
+- ❌ `text-gray-500 hover:text-red-500` on a close icon → ✅ `text-text-muted hover:text-danger`
+- ❌ `bg-blue-500 dark:bg-yellow-500` with `text-white dark:text-neutral-900` on a button → ✅ `bg-accent-primary text-background-primary`
+- ❌ `focus:ring-blue-500 dark:focus:ring-yellow-500` on an input → ✅ `focus:ring-accent-primary`
